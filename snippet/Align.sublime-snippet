@@ -1,0 +1,8 @@
+<snippet>
+    <content><![CDATA[\begin{align$1}
+	$0
+\end{align$1}]]></content>
+    <tabTrigger>ali</tabTrigger>
+    <scope>text.tex.latex</scope>
+    <description>Align</description>
+</snippet>

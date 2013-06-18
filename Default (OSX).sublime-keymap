@@ -1,0 +1,65 @@
+[
+	// Reassign expand_selection to ctrl+l, ctrl+l
+	{ "keys": ["super+l","super+l"], "command": "expand_selection", "args": {"to": "line"}, "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		],
+	},
+
+	// View PDF, jump to point
+	{ "keys": ["super+l","v"], "command": "jump_to_pdf", "args": {"keep_focus": false, "forward_sync": false}, "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		]
+	},
+	{ "keys": ["super+l","j"], "command": "jump_to_pdf", "args": {"keep_focus": false, "forward_sync": true}, "context":
+	 	[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		]
+	},
+
+	// Complete reference or citation
+	// cmd+l,x suggests "cross" references, which both cites and refs are
+	{ "keys": ["super+l","x"],"command": "latex_ref_cite", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		]
+	},
+
+	// Insert close current environment
+	{ "keys": ["super+l","."], "command": "latex_env_closer", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		]
+	},
+
+
+	// Wrap selected text in left right pair
+	{ "keys": ["super+l","["], "command": "insert_snippet", "args": {"contents": "\\left[ $SELECTION$1\\right]$0"}, "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+		]
+	},
+	{ "keys": ["super+l", "("], "command": "insert_snippet", "args": {"contents": "\\left( $SELECTION$1\\right)$0"}, "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+		]
+	},
+	{ "keys": ["super+l", "{"], "command": "insert_snippet", "args": {"contents": "\\left\\\\{ $SELECTION$1\\right\\\\}$0"}, "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+		]
+	},
+
+	// Wrap selected text in command or environment
+	{ "keys": ["super+l","c"], "command": "insert_snippet", "args": {"contents": "\\\\$1{$SELECTION}$0"}, "context":
+		[
+			{"key": "selector", "operator": "equal", "operand": "text.tex.latex"}
+		]
+	},
+	{ "keys": ["super+l","e"], "command": "insert_snippet", "args": {"contents": "\\begin{${1:env}}\n$2$SELECTION\n\\end{$1}$0"}, "context":
+		[
+			{"key": "selector", "operator": "equal", "operand": "text.tex.latex"}
+		]
+	}
+]

@@ -1,0 +1,9 @@
+<snippet>
+    <content><![CDATA[\begin{cases}
+	$1, &\text{ if }${2:case}\\\\
+	$3, &\text{ if }${4:case}
+\end{cases}]]></content>
+    <tabTrigger>case</tabTrigger>
+    <scope>text.tex.latex</scope>
+    <description>Cases</description>
+</snippet>

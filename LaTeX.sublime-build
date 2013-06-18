@@ -1,0 +1,12 @@
+{
+
+	"target": "make_pdf",
+	"selector": "text.tex.latex",
+
+	"osx":
+	{
+		"cmd": ["latexmk", "-f", "-quiet", "-pdf", "-synctex=1"],
+		"path": "$PATH:/usr/texbin:/usr/local/bin",
+        "file_regex": "^(?:W|E|B):\\s(.*):([0-9]+)"
+	}
+}

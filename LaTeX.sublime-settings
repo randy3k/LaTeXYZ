@@ -1,0 +1,4 @@
+{
+    // list of scopes names which auto_complete is triggered
+    "auto_complete_selector": "meta.definition.math.latex - comment"
+}
