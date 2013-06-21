@@ -4,7 +4,7 @@ import sublime, sublime_plugin
 # this only looks at the LAST \begin{...}
 # need to extend to allow for nested \begin's
 
-class latex_env_closerCommand(sublime_plugin.TextCommand):
+class RubberEnvCloserCommand(sublime_plugin.TextCommand):
 	def run(self, edit, **args):
 		view = self.view
 		pattern = r'\\(begin|end)\{[^\}]+\}'

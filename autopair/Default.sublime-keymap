@@ -1,0 +1,316 @@
+[
+    // Auto-pair brackets
+    { "keys": ["("], "command": "insert_snippet", "args": {"contents": "($1)"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\\\]|$)", "match_all": true }
+        ]
+    },
+    { "keys": ["("], "command": "insert_snippet", "args": {"contents": "(${0:$SELECTION})"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true }
+        ]
+    },
+    { "keys": [")"], "command": "move", "args": {"by": "characters", "forward": true}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^\\)", "match_all": true }
+        ]
+    },
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete Left Right.sublime-macro"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "\\($", "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^\\)", "match_all": true }
+        ]
+    },
+
+    // Auto-pair square brackets
+    { "keys": ["["], "command": "insert_snippet", "args": {"contents": "[$1]"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\\\]|$)", "match_all": true }
+        ]
+    },
+    { "keys": ["["], "command": "insert_snippet", "args": {"contents": "[${0:$SELECTION}]"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true }
+        ]
+    },
+    { "keys": ["]"], "command": "move", "args": {"by": "characters", "forward": true}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^\\]", "match_all": true }
+        ]
+    },
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete Left Right.sublime-macro"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "\\[$", "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^\\]", "match_all": true }
+        ]
+    },
+
+    // Auto-pair curly brackets
+    { "keys": ["{"], "command": "insert_snippet", "args": {"contents": "{$1}"}, "context":
+        [
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\\\]|$)", "match_all": true }
+        ]
+    },
+    { "keys": ["{"], "command": "wrap_block", "args": {"begin": "{", "end": "}"}, "context":
+        [
+            { "key": "indented_block", "match_all": true },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "following_text", "operator": "regex_match", "operand": "^$", "match_all": true },
+        ]
+    },
+    { "keys": ["{"], "command": "insert_snippet", "args": {"contents": "{${0:$SELECTION}}"}, "context":
+        [
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true }
+        ]
+    },
+    { "keys": ["}"], "command": "move", "args": {"by": "characters", "forward": true}, "context":
+        [
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^\\}", "match_all": true }
+        ]
+    },
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete Left Right.sublime-macro"}, "context":
+        [
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "\\{$", "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^\\}", "match_all": true }
+        ]
+    },
+
+    // Auto-pair brackets \(
+    { "keys": ["\\","("], "command": "insert_snippet", "args": {"contents": "\\($1\\)"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\\\]|$)", "match_all": true }
+        ]
+    },
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Rubber/macros/Delete Two Left Right.sublime-macro"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "\\\\\\($", "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^\\\\\\)", "match_all": true }
+        ]
+    },
+    // Auto-pair brackets \[
+    { "keys": ["\\","["], "command": "insert_snippet", "args": {"contents": "\\[$1\\]"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\\\]|$)", "match_all": true }
+        ]
+    },
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Rubber/macros/Delete Two Left Right.sublime-macro"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "\\\\\\[$", "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^\\\\\\]", "match_all": true }
+        ]
+    },
+    { "keys": ["enter"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Add Line in Braces.sublime-macro"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_indent", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "\\\\\\[$", "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^\\\\\\]", "match_all": true }
+        ]
+    },
+    { "keys": ["shift+enter"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Add Line in Braces.sublime-macro"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_indent", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "\\\\\\[$", "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^\\\\\\]", "match_all": true }
+        ]
+    },
+    // Auto-pair brackets \{
+    { "keys": ["\\","{"], "command": "insert_snippet", "args": {"contents": "\\\\{$1\\\\}"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\\\]|$)", "match_all": true }
+        ]
+    },
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Rubber/macros/Delete Two Left Right.sublime-macro"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "\\\\\\{$", "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^\\\\\\}", "match_all": true }
+        ]
+    },
+    // Auto-pair quotes `'
+    {
+        "keys": ["'"],
+        "command": "insert_snippet", "args": { "contents": "`$1'" },
+        "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|]|\\}|>|$)", "match_all": true },
+            { "key": "preceding_text", "operator": "not_regex_contains", "operand": "[\"a-zA-Z0-9_]$", "match_all": true }
+        ]
+    },
+    {
+        "keys": ["'"],
+        "command": "insert_snippet", "args": { "contents": "`${0:$SELECTION}'" },
+        "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true },
+        ]
+    },
+    {
+        "keys": ["'"],
+        "command": "move", "args": { "by": "characters", "forward": true},
+        "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^'", "match_all": true }
+        ],
+    },
+    {
+        "keys": ["backspace"],
+        "command": "run_macro_file", "args": { "file": "res://Packages/Default/Delete Left Right.sublime-macro" },
+        "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "`$", "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^'", "match_all": true }
+        ]
+    },
+
+    // Auto-pair double quotes ``''
+    {
+        "keys": ["\""],
+        "command": "insert_snippet", "args": { "contents": "``$1''" },
+        "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|]|\\}|>|$)", "match_all": true },
+            { "key": "preceding_text", "operator": "not_regex_contains", "operand": "[\"a-zA-Z0-9_]$", "match_all": true },
+        ]
+    },
+    {
+        "keys": ["\""],
+        "command": "insert_snippet", "args": { "contents": "``${0:$SELECTION}''" },
+        "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true }
+        ]
+    },
+    {
+        "keys": ["\""], "command": "run_macro_file", "args": { "file": "res://Packages/Rubber/macros/Move Two Characters.sublime-macro" },
+        "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^''", "match_all": false }
+        ],
+    },
+    {
+        "keys": ["backspace"],
+        "command": "run_macro_file", "args": { "file": "res://Packages/Rubber/macros/Delete Two Left Right.sublime-macro" },
+        "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "``$", "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^''", "match_all": true }
+        ]
+    },
+
+    // Auto-pair inline math $
+    {
+        "keys": ["$"],
+        "command": "insert_snippet", "args": { "contents": "\\$$1\\$" },
+        "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true }
+        ]
+    },
+    {
+        "keys": ["$"],
+        "command": "insert_snippet", "args": { "contents": "\\$${0:$SELECTION}\\$" },
+        "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true }
+        ]
+    },
+    {
+        "keys": ["$"],
+        "command": "move", "args": { "by": "characters", "forward": true },
+        "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^\\$", "match_all": true }
+        ]
+    },
+    {
+        "keys": ["backspace"],
+        "command": "run_macro_file", "args": { "file": "res://Packages/Default/Delete Left Right.sublime-macro" },
+        "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "\\$$", "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^\\$", "match_all": true }
+        ],
+    }
+]

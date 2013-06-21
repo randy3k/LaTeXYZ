@@ -1,34 +1,26 @@
-#!/usr/bin/python
-
 # This script derived from a piece of the rubber project
 # http://launchpad.net/rubber
 # (c) Emmanuel Beffara, 2002--2006
 #
 # Modified by Nathan Grigg, January 2012
-# Modified by Randy Lai for python 3 support, June, 2013
+# Modified by Randy Lai, randy.cs.lai@gmail.com, June, 2013, At some point, I will rewrite this
 
 import re
-import string
-import sys
-import getopt
 
-#----  Log parser  ----{{{1
+#----  Log parser
 
-re_loghead = re.compile("This is [0-9a-zA-Z-]*")
 re_rerun = re.compile("LaTeX Warning:.*Rerun")
-re_file = re.compile("(\\((?P<file>[^\n\t(){}]*[^ \n\t(){}])|\\))")
+# file name regex, it may be buggy
+re_file = re.compile(r"(\((?P<file>([^\n\t(){}]*?\.[a-zA-Z]+|[^\n\t(){}]*[^ \n\t(){}]))|\))")
 re_badbox = re.compile(r"(Ov|Und)erfull \\[hv]box ")
 re_line = re.compile(r"(l\.(?P<line>[0-9]+)( (?P<code>.*))?$|<\*>)")
 re_cseq = re.compile(r".*(?P<seq>(\\|\.\.\.)[^ ]*) ?$")
 re_macro = re.compile(r"^(?P<macro>\\.*) ->")
 re_page = re.compile("\[(?P<num>[0-9]+)\]")
-re_atline = re.compile(
-"( detected| in paragraph)? at lines? (?P<line>[0-9]*)(--(?P<last>[0-9]*))?")
-re_reference = re.compile("LaTeX Warning: Reference `(?P<ref>.*)' \
-on page (?P<page>[0-9]*) undefined on input line (?P<line>[0-9]*)\\.$")
+re_atline = re.compile("( detected| in paragraph)? at lines? (?P<line>[0-9]*)(--(?P<last>[0-9]*))?")
+re_reference = re.compile("LaTeX Warning: Reference `(?P<ref>.*)' on page (?P<page>[0-9]*) undefined on input line (?P<line>[0-9]*)\\.$")
 re_label = re.compile("LaTeX Warning: (?P<text>Label .*)$")
-re_warning = re.compile(
-"(LaTeX|Package)( (?P<pkg>.*))? Warning: (?P<text>.*)$")
+re_warning = re.compile("(LaTeX|Package)( (?P<pkg>.*))? Warning: (?P<text>.*)$")
 re_online = re.compile("(; reported)? on input line (?P<line>[0-9]*)")
 re_ignored = re.compile("; all text was ignored after line (?P<line>[0-9]*).$")
 
@@ -38,69 +30,23 @@ class LogCheck (object):
     For efficiency, the instances contain the whole file as a list of strings
     so that it can be read several times with no disk access.
     """
-    #-- Initialization {{{2
+    #-- Initialization
 
     def __init__ (self):
         self.lines = None
 
     def read (self, name):
-        """
-        Read the specified log file, checking that it was produced by the
-        right compiler. Returns true if the log file is invalid or does not
-        exist.
-        """
         self.lines = None
         try:
-            file = open(name)
+            file = open(name, 'rb')
         except IOError:
             return 2
-        line = file.readline()
-        if not line:
-            file.close()
-            return 1
-        if not re_loghead.match(line):
-            file.close()
-            return 1
-        self.lines = file.readlines()
+        data = file.read()
+        self.lines = [l.decode('utf-8', 'ignore')  for l in data.splitlines(True)]
+        # self.lines = file.readlines()
         file.close()
-        return 0
 
-    #-- Process information {{{2
-
-    def errors (self):
-        """
-        Returns true if there was an error during the compilation.
-        """
-        skipping = 0
-        for line in self.lines:
-            if line.strip() == "":
-                skipping = 0
-                continue
-            if skipping:
-                continue
-            m = re_badbox.match(line)
-            if m:
-                skipping = 1
-                continue
-            if line[0] == "!":
-                # We check for the substring "pdfTeX warning" because pdfTeX
-                # sometimes issues warnings (like undefined references) in the
-                # form of errors...
-
-                if string.find(line, "pdfTeX warning") == -1:
-                    return 1
-        return 0
-
-    def run_needed (self):
-        """
-        Returns true if LaTeX indicated that another compilation is needed.
-        """
-        for line in self.lines:
-            if re_rerun.match(line):
-                return 1
-        return 0
-
-    #-- Information extraction {{{2
+    #-- Information extraction
 
     def continued (self, line):
         """
@@ -110,7 +56,7 @@ class LogCheck (object):
         """
         return len(line) == 79
 
-    def parse (self, errors=0, boxes=0, refs=0, warnings=0):
+    def parse (self, errors=1, boxes=1, refs=1, warnings=1):
         """
         Parse the log file for relevant information. The named arguments are
         booleans that indicate which information should be extracted:
@@ -142,7 +88,6 @@ class LogCheck (object):
 
             # TeX breaks messages at 79 characters, just to make parsing
             # trickier...
-
             if not parsing and self.continued(line):
                 accu += line
                 continue
@@ -182,7 +127,7 @@ class LogCheck (object):
                 if m:
                     parsing = 0
                     skipping = 1
-                    pdfTeX = string.find(line, "pdfTeX warning") != -1
+                    pdfTeX = line.find("pdfTeX warning") != -1
                     if error is not None and ((pdfTeX and warnings) or (errors and not pdfTeX)):
                         if pdfTeX:
                             d = {
@@ -269,7 +214,7 @@ class LogCheck (object):
                 if refs:
                     d = {
                         "kind": "warning",
-                        "text": _("Reference `%s' undefined.") % m.group("ref"),
+                        "text": ("Reference `%s' undefined.") % m.group("ref"),
                         "file": pos[-1]
                         }
                     d.update( m.groupdict() )
@@ -325,19 +270,17 @@ class LogCheck (object):
                 skipping = 1
                 continue
 
+            # ignore Missing character
+            if re.match("Missing character", line): continue
+
+            # ignore possible latex code
+            # regular log would not start with spaces
+            if re.match("^    .*", line): continue
+
             # If there is no message, track source names and page numbers.
 
             last_file = self.update_file(line, pos, last_file)
             page = self.update_page(line, page)
-
-    def get_errors (self):
-        return self.parse(errors=1)
-    def get_boxes (self):
-        return self.parse(boxes=1)
-    def get_references (self):
-        return self.parse(refs=1)
-    def get_warnings (self):
-        return self.parse(warnings=1)
 
     def update_file (self, line, stack, last):
         """
@@ -373,94 +316,9 @@ class LogCheck (object):
         return int(ms[-1]) + 1
 
 
-# command line options
-
-def parse_options(cmdline):
-    try:
-        opts, args = getopt.getopt(
-            cmdline, "h", ["boxes","errors","help","refs","warnings"])
-    except getopt.GetoptError as e:
-        sys.stderr.write(e.msg + "\n")
-        sys.exit(1)
-
-    d = {"boxes": 0, "errors": 0, "refs": 0, "warnings": 0}
-
-    # set a default option
-    if len(opts) == 0:
-        d["errors"] = 1
-    for opt,arg in opts:
-        if opt in ("-h","--help"):
-            help()
-        else:
-            d[opt[2:]] = 1
-
-    if len(args) != 1:
-        sys.stderr.write("One log file is required\n")
-        sys.exit(1)
-    file = args[0]
-
-    return d,file
-
-def help():
-    print ("""\
-usage: rubber [options] logfile
-available options:
-    --boxes     display overfull/underfull box messages
-    --errors    display error messages
-    --help      display this message end exit
-    --refs      display missing reference messages
-    --warnings  display all other warnings
-""")
-    sys.exit()
-
-# applescript compatible output
-
-def applescript_output(d,directory):
-    out = []
-    if "kind" in d:
-        if d["kind"] == "error":
-            out.append("Error")
-        else:
-            out.append("Warning")
-    else:
-        return
-
-    if "file" in d:
-        file = d["file"]
-        # convert relative path to absolute path
-        if file[0] == "/":
-            out.append(file)
-        else:
-            if file[:2] == "./":
-                file = file[2:]
-            out.append(directory + file)
-    else:
-        out.append("")
-
-
-    if "line" in d and d["line"]:
-        out.append(d["line"])
-    else:
-        out.append("0")
-
-    message = ""
-    if "text" in d:
-        message += d["text"]
-    if "pkg" in d:
-        message += " (Package %s) " % d["pkg"]
-    if "page" in d:
-        message += " (On page %d)" % d["page"]
-
-    out.append(message)
-
-    return "\t".join(out)
-
-
-if __name__ == "__main__":
-    options,file = parse_options(sys.argv[1:])
-    directory = file[:file.rfind('/') + 1]
-    check = LogCheck()
-    check.read(file)
-    for d in check.parse(errors=options["errors"], boxes=options["boxes"],
-      refs=options["refs"], warnings=options["warnings"]):
-        print(applescript_output(d, directory))
+if __name__ == '__main__':
+    logfile = 'somefile'
+    check = parser.LogCheck()
+    check.read(logfile)
+    D  = check.parse()
+    for d in D: print(d)

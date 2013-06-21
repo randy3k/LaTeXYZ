@@ -1,3 +1,0 @@
-[
-	{ "caption": "Rubber-LaTeX: View PDF", "command": "jump_to_pdf", "args": {"keep_focus": false, "forward_sync": false}}
-]

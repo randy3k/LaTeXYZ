@@ -10,14 +10,14 @@ def match(rex, str):
     else:
         return None
 
-class LatexQReplaceCommand(sublime_plugin.TextCommand):
+class RubberReplaceCommand(sublime_plugin.TextCommand):
     def run(self, edit, a, b, replacement):
         region = sublime.Region(a, b)
         self.view.replace(edit, region, replacement)
         self.view.sel().clear()
         self.view.sel().add(a+len(replacement))
 
-class LatexRefCiteCommand(sublime_plugin.TextCommand):
+class RubberXrefCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         view = self.view
         point = view.sel()[0].end()
@@ -56,7 +56,7 @@ class LatexRefCiteCommand(sublime_plugin.TextCommand):
                 # Allow user to cancel
                 if i<0: return
                 ref = open_brace + completions[i] + close_brace
-                view.run_command("latex_q_replace", {"a": point - len(prefix), "b": point, "replacement": ref})
+                view.run_command("rubber_replace", {"a": point - len(prefix), "b": point, "replacement": ref})
 
             view.window().show_quick_panel(completions, on_done)
 
@@ -81,7 +81,7 @@ class LatexRefCiteCommand(sublime_plugin.TextCommand):
                 # Allow user to cancel
                 if i<0: return
                 cite = open_brace + completions[i][0] + close_brace
-                view.run_command("latex_q_replace", {"a": point-len(prefix), "b": point, "replacement": cite})
+                view.run_command("rubber_replace", {"a": point-len(prefix), "b": point, "replacement": cite})
 
             items = [[ "[" + author + "] " + title, title + " (" + keyword + ")"] for (keyword,title, author) in completions]
             view.window().show_quick_panel(items, on_done)

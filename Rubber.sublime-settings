@@ -21,5 +21,8 @@
 		// or if the PDF viewer opens instantly and you don't want to wait.
 		// Default: 1.5 (works on my MBP4,1...)
 		"sync_wait": 1.5
-	}
+	},
+	"extensions": ["tex"],
+
+    "auto_complete_selector": "meta.definition.math.latex - comment"
 }

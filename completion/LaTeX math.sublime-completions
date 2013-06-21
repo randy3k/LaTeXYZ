@@ -42,6 +42,7 @@
             "\\Omega",
 
            "\\infty",
+           "\\varnothing",
 
             "\\quad",
             "\\qquad",
@@ -75,7 +76,7 @@
             "\\mathsf",
             "\\mathcal",
 
-            { "trigger": "\\partial", "contents": "\\partial" },
+            "\\partial",
             { "trigger": "\\sum", "contents": "\\sum_{$1}^{$2}$0"},
             { "trigger": "\\prod", "contents": "\\prod_{$1}^{$2}$0"},
             { "trigger": "\\int", "contents": "\\int_{$1}^{$2}$0"},

@@ -1,0 +1,271 @@
+[
+    // automatic addition of new \items when hitting Shift+Enter in a list environment
+    { "keys": ["shift+enter"], "command": "insert_snippet", "args": {"contents": "\n\t\\item$0"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.list.latex" }
+        ]
+    },
+
+    // left-right paris
+
+    { "keys": ["("], "command": "auto_left_right_pair", "args": {"arg": ["(", ")"]}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "in_brackets", "operator": "equal", "operand": true}
+        ]
+    },
+    { "keys": ["["], "command": "auto_left_right_pair", "args": {"arg": ["[", "]"]}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "in_square_brackets", "operator": "equal", "operand": true}
+        ]
+    },
+    { "keys": ["{"], "command": "auto_left_right_pair", "args": {"arg": ["\\{", "\\}"]}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "in_curly_brackets", "operator": "equal", "operand": true}
+        ]
+    },
+    { "keys": ["("], "command": "run_macro_file", "args": {"file": "res://Packages/Rubber/macros/Delete Left and Insert Left Right Brackets.sublime-macro"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": false },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "\\($", "match_all": true }
+        ]
+    },
+    { "keys": ["["], "command": "run_macro_file", "args": {"file": "res://Packages/Rubber/macros/Delete Left and Insert Left Right Square Brackets.sublime-macro"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": false },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "\\[$", "match_all": true }
+        ]
+    },
+    { "keys": ["{"], "command": "run_macro_file", "args": {"file": "res://Packages/Rubber/macros/Delete Left and Insert Left Right Curly Brackets.sublime-macro"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": false },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "\\{$", "match_all": true }
+        ]
+    },
+
+
+    // vim-latex like keymaps - general
+    { "keys": ["_", "_"], "command": "insert_snippet", "args": {"contents": "_{$1}$0"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["^", "^"], "command": "insert_snippet", "args": {"contents": "^{$1}$0"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["|", "|"], "command": "insert_snippet", "args": {"contents": "|$1|$0"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["\\","|", "|"], "command": "insert_snippet", "args": {"contents": "\\|$1\\|$0"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": [".", ".", "."], "command": "insert_snippet", "args": {"contents": "\\ldots"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "/"], "command": "insert_snippet", "args": {"contents": "\\frac{$1}{$2}$0"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "0"], "command": "insert_snippet", "args": {"contents": "\\varnothing"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "2"], "command": "insert_snippet", "args": {"contents": "\\sqrt{$1}$0"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "8"], "command": "insert_snippet", "args": {"contents": "\\partial"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "8"], "command": "insert_snippet", "args": {"contents": "\\infty"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+
+    // vim-latex like keymaps - greek
+    { "keys": ["`", "a"], "command": "insert_snippet", "args": {"contents": "\\alpha"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "b"], "command": "insert_snippet", "args": {"contents": "\\beta"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "g"], "command": "insert_snippet", "args": {"contents": "\\gamma"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "d"], "command": "insert_snippet", "args": {"contents": "\\delta"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "e"], "command": "insert_snippet", "args": {"contents": "\\varepsilon"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "h"], "command": "insert_snippet", "args": {"contents": "\\eta"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "q"], "command": "insert_snippet", "args": {"contents": "\\theta"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "i"], "command": "insert_snippet", "args": {"contents": "\\iota"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "k"], "command": "insert_snippet", "args": {"contents": "\\kappa"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "l"], "command": "insert_snippet", "args": {"contents": "\\lambda"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "m"], "command": "insert_snippet", "args": {"contents": "\\mu"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "n"], "command": "insert_snippet", "args": {"contents": "\\nu"}, "context":
+         [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "x"], "command": "insert_snippet", "args": {"contents": "\\xi"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "p"], "command": "insert_snippet", "args": {"contents": "\\pi"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "r"], "command": "insert_snippet", "args": {"contents": "\\rho"}, "context":
+         [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "s"], "command": "insert_snippet", "args": {"contents": "\\sigma"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "t"], "command": "insert_snippet", "args": {"contents": "\\tau"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "u"], "command": "insert_snippet", "args": {"contents": "\\upsilon"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "f"], "command": "insert_snippet", "args": {"contents": "\\varphi"}, "context":
+         [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "c"], "command": "insert_snippet", "args": {"contents": "\\chi"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "y"], "command": "insert_snippet", "args": {"contents": "\\psi"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "w"], "command": "insert_snippet", "args": {"contents": "\\omega"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "G"], "command": "insert_snippet", "args": {"contents": "\\Gamma"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "D"], "command": "insert_snippet", "args": {"contents": "\\Delta"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "Q"], "command": "insert_snippet", "args": {"contents": "\\Theta"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "L"], "command": "insert_snippet", "args": {"contents": "\\Lambda"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "X"], "command": "insert_snippet", "args": {"contents": "\\Xi"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "P"], "command": "insert_snippet", "args": {"contents": "\\Pi"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "S"], "command": "insert_snippet", "args": {"contents": "\\Sigma"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "F"], "command": "insert_snippet", "args": {"contents": "\\Phi"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "Y"], "command": "insert_snippet", "args": {"contents": "\\Psi"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "W"], "command": "insert_snippet", "args": {"contents": "\\Omega"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    }
+]

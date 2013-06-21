@@ -1,0 +1,15 @@
+{
+
+	"target": "rubber_compile",
+	"selector": "text.tex.latex",
+
+	"osx":
+	{
+		"cmd": [
+            "latexmk", "-f", "-quiet", "-pdf", "-synctex=1",
+             "-e", "\\$pdflatex='pdflatex --shell-escape  %O %S'"
+             ],
+		"path": "$PATH:/usr/texbin:/usr/local/bin",
+        "file_regex": "^(?:W|E|F|B):\\s(.*):([0-9]+)\\s+"
+	}
+}

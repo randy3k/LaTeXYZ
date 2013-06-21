@@ -20,7 +20,7 @@ def get_tex_root(view):
 			(texPath, texName) = os.path.split(texFile)
 			(rootPath, rootName) = os.path.split(mroot.group(1))
 			root = os.path.join(texPath,rootPath,rootName)
-			root = os.path.normpath(root)
+			root = os.path.abspath(os.path.normpath(root))
 			if os.path.isfile(root):
 				print("!TEX root = ", root)
 				return root
