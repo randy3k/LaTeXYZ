@@ -275,7 +275,7 @@ class LogCheck (object):
 
             # ignore possible latex code
             # regular log would not start with spaces
-            if re.match("^    .*", line): continue
+            if re.match("^    ", line): continue
 
             # If there is no message, track source names and page numbers.
 

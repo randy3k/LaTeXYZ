@@ -13,7 +13,7 @@
 	<key>keyEquivalent</key>
 	<string>^~L</string>
 	<key>name</key>
-	<string>Rubber</string>
+	<string>LaTeX-Rubber</string>
 	<key>patterns</key>
 	<array>
 		<dict>
@@ -402,6 +402,20 @@
 				</dict>
 			</array>
 		</dict>
+		<key>nestedpan</key>
+		<dict>
+			<key>begin</key>
+			<string>\{</string>
+			<key>end</key>
+			<string>\}</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
+				</dict>
+			</array>
+		</dict>
 		<key>math</key>
 		<dict>
 			<key>patterns</key>
@@ -440,7 +454,7 @@
 						</dict>
 					</array>
 				</dict>
-	<dict>
+				<dict>
 					<key>begin</key>
 					<string>(\\parbox)\{[^\}]*\}\{</string>
 					<key>beginCaptures</key>

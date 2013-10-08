@@ -12,43 +12,66 @@ class RubberThread(threading.Thread):
         self.caller = caller
         threading.Thread.__init__(self)
 
+    def initialize(self):
+        caller = self.caller
+        if caller.path:
+            self.old_path = os.environ["PATH"]
+            os.environ["PATH"] = os.path.expandvars(caller.path)
+
+        self.old_dir = os.getcwd()
+        os.chdir(os.path.dirname(caller.file_name))
+
+    def finalize(self):
+        caller = self.caller
+        if caller.path:
+            os.environ["PATH"] = self.old_path
+            os.path.dirname(self.old_dir)
+
     def run(self):
         print("Thread " + self.getName())
         t = time.time()
         caller = self.caller
         caller.output("[Compling " + caller.file_name + "]\n")
         sublime.set_timeout(caller.status_updater, 100)
-        if caller.path:
-            old_path = os.environ["PATH"]
-            os.environ["PATH"] = os.path.expandvars(caller.path)
+
 
         plat = sublime.platform()
-        old_dir = os.getcwd()
-        os.chdir(os.path.dirname(caller.file_name))
+        # check if perl is installed
+        try:
+            if plat == "windows":
+                startupinfo = subprocess.STARTUPINFO()
+                startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                subprocess.Popen(["perl", "-v"], startupinfo=startupinfo)
+            else:
+                subprocess.Popen(["perl", "-v"])
+        except:
+            sublime.error_message("Cannot find Perl interpreter.")
+            return
+
+        self.initialize()
+
         try:
             if plat == "windows":
                 # make sure console does not come up
                 startupinfo = subprocess.STARTUPINFO()
                 startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
                 proc = subprocess.Popen(caller.cmd, startupinfo=startupinfo)
+                # proc = subprocess.Popen(caller.cmd)
             else:
                 proc = subprocess.Popen(caller.cmd)
         except:
             caller.output("[Cannot compile!]\n")
-            # reset PATH and working dir
-            os.environ["PATH"] = old_path
-            os.path.dirname(old_dir)
+            # reset $PATH and working dir
+            self.finalize()
             return
 
-        # reset PATH and working dir
-        os.environ["PATH"] = old_path
-        os.chdir(old_dir)
+        # reset $PATH and working dir
+        self.finalize()
 
         # export proc in case it needs to be killed
         self.proc = proc
         # wait until proc finishes
         proc.wait()
-
         if hasattr(self, 'killed') and self.killed:
             caller.output("\n[Process killed!]\n")
             return
@@ -68,7 +91,7 @@ class RubberCompileCommand(sublime_plugin.WindowCommand):
         # Get parameters for Thread:
         self.file_name = getroot.get_tex_root(view)
         tex_dir = os.path.dirname(self.file_name)
-        self.cmd = cmd + [self.file_name]
+        self.cmd = cmd + [os.path.relpath(self.file_name, tex_dir)]
         self.path = path
 
         self.output_view = self.window.get_output_panel("exec")
@@ -105,7 +128,12 @@ class RubberCompileCommand(sublime_plugin.WindowCommand):
     def output(self, data):
         self.output_view.run_command("rubber_output", {"characters": data})
 
+    def clearoutput(self):
+        self.output_view = self.window.get_output_panel("exec")
+
     def output_log(self, returncode):
+
+        tex_dir = os.path.dirname(self.file_name)
         logfile = os.path.splitext(self.file_name)[0] + ".log"
 
         check = parser.LogCheck()
@@ -117,9 +145,18 @@ class RubberCompileCommand(sublime_plugin.WindowCommand):
             warnings = []
             fspecifiers = []
 
+            def cleanfile(file):
+                # for windows, it happens that file path in tex log may be "C:/foo/bar.tex
+                plat = sublime.platform()
+                if plat=="windows":
+                    file.replace("/","\\")
+                    file = re.sub("^\"", "", file)
+                file = os.path.relpath(file, tex_dir)
+                return file
+
             for d in D:
                 print(d)
-                out = (d['file'], int(d['line']) if 'line' in d and d['line'] else 0, d['text'])
+                out = (cleanfile(d['file']), int(d['line']) if 'line' in d and d['line'] else 0, d['text'])
                 if 'kind' in d:
                     if d['kind'] == "error":
                         errors.append("E: %s:%-4d  %s"% out)
@@ -134,18 +171,25 @@ class RubberCompileCommand(sublime_plugin.WindowCommand):
             self.output("Report to Github.")
             return
 
+        self.clearoutput()
+
+        if errors:
+            self.output("Complication Failure!\n")
+        else:
+            self.output("Complication Success!\n")
+
         self.output("\n"+ str(len(errors)) + " Erorr(s), " + str(len(warnings)) +
-                     " Warning(s), " + str(len(fspecifiers)) + " Float specifier(s) changed, and " +
-                         str(len(badboxes)) + " Bad box(es)" + ".\n")
+                     " Warning(s), " + str(len(fspecifiers)) + " FSC, and " +
+                         str(len(badboxes)) + " BadBox(es)" + ".\n")
 
         if errors:
             self.output("\n[Error(s)]\n" + "\n".join(errors) + "\n")
         if warnings:
             self.output("\n[Warning(s)]\n" + "\n".join(warnings)+ "\n")
         if fspecifiers:
-            self.output("\n[Float specifier(s) changed]\n" + "\n".join(fspecifiers)+ "\n")
+            self.output("\n[FSC]\n" + "\n".join(fspecifiers)+ "\n")
         if badboxes:
-            self.output("\n[Bad box(es)]\n" + "\n".join(badboxes)+ "\n")
+            self.output("\n[BadBox(es)]\n" + "\n".join(badboxes)+ "\n")
 
         if returncode==0 and not errors:
             self.window.active_view().run_command("jump_to_pdf", {"keep_focus": True, "forward_sync": False})

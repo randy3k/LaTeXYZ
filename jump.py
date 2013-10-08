@@ -28,34 +28,23 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
 
         line += 1
 
-        # platform-specific code:
         plat = sublime.platform()
         if plat == 'osx':
-            use_skim = osx_settings['use_skim']
-            use_acrobat = osx_settings['use_acrobat']
-            if use_skim:
-                args = ['osascript']
-                apple_script = ('tell application "Skim"\n'
-                                    'if '+ str(not keep_focus)+' then activate\n'
-                                    'open POSIX file "' + pdffile + '"\n'
-                                    'revert front document\n'
-                                    'if '+ str(forward_sync)+' then\n'
-                                        'tell front document to go to TeX line ' + str(line) + ' from POSIX file "' + srcfile + '"\n'
-                                    'end if\n'
-                                'end tell\n')
-                args.extend(['-e', apple_script])
-                # print(apple_script)
-                subprocess.Popen(args)
-            elif use_acrobat:
-                options = ["-g", "-a", "Adobe Acrobat Pro"] if keep_focus else ["-a", "Adobe Acrobat Pro"]
-                subprocess.Popen(["open"] + options + [pdffile])
-            else:
-                options = ["-g", "-a", "Preview"] if keep_focus else ["-a", "Preview"]
-                subprocess.Popen(["open"] + options + [pdffile])
+            args = ['osascript']
+            apple_script = ('tell application "Skim"\n'
+                                'if '+ str(not keep_focus)+' then activate\n'
+                                'open POSIX file "' + pdffile + '"\n'
+                                'revert front document\n'
+                                'if '+ str(forward_sync)+' then\n'
+                                    'tell front document to go to TeX line ' + str(line) + ' from POSIX file "' + srcfile + '"\n'
+                                'end if\n'
+                            'end tell\n')
+            args.extend(['-e', apple_script])
+            # print(apple_script)
+            subprocess.Popen(args)
+
 
         elif plat == 'windows':
-            # determine if Sumatra is running, launch it if not
-            print("Windows, Calling Sumatra")
             # hide console
             startupinfo = subprocess.STARTUPINFO()
             startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
@@ -67,17 +56,17 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
                 try:
                     subprocess.Popen(["SumatraPDF", "-reuse-instance", pdffile])
                 except:
-                    sublime.error_message("Cannot launch Viewer. Make sure it is on your PATH.")
+                    sublime.error_message("Cannot launch SumatraPDF.")
 
                 # wait 1/2 seconds so Sumatra comes up
                 time.sleep(0.5)
+
             if forward_sync:
-                # Use the command line facility rather than DDE to forward search
                 subprocess.Popen(["SumatraPDF.exe","-reuse-instance","-forward-search", srcfile, str(line), pdffile])
+            elif not keep_focus:
+                subprocess.Popen(["SumatraPDF.exe","-reuse-instance","-forward-search", srcfile, str(0), pdffile])
 
-
-        elif plat == 'linux': # for some reason, I get 'linux2' from sys.platform
-            print("Linux!")
+        elif plat == 'linux':
 
             # the required scripts are in the 'evince' subdir
             ev_path = os.path.join(sublime.packages_path(), 'Rubber', 'evince')
