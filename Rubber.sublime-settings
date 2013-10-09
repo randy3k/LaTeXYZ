@@ -4,16 +4,11 @@
 	"force_set_syntax" : true,
 
 	"osx": {
-		// Use Skim on Mac OS X instead of Preview.app
-		"use_skim": true,
-		// Use Adobe Acrobat Pro on Mac OS X instead of Preview.app
-		"use_acrobat": false
+
 	},
 
-	// Settings that are specific to Linux platforms
 	"linux": {
-		"python2": "",
-		"sublime": "sublime-text",
-		"sync_wait": 1.5
+		"python": "",
+		"sublime": ""
 	}
 }
