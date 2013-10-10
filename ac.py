@@ -3,21 +3,14 @@ import os, os.path
 import re
 from . import getroot
 
-def match(rex, str):
-    m = rex.match(str)
-    if m:
-        return m.group(0)
-    else:
-        return None
-
-class RubberReplaceCommand(sublime_plugin.TextCommand):
+class LatexsqReplaceCommand(sublime_plugin.TextCommand):
     def run(self, edit, a, b, replacement):
         region = sublime.Region(a, b)
         self.view.replace(edit, region, replacement)
         self.view.sel().clear()
         self.view.sel().add(a+len(replacement))
 
-class RubberXrefCommand(sublime_plugin.TextCommand):
+class LatexsqAcCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         view = self.view
         point = view.sel()[0].end()
@@ -25,69 +18,65 @@ class RubberXrefCommand(sublime_plugin.TextCommand):
             return
 
         line = view.substr(sublime.Region(view.line(point).begin(), point))
-        line = line[::-1]
 
-        rex_ref = re.compile(r"([^{]*?)(\{)?fer(?:qe|egap)?\\")
-        rex_cite = re.compile(r"([^,{ ]*?)[^{]*?(\{)?[a-zA-Z_*]*etic\\")
+        rex_ref = re.compile(r".*\\(?:eq|page)*ref(\{([a-zA-Z0-9_]*))?$")
+        rex_cite = re.compile(r".*\\cite(?:[a-zA-Z_]*)(\{(?:[a-zA-Z0-9_]*\s*,\s*)*([a-zA-Z0-9_]*))?$")
 
         root = getroot.get_tex_root(view)
 
-        # dispatching ref
         if re.match(rex_ref, line):
-            expr = match(rex_ref, line)
-            prefix, paren = rex_ref.match(expr).groups()
-            prefix = prefix[::-1]
+            print("dispatching ref")
+            paren, prefix = rex_ref.match(line).groups()
 
             completions = []
             find_labels_in_files(os.path.dirname(root), root, completions)
             completions = list(set(completions))
 
+            if prefix==None: prefix = ""
             if prefix:
                 completions = [c for c in completions if prefix in c]
             open_brace = "" if paren else "{"
             close_brace = "" if paren else "}"
 
             if not completions:
-                sublime.error_message("No label matches %s !" % (prefix,))
+                sublime.status_message("No label matches %s!" % (prefix,))
                 return
 
-            # Note we now generate refs on the fly. Less copying of vectors! Win!
             def on_done(i):
-                # Allow user to cancel
                 if i<0: return
                 ref = open_brace + completions[i] + close_brace
-                view.run_command("rubber_replace", {"a": point - len(prefix), "b": point, "replacement": ref})
+                view.run_command("latexsq_replace", {"a": point - len(prefix), "b": point, "replacement": ref})
 
             view.window().show_quick_panel(completions, on_done)
 
-        # dispatching cite
         elif re.match(rex_cite, line):
-            expr = match(rex_cite, line)
-            prefix, paren= rex_cite.match(expr).groups()
-            prefix = prefix[::-1]
+            print("dispatching cite")
+            paren, prefix = rex_cite.match(line).groups()
 
             completions = []
             find_bib_records(root, completions)
 
-            # filter against keyword, title, or author
+            if prefix==None: prefix = ""
             if prefix:
                 completions = [comp for comp in completions if prefix.lower() in "%s %s %s" \
                                                         % (comp[0].lower(),comp[1].lower(), comp[2].lower())]
             open_brace = "" if paren else "{"
             close_brace = "" if paren else "}"
 
-            # Note we now generate citation on the fly. Less copying of vectors! Win!
+            if not completions:
+                sublime.status_message("No bib record matches %s!" % (prefix,))
+                return
+
             def on_done(i):
-                # Allow user to cancel
                 if i<0: return
                 cite = open_brace + completions[i][0] + close_brace
-                view.run_command("rubber_replace", {"a": point-len(prefix), "b": point, "replacement": cite})
+                view.run_command("latexsq_replace", {"a": point-len(prefix), "b": point, "replacement": cite})
 
             items = [[ "[" + author + "] " + title, title + " (" + keyword + ")"] for (keyword,title, author) in completions]
             view.window().show_quick_panel(items, on_done)
 
         else:
-            sublime.error_message("Ref/cite: unrecognized format.")
+            sublime.status_message("Nothing to be auto completed.")
             return
 
 
@@ -101,7 +90,7 @@ def find_bib_files(rootdir, src, bibfiles):
     try:
         src_file = open(file_path, "r")
     except IOError:
-        sublime.status_message("Rubber WARNING: cannot open included file " + file_path)
+        sublime.status_message("LaTeXSq WARNING: cannot open included file " + file_path)
         print("WARNING! I can't find it! Check your \\include's and \\input's.")
         return
 
@@ -181,7 +170,7 @@ def find_labels_in_files(rootdir, src, labels):
             src_content = re.sub(r"(?<![\\])(\\\\)*%.*", "", src_file.read())
             labels += re.findall(r'\\label\{([^\{\}]+)\}', src_content)
     except IOError:
-        sublime.status_message("Rubber WARNING: cannot find included file " + file_path)
+        sublime.status_message("LaTeXSq WARNING: cannot find included file " + file_path)
         print("WARNING! I can't find it! Check your \\include's and \\input's.")
         return
 

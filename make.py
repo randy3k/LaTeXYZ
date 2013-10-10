@@ -5,7 +5,7 @@ import re
 from . import getroot
 from . import parser
 
-class RubberThread(threading.Thread):
+class LaTeXSqThread(threading.Thread):
 
     # pass caller to make output and killing possible
     def __init__(self, caller):
@@ -81,7 +81,7 @@ class RubberThread(threading.Thread):
         caller.output("\n\n[Done in %ss!]\n"% round(elapsed,2) )
 
 
-class RubberCompileCommand(sublime_plugin.WindowCommand):
+class LatexsqCompileCommand(sublime_plugin.WindowCommand):
     def run(self, cmd="", file_regex="", path=""):
         view = self.window.active_view()
         if view.is_dirty():
@@ -112,21 +112,21 @@ class RubberCompileCommand(sublime_plugin.WindowCommand):
             self.thread.killed = True
             return
 
-        self.thread = RubberThread(self)
+        self.thread = LaTeXSqThread(self)
         self.thread.start()
 
     def status_updater(self, status=0):
         status = status % 14
         before = min(status, 14-status)
         after = 7 - before
-        self.window.active_view().set_status("rubber", "Compling [%s=%s]" % (" " * before, " " * after))
+        self.window.active_view().set_status("latexsq", "Compling [%s=%s]" % (" " * before, " " * after))
         if self.thread and self.thread.isAlive():
             sublime.set_timeout(lambda: self.status_updater(status+1), 100)
         else:
-            self.window.active_view().erase_status("rubber")
+            self.window.active_view().erase_status("latexsq")
 
     def output(self, data):
-        self.output_view.run_command("rubber_output", {"characters": data})
+        self.output_view.run_command("latexsq_output", {"characters": data})
 
     def clearoutput(self):
         self.output_view = self.window.get_output_panel("exec")
@@ -194,7 +194,7 @@ class RubberCompileCommand(sublime_plugin.WindowCommand):
         if returncode==0 and not errors:
             self.window.active_view().run_command("jump_to_pdf", {"keep_focus": True, "forward_sync": False})
 
-class RubberOutputCommand(sublime_plugin.TextCommand):
+class LatexsqOutputCommand(sublime_plugin.TextCommand):
     def run(self, edit, characters):
         self.view.set_read_only(False)
         self.view.insert(edit, self.view.size(), characters)

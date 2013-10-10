@@ -1,6 +1,6 @@
 {
 
-	"target": "rubber_compile",
+	"target": "latexsq_compile",
 	"selector": "text.tex.latex",
 
 	"osx":

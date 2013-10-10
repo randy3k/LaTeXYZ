@@ -20,34 +20,16 @@
 
 	// Complete reference or citation
 	// cmd+l,x suggests "cross" references, which both cites and refs are
-	{ "keys": ["ctrl+l","x"],"command": "rubber_xref", "context":
+	{ "keys": ["ctrl+l","x"],"command": "latexsq_xref", "context":
 		[
 			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
 		]
 	},
 
 	// Insert close current environment
-	{ "keys": ["ctrl+l","."], "command": "rubber_env_closer", "context":
+	{ "keys": ["ctrl+l","."], "command": "latexsq_env_closer", "context":
 		[
 			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
-		]
-	},
-
-
-	// Wrap selected text in left right pair
-	{ "keys": ["ctrl+l","["], "command": "insert_snippet", "args": {"contents": "\\left[${1:$SELECTION}\\right]$0"}, "context":
-		[
-			{ "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
-		]
-	},
-	{ "keys": ["ctrl+l", "("], "command": "insert_snippet", "args": {"contents": "\\left(${1:$SELECTION}\\right)$0"}, "context":
-		[
-			{ "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
-		]
-	},
-	{ "keys": ["ctrl+l", "{"], "command": "insert_snippet", "args": {"contents": "\\left\\\\{${1:$SELECTION}\\right\\\\}$0"}, "context":
-		[
-			{ "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
 		]
 	},
 

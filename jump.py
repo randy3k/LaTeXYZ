@@ -10,7 +10,7 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
         if not view.score_selector(point, "text.tex.latex"):
             return
 
-        s = sublime.load_settings("Rubber.sublime-settings")
+        s = sublime.load_settings("LaTeXSq.sublime-settings")
 
         keep_focus = args["keep_focus"] if "keep_focus" in args else True
         forward_sync = args["forward_sync"] if "forward_sync" in args else False
@@ -70,7 +70,7 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
 
             linux_settings = s.get("linux")
             # the required scripts are in the 'evince' subdir
-            ev_path = os.path.join(sublime.packages_path(), 'Rubber', 'evince')
+            ev_path = os.path.join(sublime.packages_path(), 'LaTeXSq', 'evince')
             ev_fwd_exec = os.path.join(ev_path, 'evince_forward_search')
             ev_sync_exec = os.path.join(ev_path, 'evince_sync') # for inverse search!
 

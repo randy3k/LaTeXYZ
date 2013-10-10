@@ -1,5 +1,7 @@
 import sublime, sublime_plugin
 
+# for auto pair \left \right pairs
+
 class AutoLeftRightPairListener(sublime_plugin.EventListener):
     def on_query_context(self, view, key, operator, operand, match_all):
         if view.is_scratch() or view.settings().get('is_widget'): return

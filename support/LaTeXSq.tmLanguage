@@ -13,7 +13,7 @@
 	<key>keyEquivalent</key>
 	<string>^~L</string>
 	<key>name</key>
-	<string>LaTeX-Rubber</string>
+	<string>LaTeXSq</string>
 	<key>patterns</key>
 	<array>
 		<dict>

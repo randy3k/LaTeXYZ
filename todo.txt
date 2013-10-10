@@ -1,4 +1,4 @@
 auto re-numbering of ref
 ctrl-M for left right
 auto highlight for left right
-windows and linux support
+better cite/ref command

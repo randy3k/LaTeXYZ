@@ -18,36 +18,10 @@
 		]
 	},
 
-	// Complete reference or citation
-	// cmd+l,x suggests "cross" references, which both cites and refs are
-	{ "keys": ["super+l","x"],"command": "rubber_xref", "context":
+	// cmd+l,x suggests autocompletion
+	{ "keys": ["super+l","x"],"command": "latexsq_ac", "context":
 		[
 			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
-		]
-	},
-
-	// Insert close current environment
-	{ "keys": ["super+l","."], "command": "rubber_env_closer", "context":
-		[
-			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
-		]
-	},
-
-
-	// Wrap selected text in left right pair
-	{ "keys": ["super+l","["], "command": "insert_snippet", "args": {"contents": "\\left[${1:$SELECTION}\\right]$0"}, "context":
-		[
-			{ "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
-		]
-	},
-	{ "keys": ["super+l", "("], "command": "insert_snippet", "args": {"contents": "\\left(${1:$SELECTION}\\right)$0"}, "context":
-		[
-			{ "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
-		]
-	},
-	{ "keys": ["super+l", "{"], "command": "insert_snippet", "args": {"contents": "\\left\\\\{${1:$SELECTION}\\right\\\\}$0"}, "context":
-		[
-			{ "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
 		]
 	},
 

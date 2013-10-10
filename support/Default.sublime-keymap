@@ -114,7 +114,7 @@
             { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
         ]
     },
-    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Rubber/macros/Delete Two Left Right.sublime-macro"}, "context":
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXSq/macros/Delete Two Left Right.sublime-macro"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -132,7 +132,7 @@
             { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
         ]
     },
-    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Rubber/macros/Delete Two Left Right.sublime-macro"}, "context":
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXSq/macros/Delete Two Left Right.sublime-macro"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -168,7 +168,7 @@
             { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
         ]
     },
-    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Rubber/macros/Delete Two Left Right.sublime-macro"}, "context":
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXSq/macros/Delete Two Left Right.sublime-macro"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -178,7 +178,7 @@
         ]
     },
     // Auto-pair quotes `'
-    // do not auto-complete when the preceding letter is "$, this is needed for "$X$'s"
+    // do not auto-complete when the preceding letter is "$, this is needed for $X$'s
     { "keys": ["'"], "command": "insert_snippet", "args": {"contents": "'$0"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
@@ -197,7 +197,7 @@
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|]|\\}|>|$)", "match_all": true },
-            { "key": "preceding_text", "operator": "not_regex_contains", "operand": "[\"a-zA-Z0-9_$]$", "match_all": true }
+            { "key": "preceding_text", "operator": "not_regex_contains", "operand": "['a-zA-Z0-9_]$", "match_all": true }
         ]
     },
     {
@@ -258,7 +258,7 @@
         ]
     },
     {
-        "keys": ["\""], "command": "run_macro_file", "args": { "file": "res://Packages/Rubber/macros/Move Two Characters.sublime-macro" },
+        "keys": ["\""], "command": "run_macro_file", "args": { "file": "res://Packages/LaTeXSq/macros/Move Two Characters.sublime-macro" },
         "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
@@ -268,7 +268,7 @@
     },
     {
         "keys": ["backspace"],
-        "command": "run_macro_file", "args": { "file": "res://Packages/Rubber/macros/Delete Two Left Right.sublime-macro" },
+        "command": "run_macro_file", "args": { "file": "res://Packages/LaTeXSq/macros/Delete Two Left Right.sublime-macro" },
         "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
@@ -348,7 +348,7 @@
             { "key": "in_curly_brackets", "operator": "equal", "operand": true}
         ]
     },
-    { "keys": ["("], "command": "run_macro_file", "args": {"file": "res://Packages/Rubber/macros/Delete Left and Insert Left Right Brackets.sublime-macro"}, "context":
+    { "keys": ["("], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXSq/macros/Delete Left and Insert Left Right Brackets.sublime-macro"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": false },
@@ -356,7 +356,7 @@
             { "key": "preceding_text", "operator": "regex_contains", "operand": "\\($", "match_all": true }
         ]
     },
-    { "keys": ["["], "command": "run_macro_file", "args": {"file": "res://Packages/Rubber/macros/Delete Left and Insert Left Right Square Brackets.sublime-macro"}, "context":
+    { "keys": ["["], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXSq/macros/Delete Left and Insert Left Right Square Brackets.sublime-macro"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": false },
@@ -364,7 +364,7 @@
             { "key": "preceding_text", "operator": "regex_contains", "operand": "\\[$", "match_all": true }
         ]
     },
-    { "keys": ["{"], "command": "run_macro_file", "args": {"file": "res://Packages/Rubber/macros/Delete Left and Insert Left Right Curly Brackets.sublime-macro"}, "context":
+    { "keys": ["{"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXSq/macros/Delete Left and Insert Left Right Curly Brackets.sublime-macro"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": false },

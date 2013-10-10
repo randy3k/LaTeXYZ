@@ -12,30 +12,30 @@
                 "children":
                 [
                     {
-                        "caption": "Rubber",
+                        "caption": "LaTeXSq",
                         "children":
                         [
                             {
                                 "command": "open_file",
-                                "args": {"file": "${packages}/Rubber/README.markdown"},
+                                "args": {"file": "${packages}/LaTeXSq/README.markdown"},
                                 "caption": "README"
                             },
                             { "caption": "-" },
                             {
                                 "command": "open_file",
-                                "args": {"file": "${packages}/Rubber/Rubber.sublime-settings"},
+                                "args": {"file": "${packages}/LaTeXSq/LaTeXSq.sublime-settings"},
                                 "caption": "Settings – Default"
                             },
                             {
                                 "command": "open_file",
-                                "args": {"file": "${packages}/User/Rubber.sublime-settings"},
+                                "args": {"file": "${packages}/User/LaTeXSq.sublime-settings"},
                                 "caption": "Settings – User"
                             },
                             { "caption": "-" },
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/Rubber/Default (OSX).sublime-keymap",
+                                    "file": "${packages}/LaTeXSq/Default (OSX).sublime-keymap",
                                     "platform": "OSX"
                                 },
                                 "caption": "Key Bindings – Default"
@@ -43,7 +43,7 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/Rubber/Default (Linux).sublime-keymap",
+                                    "file": "${packages}/LaTeXSq/Default (Linux).sublime-keymap",
                                     "platform": "Linux"
                                 },
                                 "caption": "Key Bindings – Default"
@@ -51,7 +51,7 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/Rubber/Default (Windows).sublime-keymap",
+                                    "file": "${packages}/LaTeXSq/Default (Windows).sublime-keymap",
                                     "platform": "Windows"
                                 },
                                 "caption": "Key Bindings – Default"
@@ -84,7 +84,7 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/Rubber/Default (OSX).sublime-mousemap",
+                                    "file": "${packages}/LaTeXSq/Default (OSX).sublime-mousemap",
                                     "platform": "OSX"
                                 },
                                 "caption": "Mouse Bindings – Default"
@@ -92,7 +92,7 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/Rubber/Default (Linux).sublime-mousemap",
+                                    "file": "${packages}/LaTeXSq/Default (Linux).sublime-mousemap",
                                     "platform": "Linux"
                                 },
                                 "caption": "Mouse Bindings – Default"
@@ -100,7 +100,7 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/Rubber/Default (Windows).sublime-mousemap",
+                                    "file": "${packages}/LaTeXSq/Default (Windows).sublime-mousemap",
                                     "platform": "Windows"
                                 },
                                 "caption": "Mouse Bindings – Default"
