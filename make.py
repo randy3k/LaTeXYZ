@@ -1,8 +1,8 @@
 import sublime, sublime_plugin
-import sys, os, threading, time
+import os, threading, time
 import subprocess
 import re
-from . import getroot
+from . misc import *
 from . import parser
 
 class LaTeXSqThread(threading.Thread):
@@ -48,6 +48,7 @@ class LaTeXSqThread(threading.Thread):
             sublime.error_message("Cannot find Perl interpreter.")
             return
 
+        # print(os.getcwd())
         self.initialize()
 
         try:
@@ -89,7 +90,7 @@ class LatexsqCompileCommand(sublime_plugin.WindowCommand):
             view.run_command('save')
 
         # Get parameters for Thread:
-        self.file_name = getroot.get_tex_root(view)
+        self.file_name = get_tex_root(view)
         tex_dir = os.path.dirname(self.file_name)
         self.cmd = cmd + [os.path.relpath(self.file_name, tex_dir)]
         self.path = path

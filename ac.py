@@ -1,8 +1,10 @@
 import sublime, sublime_plugin
-import os, os.path
+import os
 import re
-from . import getroot
+from . misc import *
+# from collections import OrderedDict
 
+# sublime wrapper for replacement
 class LatexsqReplaceCommand(sublime_plugin.TextCommand):
     def run(self, edit, a, b, replacement):
         region = sublime.Region(a, b)
@@ -16,166 +18,129 @@ class LatexsqAcCommand(sublime_plugin.TextCommand):
         point = view.sel()[0].end()
         if not view.score_selector(point, "text.tex.latex"):
             return
+        linecontent = view.substr(sublime.Region(view.line(point).begin(), point))
 
-        line = view.substr(sublime.Region(view.line(point).begin(), point))
+        rexp = re.compile(r".*\\(?:eq|page)*ref(\{([a-zA-Z0-9_:-]*))?$")
+        m = rexp.match(linecontent)
+        if m: self.dispatch_ref(m, point); return
 
-        rex_ref = re.compile(r".*\\(?:eq|page)*ref(\{([a-zA-Z0-9_]*))?$")
-        rex_cite = re.compile(r".*\\cite(?:[a-zA-Z_]*)(\{(?:[a-zA-Z0-9_]*\s*,\s*)*([a-zA-Z0-9_]*))?$")
+        rexp = re.compile(r".*\\cite(?:[a-zA-Z_*]*)(\{(?:[a-zA-Z0-9_:-]*\s*,\s*)*([a-zA-Z0-9_:-]*))?$")
+        m = rexp.match(linecontent)
+        if m: self.dispatch_cite(m, point); return
 
-        root = getroot.get_tex_root(view)
+        rexp = re.compile(r".*\\label(\{([a-zA-Z0-9_:-]*))?$")
+        m = rexp.match(linecontent)
+        if m: self.dispatch_label(m, point); return
 
-        if re.match(rex_ref, line):
-            print("dispatching ref")
-            paren, prefix = rex_ref.match(line).groups()
+        sublime.status_message("Nothing to be auto completed.")
 
-            completions = []
-            find_labels_in_files(os.path.dirname(root), root, completions)
-            completions = list(set(completions))
+    def dispatch_ref(self, m, point):
+        print("dispatching ref")
+        view = self.view
+        texroot = get_tex_root(view)
+        tex_dir = os.path.dirname(texroot)
+        braces, prefix = m.groups()
 
-            if prefix==None: prefix = ""
-            if prefix:
-                completions = [c for c in completions if prefix in c]
-            open_brace = "" if paren else "{"
-            close_brace = "" if paren else "}"
+        completions = []
+        search_in_tex(r'\\label\{([^\{\}]+)\}', texroot, tex_dir, completions)
+        # to clear duplicate labels
+        # completions = list(OrderedDict([(c['result'],c) for c in completions]).values())
 
-            if not completions:
-                sublime.status_message("No label matches %s!" % (prefix,))
-                return
-
-            def on_done(i):
-                if i<0: return
-                ref = open_brace + completions[i] + close_brace
-                view.run_command("latexsq_replace", {"a": point - len(prefix), "b": point, "replacement": ref})
-
-            view.window().show_quick_panel(completions, on_done)
-
-        elif re.match(rex_cite, line):
-            print("dispatching cite")
-            paren, prefix = rex_cite.match(line).groups()
-
-            completions = []
-            find_bib_records(root, completions)
-
-            if prefix==None: prefix = ""
-            if prefix:
-                completions = [comp for comp in completions if prefix.lower() in "%s %s %s" \
-                                                        % (comp[0].lower(),comp[1].lower(), comp[2].lower())]
-            open_brace = "" if paren else "{"
-            close_brace = "" if paren else "}"
-
-            if not completions:
-                sublime.status_message("No bib record matches %s!" % (prefix,))
-                return
-
-            def on_done(i):
-                if i<0: return
-                cite = open_brace + completions[i][0] + close_brace
-                view.run_command("latexsq_replace", {"a": point-len(prefix), "b": point, "replacement": cite})
-
-            items = [[ "[" + author + "] " + title, title + " (" + keyword + ")"] for (keyword,title, author) in completions]
-            view.window().show_quick_panel(items, on_done)
-
+        if prefix:
+            completions = [c for c in completions if prefix in c['result']]
         else:
-            sublime.status_message("Nothing to be auto completed.")
+            prefix = ""
+        open_brace = "" if braces else "{"
+        close_brace = "" if braces else "}"
+
+        if not completions:
+            sublime.status_message("No label matches %s!" % (prefix,))
             return
 
+        def on_done(i):
+            if i<0: return
+            ref = open_brace + completions[i]['result'] + close_brace
+            view.run_command("latexsq_replace", {"a": point - len(prefix), "b": point, "replacement": ref})
 
-def find_bib_files(rootdir, src, bibfiles):
-    if src[-4:].lower() != ".tex":
-        src = src + ".tex"
+        item = [[c['result'], os.path.relpath(c['file'], tex_dir)+":"+str(c['line'])] for c in completions]
+        view.window().show_quick_panel(item, on_done)
 
-    file_path = os.path.normpath(os.path.join(rootdir,src))
-    print("Searching file: " + repr(file_path))
+    def dispatch_cite(self, m, point):
+        print("dispatching cite")
+        view = self.view
+        texroot = get_tex_root(view)
+        braces, prefix = m.groups()
 
-    try:
-        src_file = open(file_path, "r")
-    except IOError:
-        sublime.status_message("LaTeXSq WARNING: cannot open included file " + file_path)
-        print("WARNING! I can't find it! Check your \\include's and \\input's.")
-        return
+        completions = []
+        find_bib_records(texroot, completions)
 
-    src_content = re.sub(r"(?<![\\])(\\\\)*%.*","",src_file.read())
-    bibtags =  re.findall(r'\\bibliography\{[^\}]+\}', src_content)
-
-    # extract absolute filepath for each bib file
-    for tag in bibtags:
-        bfiles = re.search(r'\{([^\}]+)', tag).group(1).split(',')
-        for bf in bfiles:
-            if bf[-4:].lower() != '.bib':
-                bf = bf + '.bib'
-            # We join with rootdir - everything is off the dir of the master file
-            bf = os.path.normpath(os.path.join(rootdir,bf))
-            bibfiles.append(bf)
-
-    # search through input tex files recursively
-    for f in re.findall(r'\\(?:input|include)\{[^\}]+\}',src_content):
-        input_f = re.search(r'\{([^\}]+)', f).group(1)
-        find_bib_files(rootdir, input_f, bibfiles)
-
-def find_bib_records(root, completions):
-
-    bib_files = []
-    find_bib_files(os.path.dirname(root), root, bib_files)
-    # remove duplicate bib files
-    bib_files = ([x.strip() for x in bib_files])
-    bib_files = list(set(bib_files))
-
-    if not bib_files:
-        sublime.error_message("No bib files found!") # here we can!
-        return []
-
-    kp = re.compile(r'@[^\{]+\{(.+),')
-    tp = re.compile(r'\btitle\s*=\s*(?:\{+|")\s*(.+)', re.IGNORECASE)  # note no comma!
-    ap = re.compile(r'\bauthor\s*=\s*(?:\{+|")\s*(.+)', re.IGNORECASE)
-
-    for bibfname in bib_files:
-        try:
-            bibf = open(bibfname)
-        except IOError:
-            print("Cannot open bibliography file %s !" % (bibfname,))
-            sublime.status_message("Cannot open bibliography file %s !" % (bibfname,))
-            continue
+        if prefix:
+            completions = [c for c in completions \
+                            if prefix.lower() in ("%s %s %s" % (c['keyword'],c['title'], c['author'])).lower()]
         else:
-            bib = bibf.readlines()
-            bibf.close()
+            prefix = ""
+        open_brace = "" if braces else "{"
+        close_brace = "" if braces else "}"
 
-        # note Unicode trickery
-        keywords = [kp.search(line).group(1) for line in bib if line[0] == '@']
-        titles = [tp.search(line).group(1) for line in bib if tp.search(line)]
-        authors = [ap.search(line).group(1) for line in bib if ap.search(line)]
+        if not completions:
+            sublime.status_message("No bib record matches %s!" % (prefix,))
+            return
+        # sort by author
+        completions = sorted(completions, key=lambda x: x['author'].lower())
 
+        def on_done(i):
+            if i<0: return
+            cite = open_brace + completions[i]['keyword'] + close_brace
+            view.run_command("latexsq_replace", {"a": point-len(prefix), "b": point, "replacement": cite})
 
-        if len(keywords) != len(titles):
-            print("Bibliography " + repr(bibfname) + " is broken!")
+        items = [[ "[" + c['author'] + "] " + c['title'], " (" + c['keyword'] + ") " + c['title'] ] for c in completions]
+        view.window().show_quick_panel(items, on_done)
+
+    def dispatch_label(self, m, point):
+        print("dispatching label")
+        view = self.view
+        texroot = get_tex_root(view)
+        tex_dir = os.path.dirname(texroot)
+        braces, prefix = m.groups()
+        print(prefix)
+
+        if not prefix:
             return
 
-        print("Found %d total bib entries" % (len(keywords),))
-
-        # Filter out }'s and ,'s at the end. Ugly!
-        nobraces = re.compile(r'\s*,*\}*(.+)')
-        titles = [nobraces.search(t[::-1]).group(1)[::-1] for t in titles]
-        authors = [nobraces.search(a[::-1]).group(1)[::-1] for a in authors]
-        completions += list(zip(keywords, titles, authors))
+        completions = []
+        search_in_tex(r'\\label\{('+ prefix +'[^\{\}]+)\}', texroot, tex_dir, completions)
+        print(completions)
 
 
-def find_labels_in_files(rootdir, src, labels):
-    if src[-4:].lower() != ".tex":
-        src = src + ".tex"
 
-    file_path = os.path.normpath(os.path.join(rootdir, src))
-    print("Searching file: " + repr(file_path))
-
-    try:
-        with open(file_path, "r") as src_file:
-            src_content = re.sub(r"(?<![\\])(\\\\)*%.*", "", src_file.read())
-            labels += re.findall(r'\\label\{([^\{\}]+)\}', src_content)
-    except IOError:
-        sublime.status_message("LaTeXSq WARNING: cannot find included file " + file_path)
-        print("WARNING! I can't find it! Check your \\include's and \\input's.")
-        return
-
-    # search through input tex files recursively
-    for f in re.findall(r'\\(?:input|include)\{([^\{\}]+)\}', src_content):
-        find_labels_in_files(rootdir, f, labels)
-
-
+class LaTeXSqEnvCloserCommand(sublime_plugin.TextCommand):
+    def run(self, edit, **args):
+        view = self.view
+        pattern = r'\\(begin|end)\{[^\}]+\}'
+        b = []
+        currpoint = view.sel()[0].b
+        point = 0
+        r = view.find(pattern, point)
+        while r and r.end() <= currpoint:
+            be = view.substr(r)
+            point = r.end()
+            if "\\begin" == be[0:6]:
+                b.append(be[6:])
+            else:
+                if be[4:] == b[-1]:
+                    b.pop()
+                else:
+                    sublime.error_message("\\begin%s closed with %s on line %d"
+                    % (b[-1], be, view.rowcol(point)[0]))
+                    return
+            r = view.find(pattern, point)
+        # now either b = [] or b[-1] is unmatched
+        if b == []:
+            sublime.error_message("Every environment is closed")
+        else:
+            # note the double escaping of \end
+            #view.run_command("insertCharacters \"\\\\end" + b[-1] + "\\n\"")
+            print("now we insert")
+            # for some reason insert does not work
+            view.run_command("insert_snippet",
+                                {'contents': "\\\\end" + b[-1] + "\n"})

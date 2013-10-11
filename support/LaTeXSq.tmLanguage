@@ -402,20 +402,6 @@
 				</dict>
 			</array>
 		</dict>
-		<key>nestedpan</key>
-		<dict>
-			<key>begin</key>
-			<string>\{</string>
-			<key>end</key>
-			<string>\}</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>$self</string>
-				</dict>
-			</array>
-		</dict>
 		<key>math</key>
 		<dict>
 			<key>patterns</key>
@@ -563,6 +549,10 @@
 							<string>[a-zA-Z0-9]</string>
 							<key>name</key>
 							<string>string.other.latex</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>$self</string>
 						</dict>
 					</array>
 				</dict>

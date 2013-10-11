@@ -1,7 +1,5 @@
-import sublime, sublime_plugin, os.path, subprocess, time
-from . import getroot
-import os
-import shutil
+import sublime, sublime_plugin, os, subprocess, time
+from . misc import *
 
 class JumpToPdfCommand(sublime_plugin.TextCommand):
     def run(self, edit, **args):
@@ -16,7 +14,7 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
         forward_sync = args["forward_sync"] if "forward_sync" in args else False
 
         srcfile = self.view.file_name()
-        root = getroot.get_tex_root(self.view)
+        root = get_tex_root(self.view)
 
         rootName, rootExt = os.path.splitext(root)
         pdffile = rootName + '.pdf'
