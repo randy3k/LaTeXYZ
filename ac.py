@@ -2,7 +2,6 @@ import sublime, sublime_plugin
 import os
 import re
 from . misc import *
-# from collections import OrderedDict
 
 # sublime wrapper for replacement
 class LatexsqReplaceCommand(sublime_plugin.TextCommand):
@@ -16,8 +15,7 @@ class LatexsqAcCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         view = self.view
         point = view.sel()[0].end()
-        if not view.score_selector(point, "text.tex.latex"):
-            return
+        if not view.score_selector(point, "text.tex.latex"): return
         linecontent = view.substr(sublime.Region(view.line(point).begin(), point))
 
         rexp = re.compile(r".*\\(?:eq|page)*ref(\{([a-zA-Z0-9_:-]*))?$")
@@ -32,85 +30,101 @@ class LatexsqAcCommand(sublime_plugin.TextCommand):
         m = rexp.match(linecontent)
         if m: self.dispatch_label(m, point); return
 
+        rexp = re.compile(r".*\\includegraphics((?:\[[\]]*\])?\{([^\}]*))?$")
+        m = rexp.match(linecontent)
+        ext = ['jpg', 'jpeg', 'bmp', 'pdf', 'ps', 'eps']
+        if m: self.dispatch_listdir(m, point, ext); return
+
+        rexp = re.compile(r".*\\(?:input|include)(\{([^\}]*))?$")
+        m = rexp.match(linecontent)
+        ext = ['tex']
+        if m: self.dispatch_listdir(m, point, ext); return
+
+        rexp = re.compile(r".*\\bibliography(\{([^\}]*))?$")
+        m = rexp.match(linecontent)
+        ext = ['bib']
+        if m: self.dispatch_listdir(m, point, ext); return
+
         sublime.status_message("Nothing to be auto completed.")
+
+    def on_completion(self, i, completions, add_braces, a, b):
+        if i<0: return
+        open_brace = "" if add_braces else "{"
+        close_brace = "" if add_braces else "}"
+        rept = open_brace + completions[i] + close_brace
+        self.view.run_command("latexsq_replace", {"a": a, "b": b, "replacement": rept})
 
     def dispatch_ref(self, m, point):
         print("dispatching ref")
         view = self.view
         texroot = get_tex_root(view)
         tex_dir = os.path.dirname(texroot)
-        braces, prefix = m.groups()
+        option, prefix = m.groups()
 
-        completions = []
-        search_in_tex(r'\\label\{([^\{\}]+)\}', texroot, tex_dir, completions)
-        # to clear duplicate labels
-        # completions = list(OrderedDict([(c['result'],c) for c in completions]).values())
+        results = []
+        search_in_tex(r'\\label\{([^\{\}]+)\}', texroot, tex_dir, results)
 
         if prefix:
-            completions = [c for c in completions if prefix in c['result']]
+            results = [c for c in results if prefix in c['result']]
         else:
             prefix = ""
-        open_brace = "" if braces else "{"
-        close_brace = "" if braces else "}"
 
-        if not completions:
+        if not results:
             sublime.status_message("No label matches %s!" % (prefix,))
             return
 
-        def on_done(i):
-            if i<0: return
-            ref = open_brace + completions[i]['result'] + close_brace
-            view.run_command("latexsq_replace", {"a": point - len(prefix), "b": point, "replacement": ref})
-
-        item = [[c['result'], os.path.relpath(c['file'], tex_dir)+":"+str(c['line'])] for c in completions]
-        view.window().show_quick_panel(item, on_done)
+        display = [[c['result'], os.path.relpath(c['file'], tex_dir)+":"+str(c['line'])] for c in results]
+        on_done = lambda i: self.on_completion(i, [c['result'] for c in results], option, point - len(prefix), point)
+        view.window().show_quick_panel(display, on_done)
 
     def dispatch_cite(self, m, point):
         print("dispatching cite")
         view = self.view
         texroot = get_tex_root(view)
-        braces, prefix = m.groups()
+        option, prefix = m.groups()
 
-        completions = []
-        find_bib_records(texroot, completions)
+        results = []
+        find_bib_records(texroot, results)
 
         if prefix:
-            completions = [c for c in completions \
+            results = [c for c in results \
                             if prefix.lower() in ("%s %s %s" % (c['keyword'],c['title'], c['author'])).lower()]
         else:
             prefix = ""
-        open_brace = "" if braces else "{"
-        close_brace = "" if braces else "}"
 
-        if not completions:
+        if results:
+            # sort by author
+            results = sorted(results, key=lambda x: x['author'].lower())
+        else:
             sublime.status_message("No bib record matches %s!" % (prefix,))
             return
-        # sort by author
-        completions = sorted(completions, key=lambda x: x['author'].lower())
 
-        def on_done(i):
-            if i<0: return
-            cite = open_brace + completions[i]['keyword'] + close_brace
-            view.run_command("latexsq_replace", {"a": point-len(prefix), "b": point, "replacement": cite})
-
-        items = [[ "[" + c['author'] + "] " + c['title'], " (" + c['keyword'] + ") " + c['title'] ] for c in completions]
-        view.window().show_quick_panel(items, on_done)
+        display = [[ "[" + c['author'] + "] " + c['title'], " (" + c['keyword'] + ") " + c['title'] ] for c in results]
+        on_done = lambda i: self.on_completion(i, [c['keyword'] for c in results], option, point - len(prefix), point)
+        view.window().show_quick_panel(display, on_done)
 
     def dispatch_label(self, m, point):
         print("dispatching label")
         view = self.view
         texroot = get_tex_root(view)
         tex_dir = os.path.dirname(texroot)
-        braces, prefix = m.groups()
+        option, prefix = m.groups()
         print(prefix)
 
-        if not prefix:
-            return
+    def dispatch_listdir(self, m, point, ext):
+        print("dispatching listdir")
+        view = self.view
+        texroot = get_tex_root(view)
+        tex_dir = os.path.dirname(texroot)
+        option, prefix = m.groups()
 
-        completions = []
-        search_in_tex(r'\\label\{('+ prefix +'[^\{\}]+)\}', texroot, tex_dir, completions)
-        print(completions)
-
+        if not prefix: prefix = ""
+        dir = os.path.join(tex_dir, os.path.dirname(prefix))
+        base = os.path.basename(prefix)
+        def on_done(target):
+            target_dir = os.path.splitext(os.path.relpath(target, tex_dir))[0]
+            self.on_completion(0, [target_dir], option, point - len(prefix), point)
+        listdir(view, dir, base, ext, on_done)
 
 
 class LaTeXSqEnvCloserCommand(sublime_plugin.TextCommand):

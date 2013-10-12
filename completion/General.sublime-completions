@@ -3,6 +3,6 @@
 
         "completions":
         [
-            { "trigger": "\\includegraphics", "contents": "\\includegraphics${1:[]}{$2}$0" }
+            { "trigger": "\\includegraphics", "contents": "\\includegraphics{$1}" }
         ]
 }

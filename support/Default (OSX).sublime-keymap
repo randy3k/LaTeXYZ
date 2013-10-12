@@ -6,6 +6,13 @@
 		],
 	},
 
+	// Clean Build
+	{ "keys": ["super+shift+b"], "command": "latexsq_clean", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		]
+	},
+
 	// View PDF, jump to point
 	{ "keys": ["super+l","v"], "command": "jump_to_pdf", "args": {"keep_focus": false, "forward_sync": false}, "context":
 		[
