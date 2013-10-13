@@ -6,28 +6,27 @@
 		],
 	},
 
-	// View PDF, jump to point
-	{ "keys": ["ctrl+l","v"], "command": "jump_to_pdf", "args": {"keep_focus": false, "forward_sync": false}, "context":
+	// Clean Build
+	{ "keys": ["ctrl+shift+b"], "command": "latexsq_clean", "context":
 		[
 			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
 		]
 	},
-	{ "keys": ["ctrl+l","j"], "command": "jump_to_pdf", "args": {"keep_focus": false, "forward_sync": true}, "context":
+
+	// View PDF, jump to point
+	{ "keys": ["ctrl+l","v"], "command": "jump_to_pdf", "args": {"bring_front": true, "forward_sync": false}, "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		]
+	},
+	{ "keys": ["ctrl+l","j"], "command": "jump_to_pdf", "args": {"bring_front": true, "forward_sync": true}, "context":
 	 	[
 			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
 		]
 	},
 
-	// Complete reference or citation
-	// cmd+l,x suggests "cross" references, which both cites and refs are
-	{ "keys": ["ctrl+l","x"],"command": "latexsq_xref", "context":
-		[
-			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
-		]
-	},
-
-	// Insert close current environment
-	{ "keys": ["ctrl+l","."], "command": "latexsq_env_closer", "context":
+	// cmd+l,x suggests autocompletion
+	{ "keys": ["ctrl+l","x"],"command": "latexsq_ac", "context":
 		[
 			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
 		]

@@ -48,17 +48,17 @@ def listdir(view, dir, base, ext, on_done):
         return
     ls = os.listdir(dir)
     if ext:
-        fnames = [f for f in ls if os.path.splitext(f)[1][1:].lower() in ext]
+        fnames = [f for f in ls if os.path.splitext(f)[1].lower() in ext]
     else:
         fnames = [f for f in ls if os.path.isfile(os.path.join(dir, f))]
     if base:
         fnames = [f for f in fnames if base.lower() in f.lower()]
 
-    display = ['.', os.pardir]+ [">"+f for f in ls if os.path.isdir(os.path.join(dir, f))] + fnames
+    display = [os.pardir]+ [">"+f for f in ls if os.path.isdir(os.path.join(dir, f))] + fnames
 
     def on_action(i):
         if i<0: return
-        elif i<=1 or display[i][0] == '>':
+        elif i==0 or display[i][0] == '>':
             target = display[i][1:] if display[i][0] == '>' else display[i]
             target_dir = os.path.normpath(os.path.join(dir, target))
             sublime.set_timeout(lambda: listdir(view, target_dir, base, ext, on_done), 1)
@@ -69,8 +69,10 @@ def listdir(view, dir, base, ext, on_done):
     sublime.set_timeout(lambda: view.window().show_quick_panel(display, on_action), 100)
 
 # search for pattern in the tex files
-def search_in_tex(rexp, src, tex_dir, results):
+def search_in_tex(rexp, src, tex_dir=None):
     print("Scanning file: " + repr(src))
+    results = []
+    if not tex_dir:  tex_dir = os.path.dirname(src)
     try:
         src_file = open(src, "r", encoding="utf-8")
         src_content = src_file.readlines()
@@ -84,16 +86,17 @@ def search_in_tex(rexp, src, tex_dir, results):
         for f in re.findall(r'\\(?:input|include)\{([^\{\}]+)\}', "\n".join(src_content)):
             if f[-4:].lower() != ".tex": f = f + ".tex"
             f = os.path.normpath(os.path.join(tex_dir, f))
-            search_in_tex(rexp, f, tex_dir, results)
+            results += search_in_tex(rexp, f, tex_dir)
 
     except IOError:
         print("Cannot open file: %s" % src)
 
+    return results
+
 # find bibtex records
-def find_bib_records(texroot, results):
+def find_bib_records(texroot, by=None):
     tex_dir = os.path.dirname(texroot)
-    bib_files = []
-    search_in_tex(r'\\bibliography\{([^\}]+)\}', texroot, tex_dir, bib_files)
+    bib_files = search_in_tex(r'\\bibliography\{([^\}]+)\}', texroot, tex_dir)
 
     bib_files = [subitem.strip() for item in bib_files for subitem in item['result'].split(",")]
     bib_files = [f+".bib" if f[-4:].lower() != ".bib" else f for f in bib_files]
@@ -113,6 +116,7 @@ def find_bib_records(texroot, results):
     titlep = re.compile(r'\btitle\s*=\s*(?:\{+|")\s*(.*?)[\} ,"]*$', re.IGNORECASE)
     authorp = re.compile(r'\bauthor\s*=\s*(?:\{+|")\s*(.*?)[\} ,"]*$', re.IGNORECASE)
 
+    results = []
     for bibfname in bib_files:
         try:
             bibf = open(bibfname, encoding="utf-8")
@@ -142,3 +146,7 @@ def find_bib_records(texroot, results):
                 if title and author: break
                 j += 1
             results.append({"keyword": keyword, 'title': title, 'author': author, 'file': bibfname, 'line': line})
+
+    if by:
+        results = sorted(results, key=lambda x: x[by].lower())
+    return results

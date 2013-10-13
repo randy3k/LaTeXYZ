@@ -14,12 +14,12 @@
 	},
 
 	// View PDF, jump to point
-	{ "keys": ["super+l","v"], "command": "jump_to_pdf", "args": {"keep_focus": false, "forward_sync": false}, "context":
+	{ "keys": ["super+l","v"], "command": "jump_to_pdf", "args": {"bring_front": true, "forward_sync": false}, "context":
 		[
 			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
 		]
 	},
-	{ "keys": ["super+l","j"], "command": "jump_to_pdf", "args": {"keep_focus": false, "forward_sync": true}, "context":
+	{ "keys": ["super+l","j"], "command": "jump_to_pdf", "args": {"bring_front": true, "forward_sync": true}, "context":
 	 	[
 			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
 		]

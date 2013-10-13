@@ -7,8 +7,10 @@
 	},
 
 	"linux": {
-		"python": "",
-		"sublime": ""
+		// path to sublime
+		"sublime": "subl",
+		// python to python2
+		"python": "python"
 	},
     "extensions": ["tex","TEX","TeX","Tex"]
 }

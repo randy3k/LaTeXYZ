@@ -1,5 +1,16 @@
-import sublime, sublime_plugin, os, subprocess, time
+import sublime, sublime_plugin, os, subprocess, time, threading
 from . misc import *
+
+class EvinceThread(threading.Thread):
+    def __init__(self, args):
+        self.args = args
+        threading.Thread.__init__(self)
+
+    def run(self):
+        ev_sync = subprocess.Popen(self.args)
+        ev = subprocess.Popen(['evince', self.args[3]])
+        ev.wait()
+        ev_sync.kill()
 
 class JumpToPdfCommand(sublime_plugin.TextCommand):
     def run(self, edit, **args):
@@ -10,7 +21,7 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
 
         s = sublime.load_settings("LaTeXSq.sublime-settings")
 
-        keep_focus = args["keep_focus"] if "keep_focus" in args else True
+        bring_front = args["bring_front"] if "bring_front" in args else False
         forward_sync = args["forward_sync"] if "forward_sync" in args else False
 
         srcfile = self.view.file_name()
@@ -20,8 +31,6 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
         pdffile = rootName + '.pdf'
 
         (line, col) = self.view.rowcol(self.view.sel()[0].end())
-        print("Jump to: ", line,col)
-
         line += 1
 
         plat = sublime.platform()
@@ -30,7 +39,7 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
 
             args = ['osascript']
             apple_script = ('tell application "Skim"\n'
-                                'if '+ str(not keep_focus)+' then activate\n'
+                                'if '+ str(bring_front)+' then activate\n'
                                 'open POSIX file "' + pdffile + '"\n'
                                 'revert front document\n'
                                 'if '+ str(forward_sync)+' then\n'
@@ -38,7 +47,6 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
                                 'end if\n'
                             'end tell\n')
             args.extend(['-e', apple_script])
-            # print(apple_script)
             subprocess.Popen(args)
 
 
@@ -46,50 +54,40 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
             # hide console
             startupinfo = subprocess.STARTUPINFO()
             startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-            tasks = subprocess.Popen(["tasklist"], stdout=subprocess.PIPE,
-                    startupinfo=startupinfo).communicate()[0]
+            tasks = subprocess.check_output(["tasklist"], startupinfo=startupinfo)
 
-            if "SumatraPDF.exe" not in str(tasks, encoding='utf8' ):
+            sumatra_is_running = "SumatraPDF.exe" in str(tasks, encoding='utf8' )
+            if bring_front or not sumatra_is_running:
                 print("Sumatra not running, launch it")
                 try:
-                    subprocess.Popen(["SumatraPDF", "-reuse-instance", pdffile])
+                    subprocess.Popen(["SumatraPDF", "-reuse-instance", pdffile], startupinfo=startupinfo)
                 except:
-                    sublime.error_message("Cannot launch SumatraPDF.")
-
-                # wait 1/2 seconds so Sumatra comes up
-                time.sleep(0.5)
+                    print("Cannot launch SumatraPDF.")
+                    return
+                if not sumatra_is_running: time.sleep(1)
 
             if forward_sync:
-                subprocess.Popen(["SumatraPDF.exe","-reuse-instance","-forward-search", srcfile, str(line), pdffile])
-            elif not keep_focus:
-                subprocess.Popen(["SumatraPDF.exe","-reuse-instance","-forward-search", srcfile, str(0), pdffile])
+                subprocess.Popen(["SumatraPDF.exe","-reuse-instance","-forward-search", srcfile, str(line), pdffile], startupinfo=startupinfo)
 
         elif plat == 'linux':
 
             linux_settings = s.get("linux")
-            # the required scripts are in the 'evince' subdir
-            ev_path = os.path.join(sublime.packages_path(), 'LaTeXSq', 'evince')
-            ev_fwd_exec = os.path.join(ev_path, 'evince_forward_search')
-            ev_sync_exec = os.path.join(ev_path, 'evince_sync') # for inverse search!
+            evince_sync = os.path.join(sublime.packages_path(), 'LaTeXSq', 'evince_sync')
 
-            running_apps = subprocess.check_output(['ps', 'xw']).decode(sublime_plugin.sys.getdefaultencoding(), 'ignore')
+            tasks = subprocess.check_output(['ps', 'xw'])
 
-            # Get python binary if set:
-            py_binary = linux_settings["python"] or 'python'
-            sb_binary = linux_settings["sublime"] or 'subl'
+            python = linux_settings["python"]
+            subl = linux_settings["sublime"]
 
-            evince_running = ("evince " + pdffile in running_apps)
-            if (not keep_focus) or (not evince_running):
-                print("(Re)launching evince")
-                subprocess.Popen(['sh', ev_sync_exec, py_binary, sb_binary, pdffile], cwd=ev_path)
-                print("launched evince_sync")
-                if not evince_running:
-                    time.sleep(0.5)
+            evince_is_running = "evince " + pdffile in str(tasks, encoding='utf8')
+            if bring_front or not evince_is_running:
+                args = [python, evince_sync, "backward", pdffile, subl + " %f:%l"]
+                EvinceThread(args).start()
+                if not evince_is_running: time.sleep(1)
+
             if forward_sync:
-                subprocess.Popen([py_binary, ev_fwd_exec, pdffile, str(line), srcfile])
+                subprocess.Popen([python, evince_sync, "forward", pdffile, str(line), srcfile])
 
-        else:
-            sublime.error_message("Platform not supported!")
 
     def is_enabled(self):
         view = self.view

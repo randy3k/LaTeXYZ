@@ -1,4 +1,3 @@
 auto re-numbering of ref
 ctrl-M for left right
-include evince_sync script
-LaTeXSqEnvCloserCommand
+better way to bring evince to the front
