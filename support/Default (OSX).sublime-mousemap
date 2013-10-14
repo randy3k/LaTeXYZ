@@ -2,7 +2,7 @@
 	{
 		"button": "button1", "modifiers": ["shift","super"],
 		"press_command": "jump_to_pdf",
-		"press_args": {"bring_front": true, "forward_sync": true}, "context":
+		"press_args": {"bring_forward": true, "forward_sync": true}, "context":
 	 	[
 			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
 		]

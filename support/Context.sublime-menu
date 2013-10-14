@@ -1,5 +1,5 @@
 [
     {"caption" : "-", "id": "latexsq"},
-    { "caption": "Jump to PDF",  "command": "jump_to_pdf", "args": {"bring_front": false, "forward_sync": true} },
-    { "caption": "View PDF", "command": "jump_to_pdf", "args": {"bring_front": false, "forward_sync": false} }
+    { "caption": "Jump to PDF",  "command": "jump_to_pdf", "args": {"bring_forward": true, "forward_sync": true} },
+    { "caption": "View PDF", "command": "jump_to_pdf", "args": {"bring_forward": true, "forward_sync": false} }
 ]

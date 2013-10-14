@@ -21,7 +21,7 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
 
         s = sublime.load_settings("LaTeXSq.sublime-settings")
 
-        bring_front = args["bring_front"] if "bring_front" in args else False
+        bring_forward = args["bring_forward"] if "bring_forward" in args else False
         forward_sync = args["forward_sync"] if "forward_sync" in args else False
 
         srcfile = self.view.file_name()
@@ -39,7 +39,7 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
 
             args = ['osascript']
             apple_script = ('tell application "Skim"\n'
-                                'if '+ str(bring_front)+' then activate\n'
+                                'if '+ str(bring_forward)+' then activate\n'
                                 'open POSIX file "' + pdffile + '"\n'
                                 'revert front document\n'
                                 'if '+ str(forward_sync)+' then\n'
@@ -57,7 +57,7 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
             tasks = subprocess.check_output(["tasklist"], startupinfo=startupinfo)
 
             sumatra_is_running = "SumatraPDF.exe" in str(tasks, encoding='utf8' )
-            if bring_front or not sumatra_is_running:
+            if bring_forward or not sumatra_is_running:
                 print("Sumatra not running, launch it")
                 try:
                     subprocess.Popen(["SumatraPDF", "-reuse-instance", pdffile], startupinfo=startupinfo)
@@ -80,7 +80,7 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
             subl = linux_settings["sublime"]
 
             evince_is_running = "evince " + pdffile in str(tasks, encoding='utf8')
-            if bring_front or not evince_is_running:
+            if bring_forward or not evince_is_running:
                 args = [python, evince_sync, "backward", pdffile, subl + " %f:%l"]
                 EvinceThread(args).start()
                 if not evince_is_running: time.sleep(1)

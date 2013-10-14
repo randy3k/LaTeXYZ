@@ -193,7 +193,7 @@ class LatexsqCompileCommand(sublime_plugin.WindowCommand):
             self.output("\n[BadBox(es)]\n" + "\n".join(badboxes)+ "\n")
 
         if returncode==0 and not errors:
-            self.window.active_view().run_command("jump_to_pdf", {"bring_front": False, "forward_sync": False})
+            self.window.active_view().run_command("jump_to_pdf", {"bring_forward": False, "forward_sync": False})
 
 class LatexsqOutputCommand(sublime_plugin.TextCommand):
     def run(self, edit, characters):

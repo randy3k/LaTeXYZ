@@ -113,7 +113,7 @@ class EvinceWindowProxy:
             self.window = dbus.Interface(window_obj,self.EV_WINDOW_IFACE)
             self.window.connect_to_signal("SyncSource", self.on_sync_source)
         else:
-            #That should never happen. 
+            #That should never happen.
             if self._log:
                 self._log.debug("GetWindowList returned empty list")
 
@@ -134,13 +134,13 @@ if __name__ == '__main__':
     if len(args)==5 and args[1] == 'forward':
         pdf = os.path.abspath(args[2]).replace(" ", "%20")
         line = int(args[3])
-        tex = os.path.join(os.path.dirname(os.path.abspath(args[4])), './',\
-                 os.path.basename(os.path.abspath(args[4])))
+        tex = os.path.abspath(args[4])
 
         try:
             bus = dbus.SessionBus()
             daemon = bus.get_object('org.gnome.evince.Daemon', '/org/gnome/evince/Daemon')
-            dbus_name = daemon.FindDocument('file://' + quote(pdf, safe="%/:=&?~#+!$,;'@()*[]"), True, dbus_interface='org.gnome.evince.Daemon')
+            dbus_name = daemon.FindDocument('file://' + quote(pdf, safe="%/:=&?~#+!$,;'@()*[]"), \
+                                True, dbus_interface='org.gnome.evince.Daemon')
             window = bus.get_object(dbus_name, '/org/gnome/evince/Window/0')
             time.sleep(0.2)
             window.SyncView(tex, (line, 1), 0, dbus_interface='org.gnome.evince.Window')
@@ -154,6 +154,7 @@ if __name__ == '__main__':
         EvinceWindowProxy('file://' + pdf, editor, True)
         loop = gobject.MainLoop()
         loop.run()
+
     else:
         sys.stderr.write("Unknown evince command: %s.\n" % args[1])
         sys.exit(1)
