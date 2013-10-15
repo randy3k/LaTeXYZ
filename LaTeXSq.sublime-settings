@@ -9,8 +9,8 @@
 	"linux": {
 		// path to sublime
 		"sublime": "subl",
-		// python to python2
+		// path to python2
 		"python": "python"
 	},
-    "extensions": ["tex","TEX","TeX","Tex"]
+    "extensions": ["tex", "TEX", "TeX", "Tex"]
 }

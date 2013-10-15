@@ -46,6 +46,7 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
                                     'tell front document to go to TeX line ' + str(line) + ' from POSIX file "' + srcfile + '"\n'
                                 'end if\n'
                             'end tell\n')
+            # print(apple_script)
             args.extend(['-e', apple_script])
             subprocess.Popen(args)
 

@@ -79,7 +79,7 @@ class LaTeXSqThread(threading.Thread):
 
         caller.output_log(proc.returncode)
         elapsed = (time.time() - t)
-        caller.output("\n\n[Done in %ss!]\n"% round(elapsed,2) )
+        caller.output("\n[Done in %ss!]\n"% round(elapsed,2) )
 
 
 class LatexsqCompileCommand(sublime_plugin.WindowCommand):
@@ -174,10 +174,12 @@ class LatexsqCompileCommand(sublime_plugin.WindowCommand):
 
         self.clearoutput()
 
-        if errors:
+        if returncode!=0 or errors:
             self.output("Complication Failure!\n")
         else:
             self.output("Complication Success!\n")
+        if returncode!=0:
+            self.output("[latexmk returns (%d)!]\n" % returncode)
 
         self.output("\n"+ str(len(errors)) + " Erorr(s), " + str(len(warnings)) +
                      " Warning(s), " + str(len(fspecifiers)) + " FSC, and " +
