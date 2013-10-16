@@ -58,17 +58,19 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
             tasks = subprocess.check_output(["tasklist"], startupinfo=startupinfo)
 
             sumatra_is_running = "SumatraPDF.exe" in str(tasks, encoding='utf8' )
-            if bring_forward or not sumatra_is_running:
-                print("Sumatra not running, launch it")
-                try:
-                    subprocess.Popen(["SumatraPDF", "-reuse-instance", pdffile], startupinfo=startupinfo)
-                except:
-                    print("Cannot launch SumatraPDF.")
-                    return
-                if not sumatra_is_running: time.sleep(1)
+            try:
+                if not sumatra_is_running:
+                    print("Sumatra not running, launch it")
+                    subprocess.Popen(["SumatraPDF", pdffile])
+                    if not sumatra_is_running: time.sleep(1)
+                elif bring_forward:
+                    subprocess.Popen(["SumatraPDF", "-reuse-instance", pdffile])
+            except:
+                print("Cannot launch SumatraPDF.")
+                return 
 
             if forward_sync:
-                subprocess.Popen(["SumatraPDF.exe","-reuse-instance","-forward-search", srcfile, str(line), pdffile], startupinfo=startupinfo)
+                subprocess.Popen(["SumatraPDF.exe","-reuse-instance","-forward-search", srcfile, str(line), pdffile])
 
         elif plat == 'linux':
 

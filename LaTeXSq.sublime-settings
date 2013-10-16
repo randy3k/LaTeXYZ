@@ -1,7 +1,7 @@
 {
     "auto_complete_selector": "meta.definition.math.latex - comment",
     "spell_check": true,
-    "forward_sync_on_sucess": true,
+    "forward_sync_on_success": true,
 	"osx": {
 
 	},
