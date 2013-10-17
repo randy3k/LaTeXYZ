@@ -421,7 +421,7 @@
             { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
         ]
     },
-    { "keys": ["`", "8"], "command": "insert_snippet", "args": {"contents": "\\partial"}, "context":
+    { "keys": ["`", "6"], "command": "insert_snippet", "args": {"contents": "\\partial"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
         ]
@@ -454,6 +454,11 @@
         ]
     },
     { "keys": ["`", "e"], "command": "insert_snippet", "args": {"contents": "\\varepsilon"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "z"], "command": "insert_snippet", "args": {"contents": "\\zeta"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
         ]
@@ -574,6 +579,11 @@
         ]
     },
     { "keys": ["`", "S"], "command": "insert_snippet", "args": {"contents": "\\Sigma"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["`", "Y"], "command": "insert_snippet", "args": {"contents": "\\Upsilon"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
         ]
