@@ -6,11 +6,14 @@
 
 	},
 
+	"windows": {
+		// path to SumatraPDF
+		// "sumatrapdf" : "C:\\Program Files\\SumatraPDF\\SumatraPDF.exe"
+	},
+
 	"linux": {
 		// path to sublime
-		"sublime": "subl",
-		// path to python2
-		"python": "python"
+		// "sublime": "/usr/local/bin/subl",
 	},
     "extensions": ["tex", "TEX", "TeX", "Tex"]
 }

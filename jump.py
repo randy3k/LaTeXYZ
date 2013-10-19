@@ -1,5 +1,19 @@
 import sublime, sublime_plugin, os, subprocess, time, threading
 from . misc import *
+import sys
+if sys.platform == "win32":
+    if sys.version_info >= (3, 0, 0):
+        from winreg import *
+    else:
+        from _winreg import *
+
+def SumatraPDF():
+    try:
+        akey=OpenKey(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\SumatraPDF.exe", 0, KEY_WOW64_64KEY|KEY_READ)
+        path=QueryValueEx(akey, "")[0]
+    except:
+        print("Cannot find SumatraPDF from registry. Check if SumatraPDF has been installed!")
+    return path
 
 class EvinceThread(threading.Thread):
     def __init__(self, args):
@@ -53,24 +67,26 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
 
         elif plat == 'windows':
             # hide console
+            windows_settings = s.get("windows")
+
             startupinfo = subprocess.STARTUPINFO()
             startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
             tasks = subprocess.check_output(["tasklist"], startupinfo=startupinfo)
-
             sumatra_is_running = "SumatraPDF.exe" in str(tasks, encoding='utf8' )
             try:
+                sumatrapdf = windows_settings["sumatrapdf"] if "sumatrapdf" in windows_settings else SumatraPDF()
                 if not sumatra_is_running:
-                    print("Sumatra not running, launch it")
-                    subprocess.Popen(["SumatraPDF", pdffile])
+                    print("SumatraPDF not running, launch it")
+                    subprocess.Popen([sumatrapdf, pdffile])
                     if not sumatra_is_running: time.sleep(1)
                 elif bring_forward:
-                    subprocess.Popen(["SumatraPDF", "-reuse-instance", pdffile])
+                    subprocess.Popen([sumatrapdf, "-reuse-instance", pdffile])
             except:
-                print("Cannot launch SumatraPDF.")
+                print("Cannot launch SumatraPDF!")
                 return 
 
             if forward_sync:
-                subprocess.Popen(["SumatraPDF.exe","-reuse-instance","-forward-search", srcfile, str(line), pdffile])
+                subprocess.Popen([sumatrapdf,"-reuse-instance","-forward-search", srcfile, str(line), pdffile])
 
         elif plat == 'linux':
 
@@ -79,17 +95,16 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
 
             tasks = subprocess.check_output(['ps', 'xw'])
 
-            python = linux_settings["python"]
-            subl = linux_settings["sublime"]
+            subl = linux_settings["sublime"] if "sublime" in linux_settings else "subl"
 
             evince_is_running = "evince " + pdffile in str(tasks, encoding='utf8')
             if bring_forward or not evince_is_running:
-                args = [python, evince_sync, "backward", pdffile, subl + " %f:%l"]
+                args = ["python", evince_sync, "backward", pdffile, subl + " %f:%l"]
                 EvinceThread(args).start()
                 if not evince_is_running: time.sleep(1)
 
             if forward_sync:
-                subprocess.Popen([python, evince_sync, "forward", pdffile, str(line), srcfile])
+                subprocess.Popen(["python", evince_sync, "forward", pdffile, str(line), srcfile])
 
 
     def is_enabled(self):
