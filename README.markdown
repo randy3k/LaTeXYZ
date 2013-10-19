@@ -7,7 +7,7 @@ LaTeXSq aims to be lightweight, extendable but self contained. If you are lookin
 * [LaTeXing](http://latexing.com)
 * [LaTeXTools](https://github.com/SublimeText/LaTeXTools)
 
-These two plugins are great. A lot of ideas actually are inspired by these two plugins. Unfortunately, LaTeXing is not open source and the development of LaTeXTools has been slowed lately.
+These two plugins are great. A lot of ideas actually are inspired by these two plugins. Unfortunately, LaTeXing is not open source and the development of LaTeXTools has been slowed down lately.
 
 
 ### Features
@@ -25,7 +25,7 @@ These two plugins are great. A lot of ideas actually are inspired by these two p
 ###[User Manual](https://github.com/randy3k/LaTeXSq/wiki/User Manual)
 
 ### ST2 compartibility
-While it is possible to backward port to ST2,  keeping it to be ST3 only would be more easier to maintain. 
+While it is possible to backward port to ST2,  keeping it to be ST3 only would make it easier to be maintained. 
 
 ###License
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
