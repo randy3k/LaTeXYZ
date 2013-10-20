@@ -17,15 +17,17 @@ These two plugins are great. A lot of ideas actually are inspired by these two p
 * Backward and forward sync of different PDF viewers
 * Automatch for (), [], {}, &#92;(&#92;), &#92;[&#92;], &#92;{&#92;}, \left\right pairs, $$ and quotation marks.
 * Multi files project support
-* Comprehensive LaTeX syntax 
+* Comprehensive LaTeX syntax
 * More…
 
 ###[Installation](https://github.com/randy3k/LaTeXSq/wiki/Installation)
 
+###[Project Setup](https://github.com/randy3k/LaTeXSq/wiki/Project-Setup)
+
 ###[User Manual](https://github.com/randy3k/LaTeXSq/wiki/User Manual)
 
 ### ST2 compartibility
-While it is possible to backward port to ST2,  keeping it to be ST3 only would make it easier to be maintained. 
+While it is possible to backward port to ST2,  keeping it to be ST3 only would make it easier to be maintained.
 
 ###License
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
