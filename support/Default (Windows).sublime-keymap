@@ -6,6 +6,20 @@
 		],
 	},
 
+	// Build
+	{ "keys": ["ctrl+b"], "command": "latexsq_build", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		]
+	},
+
+	// Build - force
+	{ "keys": ["ctrl+alt+b"], "command": "latexsq_build", "args": {"force": true},  "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		]
+	},
+
 	// Clean Build
 	{ "keys": ["ctrl+shift+b"], "command": "latexsq_clean", "context":
 		[

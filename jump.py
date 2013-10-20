@@ -33,7 +33,7 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
         if not view.score_selector(point, "text.tex.latex"):
             return
 
-        s = sublime.load_settings("LaTeXSq.sublime-settings")
+        s = view.settings()
 
         bring_forward = args["bring_forward"] if "bring_forward" in args else False
         forward_sync = args["forward_sync"] if "forward_sync" in args else False
@@ -83,7 +83,7 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
                     subprocess.Popen([sumatrapdf, "-reuse-instance", pdffile])
             except:
                 print("Cannot launch SumatraPDF!")
-                return 
+                return
 
             if forward_sync:
                 subprocess.Popen([sumatrapdf,"-reuse-instance","-forward-search", srcfile, str(line), pdffile])

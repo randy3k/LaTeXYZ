@@ -12,20 +12,20 @@ class LaTeXSqThread(threading.Thread):
         self.caller = caller
         threading.Thread.__init__(self)
 
-    def initialize(self):
-        caller = self.caller
-        if caller.path:
-            self.old_path = os.environ["PATH"]
-            os.environ["PATH"] = os.path.expandvars(caller.path)
+    # def initialize(self):
+    #     caller = self.caller
+    #     if caller.path:
+    #         self.old_path = os.environ["PATH"]
+    #         os.environ["PATH"] = os.path.expandvars(caller.path)
 
-        self.old_dir = os.getcwd()
-        os.chdir(os.path.dirname(caller.file_name))
+    #     self.old_dir = os.getcwd()
+    #     os.chdir(os.path.dirname(caller.file_name))
 
-    def finalize(self):
-        caller = self.caller
-        if caller.path:
-            os.environ["PATH"] = self.old_path
-            os.path.dirname(self.old_dir)
+    # def finalize(self):
+    #     caller = self.caller
+    #     if caller.path:
+    #         os.environ["PATH"] = self.old_path
+    #         os.path.dirname(self.old_dir)
 
     def run(self):
         print("Thread " + self.getName())
@@ -33,7 +33,6 @@ class LaTeXSqThread(threading.Thread):
         caller = self.caller
         caller.output("[Compling " + caller.file_name + "]\n")
         sublime.set_timeout(caller.status_updater, 100)
-
 
         plat = sublime.platform()
         # check if perl is installed
@@ -49,25 +48,27 @@ class LaTeXSqThread(threading.Thread):
             return
 
         # print(os.getcwd())
-        self.initialize()
+        # self.initialize()
 
         try:
+            my_env = os.environ.copy()
+            my_env["PATH"] = caller.path
             if plat == "windows":
                 # make sure console does not come up
                 startupinfo = subprocess.STARTUPINFO()
                 startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-                proc = subprocess.Popen(caller.cmd, startupinfo=startupinfo)
+                proc = subprocess.Popen(caller.cmd, startupinfo=startupinfo, env=my_env, cwd=os.path.dirname(caller.file_name))
                 # proc = subprocess.Popen(caller.cmd)
             else:
-                proc = subprocess.Popen(caller.cmd)
+                proc = subprocess.Popen(caller.cmd, env=my_env, cwd=os.path.dirname(caller.file_name))
         except:
             caller.output("[Cannot compile!]\n")
             # reset $PATH and working dir
-            self.finalize()
+            # self.finalize()
             return
 
         # reset $PATH and working dir
-        self.finalize()
+        # self.finalize()
 
         # export proc in case it needs to be killed
         self.proc = proc
@@ -82,8 +83,8 @@ class LaTeXSqThread(threading.Thread):
         caller.output("\n[Done in %ss!]\n"% round(elapsed,2) )
 
 
-class LatexsqCompileCommand(sublime_plugin.WindowCommand):
-    def run(self, cmd="", file_regex="", path=""):
+class LatexsqBuildCommand(sublime_plugin.WindowCommand):
+    def run(self, force=False):
         view = self.window.active_view()
         if view.is_dirty():
             print("saving...")
@@ -92,15 +93,19 @@ class LatexsqCompileCommand(sublime_plugin.WindowCommand):
         # Get parameters for Thread:
         self.file_name = get_tex_root(view)
         tex_dir = os.path.dirname(self.file_name)
+
+        s = view.settings()
+        cmd = s.get("cmd_force") if force else s.get("cmd")
         self.cmd = cmd + [os.path.relpath(self.file_name, tex_dir)]
-        self.path = path
+        os_settings = s.get(sublime.platform())
+        self.path = os.path.expandvars(os_settings['path']) if 'path' in os_settings else None
 
         self.output_view = self.window.get_output_panel("exec")
         self.output_view.set_read_only(True)
-        self.output_view.settings().set("result_file_regex", file_regex)
+        self.output_view.settings().set("result_file_regex", "^(?:W|E|F|B):\\s(.*):([0-9]+)\\s+")
         self.output_view.settings().set("result_base_dir", tex_dir)
 
-        if view.settings().get("show_panel_on_build", False):
+        if s.get("show_panel_on_build", False):
             self.window.run_command("show_panel", {"panel": "output.exec"})
 
         print(self.cmd)
@@ -133,7 +138,7 @@ class LatexsqCompileCommand(sublime_plugin.WindowCommand):
         self.output_view = self.window.get_output_panel("exec")
 
     def output_log(self, returncode):
-
+        view = self.window.active_view()
         tex_dir = os.path.dirname(self.file_name)
         logfile = os.path.splitext(self.file_name)[0] + ".log"
 
@@ -152,11 +157,10 @@ class LatexsqCompileCommand(sublime_plugin.WindowCommand):
                 if plat=="windows":
                     file.replace("/","\\")
                     file = re.sub("^\"", "", file)
-                file = os.path.relpath(file, tex_dir)
+                file = os.path.relpath(os.path.normpath(os.path.join(tex_dir, file)), tex_dir)
                 return file
 
             for d in D:
-                # print(d)
                 out = (cleanfile(d['file']), int(d['line']) if 'line' in d and d['line'] else 0, d['text'])
                 if 'kind' in d:
                     if d['kind'] == "error":
@@ -194,8 +198,7 @@ class LatexsqCompileCommand(sublime_plugin.WindowCommand):
         if badboxes:
             self.output("\n[BadBox(es)]\n" + "\n".join(badboxes)+ "\n")
 
-        s = sublime.load_settings("LaTeXSq.sublime-settings")
-        if returncode==0 and not errors and s.get("forward_sync_on_success", True):
+        if returncode==0 and not errors and view.settings().get("forward_sync_on_success", True):
             self.window.active_view().run_command("jump_to_pdf", {"bring_forward": False, "forward_sync": False})
 
 class LatexsqOutputCommand(sublime_plugin.TextCommand):

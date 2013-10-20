@@ -1,3 +1,5 @@
 auto re-numbering of ref
 ctrl-M for left right
 better way to bring evince to the front
+a full table of content
+detect texroot using .synctex.gz and .pdf

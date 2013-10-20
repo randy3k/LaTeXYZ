@@ -2,18 +2,36 @@
     "auto_complete_selector": "meta.definition.math.latex - comment",
     "spell_check": true,
     "forward_sync_on_success": true,
-	"osx": {
+    "cmd": [
+                "latexmk", "-f", "-quiet", "-pdf", "-e",
+                "$pdflatex='pdflatex -synctex=1 --shell-escape  %O %S'"
+            ],
+    "cmd_force": [
+                "latexmk", "-g", "-f", "-quiet", "-pdf", "-e",
+                "$pdflatex='pdflatex -synctex=1 --shell-escape  %O %S'"
+            ],
 
+	"osx": {
+        // envirnoment path
+        // it is on by default since paths on mac are set by launchctl
+        "path": "/usr/texbin:/usr/local/bin:$PATH"
 	},
 
 	"windows": {
+        // envirnoment path
+        // "path": "C:\\Perl64\\bin;C:\\Program Files (x86)\\MiKTeX 2.9\\miktex\\bin\\;$PATH"
+
 		// path to SumatraPDF
 		// "sumatrapdf" : "C:\\Program Files\\SumatraPDF\\SumatraPDF.exe"
 	},
 
 	"linux": {
+        // envirnoment path
+        // "path": "/usr/local/texlive/2013/bin/x86_64-linux:$PATH"
+
 		// path to sublime
 		// "sublime": "/usr/local/bin/subl",
 	},
+
     "extensions": ["tex", "TEX", "TeX", "Tex"]
 }
