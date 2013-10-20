@@ -17,14 +17,14 @@ def cleantex(texfile):
 class LatexsqCleanCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         view = self.view
-        texroot = get_tex_root(view)
-        tex_dir = os.path.dirname(texroot)
+        tex_root = get_tex_root(view)
+        tex_dir = os.path.dirname(tex_root)
 
         rexp = r'\\(?:input|include)\{([^\}]*)\}'
-        results = search_in_tex(rexp, texroot)
+        results = search_in_tex(rexp, tex_root)
         texfiles = [r['result'] for r in results]
         texfiles = [f+".tex" if f[-4:].lower() != ".tex" else f for f in texfiles]
-        texfiles = [texroot] + [os.path.join(tex_dir,f) for f in texfiles]
+        texfiles = [tex_root] + [os.path.join(tex_dir,f) for f in texfiles]
         for f in texfiles:
             if os.path.isfile(f): cleantex(f)
 

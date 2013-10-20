@@ -4,42 +4,57 @@ import re
 
 # 1) First, try to test if the currect file is a self contained tex file
 # 2) Second, check for TEX root
-# 3) Third, check for project
-# 4) If all above fail, use current file
+# 3) Third, check for project setting
+# 4) search of local .synctex.gz and .pdf
+# 5) If all above fail, use current file
 
 def get_tex_root(view):
 
-    texFile = view.file_name()
+    file_name = view.file_name()
+    file_dir = os.path.dirname(file_name)
     last_row = view.rowcol(view.size())[0]
     # check frist 5 rows only
     for i in range(0,min(5,last_row)):
         line = view.substr(view.line(view.text_point(i,0)))
         if re.match(r"\s*\\documentclass",line):
-            print("!TEX root = ", texFile)
-            return texFile
-        mroot = re.match(r"%\s*!TEX\s*root *= *(.*(tex|TEX))\s*$",line)
+            print("!TEX root = ", file_name)
+            return file_name
+        mroot = re.match(r"%\s*!tex\s*root *= *(.*tex)\s*$", line, re.IGNORECASE)
         if mroot:
-            (texPath, texName) = os.path.split(texFile)
-            (rootPath, rootName) = os.path.split(mroot.group(1))
-            texroot = os.path.join(texPath,rootPath,rootName)
-            texroot = os.path.abspath(os.path.normpath(texroot))
-            if os.path.isfile(texroot):
-                print("!TEX root = ", texroot)
-                return texroot
+            tex_root = os.path.join(file_dir,rootPath, mroot.group(1))
+            tex_root = os.path.abspath(os.path.normpath(tex_root))
+            if os.path.isfile(tex_root):
+                print("!TEX root = ", tex_root)
+                return tex_root
 
     folders = view.window().folders()
     if folders:
         os.chdir(folders[0])
         try:
-            texroot = os.path.abspath(view.settings().get('TEXroot'))
-            if os.path.isfile(texroot):
-                print("!TEX root = ", texroot)
-                return texroot
+            tex_root = os.path.abspath(view.settings().get('TEXroot'))
+            if os.path.isfile(tex_root):
+                print("!TEX root = ", tex_root)
+                return tex_root
         except:
             pass
 
-    print("!TEX root = ", texFile)
-    return texFile
+    sync = [f for f in  os.listdir(file_dir) if f.endswith(".synctex.gz")]
+    if len(sync)==1:
+        tex_root = os.path.join(file_dir, sync[0].replace(".synctex.gz", ".tex"))
+        if os.path.isfile(tex_root):
+            print("!TEX root = ", tex_root)
+            return tex_root
+
+    pdf = [f for f in  os.listdir(file_dir) if f.endswith(".pdf")]
+    if len(pdf)==1:
+        tex_root = os.path.join(file_dir, pdf[0].replace(".pdf", ".tex"))
+        if os.path.isfile(tex_root):
+            print("!TEX root = ", tex_root)
+            return tex_root
+
+
+    print("!TEX root = ", file_name)
+    return file_name
 
 # List a directory using quick panel
 def listdir(view, dir, base, ext, on_done):
@@ -94,9 +109,9 @@ def search_in_tex(rexp, src, tex_dir=None):
     return results
 
 # find bibtex records
-def find_bib_records(texroot, by=None):
-    tex_dir = os.path.dirname(texroot)
-    bib_files = search_in_tex(r'\\bibliography\{([^\}]+)\}', texroot, tex_dir)
+def find_bib_records(tex_root, by=None):
+    tex_dir = os.path.dirname(tex_root)
+    bib_files = search_in_tex(r'\\bibliography\{([^\}]+)\}', tex_root, tex_dir)
 
     bib_files = [subitem.strip() for item in bib_files for subitem in item['result'].split(",")]
     bib_files = [f+".bib" if f[-4:].lower() != ".bib" else f for f in bib_files]

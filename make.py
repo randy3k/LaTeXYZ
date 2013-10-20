@@ -12,28 +12,10 @@ class LaTeXSqThread(threading.Thread):
         self.caller = caller
         threading.Thread.__init__(self)
 
-    # def initialize(self):
-    #     caller = self.caller
-    #     if caller.path:
-    #         self.old_path = os.environ["PATH"]
-    #         os.environ["PATH"] = os.path.expandvars(caller.path)
-
-    #     self.old_dir = os.getcwd()
-    #     os.chdir(os.path.dirname(caller.file_name))
-
-    # def finalize(self):
-    #     caller = self.caller
-    #     if caller.path:
-    #         os.environ["PATH"] = self.old_path
-    #         os.path.dirname(self.old_dir)
-
     def run(self):
         print("Thread " + self.getName())
         t = time.time()
         caller = self.caller
-        caller.output("[Compling " + caller.file_name + "]\n")
-        sublime.set_timeout(caller.status_updater, 100)
-
         plat = sublime.platform()
         # check if perl is installed
         try:
@@ -47,28 +29,24 @@ class LaTeXSqThread(threading.Thread):
             sublime.error_message("Cannot find Perl interpreter.")
             return
 
-        # print(os.getcwd())
-        # self.initialize()
+        caller.output("[Compling " + caller.file_name + "]\n")
+        print(caller.cmd)
+        sublime.set_timeout(caller.status_updater, 100)
 
         try:
             my_env = os.environ.copy()
             my_env["PATH"] = caller.path
+            tex_dir = os.path.dirname(caller.file_name)
             if plat == "windows":
                 # make sure console does not come up
                 startupinfo = subprocess.STARTUPINFO()
                 startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-                proc = subprocess.Popen(caller.cmd, startupinfo=startupinfo, env=my_env, cwd=os.path.dirname(caller.file_name))
-                # proc = subprocess.Popen(caller.cmd)
+                proc = subprocess.Popen(caller.cmd, startupinfo=startupinfo, env=my_env, cwd=tex_dir)
             else:
-                proc = subprocess.Popen(caller.cmd, env=my_env, cwd=os.path.dirname(caller.file_name))
+                proc = subprocess.Popen(caller.cmd, env=my_env, cwd=tex_dir)
         except:
             caller.output("[Cannot compile!]\n")
-            # reset $PATH and working dir
-            # self.finalize()
             return
-
-        # reset $PATH and working dir
-        # self.finalize()
 
         # export proc in case it needs to be killed
         self.proc = proc
@@ -108,8 +86,6 @@ class LatexsqBuildCommand(sublime_plugin.WindowCommand):
         if s.get("show_panel_on_build", False):
             self.window.run_command("show_panel", {"panel": "output.exec"})
 
-        print(self.cmd)
-
         # kill process if process exists
         if hasattr(self, 'thread') and self.thread.isAlive():
             self.output("[Process is running!]\n")
@@ -143,38 +119,40 @@ class LatexsqBuildCommand(sublime_plugin.WindowCommand):
         logfile = os.path.splitext(self.file_name)[0] + ".log"
 
         check = parser.LogCheck()
+
+        if not os.path.isfile(logfile):
+            print("Cannot find log file: %s!" % logfile)
+
         check.read(logfile)
-        try:
-            D  = check.parse()
-            errors = []
-            badboxes = []
-            warnings = []
-            fspecifiers = []
+        D  = check.parse()
+        errors = []
+        badboxes = []
+        warnings = []
+        fspecifiers = []
 
-            def cleanfile(file):
-                # for windows, it happens that file path in tex log may be "C:/foo/bar.tex
-                plat = sublime.platform()
-                if plat=="windows":
-                    file.replace("/","\\")
-                    file = re.sub("^\"", "", file)
-                file = os.path.relpath(os.path.normpath(os.path.join(tex_dir, file)), tex_dir)
-                return file
+        def cleanfile(file):
+            # for windows, it happens that file path in tex log may be "C:/foo/bar.tex
+            plat = sublime.platform()
+            if plat=="windows":
+                file.replace("/","\\")
+                file = re.sub("^\"", "", file)
+            old_cwd = os.getcwd()
+            os.chdir(tex_dir)
+            file = os.path.relpath(file, tex_dir)
+            os.chdir(old_cwd)
+            return file
 
-            for d in D:
-                out = (cleanfile(d['file']), int(d['line']) if 'line' in d and d['line'] else 0, d['text'])
-                if 'kind' in d:
-                    if d['kind'] == "error":
-                        errors.append("E: %s:%-4d  %s"% out)
-                    elif d['kind'] == "warning" and ('Underfull' in d['text'] or 'Overfull' in d['text']):
-                        badboxes.append("B: %s:%-4d  %s"% out)
-                    elif d['kind'] == "warning" and 'float specifier changed' in d['text']:
-                        fspecifiers.append("F: %s:%-4d  %s"% out)
-                    elif d['kind'] == "warning":
-                        warnings.append("W: %s:%-4d  %s"% out)
-        except:
-            self.output("\nCannot parse LaTeX log file: %s\n" % logfile)
-            self.output("Report to Github.")
-            return
+        for d in D:
+            out = (cleanfile(d['file']), int(d['line']) if 'line' in d and d['line'] else 0, d['text'])
+            if 'kind' in d:
+                if d['kind'] == "error":
+                    errors.append("E: %s:%-4d  %s"% out)
+                elif d['kind'] == "warning" and ('Underfull' in d['text'] or 'Overfull' in d['text']):
+                    badboxes.append("B: %s:%-4d  %s"% out)
+                elif d['kind'] == "warning" and 'float specifier changed' in d['text']:
+                    fspecifiers.append("F: %s:%-4d  %s"% out)
+                elif d['kind'] == "warning":
+                    warnings.append("W: %s:%-4d  %s"% out)
 
         self.clearoutput()
 

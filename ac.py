@@ -55,11 +55,11 @@ class LatexsqAcCommand(sublime_plugin.TextCommand):
     def dispatch_ref(self, m, point):
         print("dispatching ref")
         view = self.view
-        texroot = get_tex_root(view)
-        tex_dir = os.path.dirname(texroot)
+        tex_root = get_tex_root(view)
+        tex_dir = os.path.dirname(tex_root)
         braces, prefix = m.groups()
 
-        results = search_in_tex(r'\\label\{([^\{\}]+)\}', texroot)
+        results = search_in_tex(r'\\label\{([^\{\}]+)\}', tex_root)
 
         if prefix:
             results = [r for r in results if prefix in r['result']]
@@ -77,10 +77,10 @@ class LatexsqAcCommand(sublime_plugin.TextCommand):
     def dispatch_cite(self, m, point):
         print("dispatching cite")
         view = self.view
-        texroot = get_tex_root(view)
+        tex_root = get_tex_root(view)
         braces, prefix = m.groups()
 
-        results = find_bib_records(texroot, by = 'author')
+        results = find_bib_records(tex_root, by = 'author')
 
         if prefix:
             results = [r for r in results \
@@ -99,16 +99,16 @@ class LatexsqAcCommand(sublime_plugin.TextCommand):
     def dispatch_label(self, m, point):
         print("dispatching label")
         view = self.view
-        texroot = get_tex_root(view)
-        tex_dir = os.path.dirname(texroot)
+        tex_root = get_tex_root(view)
+        tex_dir = os.path.dirname(tex_root)
         braces, prefix = m.groups()
         print(prefix)
 
     def dispatch_listdir(self, m, point, ext):
         print("dispatching listdir")
         view = self.view
-        texroot = get_tex_root(view)
-        tex_dir = os.path.dirname(texroot)
+        tex_root = get_tex_root(view)
+        tex_dir = os.path.dirname(tex_root)
         braces, prefix = m.groups()
 
         if not prefix: prefix = ""
