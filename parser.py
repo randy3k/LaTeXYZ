@@ -11,7 +11,7 @@ import re
 
 re_rerun = re.compile("LaTeX Warning:.*Rerun")
 # file name regex, it may be buggy
-re_file = re.compile(r"(\((?P<file>([^\n\t(){}]*?\.[a-zA-Z]+|[^\n\t(){}]*[^ \n\t(){}]))|\))")
+re_file = re.compile(r"""\((?P<file>("[^"]+(?=")|[^\n\t(){}]*?\.[a-zA-Z]+|[^\n\t(){}]*[^ \n\t(){}]))|\)""")
 re_badbox = re.compile(r"(Ov|Und)erfull \\[hv]box ")
 re_line = re.compile(r"(l\.(?P<line>[0-9]+)( (?P<code>.*))?$|<\*>)")
 re_cseq = re.compile(r".*(?P<seq>(\\|\.\.\.)[^ ]*) ?$")
@@ -42,7 +42,7 @@ class LogCheck (object):
         except IOError:
             return 2
         data = file.read()
-        self.lines = [l.decode('utf-8', 'ignore')  for l in data.splitlines(True)]
+        self.lines = [l.decode('utf-8', 'ignore').replace('\r','')  for l in data.splitlines(True)]
         # self.lines = file.readlines()
         file.close()
 
@@ -317,8 +317,9 @@ class LogCheck (object):
 
 
 if __name__ == '__main__':
-    logfile = 'somefile'
-    check = parser.LogCheck()
+    import sys
+    logfile = sys.argv[1]
+    check = LogCheck()
     check.read(logfile)
     D  = check.parse()
     for d in D: print(d)
