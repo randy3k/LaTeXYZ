@@ -13,6 +13,7 @@ def SumatraPDF():
         path=QueryValueEx(akey, "")[0]
     except:
         print("Cannot find SumatraPDF from registry. Check if SumatraPDF has been installed!")
+        return
     return path
 
 class EvinceThread(threading.Thread):
@@ -39,10 +40,9 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
         forward_sync = args["forward_sync"] if "forward_sync" in args else False
 
         srcfile = self.view.file_name()
-        root = get_tex_root(self.view)
+        tex_root = get_tex_root(self.view)
 
-        rootName, rootExt = os.path.splitext(root)
-        pdffile = rootName + '.pdf'
+        pdffile = os.path.splitext(tex_root)[0] + '.pdf'
 
         (line, col) = self.view.rowcol(self.view.sel()[0].end())
         line += 1
