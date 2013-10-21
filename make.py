@@ -35,7 +35,7 @@ class LaTeXSqThread(threading.Thread):
 
         try:
             my_env = os.environ.copy()
-            my_env["PATH"] = caller.path
+            if caller.path: my_env["PATH"] = caller.path
             tex_dir = os.path.dirname(caller.file_name)
             if plat == "windows":
                 # make sure console does not come up
