@@ -5,6 +5,7 @@ import re
 from . misc import *
 from . import parser
 
+
 class LaTeXSqThread(threading.Thread):
 
     # pass caller to make output and killing possible
@@ -13,30 +14,29 @@ class LaTeXSqThread(threading.Thread):
         threading.Thread.__init__(self)
 
     def run(self):
-        print("Thread " + self.getName())
+        # print("Thread " + self.getName())
         t = time.time()
         caller = self.caller
         plat = sublime.platform()
-        # check if perl is installed
-        try:
-            if plat == "windows":
-                startupinfo = subprocess.STARTUPINFO()
-                startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-                subprocess.Popen(["perl", "-v"], startupinfo=startupinfo)
-            else:
-                subprocess.Popen(["perl", "-v"])
-        except:
-            sublime.error_message("Cannot find Perl interpreter.")
-            return
+        my_env = os.environ.copy()
+        if caller.path: my_env["PATH"] = caller.path
+        tex_dir = os.path.dirname(caller.file_name)
+
+        if caller.cmd[0] == "latexmk":
+            # check if perl is installed
+            if not check_program("perl", my_env):
+                sublime.error_message("Cannot find Perl.")
+                return
+            # check if latexmk is installed
+            if not check_program("latexmk", my_env):
+                sublime.error_message("Cannot find latexmk.")
+                return
 
         caller.output("[Compling " + caller.file_name + "]\n")
         print(caller.cmd)
         sublime.set_timeout(caller.status_updater, 100)
 
         try:
-            my_env = os.environ.copy()
-            if caller.path: my_env["PATH"] = caller.path
-            tex_dir = os.path.dirname(caller.file_name)
             if plat == "windows":
                 # make sure console does not come up
                 startupinfo = subprocess.STARTUPINFO()
@@ -122,6 +122,7 @@ class LatexsqBuildCommand(sublime_plugin.WindowCommand):
 
         if not os.path.isfile(logfile):
             print("Cannot find log file: %s!" % logfile)
+            return
 
         check.read(logfile)
         D  = check.parse()

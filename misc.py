@@ -1,14 +1,28 @@
 import sublime, sublime_plugin
 import os
 import re
+import sys
+import subprocess
 
-# 1) First, try to test if the currect file is a self contained tex file
-# 2) Second, check for TEX root
-# 3) Third, check for project setting
-# 4) search of local .synctex.gz and .pdf
-# 5) If all above fail, use current file
+def check_program(prog, env):
+    try:
+        if sys.platform == "win32":
+            startupinfo = subprocess.STARTUPINFO()
+            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+            subprocess.Popen([prog, "-v"], startupinfo=startupinfo, env=env)
+        else:
+            subprocess.Popen([prog, "-v"], env=env)
+    except:
+        return False
+    return True
+
 
 def get_tex_root(view):
+    # 1) First, try to test if the currect file is a self contained tex file
+    # 2) Second, check for TEX root
+    # 3) Third, check for project setting
+    # 4) search of local .synctex.gz and .pdf
+    # 5) If all above fail, use current file
 
     file_name = view.file_name()
     file_dir = os.path.dirname(file_name)
