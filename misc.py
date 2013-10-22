@@ -43,14 +43,17 @@ def get_tex_root(view):
 
     folders = view.window().folders()
     if folders:
+        old_dir = os.getcwd()
         os.chdir(folders[0])
         try:
             tex_root = os.path.abspath(view.settings().get('TEXroot'))
             if os.path.isfile(tex_root):
                 print("!TEX root = ", tex_root)
+                os.chdir(old_dir)
                 return tex_root
         except:
             pass
+        os.chdir(old_dir)
 
     sync = [f for f in  os.listdir(file_dir) if f.endswith(".synctex.gz")]
     if len(sync)==1:
@@ -98,7 +101,7 @@ def listdir(view, dir, base, ext, on_done):
     sublime.set_timeout(lambda: view.window().show_quick_panel(display, on_action), 100)
 
 # search for pattern in the tex files
-def search_in_tex(rexp, src, tex_dir=None):
+def search_in_tex(rexp, src, tex_dir=None, recursive=True):
     print("Scanning file: " + repr(src))
     results = []
     if not tex_dir:  tex_dir = os.path.dirname(src)
@@ -112,10 +115,11 @@ def search_in_tex(rexp, src, tex_dir=None):
             results += [{"file":src, "line":line+1, "result": t} for t in this_result]
 
         # recursive search
-        for f in re.findall(r'\\(?:input|include)\{([^\{\}]+)\}', "\n".join(src_content)):
-            if f[-4:].lower() != ".tex": f = f + ".tex"
-            f = os.path.normpath(os.path.join(tex_dir, f))
-            results += search_in_tex(rexp, f, tex_dir)
+        if recursive:
+            for f in re.findall(r'\\(?:input|include)\{([^\{\}]+)\}', "\n".join(src_content)):
+                if f[-4:].lower() != ".tex": f = f + ".tex"
+                f = os.path.normpath(os.path.join(tex_dir, f))
+                results += search_in_tex(rexp, f, tex_dir)
 
     except IOError:
         print("Cannot open file: %s" % src)
