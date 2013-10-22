@@ -27,6 +27,13 @@
 		]
 	},
 
+	// Clean Build - force
+	{ "keys": ["ctrl+alt+shift+b"], "command": "latexsq_clean", "args": {"force": true}, "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		]
+	},
+
 	// View PDF, jump to point
 	{ "keys": ["ctrl+l","v"], "command": "jump_to_pdf", "args": {"bring_forward": true, "forward_sync": false}, "context":
 		[
