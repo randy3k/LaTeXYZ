@@ -13,7 +13,7 @@ def SumatraPDF():
         path=QueryValueEx(akey, "")[0]
     except:
         print("Cannot find SumatraPDF from registry. Check if SumatraPDF has been installed!")
-        return
+        return "SumatraPDF.exe"
     return path
 
 class EvinceThread(threading.Thread):
