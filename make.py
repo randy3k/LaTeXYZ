@@ -36,17 +36,13 @@ class LaTeXSqThread(threading.Thread):
         print(caller.cmd)
         sublime.set_timeout(caller.status_updater, 100)
 
-        try:
-            if plat == "windows":
-                # make sure console does not come up
-                startupinfo = subprocess.STARTUPINFO()
-                startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-                proc = subprocess.Popen(caller.cmd, startupinfo=startupinfo, env=my_env, cwd=tex_dir)
-            else:
-                proc = subprocess.Popen(caller.cmd, env=my_env, cwd=tex_dir)
-        except:
-            caller.output("[Cannot compile!]\n")
-            return
+        if plat == "windows":
+            # make sure console does not come up
+            startupinfo = subprocess.STARTUPINFO()
+            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+            proc = subprocess.Popen(caller.cmd, startupinfo=startupinfo, env=my_env, cwd=tex_dir)
+        else:
+            proc = subprocess.Popen(caller.cmd, env=my_env, cwd=tex_dir)
 
         # export proc in case it needs to be killed
         self.proc = proc
@@ -56,6 +52,7 @@ class LaTeXSqThread(threading.Thread):
             caller.output("\n[Process killed!]\n")
             return
 
+        caller.clearoutput()
         caller.output_log(proc.returncode)
         elapsed = (time.time() - t)
         caller.output("\n[Done in %ss!]\n"% round(elapsed,2) )
@@ -117,13 +114,11 @@ class LatexsqBuildCommand(sublime_plugin.WindowCommand):
         view = self.window.active_view()
         tex_dir = os.path.dirname(self.file_name)
         logfile = os.path.splitext(self.file_name)[0] + ".log"
-
-        check = parser.LogCheck()
-
         if not os.path.isfile(logfile):
             print("Cannot find log file: %s!" % logfile)
             return
 
+        check = parser.LogCheck()
         check.read(logfile)
         D  = check.parse()
         errors = []
@@ -131,18 +126,11 @@ class LatexsqBuildCommand(sublime_plugin.WindowCommand):
         warnings = []
         fspecifiers = []
 
-        def cleanfile(file):
-            # for windows, it happens that file path in tex log may be "C:/foo/bar.tex
-            plat = sublime.platform()
-            if plat=="windows":
-                file.replace("/","\\")
-                file = re.sub("^\"", "", file)
-            old_cwd = os.getcwd()
-            os.chdir(tex_dir)
-            file = os.path.relpath(file, tex_dir)
-            os.chdir(old_cwd)
-            return file
-
+        # changing workdir for getting relative path
+        old_cwd = os.getcwd()
+        os.chdir(tex_dir)
+        cleanfile = lambda f: os.path.relpath(re.sub("^\"", "", f.replace("/","\\")) \
+                                    if sublime.platform()=="windows" else f, tex_dir)
         for d in D:
             out = (cleanfile(d['file']), int(d['line']) if 'line' in d and d['line'] else 0, d['text'])
             if 'kind' in d:
@@ -154,15 +142,12 @@ class LatexsqBuildCommand(sublime_plugin.WindowCommand):
                     fspecifiers.append("F: %s:%-4d  %s"% out)
                 elif d['kind'] == "warning":
                     warnings.append("W: %s:%-4d  %s"% out)
-
-        self.clearoutput()
+        os.chdir(old_cwd)
 
         if returncode!=0 or errors:
-            self.output("Complication Failure!\n")
+            self.output("Complication Failure with return code [%d]!\n" % returncode)
         else:
             self.output("Complication Success!\n")
-        if returncode!=0:
-            self.output("[latexmk returns (%d)!]\n" % returncode)
 
         self.output("\n"+ str(len(errors)) + " Erorr(s), " + str(len(warnings)) +
                      " Warning(s), " + str(len(fspecifiers)) + " FSC, and " +
