@@ -22,6 +22,8 @@ These two plugins are great. A lot of ideas actually are inspired by these two p
 
 ###[Installation](https://github.com/randy3k/LaTeXSq/wiki/Installation)
 
+###[LaTeXSq Options](https://github.com/randy3k/LaTeXSq/wiki/LaTeXSq-Options)
+
 ###[Project Setup](https://github.com/randy3k/LaTeXSq/wiki/Project-Setup)
 
 ###[User Manual](https://github.com/randy3k/LaTeXSq/wiki/User Manual)
