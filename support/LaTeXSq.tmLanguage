@@ -80,6 +80,42 @@
 		</dict>
 		<dict>
 			<key>begin</key>
+			<string>\\((?:re)?newcommand){\s*([^\}]*)\s*}{</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.latex</string>
+				</dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.latex</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>}</string>
+			<key>name</key>
+			<string>meta.definition.math.latex</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#option</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#beginend</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#command</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
 			<string>(\\begin)\{\s*((?:align|alignat|displaymath|displaymath|eqnarray|equation|flalign|gather|math|multline|xalignat)\*?)\s*\}</string>
 			<key>beginCaptures</key>
 			<dict>
@@ -320,13 +356,11 @@
 					<key>include</key>
 					<string>#section</string>
 				</dict>
+				<dict>
+					<key>include</key>
+					<string>#command</string>
+				</dict>
 			</array>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\\[a-zA-Z]+</string>
-			<key>name</key>
-			<string>keyword.other.latex</string>
 		</dict>
 	</array>
 	<key>repository</key>
@@ -402,6 +436,41 @@
 				</dict>
 			</array>
 		</dict>
+		<key>option</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>\{</string>
+					<key>end</key>
+					<string>\}</string>
+				</dict>
+			</array>
+		</dict>
+		<key>nested</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>\{</string>
+					<key>end</key>
+					<string>\}</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>$self</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
+				</dict>
+			</array>
+		</dict>
 		<key>math</key>
 		<dict>
 			<key>patterns</key>
@@ -422,21 +491,8 @@
 					<key>patterns</key>
 					<array>
 						<dict>
-							<key>begin</key>
-							<string>\{</string>
-							<key>end</key>
-							<string>\}</string>
-							<key>patterns</key>
-							<array>
-								<dict>
-									<key>include</key>
-									<string>$self</string>
-								</dict>
-							</array>
-						</dict>
-						<dict>
 							<key>include</key>
-							<string>$self</string>
+							<string>#nested</string>
 						</dict>
 					</array>
 				</dict>
@@ -456,21 +512,8 @@
 					<key>patterns</key>
 					<array>
 						<dict>
-							<key>begin</key>
-							<string>\{</string>
-							<key>end</key>
-							<string>\}</string>
-							<key>patterns</key>
-							<array>
-								<dict>
-									<key>include</key>
-									<string>$self</string>
-								</dict>
-							</array>
-						</dict>
-						<dict>
 							<key>include</key>
-							<string>$self</string>
+							<string>#nested</string>
 						</dict>
 					</array>
 				</dict>
@@ -505,19 +548,6 @@
 					<string>[0-9]+</string>
 					<key>name</key>
 					<string>constant.numeric.latex</string>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>\{</string>
-					<key>end</key>
-					<string>\}</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#math</string>
-						</dict>
-					</array>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -586,6 +616,13 @@
 					</array>
 				</dict>
 			</array>
+		</dict>
+		<key>command</key>
+		<dict>
+			<key>match</key>
+			<string>\\[a-zA-Z]+</string>
+			<key>name</key>
+			<string>keyword.other.latex</string>
 		</dict>
 	</dict>
 	<key>scopeName</key>
