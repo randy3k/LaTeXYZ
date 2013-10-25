@@ -14,7 +14,7 @@ class LatexsqReplaceCommand(sublime_plugin.TextCommand):
 class LatexsqAcCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         view = self.view
-        point = view.sel()[0].end()
+        point = view.sel()[0].end() if view.sel() else 0
         if not view.score_selector(point, "text.tex.latex"): return
         contentb = view.substr(sublime.Region(view.line(point).begin(), point))
         content = view.substr(view.line(point))
