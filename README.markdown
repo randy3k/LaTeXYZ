@@ -17,7 +17,7 @@ These two plugins are great. A lot of ideas actually are inspired by these two p
 * Backward and forward sync of different PDF viewers
 * Automatch for (), [], {}, &#92;(&#92;), &#92;[&#92;], &#92;{&#92;}, \left\right pairs, $$ and quotation marks.
 * Multi files project support
-* Comprehensive LaTeX syntax
+* Comprehensive LaTeX syntax, for example, handling `\newcommand{\bg}{\begin{align}}`
 * More…
 
 ###[Installation](https://github.com/randy3k/LaTeXSq/wiki/Installation)
