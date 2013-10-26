@@ -93,7 +93,7 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
             linux_settings = s.get("linux")
 
             evince_sync = sublime.load_resource("Packages/LaTeXSq/evince_sync")
-
+            print("evince_sync loaded")
             tasks = subprocess.check_output(['ps', 'xw'])
 
             subl = linux_settings["sublime"] if "sublime" in linux_settings else "subl"
