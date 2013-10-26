@@ -23,7 +23,7 @@ class EvinceThread(threading.Thread):
 
     def run(self):
         ev_sync = subprocess.Popen(self.args)
-        ev = subprocess.Popen(['evince', self.args[3]])
+        ev = subprocess.Popen(['evince', self.args[4]])
         ev.wait()
         ev_sync.kill()
 
@@ -91,7 +91,8 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
         elif plat == 'linux':
 
             linux_settings = s.get("linux")
-            evince_sync = os.path.join(sublime.packages_path(), 'LaTeXSq', 'evince_sync')
+
+            evince_sync = sublime.load_resource("Packages/LaTeXSq/evince_sync")
 
             tasks = subprocess.check_output(['ps', 'xw'])
 
@@ -99,12 +100,12 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
 
             evince_is_running = "evince " + pdffile in str(tasks, encoding='utf8')
             if bring_forward or not evince_is_running:
-                args = ["python", evince_sync, "backward", pdffile, subl + " %f:%l"]
+                args = ["python", "-c", evince_sync, "backward", pdffile, subl + " %f:%l"]
                 EvinceThread(args).start()
                 if not evince_is_running: time.sleep(1)
 
             if forward_sync:
-                subprocess.Popen(["python", evince_sync, "forward", pdffile, str(line), srcfile])
+                subprocess.Popen(["python", "-c", evince_sync, "forward", pdffile, str(line), srcfile])
 
 
     def is_enabled(self):
