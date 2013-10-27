@@ -80,18 +80,18 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\\((?:re)?newcommand){\s*([^\}]*)\s*}{</string>
+			<string>(\\(?:re)?newcommand){\s*([^\}]*)\s*}[^{]*{</string>
 			<key>beginCaptures</key>
 			<dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>keyword.other.latex</string>
-				</dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
 					<string>keyword.other.latex</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.general.latex</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -103,14 +103,6 @@
 				<dict>
 					<key>include</key>
 					<string>#option</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#beginend</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#command</string>
 				</dict>
 			</array>
 		</dict>
@@ -436,7 +428,7 @@
 				</dict>
 			</array>
 		</dict>
-		<key>option</key>
+		<key>option_braces</key>
 		<dict>
 			<key>patterns</key>
 			<array>
@@ -445,10 +437,35 @@
 					<string>\{</string>
 					<key>end</key>
 					<string>\}</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#option</string>
+						</dict>
+					</array>
 				</dict>
 			</array>
 		</dict>
-		<key>nested</key>
+		<key>option</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#option_braces</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#beginend</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#command</string>
+				</dict>
+			</array>
+		</dict>
+		<key>braces</key>
 		<dict>
 			<key>patterns</key>
 			<array>
@@ -464,10 +481,6 @@
 							<string>$self</string>
 						</dict>
 					</array>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>$self</string>
 				</dict>
 			</array>
 		</dict>
@@ -492,7 +505,7 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#nested</string>
+							<string>#braces</string>
 						</dict>
 					</array>
 				</dict>
@@ -513,7 +526,7 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#nested</string>
+							<string>#braces</string>
 						</dict>
 					</array>
 				</dict>
@@ -622,7 +635,7 @@
 			<key>match</key>
 			<string>\\[a-zA-Z]+</string>
 			<key>name</key>
-			<string>keyword.other.latex</string>
+			<string>support.function.general.latex</string>
 		</dict>
 	</dict>
 	<key>scopeName</key>
