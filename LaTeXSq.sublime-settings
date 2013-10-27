@@ -33,5 +33,5 @@
 		// "sublime": "/usr/local/bin/subl",
 	},
 
-    "extensions": ["tex", "TEX", "TeX", "Tex"]
+    "extensions": ["tex"]
 }
