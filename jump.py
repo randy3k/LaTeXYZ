@@ -2,14 +2,11 @@ import sublime, sublime_plugin, os, subprocess, time, threading
 from . misc import *
 import sys
 if sys.platform == "win32":
-    if sys.version_info >= (3, 0, 0):
-        from winreg import *
-    else:
-        from _winreg import *
+    from winreg import *
 
 def SumatraPDF():
     try:
-        akey=OpenKey(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\SumatraPDF.exe", 0, KEY_WOW64_64KEY|KEY_READ)
+        akey=OpenKey(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\SumatraPDF.exe", 0, KEY_READ)
         path=QueryValueEx(akey, "")[0]
     except:
         print("Cannot find SumatraPDF from registry. Check if SumatraPDF has been installed!")
