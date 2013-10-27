@@ -4,14 +4,14 @@ import re
 import sys
 import subprocess
 
-def check_program(prog, env):
+def check_program(args, env):
     try:
         if sys.platform == "win32":
             startupinfo = subprocess.STARTUPINFO()
             startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-            subprocess.Popen([prog, "-v"], startupinfo=startupinfo, env=env)
+            subprocess.Popen(args, startupinfo=startupinfo, env=env)
         else:
-            subprocess.Popen([prog, "-v"], env=env)
+            subprocess.Popen(args, env=env)
     except:
         return False
     return True

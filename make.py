@@ -24,11 +24,11 @@ class LaTeXSqThread(threading.Thread):
 
         if caller.cmd[0] == "latexmk":
             # check if perl is installed
-            if not check_program("perl", my_env):
+            if not check_program(["perl", "-v"], my_env) and not check_program(["runscript", "tlperl", "-v"], my_env):
                 sublime.error_message("Cannot find Perl.")
                 return
             # check if latexmk is installed
-            if not check_program("latexmk", my_env):
+            if not check_program(["latexmk", "-v"], my_env):
                 sublime.error_message("Cannot find latexmk.")
                 return
 
