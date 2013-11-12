@@ -9,7 +9,7 @@
           <key>decreaseIndentPattern</key>
           <string>^\s*\\end\s*\{(?:itemize|enumerate|description)\*?\}\s*$</string>
           <key>increaseIndentPattern</key>
-          <string>^\s*\\begin\s*\{(?:itemize|enumerate|description)\*?\}\s*$</string>    
+          <string>^\s*\\begin\s*\{(?:itemize|enumerate|description)\*?\}\s*$</string>
       </dict>
   </dict>
 </plist>

@@ -1,7 +1,10 @@
 {
     "auto_complete_selector": "meta.definition.math.latex - comment",
-    "spell_check": true,
+
+    "spell_check" : true,
+
     "forward_sync_on_success": true,
+
     "cmd": [
                 "latexmk", "-f", "-quiet", "-pdf", "-e",
                 "$pdflatex='pdflatex -synctex=1 --shell-escape  %O %S'"
@@ -19,7 +22,7 @@
 
 	"windows": {
         // envirnoment path
-        // "path": "C:\\Perl64\\bin;C:\\Program Files (x86)\\MiKTeX 2.9\\miktex\\bin\\;$PATH"
+        // "path": "C:\\Program Files\\MiKTeX 2.9\\miktex\\bin\\;$PATH"
 
 		// path to SumatraPDF
 		// "sumatrapdf" : "C:\\Program Files\\SumatraPDF\\SumatraPDF.exe"
@@ -30,7 +33,7 @@
         // "path": "/usr/local/texlive/2013/bin/x86_64-linux:$PATH"
 
 		// path to sublime
-		// "sublime": "/usr/local/bin/subl",
+		// "sublime": "/usr/bin/subl",
 	},
 
     "extensions": ["tex"]
