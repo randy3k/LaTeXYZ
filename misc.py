@@ -35,7 +35,7 @@ def get_tex_root(view):
             return file_name
         mroot = re.match(r"%\s*!tex\s*root *= *(.*tex)\s*$", line, re.IGNORECASE)
         if mroot:
-            tex_root = os.path.join(file_dir,rootPath, mroot.group(1))
+            tex_root = os.path.join(file_dir, mroot.group(1))
             tex_root = os.path.abspath(os.path.normpath(tex_root))
             if os.path.isfile(tex_root):
                 print("!TEX root = ", tex_root)
