@@ -507,10 +507,6 @@
 							<key>include</key>
 							<string>#braces</string>
 						</dict>
-						<dict>
-							<key>include</key>
-							<string>$self</string>
-						</dict>
 					</array>
 				</dict>
 				<dict>
@@ -531,10 +527,6 @@
 						<dict>
 							<key>include</key>
 							<string>#braces</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>$self</string>
 						</dict>
 					</array>
 				</dict>
