@@ -3,7 +3,15 @@
 
     "spell_check" : true,
 
+    "view_on_success": true,
+
+    // it is disabled if view_on_success is false
+    // this may not be working on some platforms
+    "bring_forward_on_success": false,
+
+    // it is disabled if view_on_success is false
     "forward_sync_on_success": true,
+
 
     "cmd": [
                 "latexmk", "-f", "-quiet", "-pdf", "-e",
@@ -34,7 +42,7 @@
 
 		// path to sublime
 		// "sublime": "/usr/bin/subl",
-                
+
 		// which viewer to use: evince or okular (default is evince)
 		// "viewer": "okular"
 	},

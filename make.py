@@ -162,8 +162,10 @@ class LatexsqBuildCommand(sublime_plugin.WindowCommand):
         if badboxes:
             self.output("\n[BadBox(es)]\n" + "\n".join(badboxes)+ "\n")
 
-        if returncode==0 and not errors and view.settings().get("forward_sync_on_success", True):
-            self.window.active_view().run_command("jump_to_pdf", {"bring_forward": False, "forward_sync": True})
+        if returncode==0 and not errors and view.settings().get("view_on_success", True):
+            forward_sync = view.settings().get("forward_sync_on_success", True)
+            bring_forward = view.settings().get("bring_forward_on_success", False)
+            self.window.active_view().run_command("jump_to_pdf", {"bring_forward": bring_forward, "forward_sync": forward_sync})
 
 class LatexsqOutputCommand(sublime_plugin.TextCommand):
     def run(self, edit, characters):
