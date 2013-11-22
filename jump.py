@@ -89,11 +89,11 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
 
             linux_settings = s.get("linux")
             useOkular = linux_settings["viewer"] == "okular"
-            
+
             if useOkular:
                 if forward_sync:
                     args = ["okular", "-unique", "%s#src:%s %s"%( pdffile,line,srcfile)]
-                        else:
+                else:
                     args = ["okular", "-unique", pdffile]
                 print("about to run okular with %s"%' '.join(args))
                 subprocess.Popen(args)
