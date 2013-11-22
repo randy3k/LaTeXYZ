@@ -21,7 +21,6 @@ class LaTeXSqThread(threading.Thread):
         my_env = os.environ.copy()
         if caller.path: my_env["PATH"] = caller.path
         tex_dir = os.path.dirname(caller.file_name)
-
         if caller.cmd[0] == "latexmk":
             # check if perl is installed
             if not check_program(["perl", "-v"], my_env) and not check_program(["runscript", "tlperl", "-v"], my_env):

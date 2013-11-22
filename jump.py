@@ -88,7 +88,7 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
         elif plat == 'linux':
 
             linux_settings = s.get("linux")
-            viewer = get(linux_settings, "viewer", "evince")
+            viewer = linux_settings.get("viewer", "evince")
 
             if viewer=="okular":
                 if forward_sync:
