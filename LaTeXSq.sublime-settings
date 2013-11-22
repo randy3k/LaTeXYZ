@@ -34,6 +34,9 @@
 
 		// path to sublime
 		// "sublime": "/usr/bin/subl",
+                
+		// which viewer to use: evince or okular (default is evince)
+		// "viewer": "okular"
 	},
 
     "extensions": ["tex"]
