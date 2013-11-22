@@ -88,9 +88,9 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
         elif plat == 'linux':
 
             linux_settings = s.get("linux")
-            useOkular = linux_settings["viewer"] == "okular"
+            viewer = get(linux_settings, "viewer", "evince")
 
-            if useOkular:
+            if viewer=="okular":
                 if forward_sync:
                     args = ["okular", "-unique", "%s#src:%s %s"%( pdffile,line,srcfile)]
                 else:
@@ -98,7 +98,6 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
                 print("about to run okular with %s"%' '.join(args))
                 subprocess.Popen(args)
             else:
-
                 evince_sync = sublime.load_resource("Packages/LaTeXSq/evince_sync")
                 print("evince_sync loaded")
                 tasks = subprocess.check_output(['ps', 'xw'])
