@@ -88,21 +88,30 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
         elif plat == 'linux':
 
             linux_settings = s.get("linux")
+            useOkular = linux_settings["viewer"] == "okular"
+            
+            if useOkular:
+                if forward_sync:
+                    args = ["okular", "-unique", "%s#src:%s %s"%( pdffile,line,srcfile)]
+                        else:
+                    args = ["okular", "-unique", pdffile]
+                print("about to run okular with %s"%' '.join(args))
+                subprocess.Popen(args)
+            else:
 
-            evince_sync = sublime.load_resource("Packages/LaTeXSq/evince_sync")
-            print("evince_sync loaded")
-            tasks = subprocess.check_output(['ps', 'xw'])
+                evince_sync = sublime.load_resource("Packages/LaTeXSq/evince_sync")
+                print("evince_sync loaded")
+                tasks = subprocess.check_output(['ps', 'xw'])
 
-            subl = linux_settings["sublime"] if "sublime" in linux_settings else "subl"
+                subl = linux_settings["sublime"] if "sublime" in linux_settings else "subl"
+                evince_is_running = "evince " + pdffile in str(tasks, encoding='utf8')
+                if bring_forward or not evince_is_running:
+                    args = ["python", "-c", evince_sync, "backward", pdffile, subl + " %f:%l"]
+                    EvinceThread(args).start()
+                    if not evince_is_running: time.sleep(1)
 
-            evince_is_running = "evince " + pdffile in str(tasks, encoding='utf8')
-            if bring_forward or not evince_is_running:
-                args = ["python", "-c", evince_sync, "backward", pdffile, subl + " %f:%l"]
-                EvinceThread(args).start()
-                if not evince_is_running: time.sleep(1)
-
-            if forward_sync:
-                subprocess.Popen(["python", "-c", evince_sync, "forward", pdffile, str(line), srcfile])
+                if forward_sync:
+                    subprocess.Popen(["python", "-c", evince_sync, "forward", pdffile, str(line), srcfile])
 
 
     def is_enabled(self):

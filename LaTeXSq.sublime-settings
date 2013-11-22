@@ -4,6 +4,7 @@
     "spell_check" : true,
 
     "forward_sync_on_success": true,
+    "forward_sync" : true
 
     "cmd": [
                 "latexmk", "-f", "-quiet", "-pdf", "-e",
@@ -34,6 +35,9 @@
 
 		// path to sublime
 		// "sublime": "/usr/bin/subl",
+                
+		// which viewer to use: evince or okular (default is evince)
+		// "viewer": "okular",
 	},
 
     "extensions": ["tex"]
