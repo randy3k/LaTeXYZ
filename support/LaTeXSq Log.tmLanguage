@@ -9,7 +9,7 @@
 	<key>foldingStopMarker</key>
 	<string>\*\*/|^\s*\)</string>
 	<key>name</key>
-	<string>LaTeX Log</string>
+	<string>LaTeXSq Log</string>
 	<key>patterns</key>
 	<array>
 		<dict>
