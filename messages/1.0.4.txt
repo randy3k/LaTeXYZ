@@ -1,0 +1,3 @@
+LaTeXSq is renamed as LaTeXSQ
+
+Make sure to rename your user setting file `LaTeXSq.sublime-settings` to `LaTeXSQ.sublime-settings`
