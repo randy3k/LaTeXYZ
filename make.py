@@ -6,7 +6,7 @@ from . misc import *
 from . import parser
 
 
-class LaTeXSqThread(threading.Thread):
+class LaTeXSQThread(threading.Thread):
 
     # pass caller to make output and killing possible
     def __init__(self, caller):
@@ -90,7 +90,7 @@ class LatexsqBuildCommand(sublime_plugin.WindowCommand):
             self.thread.killed = True
             return
 
-        self.thread = LaTeXSqThread(self)
+        self.thread = LaTeXSQThread(self)
         self.thread.start()
 
     def status_updater(self, status=0):

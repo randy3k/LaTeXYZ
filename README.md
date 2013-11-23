@@ -1,8 +1,8 @@
-LaTeXSq
+LaTeXSQ
 =================
 
-LaTeXSq is a multi-platform LaTeX plugin for Sublime Text 3. It works on OSX, Windows and Linux (Ubuntu).
-LaTeXSq aims to be lightweight, extensible but self contained. If you are looking for a full feature plugin, visit
+LaTeXSQ is a multi-platform LaTeX plugin for Sublime Text 3. It works on OSX, Windows and Linux (Ubuntu).
+LaTeXSQ aims to be lightweight, extensible but self contained. If you are looking for a full feature plugin, visit
 
 * [LaTeXing](http://latexing.com)
 * [LaTeXTools](https://github.com/SublimeText/LaTeXTools)
@@ -20,13 +20,13 @@ These two plugins are great. A lot of ideas are actually inspired by these two p
 * Comprehensive LaTeX syntax, for example, handling `\newcommand{\bg}{\begin{align}}`
 * More…
 
-###[Installation](https://github.com/randy3k/LaTeXSq/wiki/Installation)
+###[Installation](https://github.com/randy3k/LaTeXSQ/wiki/Installation)
 
-###[LaTeXSq Options](https://github.com/randy3k/LaTeXSq/wiki/LaTeXSq-Options)
+###[LaTeXSQ Options](https://github.com/randy3k/LaTeXSQ/wiki/LaTeXSQ-Options)
 
-###[Project Setup](https://github.com/randy3k/LaTeXSq/wiki/Project-Setup)
+###[Project Setup](https://github.com/randy3k/LaTeXSQ/wiki/Project-Setup)
 
-###[User Manual](https://github.com/randy3k/LaTeXSq/wiki/User Manual)
+###[User Manual](https://github.com/randy3k/LaTeXSQ/wiki/User Manual)
 
 ### ST2 compartibility
 While it is possible to backward port to ST2,  keeping it to be ST3 only would make it easier to be maintained.

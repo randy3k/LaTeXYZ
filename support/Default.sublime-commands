@@ -1,3 +1,3 @@
 [
-	{ "caption": "LaTeXSq for LaTeX: View PDF", "command": "jump_to_pdf", "args": {"bring_forward": true, "forward_sync": false}}
+	{ "caption": "LaTeXSQ for LaTeX: View PDF", "command": "jump_to_pdf", "args": {"bring_forward": true, "forward_sync": false}}
 ]
