@@ -1,13 +1,13 @@
 LaTeXSq
 =================
 
-LaTeXSq is a multi-platfrom LaTeX plugin for Sublime Text 3. It works on OSX, Windows and Linux (Ubuntu).
-LaTeXSq aims to be lightweight, extendable but self contained. If you are looking for a full feature plugin, they are what you would like to look at
+LaTeXSq is a multi-platform LaTeX plugin for Sublime Text 3. It works on OSX, Windows and Linux (Ubuntu).
+LaTeXSq aims to be lightweight, extensible but self contained. If you are looking for a full feature plugin, visit
 
 * [LaTeXing](http://latexing.com)
 * [LaTeXTools](https://github.com/SublimeText/LaTeXTools)
 
-These two plugins are great. A lot of ideas actually are inspired by these two plugins. Unfortunately, LaTeXing is not open source and the development of LaTeXTools has been slowed down lately.
+These two plugins are great. A lot of ideas are actually inspired by these two plugins. Unfortunately, LaTeXing is not open source and the development of LaTeXTools has been slowed down lately.
 
 
 ### Features
