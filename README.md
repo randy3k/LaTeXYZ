@@ -1,8 +1,8 @@
 LaTeXSQ
 =================
 
-LaTeXSQ is a multi-platform LaTeX plugin for Sublime Text 3. It works on OSX, Windows and Linux (Ubuntu).
-LaTeXSQ aims to be lightweight, extensible but self contained. If you are looking for a full feature plugin, visit
+LaTeXSQ (aka LaTeX^2) is a multi-platform LaTeX plugin for Sublime Text 3. It works on OSX, Windows and Linux (Ubuntu).
+LaTeXSQ aims to be lightweight, extensible but self contained. If you are looking for a full feature plugin, see
 
 * [LaTeXing](http://latexing.com)
 * [LaTeXTools](https://github.com/SublimeText/LaTeXTools)
@@ -29,7 +29,7 @@ These two plugins are great. A lot of ideas are actually inspired by these two p
 ###[User Manual](https://github.com/randy3k/LaTeXSQ/wiki/User Manual)
 
 ### ST2 compartibility
-While it is possible to backward port to ST2,  keeping it to be ST3 only would make it easier to be maintained.
+While it is possible to backward port to ST2,  I would rather keep it ST3 only for easier maintenance.
 
 ###License
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
