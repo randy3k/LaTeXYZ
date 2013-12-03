@@ -345,35 +345,11 @@
             { "key": "in_square_brackets", "operator": "equal", "operand": true}
         ]
     },
-    { "keys": ["{"], "command": "auto_left_right_pair", "args": {"arg": ["\\\\{", "\\\\}"]}, "context":
+    { "keys": ["{"], "command": "auto_left_right_pair", "args": {"arg": ["\\{", "\\}"]}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
             { "key": "in_curly_brackets", "operator": "equal", "operand": true}
-        ]
-    },
-    { "keys": ["("], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXSQ/macros/Delete Left and Insert Left Right Brackets.sublime-macro"}, "context":
-        [
-            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
-            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": false },
-            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
-            { "key": "preceding_text", "operator": "regex_contains", "operand": "\\($", "match_all": true }
-        ]
-    },
-    { "keys": ["["], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXSQ/macros/Delete Left and Insert Left Right Square Brackets.sublime-macro"}, "context":
-        [
-            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
-            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": false },
-            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
-            { "key": "preceding_text", "operator": "regex_contains", "operand": "\\[$", "match_all": true }
-        ]
-    },
-    { "keys": ["{"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXSQ/macros/Delete Left and Insert Left Right Curly Brackets.sublime-macro"}, "context":
-        [
-            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
-            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": false },
-            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
-            { "key": "preceding_text", "operator": "regex_contains", "operand": "\\{$", "match_all": true }
         ]
     },
 
