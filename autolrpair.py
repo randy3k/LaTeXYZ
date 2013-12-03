@@ -26,8 +26,8 @@ class AutoLeftRightPairCommand(sublime_plugin.TextCommand):
             view.replace(edit, sublime.Region(a-len(arg[0]),b+len(arg[1])), view.substr(sublime.Region(a,b)))
             view.sel().add(sublime.Region(a-len(arg[0]),b-len(arg[0])))
 
-        left = "\\left"+ re.escape(arg[0])
-        right = "\\right"+ re.escape(arg[1])
+        left = "\\left"+ arg[0].replace('\\', '\\\\')
+        right = "\\right"+ arg[1].replace('\\', '\\\\')
 
         view.run_command("insert_snippet", {"contents": left+"${1:$SELECTION}"+right})
 
