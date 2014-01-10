@@ -144,11 +144,11 @@ class LatexsqBuildCommand(sublime_plugin.WindowCommand):
         os.chdir(old_cwd)
 
         if returncode!=0 or errors:
-            self.output("Complication Failure with return code [%d]!\n" % returncode)
+            self.output("Compilation failed with return code [%d]!\n" % returncode)
         else:
-            self.output("Complication Success!\n")
+            self.output("Compilation succeeded!\n")
 
-        self.output("\n"+ str(len(errors)) + " Erorr(s), " + str(len(warnings)) +
+        self.output("\n"+ str(len(errors)) + " Error(s), " + str(len(warnings)) +
                      " Warning(s), " + str(len(fspecifiers)) + " FSC, and " +
                          str(len(badboxes)) + " BadBox(es)" + ".\n")
 
