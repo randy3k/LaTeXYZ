@@ -2,7 +2,7 @@ import sublime, sublime_plugin
 import os, threading, time
 import subprocess
 import re
-from . misc import *c
+from . misc import *
 from . import parser
 
 
