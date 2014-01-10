@@ -2,7 +2,7 @@ import sublime, sublime_plugin
 import os, threading, time
 import subprocess
 import re
-from . misc import *
+from . misc import *c
 from . import parser
 
 
@@ -31,7 +31,7 @@ class LaTeXSQThread(threading.Thread):
                 sublime.error_message("Cannot find latexmk.")
                 return
 
-        caller.output("[Compling " + caller.file_name + "]\n")
+        caller.output("[Compiling " + caller.file_name + "]\n")
         print(caller.cmd)
         sublime.set_timeout(caller.status_updater, 100)
 
@@ -97,7 +97,7 @@ class LatexsqBuildCommand(sublime_plugin.WindowCommand):
         status = status % 14
         before = min(status, 14-status)
         after = 7 - before
-        self.window.active_view().set_status("latexsq", "Compling [%s=%s]" % (" " * before, " " * after))
+        self.window.active_view().set_status("latexsq", "Compiling [%s=%s]" % (" " * before, " " * after))
         if self.thread and self.thread.isAlive():
             sublime.set_timeout(lambda: self.status_updater(status+1), 100)
         else:
