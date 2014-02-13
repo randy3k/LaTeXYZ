@@ -129,7 +129,7 @@ def search_in_tex(rexp, src, tex_dir=None, recursive=True):
 # find bibtex records
 def find_bib_records(tex_root, by=None):
     tex_dir = os.path.dirname(tex_root)
-    bib_files = search_in_tex(r'\\bibliography\{([^\}]+)\}', tex_root, tex_dir)
+    bib_files = search_in_tex(r'\\(?:bibliography|addbibresource)\{([^\}]+)\}', tex_root, tex_dir)
 
     bib_files = [subitem.strip() for item in bib_files for subitem in item['result'].split(",")]
     bib_files = [f+".bib" if f[-4:].lower() != ".bib" else f for f in bib_files]
