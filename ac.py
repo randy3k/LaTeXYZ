@@ -115,7 +115,7 @@ class LatexsqAcCommand(sublime_plugin.TextCommand):
         dir = os.path.join(tex_dir, os.path.dirname(prefix))
         base = os.path.basename(prefix)
         def on_done(target):
-            target_dir = os.path.splitext(os.path.relpath(target, tex_dir))[0]
+            target_dir = (os.path.splitext(os.path.relpath(target, tex_dir))[0]).replace(os.sep, '/')
             self.replace(0, [target_dir], braces, point - len(prefix), point)
         listdir(view, dir, base, ext, on_done)
 
