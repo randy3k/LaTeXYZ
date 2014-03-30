@@ -7,15 +7,9 @@ class AutoLeftRightPairListener(sublime_plugin.EventListener):
     def on_query_context(self, view, key, operator, operand, match_all):
         if view.is_scratch() or view.settings().get('is_widget'): return
         if not view.score_selector(view.sel()[0].end() if len(view.sel())>0 else 0, "text.tex.latex"): return
-        if key == 'in_brackets':
-            out = all([view.substr(sel.begin()-1)=='(' and view.substr(sel.end())==')' for sel in view.sel()])
-            return (out == operand) if operator==0 else not (out == operand)
-        elif key == 'in_square_brackets':
-            out = all([view.substr(sel.begin()-1)=='[' and view.substr(sel.end())==']' for sel in view.sel()])
-            return (out == operand) if operator==0 else not (out == operand)
-        elif key == 'in_curly_brackets':
-            out = all([view.substr(sublime.Region(sel.begin()-2,sel.begin()))=='\\{' and view.substr(sublime.Region(sel.begin(),sel.begin()+2))=='\\}' for sel in view.sel()])
-            return (out == operand) if operator==0 else not (out == operand)
+        if key == 'in_multiline_eqnarray':
+            return True
+            
 
 class AutoLeftRightPairCommand(sublime_plugin.TextCommand):
     def run(self, edit, arg):

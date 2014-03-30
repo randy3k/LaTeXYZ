@@ -28,6 +28,8 @@ These two plugins are great. A lot of ideas are actually inspired by these two p
 
 ###[User Manual](https://github.com/randy3k/LaTeXSQ/wiki/User Manual)
 
+###[BracketHighlighter Settings](https://github.com/randy3k/LaTeXSQ/wiki/BracketHighlighter-settings)
+
 ### ST2 compartibility
 While it is possible to backward port to ST2,  I would rather keep it ST3 only for easier maintenance.
 
