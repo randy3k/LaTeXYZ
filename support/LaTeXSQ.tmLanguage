@@ -50,7 +50,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>constant.language.latex</string>
+					<string>keyword.other.latex</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -60,7 +60,7 @@
 				<key>3</key>
 				<dict>
 					<key>name</key>
-					<string>constant.language.latex</string>
+					<string>keyword.other.latex</string>
 				</dict>
 			</dict>
 			<key>match</key>
@@ -70,7 +70,7 @@
 			<key>match</key>
 			<string>&amp;</string>
 			<key>name</key>
-			<string>constant.language.latex</string>
+			<string>keyword.other.latex</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -155,7 +155,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>constant.language.latex</string>
+					<string>keyword.other.latex</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -165,7 +165,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>constant.language.latex</string>
+					<string>keyword.other.latex</string>
 				</dict>
 			</dict>
 			<key>name</key>
@@ -186,7 +186,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>constant.language.latex</string>
+					<string>keyword.other.latex</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -196,7 +196,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>constant.language.latex</string>
+					<string>keyword.other.latex</string>
 				</dict>
 			</dict>
 			<key>name</key>
@@ -217,7 +217,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>constant.language.latex</string>
+					<string>keyword.other.latex</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -227,7 +227,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>constant.language.latex</string>
+					<string>keyword.other.latex</string>
 				</dict>
 			</dict>
 			<key>name</key>
