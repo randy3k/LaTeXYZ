@@ -50,7 +50,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.latex</string>
+					<string>constant.other.latex</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -60,7 +60,7 @@
 				<key>3</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.latex</string>
+					<string>support.function.latex</string>
 				</dict>
 			</dict>
 			<key>match</key>
@@ -70,13 +70,13 @@
 			<key>match</key>
 			<string>&amp;</string>
 			<key>name</key>
-			<string>keyword.other.latex</string>
+			<string>constant.other.latex</string>
 		</dict>
 		<dict>
 			<key>match</key>
 			<string>\\(%|\$|#|&amp;|\{|\})</string>
 			<key>name</key>
-			<string>support.constant.general.latex</string>
+			<string>constant.other.latex</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -86,12 +86,12 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.latex</string>
+					<string>support.function.latex</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>support.function.general.latex</string>
+					<string>support.function.latex</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -114,7 +114,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.latex</string>
+					<string>support.function.latex</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -129,7 +129,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.latex</string>
+					<string>support.function.latex</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -155,7 +155,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.latex</string>
+					<string>support.function.latex</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -165,7 +165,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.latex</string>
+					<string>support.function.latex</string>
 				</dict>
 			</dict>
 			<key>name</key>
@@ -186,7 +186,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.latex</string>
+					<string>support.function.latex</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -196,7 +196,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.latex</string>
+					<string>support.function.latex</string>
 				</dict>
 			</dict>
 			<key>name</key>
@@ -217,7 +217,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.latex</string>
+					<string>support.function.latex</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -227,7 +227,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.latex</string>
+					<string>support.function.latex</string>
 				</dict>
 			</dict>
 			<key>name</key>
@@ -248,7 +248,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.latex</string>
+					<string>support.function.latex</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -263,7 +263,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.latex</string>
+					<string>support.function.latex</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -289,7 +289,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.latex</string>
+					<string>support.function.latex</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -304,7 +304,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.latex</string>
+					<string>support.function.latex</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -321,7 +321,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.latex</string>
+					<string>support.function.latex</string>
 				</dict>
 			</dict>
 			<key>match</key>
@@ -367,7 +367,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>keyword.other.latex</string>
+							<string>support.function.latex</string>
 						</dict>
 						<key>2</key>
 						<dict>
@@ -384,7 +384,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>keyword.other.latex</string>
+							<string>support.function.latex</string>
 						</dict>
 						<key>2</key>
 						<dict>
@@ -409,7 +409,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>keyword.other.latex</string>
+							<string>support.function.latex</string>
 						</dict>
 					</dict>
 					<key>end</key>
@@ -496,7 +496,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>support.function.math.latex</string>
+							<string>support.function.latex entity.name.function.latex</string>
 						</dict>
 					</dict>
 					<key>end</key>
@@ -521,7 +521,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>support.function.math.latex</string>
+							<string>support.function.latex entity.name.function.latex</string>
 						</dict>
 					</dict>
 					<key>end</key>
@@ -550,19 +550,19 @@
 					<key>match</key>
 					<string>\\[a-zA-Z]+</string>
 					<key>name</key>
-					<string>support.function.math.latex</string>
+					<string>support.function.latex entity.name.function.latex</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>\+|\-|=|-|\*|/|\^|_|&lt;|&gt;|\\\{|\\\}|\[|\]|\(|\)</string>
 					<key>name</key>
-					<string>keyword.operator.latex</string>
+					<string></string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>[a-zA-Z]+</string>
 					<key>name</key>
-					<string>constant.other.latex</string>
+					<string>keyword.other</string>
 				</dict>
 				<dict>
 					<key>match</key>
@@ -588,7 +588,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>keyword.other.latex</string>
+							<string>support.function.latex</string>
 						</dict>
 					</dict>
 					<key>end</key>
@@ -621,7 +621,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>keyword.other.latex</string>
+							<string>support.function.latex</string>
 						</dict>
 					</dict>
 					<key>end</key>
@@ -643,7 +643,7 @@
 			<key>match</key>
 			<string>\\[a-zA-Z]+</string>
 			<key>name</key>
-			<string>support.function.general.latex</string>
+			<string>support.function.latex</string>
 		</dict>
 	</dict>
 	<key>scopeName</key>
