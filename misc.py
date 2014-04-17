@@ -86,11 +86,11 @@ def listdir(view, dir, base, ext, on_done):
     if base:
         fnames = [f for f in fnames if base.lower() in f.lower()]
 
-    display = [os.pardir]+ [">"+f for f in ls if os.path.isdir(os.path.join(dir, f))] + fnames
+    display = [os.curdir, os.pardir]+ [">"+f for f in ls if os.path.isdir(os.path.join(dir, f))] + fnames
 
     def on_action(i):
         if i<0: return
-        elif i==0 or display[i][0] == '>':
+        elif i<2 or display[i][0] == '>':
             target = display[i][1:] if display[i][0] == '>' else display[i]
             target_dir = os.path.normpath(os.path.join(dir, target))
             sublime.set_timeout(lambda: listdir(view, target_dir, base, ext, on_done), 1)
