@@ -1,5 +1,5 @@
 {
-    "auto_complete_selector": "meta.definition.math.latex - comment",
+    "auto_complete_selector": "support.function.latex, meta.definition.math.latex - comment",
 
     "spell_check" : true,
 
@@ -49,5 +49,5 @@
 
     "extensions": ["tex"],
 
-    "word_separators" : "./()\"'-:,.;<>~!@#$%^&*|+=[]{}`~?"
+    "word_separators" : "_./()\"'-:,.;<>~!@#$%^&*|+=[]{}`~?"
 }

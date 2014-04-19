@@ -641,7 +641,7 @@
 		<key>command</key>
 		<dict>
 			<key>match</key>
-			<string>\\[a-zA-Z]+</string>
+			<string>\\[a-zA-Z]+\s?</string>
 			<key>name</key>
 			<string>support.function.latex</string>
 		</dict>
