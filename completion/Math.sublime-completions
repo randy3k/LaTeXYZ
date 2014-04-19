@@ -77,11 +77,14 @@
             "\\mathcal",
 
             "\\partial",
-            { "trigger": "\\sum", "contents": "\\sum_{$1}^{$2}$0"},
-            { "trigger": "\\prod", "contents": "\\prod_{$1}^{$2}$0"},
-            { "trigger": "\\int", "contents": "\\int_{$1}^{$2}$0"},
-            { "trigger": "\\frac", "contents": "\\frac{$1}{$2}$0"},
-            { "trigger": "\\overset", "contents": "\\overset{$1}{$2}$0"},
-            { "trigger": "\\underset", "contents": "\\underset{$1}{$2}$0"}
+            { "trigger": "\\sum_{}^{}", "contents": "\\sum_{$1}^{$2}$0"},
+            { "trigger": "\\prod_{}^{}", "contents": "\\prod_{$1}^{$2}$0"},
+            { "trigger": "\\int_{}^{}", "contents": "\\int_{$1}^{$2}$0"},
+            { "trigger": "\\frac{}{}", "contents": "\\frac{$1}{$2}$0"},
+            { "trigger": "\\overset{}{}", "contents": "\\overset{$1}{$2}$0"},
+            { "trigger": "\\underset{}{}", "contents": "\\underset{$1}{$2}$0"},
+
+            { "trigger": "\\binom{}{}", "contents": "\\binom{$1}{$2}$0"}
+
         ]
 }
