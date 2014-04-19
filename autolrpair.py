@@ -30,5 +30,5 @@ class AutoLeftRightPairCommand(sublime_plugin.TextCommand):
         left = "\\left"+ arg[0].replace('\\', '\\\\')
         right = "\\right"+ arg[1].replace('\\', '\\\\')
 
-        view.run_command("insert_snippet", {"contents": left+"${1:$SELECTION}"+right})
+        view.run_command("insert_snippet", {"contents": left+"${1:$SELECTION} "+right})
 
