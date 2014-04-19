@@ -95,8 +95,8 @@ def listdir(view, dir, base, ext, on_done):
             target_dir = os.path.normpath(os.path.join(dir, target))
             sublime.set_timeout(lambda: listdir(view, target_dir, base, ext, on_done), 1)
         else:
-            target_dir = os.path.normpath(os.path.join(dir, display[i]))
-            on_done(target_dir)
+            targer = os.path.normpath(os.path.join(dir, display[i]))
+            on_done(targer)
 
     sublime.set_timeout(lambda: view.window().show_quick_panel(display, on_action), 100)
 
