@@ -84,7 +84,8 @@
             { "trigger": "\\overset{}{}", "contents": "\\overset{$1}{$2}$0"},
             { "trigger": "\\underset{}{}", "contents": "\\underset{$1}{$2}$0"},
 
-            { "trigger": "\\binom{}{}", "contents": "\\binom{$1}{$2}$0"}
+            { "trigger": "\\binom{}{}", "contents": "\\binom{$1}{$2}$0"},
+            { "trigger": "\\text{}", "contents": "\\text{$1}$0"}
 
         ]
 }
