@@ -47,7 +47,5 @@
         // "viewer": "okular"
     },
 
-    "extensions": ["tex"],
-
     "word_separators" : "_./()\"'-:,.;<>~!@#$%^&*|+=[]{}`~?"
 }
