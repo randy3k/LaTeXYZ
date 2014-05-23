@@ -6,7 +6,7 @@ import re
 class AutoLeftRightPairListener(sublime_plugin.EventListener):
     def on_query_context(self, view, key, operator, operand, match_all):
         if view.is_scratch() or view.settings().get('is_widget'): return
-        if not view.score_selector(view.sel()[0].end() if len(view.sel())>0 else 0, "text.tex.latex"): return
+        if not view.score_selector(view.sel()[0].end() if len(view.sel())>0 else 0, "meta.definition.math.latex"): return
         if key == 'in_brackets':
             out = all([view.substr(sel.begin()-1)=='(' and view.substr(sel.end())==')' for sel in view.sel()])
             return (out == operand) if operator==0 else not (out == operand)
