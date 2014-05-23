@@ -1,8 +1,4 @@
 {
-    "auto_complete_selector": "support.function.latex, meta.definition.math.latex - comment",
-
-    "spell_check" : true,
-
     "view_on_success": true,
 
     // it is disabled if view_on_success is false
@@ -45,7 +41,5 @@
 
         // which viewer to use: evince or okular (default is evince)
         // "viewer": "okular"
-    },
-
-    "word_separators" : "_./()\"'-:,.;<>~!@#$%^&*|+=[]{}`~?"
+    }
 }
