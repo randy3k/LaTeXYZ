@@ -2,11 +2,7 @@ LaTeXSQ
 =================
 
 LaTeXSQ (aka LaTeX^2) is a multi-platform LaTeX plugin for Sublime Text 3. It works on OSX, Windows and Linux (Ubuntu).
-LaTeXSQ aims to be lightweight, extensible but self contained. If you are looking for a full feature plugin, see
-
-* [LaTeXing](http://latexing.com)
-* [LaTeXTools](https://github.com/SublimeText/LaTeXTools)
-
+LaTeXSQ aims to be lightweight, extensible but self contained. If you are looking for a full feature plugin, see, for example [LaTeXing](http://latexing.com) or [LaTeXTools](https://github.com/SublimeText/LaTeXTools).
 These two plugins are great. A lot of ideas are actually inspired by these two plugins. Unfortunately, LaTeXing is not open source and the development of LaTeXTools has been slowed down lately.
 
 
@@ -29,6 +25,10 @@ These two plugins are great. A lot of ideas are actually inspired by these two p
 ###[User Manual](https://github.com/randy3k/LaTeXSQ/wiki/User Manual)
 
 ###[BracketHighlighter Settings](https://github.com/randy3k/LaTeXSQ/wiki/BracketHighlighter-settings)
+
+### Syntax files
+
+If you are only intrested in the syntax file, go to [LaTeX-Extended](https://github.com/randy3k/LaTeX-Extended).
 
 ### ST2 compartibility
 While it is possible to backward port to ST2,  I would rather keep it ST3 only for easier maintenance.
