@@ -99,7 +99,7 @@ class LatexPlusBuildCommand(sublime_plugin.WindowCommand):
         after = 7 - before
         self.window.active_view().set_status("Latex-Plus", "Compiling [%s=%s]" % (" " * before, " " * after))
         if self.thread and self.thread.isAlive():
-            sublime.set_timeout(lambda: self.settingstatus_updater(status+1), 100)
+            sublime.set_timeout(lambda: self.status_updater(status+1), 100)
         else:
             self.window.active_view().erase_status("Latex-Plus")
 
