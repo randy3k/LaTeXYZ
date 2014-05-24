@@ -126,7 +126,7 @@
             { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
         ]
     },
-    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXSQ/macros/Delete Two Left Right.sublime-macro"}, "context":
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeX-Plus/macros/Delete Two Left Right.sublime-macro"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -145,7 +145,7 @@
             { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
         ]
     },
-    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXSQ/macros/Delete Two Left Right.sublime-macro"}, "context":
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeX-Plus/macros/Delete Two Left Right.sublime-macro"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -182,7 +182,7 @@
             { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
         ]
     },
-    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXSQ/macros/Delete Two Left Right.sublime-macro"}, "context":
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeX-Plus/macros/Delete Two Left Right.sublime-macro"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -201,7 +201,7 @@
          { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
      ]
  },
- { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXSQ/macros/Delete Two Left Right.sublime-macro"}, "context":
+ { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeX-Plus/macros/Delete Two Left Right.sublime-macro"}, "context":
      [
          { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
          { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -291,7 +291,7 @@
         ]
     },
     {
-        "keys": ["\""], "command": "run_macro_file", "args": { "file": "res://Packages/LaTeXSQ/macros/Move Two Characters.sublime-macro" },
+        "keys": ["\""], "command": "run_macro_file", "args": { "file": "res://Packages/LaTeX-Plus/macros/Move Two Characters.sublime-macro" },
         "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
@@ -301,7 +301,7 @@
     },
     {
         "keys": ["backspace"],
-        "command": "run_macro_file", "args": { "file": "res://Packages/LaTeXSQ/macros/Delete Two Left Right.sublime-macro" },
+        "command": "run_macro_file", "args": { "file": "res://Packages/LaTeX-Plus/macros/Delete Two Left Right.sublime-macro" },
         "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },

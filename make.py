@@ -6,7 +6,7 @@ from . misc import *
 from . import parser
 
 
-class LaTeXSQThread(threading.Thread):
+class LatexPlusThread(threading.Thread):
 
     # pass caller to make output and killing possible
     def __init__(self, caller):
@@ -57,7 +57,7 @@ class LaTeXSQThread(threading.Thread):
         caller.output("\n[Done in %ss!]\n"% round(elapsed,2) )
 
 
-class LatexsqBuildCommand(sublime_plugin.WindowCommand):
+class LatexPlusBuildCommand(sublime_plugin.WindowCommand):
     def run(self, force=False):
         view = self.window.active_view()
         if view.is_dirty():
@@ -68,10 +68,10 @@ class LatexsqBuildCommand(sublime_plugin.WindowCommand):
         self.file_name = get_tex_root(view)
         tex_dir = os.path.dirname(self.file_name)
 
-        s = view.settings()
-        cmd = s.get("cmd_force") if force else s.get("cmd")
+        self.settings = sublime.load_settings('LaTeX-Plus.sublime-settings')
+        cmd = self.settings.get("cmd_force") if force else self.settings.get("cmd")
         self.cmd = cmd + [os.path.relpath(self.file_name, tex_dir)]
-        os_settings = s.get(sublime.platform())
+        os_settings = self.settings.get(sublime.platform())
         self.path = os.path.expandvars(os_settings['path']) if 'path' in os_settings else None
 
         self.output_view = self.window.get_output_panel("exec")
@@ -79,7 +79,7 @@ class LatexsqBuildCommand(sublime_plugin.WindowCommand):
         self.output_view.settings().set("result_file_regex", "^(?:W|E|F|B):\\s(.*):([0-9]+)\\s+")
         self.output_view.settings().set("result_base_dir", tex_dir)
 
-        if s.get("show_panel_on_build", False):
+        if view.settings().get("show_panel_on_build", False):
             self.window.run_command("show_panel", {"panel": "output.exec"})
 
         # kill process if process exists
@@ -90,21 +90,21 @@ class LatexsqBuildCommand(sublime_plugin.WindowCommand):
             self.thread.killed = True
             return
 
-        self.thread = LaTeXSQThread(self)
+        self.thread = LatexPlusThread(self)
         self.thread.start()
 
     def status_updater(self, status=0):
         status = status % 14
         before = min(status, 14-status)
         after = 7 - before
-        self.window.active_view().set_status("latexsq", "Compiling [%s=%s]" % (" " * before, " " * after))
+        self.window.active_view().set_status("Latex-Plus", "Compiling [%s=%s]" % (" " * before, " " * after))
         if self.thread and self.thread.isAlive():
-            sublime.set_timeout(lambda: self.status_updater(status+1), 100)
+            sublime.set_timeout(lambda: self.settingstatus_updater(status+1), 100)
         else:
-            self.window.active_view().erase_status("latexsq")
+            self.window.active_view().erase_status("Latex-Plus")
 
     def output(self, data):
-        self.output_view.run_command("latexsq_output", {"characters": data})
+        self.output_view.run_command("latex_plus_output", {"characters": data})
 
     def clearoutput(self):
         self.output_view = self.window.get_output_panel("exec")
@@ -161,12 +161,12 @@ class LatexsqBuildCommand(sublime_plugin.WindowCommand):
         if badboxes:
             self.output("\n[BadBox(es)]\n" + "\n".join(badboxes)+ "\n")
 
-        if returncode==0 and not errors and view.settings().get("view_on_success", True):
-            forward_sync = view.settings().get("forward_sync_on_success", True)
-            bring_forward = view.settings().get("bring_forward_on_success", False)
+        if returncode==0 and not errors and self.settings.get("view_on_success", True):
+            forward_sync = self.settings.get("forward_sync_on_success", True)
+            bring_forward = self.settings.get("bring_forward_on_success", False)
             self.window.active_view().run_command("jump_to_pdf", {"bring_forward": bring_forward, "forward_sync": forward_sync})
 
-class LatexsqOutputCommand(sublime_plugin.TextCommand):
+class LatexPlusOutputCommand(sublime_plugin.TextCommand):
     def run(self, edit, characters):
         self.view.set_read_only(False)
         self.view.insert(edit, self.view.size(), characters)

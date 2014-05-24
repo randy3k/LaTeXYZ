@@ -12,30 +12,30 @@
                 "children":
                 [
                     {
-                        "caption": "LaTeXSQ",
+                        "caption": "LaTeX-Plus",
                         "children":
                         [
                             {
                                 "command": "open_file",
-                                "args": {"file": "${packages}/LaTeXSQ/README.md"},
+                                "args": {"file": "${packages}/LaTeX-Plus/README.md"},
                                 "caption": "README"
                             },
                             { "caption": "-" },
                             {
                                 "command": "open_file",
-                                "args": {"file": "${packages}/LaTeXSQ/LaTeXSQ.sublime-settings"},
+                                "args": {"file": "${packages}/LaTeX-Plus/LaTeX-Plus.sublime-settings"},
                                 "caption": "Settings – Default"
                             },
                             {
                                 "command": "open_file",
-                                "args": {"file": "${packages}/User/LaTeXSQ.sublime-settings"},
+                                "args": {"file": "${packages}/User/LaTeX-Plus.sublime-settings"},
                                 "caption": "Settings – User"
                             },
                             { "caption": "-" },
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/LaTeXSQ/support/Default (OSX).sublime-keymap",
+                                    "file": "${packages}/LaTeX-Plus/support/Default (OSX).sublime-keymap",
                                     "platform": "OSX"
                                 },
                                 "caption": "Key Bindings – Default"
@@ -43,7 +43,7 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/LaTeXSQ/support/Default (Linux).sublime-keymap",
+                                    "file": "${packages}/LaTeX-Plus/support/Default (Linux).sublime-keymap",
                                     "platform": "Linux"
                                 },
                                 "caption": "Key Bindings – Default"
@@ -51,7 +51,7 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/LaTeXSQ/support/Default (Windows).sublime-keymap",
+                                    "file": "${packages}/LaTeX-Plus/support/Default (Windows).sublime-keymap",
                                     "platform": "Windows"
                                 },
                                 "caption": "Key Bindings – Default"
@@ -84,7 +84,7 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/LaTeXSQ/support/Default (OSX).sublime-mousemap",
+                                    "file": "${packages}/LaTeX-Plus/support/Default (OSX).sublime-mousemap",
                                     "platform": "OSX"
                                 },
                                 "caption": "Mouse Bindings – Default"
@@ -92,7 +92,7 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/LaTeXSQ/support/Default (Linux).sublime-mousemap",
+                                    "file": "${packages}/LaTeX-Plus/support/Default (Linux).sublime-mousemap",
                                     "platform": "Linux"
                                 },
                                 "caption": "Mouse Bindings – Default"
@@ -100,7 +100,7 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/LaTeXSQ/support/Default (Windows).sublime-mousemap",
+                                    "file": "${packages}/LaTeX-Plus/support/Default (Windows).sublime-mousemap",
                                     "platform": "Windows"
                                 },
                                 "caption": "Mouse Bindings – Default"

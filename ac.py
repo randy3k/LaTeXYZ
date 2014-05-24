@@ -4,14 +4,14 @@ import re
 from . misc import *
 
 # sublime wrapper for replacement
-class LatexsqReplaceCommand(sublime_plugin.TextCommand):
+class LatexPlusReplaceCommand(sublime_plugin.TextCommand):
     def run(self, edit, a, b, replacement):
         region = sublime.Region(a, b)
         self.view.replace(edit, region, replacement)
         self.view.sel().clear()
         self.view.sel().add(a+len(replacement))
 
-class LatexsqAcCommand(sublime_plugin.TextCommand):
+class LatexPlusAcCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         view = self.view
         point = view.sel()[0].end() if view.sel() else 0
@@ -50,7 +50,7 @@ class LatexsqAcCommand(sublime_plugin.TextCommand):
         open_brace = "" if braces else "{"
         close_brace = "" if braces else "}"
         rept = open_brace + completions[i] + close_brace
-        self.view.run_command("latexsq_replace", {"a": a, "b": b, "replacement": rept})
+        self.view.run_command("LatexPlus_replace", {"a": a, "b": b, "replacement": rept})
 
     def dispatch_ref(self, m, point):
         print("dispatching ref")

@@ -31,7 +31,7 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
         if not view.score_selector(point, "text.tex.latex"):
             return
 
-        s = view.settings()
+        self.settings = sublime.load_settings('LaTeX-Plus.sublime-settings')
 
         bring_forward = args["bring_forward"] if "bring_forward" in args else False
         forward_sync = args["forward_sync"] if "forward_sync" in args else False
@@ -46,7 +46,7 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
 
         plat = sublime.platform()
         if plat == 'osx':
-            osx_settings = s.get("osx")
+            osx_settings = self.settings.get("osx")
 
             args = ['osascript']
             apple_script = ('tell application "Skim"\n'
@@ -64,7 +64,7 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
 
         elif plat == 'windows':
             # hide console
-            windows_settings = s.get("windows")
+            windows_settings = self.settings.get("windows")
 
             startupinfo = subprocess.STARTUPINFO()
             startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
@@ -87,7 +87,7 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
 
         elif plat == 'linux':
 
-            linux_settings = s.get("linux")
+            linux_settings = self.settings.get("linux")
             viewer = linux_settings.get("viewer", "evince")
 
             if viewer=="okular":

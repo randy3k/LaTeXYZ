@@ -21,7 +21,7 @@ def cleantexdir(texdir):
     for f in fnames: os.remove(f)
 
 
-class LatexsqCleanCommand(sublime_plugin.TextCommand):
+class LatexPlusCleanCommand(sublime_plugin.TextCommand):
     def run(self, edit, force=False):
         view = self.view
         tex_root = get_tex_root(view)

@@ -1,8 +1,8 @@
-LaTeXSQ
+Latex-Plus
 =================
 
-LaTeXSQ (aka LaTeX^2) is a multi-platform LaTeX plugin for Sublime Text 3. It works on OSX, Windows and Linux (Ubuntu).
-LaTeXSQ aims to be lightweight, extensible but self contained. If you are looking for a full feature plugin, see, for example [LaTeXing](http://latexing.com) or [LaTeXTools](https://github.com/SublimeText/LaTeXTools).
+Latex-Plus (aka LaTeX^2) is a multi-platform LaTeX plugin for Sublime Text 3. It works on OSX, Windows and Linux (Ubuntu).
+Latex-Plus aims to be lightweight, extensible but self contained. If you are looking for a full feature plugin, see, for example [LaTeXing](http://latexing.com) or [LaTeXTools](https://github.com/SublimeText/LaTeXTools).
 These two plugins are great. A lot of ideas are actually inspired by these two plugins. Unfortunately, LaTeXing is not open source and the development of LaTeXTools has been slowed down lately.
 
 
@@ -16,15 +16,15 @@ These two plugins are great. A lot of ideas are actually inspired by these two p
 * Comprehensive LaTeX syntax, for example, handling `\newcommand{\bg}{\begin{align}}`
 * More…
 
-###[Installation](https://github.com/randy3k/LaTeXSQ/wiki/Installation)
+###[Installation](https://github.com/randy3k/Latex-Plus/wiki/Installation)
 
-###[LaTeXSQ Options](https://github.com/randy3k/LaTeXSQ/wiki/LaTeXSQ-Options)
+###[Latex-Plus Options](https://github.com/randy3k/Latex-Plus/wiki/Latex-Plus-Options)
 
-###[Project Setup](https://github.com/randy3k/LaTeXSQ/wiki/Project-Setup)
+###[Project Setup](https://github.com/randy3k/Latex-Plus/wiki/Project-Setup)
 
-###[User Manual](https://github.com/randy3k/LaTeXSQ/wiki/User Manual)
+###[User Manual](https://github.com/randy3k/Latex-Plus/wiki/User Manual)
 
-###[BracketHighlighter Settings](https://github.com/randy3k/LaTeXSQ/wiki/BracketHighlighter-settings)
+###[BracketHighlighter Settings](https://github.com/randy3k/Latex-Plus/wiki/BracketHighlighter-settings)
 
 ### Syntax files
 

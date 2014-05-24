@@ -7,28 +7,28 @@
 	},
 
 	// Build
-	{ "keys": ["super+b"], "command": "latexsq_build", "context":
+	{ "keys": ["super+b"], "command": "latex_plus_build", "context":
 		[
 			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
 		]
 	},
 
 	// Build - force
-	{ "keys": ["super+alt+b"], "command": "latexsq_build", "args": {"force": true},  "context":
+	{ "keys": ["super+alt+b"], "command": "latex_plus_build", "args": {"force": true},  "context":
 		[
 			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
 		]
 	},
 
 	// Clean Build
-	{ "keys": ["super+shift+b"], "command": "latexsq_clean", "context":
+	{ "keys": ["super+shift+b"], "command": "latex_plus_clean", "context":
 		[
 			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
 		]
 	},
 
 	// Clean Build - force
-	{ "keys": ["super+alt+shift+b"], "command": "latexsq_clean", "args": {"force": true}, "context":
+	{ "keys": ["super+alt+shift+b"], "command": "latex_plus_clean", "args": {"force": true}, "context":
 		[
 			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
 		]
@@ -47,7 +47,7 @@
 	},
 
 	// cmd+l,x suggests autocompletion
-	{ "keys": ["super+l","x"],"command": "latexsq_ac", "context":
+	{ "keys": ["super+l","x"],"command": "latex_plus_ac", "context":
 		[
 			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
 		]
