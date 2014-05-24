@@ -164,7 +164,7 @@ class LatexPlusBuildCommand(sublime_plugin.WindowCommand):
         if returncode==0 and not errors and self.settings.get("view_on_success", True):
             forward_sync = self.settings.get("forward_sync_on_success", True)
             bring_forward = self.settings.get("bring_forward_on_success", False)
-            self.window.active_view().run_command("jump_to_pdf", {"bring_forward": bring_forward, "forward_sync": forward_sync})
+            self.window.active_view().run_command("latex_plus_jump_to_pdf", {"bring_forward": bring_forward, "forward_sync": forward_sync})
 
 class LatexPlusOutputCommand(sublime_plugin.TextCommand):
     def run(self, edit, characters):

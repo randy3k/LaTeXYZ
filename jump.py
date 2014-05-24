@@ -13,7 +13,7 @@ def SumatraPDF():
         return "SumatraPDF.exe"
     return path
 
-class EvinceThread(threading.Thread):
+class LatexPlusEvinceThread(threading.Thread):
     def __init__(self, args):
         self.args = args
         threading.Thread.__init__(self)
@@ -24,7 +24,7 @@ class EvinceThread(threading.Thread):
         ev.wait()
         ev_sync.kill()
 
-class JumpToPdfCommand(sublime_plugin.TextCommand):
+class LatexPlusJumpToPdfCommand(sublime_plugin.TextCommand):
     def run(self, edit, **args):
         view = self.view
         point = view.sel()[0].end() if len(view.sel())>0 else 0
@@ -106,7 +106,7 @@ class JumpToPdfCommand(sublime_plugin.TextCommand):
                 evince_is_running = "evince " + pdffile in str(tasks, encoding='utf8')
                 if bring_forward or not evince_is_running:
                     args = ["python", "-c", evince_sync, "backward", pdffile, subl + " %f:%l"]
-                    EvinceThread(args).start()
+                    LatexPlusEvinceThread(args).start()
                     if not evince_is_running: time.sleep(1)
 
                 if forward_sync:
