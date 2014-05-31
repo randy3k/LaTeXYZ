@@ -96,8 +96,6 @@
 			</dict>
 			<key>end</key>
 			<string>}</string>
-			<key>name</key>
-			<string>meta.definition.math.latex</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -352,6 +350,10 @@
 					<key>include</key>
 					<string>#command</string>
 				</dict>
+				<dict>
+					<key>include</key>
+					<string>#braces</string>
+				</dict>
 			</array>
 		</dict>
 	</array>
@@ -569,10 +571,6 @@
 					<string>[0-9]+</string>
 					<key>name</key>
 					<string>constant.numeric.latex</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>$self</string>
 				</dict>
 			</array>
 		</dict>
