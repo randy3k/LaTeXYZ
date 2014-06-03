@@ -50,7 +50,7 @@ class LatexPlusAcCommand(sublime_plugin.TextCommand):
         open_brace = "" if braces else "{"
         close_brace = "" if braces else "}"
         rept = open_brace + completions[i] + close_brace
-        self.view.run_command("LatexPlus_replace", {"a": a, "b": b, "replacement": rept})
+        self.view.run_command("latex_plus_replace", {"a": a, "b": b, "replacement": rept})
 
     def dispatch_ref(self, m, point):
         print("dispatching ref")
