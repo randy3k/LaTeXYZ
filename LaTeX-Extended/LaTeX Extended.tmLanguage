@@ -45,38 +45,14 @@
 			</array>
 		</dict>
 		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>variable.other.latex</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>constant.numeric.latex</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>support.function.latex</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>(\\\\)(?:\[\s*([0-9]*)\s*(\w*)\s*\])?</string>
-		</dict>
-		<dict>
 			<key>match</key>
 			<string>&amp;</string>
 			<key>name</key>
 			<string>variable.other.latex</string>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>\\(%|\$|#|&amp;|\{|\})</string>
-			<key>name</key>
-			<string>variable.other.latex</string>
+			<key>include</key>
+			<string>#special</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -170,6 +146,10 @@
 			<string>meta.definition.math.latex</string>
 			<key>patterns</key>
 			<array>
+				<dict>
+					<key>include</key>
+					<string>#special</string>
+				</dict>
 				<dict>
 					<key>include</key>
 					<string>#math</string>
@@ -464,6 +444,40 @@
 				<dict>
 					<key>include</key>
 					<string>#command</string>
+				</dict>
+			</array>
+		</dict>
+		<key>special</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\\(%|\$|#|&amp;|\{|\})</string>
+					<key>name</key>
+					<string>variable.other.latex</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>variable.other.latex</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>constant.numeric.latex</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.latex</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>(\\\\)(?:\[\s*([0-9]*)\s*(\w*)\s*\])?</string>
 				</dict>
 			</array>
 		</dict>
