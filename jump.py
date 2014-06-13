@@ -98,7 +98,7 @@ class LatexPlusJumpToPdfCommand(sublime_plugin.TextCommand):
                 print("about to run okular with %s"%' '.join(args))
                 subprocess.Popen(args)
             else:
-                evince_sync = sublime.load_resource("Packages/LaTeXSQ/evince_sync")
+                evince_sync = sublime.load_resource("Packages/LaTeX-Plus/evince_sync")
                 print("evince_sync loaded")
                 tasks = subprocess.check_output(['ps', 'xw'])
 
