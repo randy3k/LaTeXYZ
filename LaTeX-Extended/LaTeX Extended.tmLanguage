@@ -566,7 +566,7 @@
 					<key>match</key>
 					<string>\\[a-zA-Z]+</string>
 					<key>name</key>
-					<string>support.function.latex string.other.latex</string>
+					<string>support.function.latex</string>
 				</dict>
 				<dict>
 					<key>match</key>
