@@ -3,8 +3,7 @@
 
         "completions":
         [
-            { "trigger": "\\bibliographystyle{}", "contents": "\\bibliographystyle{$1}" },
-            { "trigger": "\\bibliography{}", "contents": "\\bibliography{$1}" }
-
+            { "trigger": "\\bibliographystyle{}", "contents": "bibliographystyle{$1}" },
+            { "trigger": "\\bibliography{}", "contents": "bibliography{$1}" }
         ]
 }
