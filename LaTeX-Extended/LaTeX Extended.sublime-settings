@@ -3,7 +3,5 @@
 
     "spell_check" : true,
 
-    "word_separators" : "_./()\"'-:,.;<>~!@#$%^&*|+=[]{}`~?",
-
     "extensions": ["tex"]
 }
