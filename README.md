@@ -13,22 +13,24 @@ These two plugins are great. A lot of ideas are actually inspired by these two p
 * Backward and forward sync of different PDF viewers
 * Automatch for (), [], {}, &#92;(&#92;), &#92;[&#92;], &#92;{&#92;}, \left\right pairs, $$ and quotation marks.
 * Multi files project support
-* Comprehensive LaTeX syntax, for example, handling `\newcommand{\bg}{\begin{align}}`
+* Comprehensive LaTeX syntax, particularly, correctly handle `\newcommand{\bg}{\begin{align}}`
 * More…
 
-###[Installation](https://github.com/randy3k/Latex-Plus/wiki/Installation)
+###Wiki
 
-###[Latex-Plus Options](https://github.com/randy3k/Latex-Plus/wiki/Latex-Plus-Options)
+- [Installation](https://github.com/randy3k/Latex-Plus/wiki/Installation)
 
-###[Project Setup](https://github.com/randy3k/Latex-Plus/wiki/Project-Setup)
+- [Latex-Plus Options](https://github.com/randy3k/Latex-Plus/wiki/Latex-Plus-Options)
 
-###[User Manual](https://github.com/randy3k/Latex-Plus/wiki/User Manual)
+- [Project Setup](https://github.com/randy3k/Latex-Plus/wiki/Project-Setup)
 
-###[BracketHighlighter Settings](https://github.com/randy3k/Latex-Plus/wiki/BracketHighlighter-settings)
+- [User Manual](https://github.com/randy3k/Latex-Plus/wiki/User Manual)
+
+- [BracketHighlighter Settings](https://github.com/randy3k/Latex-Plus/wiki/BracketHighlighter-settings)
 
 ### Syntax files
 
-If you are only intrested in the syntax file, go to [LaTeX-Extended](https://github.com/randy3k/LaTeX-Extended).
+If you are only intrested in the syntax file, check [LaTeX-Extended](https://github.com/randy3k/LaTeX-Extended).
 
 ### ST2 compartibility
 While it is possible to backward port to ST2,  I would rather keep it ST3 only for easier maintenance.
