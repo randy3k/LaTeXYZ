@@ -1,7 +1,0 @@
-{
-    "auto_complete_selector": "support.function.latex, meta.definition.math.latex",
-
-    "word_separators": "_./\\()\"'-:,.;<>~!@#$%^&*|+=[]{}`~?",
-
-    "extensions": ["tex"]
-}
