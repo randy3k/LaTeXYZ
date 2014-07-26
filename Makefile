@@ -1,10 +1,7 @@
 all:
 
-push:
-		git push
+subpush:
+		git subtree push --prefix=syntax git@github.com:randy3k/syntax.git master
 
-subtree-push:
-		git subtree push --prefix=LaTeX-Extended git@github.com:randy3k/LaTeX-Extended.git master
-
-subtree-pull:
-		git subtree pull --prefix=LaTeX-Extended git@github.com:randy3k/LaTeX-Extended.git master --squash
+subpull:
+		git subtree pull --prefix=syntax git@github.com:randy3k/LaTeX-Extended.git master --squash
