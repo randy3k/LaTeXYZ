@@ -5,6 +5,7 @@ Latex-Plus is a multi-platform LaTeX plugin for Sublime Text 3. It works on OSX,
 Latex-Plus aims to be lightweight, extensible but self contained. If you are looking for a full feature plugin, see, for example [LaTeXing](http://latexing.com) or [LaTeXTools](https://github.com/SublimeText/LaTeXTools).
 These two plugins are great. A lot of ideas are actually inspired by these two plugins. Unfortunately, LaTeXing is not open source and the development of LaTeXTools has been slowed down lately.
 
+If you like it, you could send me some tips via [![](http://img.shields.io/gittip/randy3k.svg)](https://www.gittip.com/randy3k).
 
 ### Features
 * OSX, Windows and Linux support
