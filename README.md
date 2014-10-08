@@ -21,11 +21,11 @@ If you like it, you could send me some tips via [![](http://img.shields.io/gitti
 
 - [Installation](https://github.com/randy3k/Latex-Plus/wiki/Installation)
 
-- [Latex-Plus Options](https://github.com/randy3k/Latex-Plus/wiki/Latex-Plus-Options)
+- [User Manual](https://github.com/randy3k/Latex-Plus/wiki/User Manual)
 
 - [Project Setup](https://github.com/randy3k/Latex-Plus/wiki/Project-Setup)
 
-- [User Manual](https://github.com/randy3k/Latex-Plus/wiki/User Manual)
+- [Latex-Plus Options](https://github.com/randy3k/Latex-Plus/wiki/Latex-Plus-Options)
 
 - [BracketHighlighter Settings](https://github.com/randy3k/Latex-Plus/wiki/BracketHighlighter-settings)
 
