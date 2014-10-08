@@ -4,17 +4,16 @@ import re
 from . misc import *
 
 def cleantex(texfile):
-
-    ext = [".aux", ".dvi", ".lis", ".log", ".blg", ".bbl", ".toc", ".idx", ".ind",
-            ".ilg", ".thm", ".out", ".fdb_latexmk", ".fls", ".nav", ".snm"]
+    settings = sublime.load_settings('LaTeX-Plus.sublime-settings')
+    ext = settings.get("clean_ext")
     prefix = os.path.splitext(texfile)[0]
     for e in ext:
         if os.path.isfile(prefix+e):
             os.remove(prefix+e)
 
 def cleantexdir(texdir):
-    ext = [".aux", ".dvi", ".lis", ".log", ".blg", ".bbl", ".toc", ".idx", ".ind",
-            ".ilg", ".thm", ".out", ".fdb_latexmk", ".fls", ".nav", ".snm", ".synctex.gz"]
+    settings = sublime.load_settings('LaTeX-Plus.sublime-settings')
+    ext = settings.get("clean_ext_force")
     ls = os.listdir(texdir)
     rexp = "(" + '|'.join(['\\'+e for e in ext]) + ")$"
     fnames = [os.path.join(texdir, f) for f in ls if re.search(rexp, f)]

@@ -10,25 +10,43 @@
 
 
     "cmd": [
-                "latexmk", "-f", "-quiet", "-pdf", "-e",
-                "$pdflatex='pdflatex -synctex=1 --shell-escape  %O %S'"
-            ],
+            "latexmk", "-quiet", "-pdf", "-e",
+            "$pdflatex='pdflatex -synctex=1 --shell-escape %O %S'"
+    ],
 
     "cmd_force": [
-                "latexmk", "-g", "-f", "-quiet", "-pdf", "-e",
-                "$pdflatex='pdflatex -synctex=1 --shell-escape  %O %S'"
-            ],
+            "latexmk", "-g", "-quiet", "-pdf", "-e",
+            "$pdflatex='pdflatex -synctex=1 --shell-escape %O %S'"
+    ],
 
     "cmd_variants": {
-        "Default" : [
-                "latexmk", "-f", "-quiet", "-pdf", "-e",
-                "$pdflatex='pdflatex -synctex=1 --shell-escape  %O %S'"
+        "PdfLaTeX (Default)" : [
+                "latexmk", "-quiet", "-pdf", "-e",
+                "$pdflatex='pdflatex -synctex=1 --shell-escape %O %S'"
         ],
-         "LaTeX-PS-PDF" : [
-                "latexmk", "-e","$dvipdf = 'dvipdfmx %O -o %D %S'", "-e",
-                "$latex = 'latex %O -interaction=nonstopmode -synctex=1 %S'","-f", "-pdfdvi"
+         "LaTeX-DVI-PDF" : [
+                "latexmk", "-quiet", "-pdfdvi", "-e", "$dvipdf = 'dvipdfmx %O -o %D %S'", "-e",
+                "$latex='latex %O -interaction=nonstopmode -synctex=1 --shell-escape %S'"
+         ],
+         "LaTeX-PS" : [
+                "latexmk", "-quiet", "-pdfps", "-e",
+                "$latex = 'latex %O -interaction=nonstopmode --shell-escape -synctex=1 %S'"
+         ],
+         "XeLaTeX" : [
+                "latexmk", "-quiet", "-pdf", "-e",
+                "$pdflatex = 'xelatex %O -interaction=nonstopmode --shell-escape -synctex=1 %S'"
          ]
     },
+
+    "clean_ext" : [
+            ".aux", ".dvi", ".lis", ".log", ".blg", ".bbl", ".toc", ".idx", ".ind",
+            ".ilg", ".thm", ".out", ".fdb_latexmk", ".fls", ".nav", ".snm"
+    ],
+
+    "clean_ext_force" :[
+            ".aux", ".dvi", ".lis", ".log", ".blg", ".bbl", ".toc", ".idx", ".ind",
+            ".ilg", ".thm", ".out", ".fdb_latexmk", ".fls", ".nav", ".snm", ".synctex.gz"
+    ],
 
     "osx": {
         // envirnoment path
