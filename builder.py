@@ -13,4 +13,5 @@ class LatexPlusChooseBuildSystemCommand(sublime_plugin.WindowCommand):
             key = display[action][0]
             value = bsys.get(key)
             settings.set("cmd", value)
+            settings.set("cmd_force", [value[0]]+["-g"]+value[1:])
             sublime.save_settings('LaTeX-Plus.sublime-settings')
