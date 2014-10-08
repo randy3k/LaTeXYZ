@@ -1,4 +1,13 @@
 [
     { "caption": "LaTeX-Plus: Choose Build System", "command": "latex_plus_choose_build_system"},
+
+    { "caption": "LaTeX-Plus: Build", "command": "latex_plus_build"},
+
+    { "caption": "LaTeX-Plus: Build (force)", "command": "latex_plus_build", "args" : {"force" : true}},
+
+    { "caption": "LaTeX-Plus: Clean auxiliary files", "command": "latex_plus_clean"},
+
+    { "caption": "LaTeX-Plus: Clean auxiliary files (force)", "command": "latex_plus_clean", "args" : {"force" : true}},
+
     { "caption": "LaTeX-Plus: View PDF", "command": "latex_plus_jump_to_pdf", "args": {"bring_forward": true, "forward_sync": false}}
 ]
