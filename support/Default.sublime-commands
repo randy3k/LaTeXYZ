@@ -1,3 +1,4 @@
 [
-	{ "caption": "LaTeX-Plus: View PDF", "command": "latex_plus_jump_to_pdf", "args": {"bring_forward": true, "forward_sync": false}}
+    { "caption": "LaTeX-Plus: Choose Build System", "command": "latex_plus_choose_build_system"},
+    { "caption": "LaTeX-Plus: View PDF", "command": "latex_plus_jump_to_pdf", "args": {"bring_forward": true, "forward_sync": false}}
 ]

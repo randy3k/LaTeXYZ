@@ -122,4 +122,3 @@ class LatexPlusJumpToPdfCommand(sublime_plugin.TextCommand):
         view = self.view
         point = view.sel()[0].end() if len(view.sel())>0 else 0
         return view.score_selector(point, "text.tex.latex")>0
-

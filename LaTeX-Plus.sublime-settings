@@ -13,10 +13,22 @@
                 "latexmk", "-f", "-quiet", "-pdf", "-e",
                 "$pdflatex='pdflatex -synctex=1 --shell-escape  %O %S'"
             ],
+
     "cmd_force": [
                 "latexmk", "-g", "-f", "-quiet", "-pdf", "-e",
                 "$pdflatex='pdflatex -synctex=1 --shell-escape  %O %S'"
             ],
+
+    "cmd_variants": {
+        "Default" : [
+                "latexmk", "-f", "-quiet", "-pdf", "-e",
+                "$pdflatex='pdflatex -synctex=1 --shell-escape  %O %S'"
+        ],
+         "LaTeX-PS-PDF" : [
+                "latexmk", "-e","$dvipdf = 'dvipdfmx %O -o %D %S'", "-e",
+                "$latex = 'latex %O -interaction=nonstopmode -synctex=1 %S'","-f", "-pdfdvi"
+         ]
+    },
 
     "osx": {
         // envirnoment path
