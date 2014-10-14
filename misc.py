@@ -9,9 +9,9 @@ def check_program(args, env):
         if sys.platform == "win32":
             startupinfo = subprocess.STARTUPINFO()
             startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-            subprocess.Popen(args, startupinfo=startupinfo, env=env)
+            subprocess.check_output(args, startupinfo=startupinfo, env=env)
         else:
-            subprocess.Popen(args, env=env)
+            subprocess.check_output(args, env=env)
     except:
         return False
     return True
