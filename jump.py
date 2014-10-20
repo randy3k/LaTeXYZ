@@ -90,15 +90,26 @@ class LatexPlusJumpToPdfCommand(sublime_plugin.TextCommand):
             linux_settings = self.settings.get("linux")
             viewer = linux_settings.get("viewer", "evince")
 
-            if viewer=="okular":
+            if viewer == "okular":
                 if forward_sync:
                     args = ["okular", "-unique", "%s#src:%s %s"%( pdffile,line,srcfile)]
                 else:
                     args = ["okular", "-unique", pdffile]
                 print("about to run okular with %s"%' '.join(args))
                 subprocess.Popen(args)
+            elif viewer == "zathura":
+                if forward_sync:
+                    dest = str(line) + ":" + str(col) + ":" + srcfile
+                    args = ["zathura", "--synctex-forward", dest, pdffile]
+                else:
+                    sb_binary = linux_settings.get("sublime", "subl")
+                    args = ["zathura", "-s", "-x",
+                            sb_binary + " %{input}:%{line}", pdffile]
+                print("about to run zathura with %s" % ' '.join(args))
+                subprocess.Popen(args)
             else:
-                evince_sync = sublime.load_resource("Packages/LaTeX-Plus/evince_sync")
+                evince_sync = sublime.load_resource(
+                    "Packages/LaTeX-Plus/evince_sync")
                 print("evince_sync loaded")
                 tasks = subprocess.check_output(['ps', 'xw'])
 
