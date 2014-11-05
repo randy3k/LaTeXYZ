@@ -56,7 +56,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(\\(?:re)?newcommand|\\def)(?:\{([^\}]*?)\}|(\\[a-zA-Z]+))[^\{]*\{</string>
+			<string>(\\(?:re)?newcommand|\\def)\s*(?:\{\s*([^\}]*?)\s*\}|(\\[a-zA-Z]+))[^\{]*\{</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
