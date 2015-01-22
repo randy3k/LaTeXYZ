@@ -352,7 +352,7 @@
         ],
     },
 
-    // left-right paris
+    // left-right pairs
 
     { "keys": ["("], "command": "auto_left_right_pair", "args": {"arg": ["(", ")"]}, "context":
         [
