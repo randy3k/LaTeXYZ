@@ -223,15 +223,6 @@
             { "key": "preceding_text", "operator": "not_regex_contains", "operand": "['a-zA-Z0-9_]$", "match_all": true }
         ]
     },
-    // do not auto-complete in math mode
-    { "keys": ["'"], "command": "insert_snippet", "args": {"contents": "'$0"}, "context":
-        [
-            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
-            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
-            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
-            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true }
-        ]
-    },
     {
         "keys": ["'"],
         "command": "insert_snippet", "args": { "contents": "`${1:$SELECTION}'" },
