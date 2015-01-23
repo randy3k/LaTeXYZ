@@ -134,7 +134,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>constant.other.latex</string>
+					<string>string.other.latex</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -144,7 +144,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>constant.other.latex</string>
+					<string>string.other.latex</string>
 				</dict>
 			</dict>
 			<key>name</key>
@@ -169,7 +169,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>support.function.latex</string>
+					<string>string.other.latex</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -179,7 +179,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>support.function.latex</string>
+					<string>string.other.latex</string>
 				</dict>
 			</dict>
 			<key>name</key>
@@ -200,7 +200,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>support.function.latex</string>
+					<string>string.other.latex</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -210,7 +210,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>support.function.latex</string>
+					<string>string.other.latex</string>
 				</dict>
 			</dict>
 			<key>name</key>
@@ -407,9 +407,9 @@
 					<array>
 						<dict>
 							<key>match</key>
-							<string>[a-zA-Z0-9]</string>
+							<string>[^\s,}]+</string>
 							<key>name</key>
-							<string>string.other.latex</string>
+							<string>constant.other.latex</string>
 						</dict>
 					</array>
 				</dict>
@@ -616,7 +616,7 @@
 							<key>match</key>
 							<string>[a-zA-Z0-9]</string>
 							<key>name</key>
-							<string>string.other.latex</string>
+							<string>constant.other.latex</string>
 						</dict>
 						<dict>
 							<key>include</key>
