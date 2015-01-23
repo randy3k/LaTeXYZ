@@ -1,9 +1,0 @@
-{
-        "scope": "text.tex.latex",
-
-        "completions":
-        [
-            { "trigger": "\\bibliographystyle{}", "contents": "bibliographystyle{$1}" },
-            { "trigger": "\\bibliography{}", "contents": "bibliography{$1}" }
-        ]
-}
