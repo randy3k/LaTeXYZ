@@ -95,18 +95,18 @@ maths = [
 ]
 
 general = [
-    ("\\includegraphics{}", "includegraphics{$1}" ),
-    ("\\part{}", "part{$1}" ),
-    ("\\part*{}", "part*{$1}" ),
-    ("\\chapter{}", "chapter{$1}" ),
-    ("\\chapter*{}", "chapter*{$1}" ),
-    ("\\section{}", "section{$1}" ),
-    ("\\section*{}", "section*{$1}" ),
-    ("\\subsection{}", "subsection{$1}" ),
-    ("\\subsection*{}", "subsection*{$1}" ),
+    ("\\includegraphics{}", "includegraphics{$1}"),
+    ("\\part{}", "part{$1}"),
+    ("\\part*{}", "part*{$1}"),
+    ("\\chapter{}", "chapter{$1}"),
+    ("\\chapter*{}", "chapter*{$1}"),
+    ("\\section{}", "section{$1}"),
+    ("\\section*{}", "section*{$1}"),
+    ("\\subsection{}", "subsection{$1}"),
+    ("\\subsection*{}", "subsection*{$1}"),
 
-    ("\\underline{}", "underline{$1}" ),
-    ("\\textbf{}", "textbf{$1}" ),
+    ("\\underline{}", "underline{$1}"),
+    ("\\textbf{}", "textbf{$1}"),
     ("\\textit{}", "textit{$1}"),
 
     ("\\bibliographystyle{}", "bibliographystyle{$1}"),
@@ -125,5 +125,5 @@ class LatexPlusAutoCompletions(sublime_plugin.EventListener):
 
         r = default_completions + command_completions + general
         if view.match_selector(locations[0], "meta.definition.math.latex"):
-            r = r + math
+            r = r + maths
         return r
