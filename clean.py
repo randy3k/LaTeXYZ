@@ -1,7 +1,9 @@
-import sublime, sublime_plugin
+import sublime
+import sublime_plugin
 import os
 import re
 from . misc import *
+
 
 def cleantex(texfile):
     settings = sublime.load_settings('LaTeX-Plus.sublime-settings')
@@ -11,13 +13,15 @@ def cleantex(texfile):
         if os.path.isfile(prefix+e):
             os.remove(prefix+e)
 
+
 def cleantexdir(texdir):
     settings = sublime.load_settings('LaTeX-Plus.sublime-settings')
     ext = settings.get("clean_ext_force")
     ls = os.listdir(texdir)
     rexp = "(" + '|'.join(['\\'+e for e in ext]) + ")$"
     fnames = [os.path.join(texdir, f) for f in ls if re.search(rexp, f)]
-    for f in fnames: os.remove(f)
+    for f in fnames:
+        os.remove(f)
 
 
 class LatexPlusCleanCommand(sublime_plugin.TextCommand):
@@ -27,10 +31,10 @@ class LatexPlusCleanCommand(sublime_plugin.TextCommand):
         tex_dir = os.path.dirname(tex_root)
 
         rexp = r'\\(?:input|include)\{([^\}]*)\}'
-        results = search_in_tex(rexp, tex_root, recursive=True if force==True else False)
+        results = search_in_tex(rexp, tex_root, recursive=True if force == True else False)
         texfiles = [r['result'] for r in results]
         texfiles = [f+".tex" if f[-4:].lower() != ".tex" else f for f in texfiles]
-        texfiles = [tex_root] + [os.path.join(tex_dir,f) for f in texfiles]
+        texfiles = [tex_root] + [os.path.join(tex_dir, f) for f in texfiles]
 
         if force:
             texdirs = list(set([os.path.dirname(f) for f in texfiles]))

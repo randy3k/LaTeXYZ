@@ -1,17 +1,27 @@
-import sublime, sublime_plugin, os, subprocess, time, threading
+import sublime
+import sublime_plugin
+import os
+import subprocess
+import time
+import threading
 from . misc import *
 import sys
+
 if sys.platform == "win32":
     from winreg import *
 
+
 def SumatraPDF():
     try:
-        akey=OpenKey(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\SumatraPDF.exe", 0, KEY_READ)
-        path=QueryValueEx(akey, "")[0]
+        akey = OpenKey(HKEY_LOCAL_MACHINE,
+                       "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\SumatraPDF.exe",
+                       0, KEY_READ)
+        path = QueryValueEx(akey, "")[0]
     except:
         print("Cannot find SumatraPDF from registry. Check if SumatraPDF has been installed!")
         return "SumatraPDF.exe"
     return path
+
 
 class LatexPlusEvinceThread(threading.Thread):
     def __init__(self, args):
@@ -24,10 +34,11 @@ class LatexPlusEvinceThread(threading.Thread):
         ev.wait()
         ev_sync.kill()
 
+
 class LatexPlusJumpToPdfCommand(sublime_plugin.TextCommand):
     def run(self, edit, **args):
         view = self.view
-        point = view.sel()[0].end() if len(view.sel())>0 else 0
+        point = view.sel()[0].end() if len(view.sel()) > 0 else 0
         if not view.score_selector(point, "text.tex.latex"):
             return
 
@@ -46,7 +57,7 @@ class LatexPlusJumpToPdfCommand(sublime_plugin.TextCommand):
 
         plat = sublime.platform()
         if plat == 'osx':
-            osx_settings = self.settings.get("osx")
+            # osx_settings = self.settings.get("osx")
 
             args = ['osascript']
             apple_script = ('tell application "Skim"\n'
@@ -57,10 +68,8 @@ class LatexPlusJumpToPdfCommand(sublime_plugin.TextCommand):
                                     'tell front document to go to TeX line ' + str(line) + ' from POSIX file "' + srcfile + '"\n'
                                 'end if\n'
                             'end tell\n')
-            # print(apple_script)
             args.extend(['-e', apple_script])
             subprocess.Popen(args)
-
 
         elif plat == 'windows':
             # hide console
@@ -69,13 +78,15 @@ class LatexPlusJumpToPdfCommand(sublime_plugin.TextCommand):
             startupinfo = subprocess.STARTUPINFO()
             startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
             tasks = subprocess.check_output(["tasklist"], startupinfo=startupinfo)
-            sumatra_is_running = "SumatraPDF.exe" in str(tasks, encoding='utf8' )
+            sumatra_is_running = "SumatraPDF.exe" in str(tasks, encoding='utf8')
             try:
-                sumatrapdf = windows_settings["sumatrapdf"] if "sumatrapdf" in windows_settings else SumatraPDF()
+                sumatrapdf = windows_settings["sumatrapdf"] \
+                    if "sumatrapdf" in windows_settings else SumatraPDF()
                 if not sumatra_is_running:
                     print("SumatraPDF not running, launch it")
                     subprocess.Popen([sumatrapdf, pdffile])
-                    if not sumatra_is_running: time.sleep(1)
+                    if not sumatra_is_running:
+                        time.sleep(1)
                 elif bring_forward:
                     subprocess.Popen([sumatrapdf, "-reuse-instance", pdffile])
             except:
@@ -83,7 +94,8 @@ class LatexPlusJumpToPdfCommand(sublime_plugin.TextCommand):
                 return
 
             if forward_sync:
-                subprocess.Popen([sumatrapdf,"-reuse-instance","-forward-search", srcfile, str(line), pdffile])
+                subprocess.Popen([sumatrapdf, "-reuse-instance", "-forward-search",
+                                  srcfile, str(line), pdffile])
 
         elif plat == 'linux':
 
@@ -92,10 +104,10 @@ class LatexPlusJumpToPdfCommand(sublime_plugin.TextCommand):
 
             if viewer == "okular":
                 if forward_sync:
-                    args = ["okular", "-unique", "%s#src:%s %s"%( pdffile,line,srcfile)]
+                    args = ["okular", "-unique", "%s#src:%s %s" % (pdffile, line, srcfile)]
                 else:
                     args = ["okular", "-unique", pdffile]
-                print("about to run okular with %s"%' '.join(args))
+                print("about to run okular with %s" % ' '.join(args))
                 subprocess.Popen(args)
             elif viewer == "zathura":
                 if forward_sync:
@@ -118,18 +130,19 @@ class LatexPlusJumpToPdfCommand(sublime_plugin.TextCommand):
                 if bring_forward or not evince_is_running:
                     args = ["python", "-c", evince_sync, "backward", pdffile, subl + " %f:%l"]
                     LatexPlusEvinceThread(args).start()
-                    if not evince_is_running: time.sleep(1)
+                    if not evince_is_running:
+                        time.sleep(1)
 
                 if forward_sync:
-                    subprocess.Popen(["python", "-c", evince_sync, "forward", pdffile, str(line), srcfile])
-
+                    subprocess.Popen(["python", "-c", evince_sync, "forward", pdffile,
+                                      str(line), srcfile])
 
     def is_enabled(self):
         view = self.view
-        point = view.sel()[0].end() if len(view.sel())>0 else 0
-        return view.score_selector(point, "text.tex.latex")>0
+        point = view.sel()[0].end() if len(view.sel()) > 0 else 0
+        return view.score_selector(point, "text.tex.latex") > 0
 
     def is_visible(self):
         view = self.view
-        point = view.sel()[0].end() if len(view.sel())>0 else 0
-        return view.score_selector(point, "text.tex.latex")>0
+        point = view.sel()[0].end() if len(view.sel()) > 0 else 0
+        return view.score_selector(point, "text.tex.latex") > 0

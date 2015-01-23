@@ -1,5 +1,8 @@
-import sublime, sublime_plugin
-import os, threading, time
+import sublime
+import sublime_plugin
+import os
+import threading
+import time
 import subprocess
 import re
 from . misc import *
@@ -19,11 +22,13 @@ class LatexPlusThread(threading.Thread):
         caller = self.caller
         plat = sublime.platform()
         my_env = os.environ.copy()
-        if caller.path: my_env["PATH"] = caller.path
+        if caller.path:
+            my_env["PATH"] = caller.path
         tex_dir = os.path.dirname(caller.file_name)
         if caller.cmd[0] == "latexmk":
             # check if perl is installed
-            if not check_program(["perl", "-v"], my_env) and not check_program(["runscript", "tlperl", "-v"], my_env):
+            if not check_program(["perl", "-v"], my_env) and \
+               not check_program(["runscript", "tlperl", "-v"], my_env):
                 sublime.error_message("Cannot find Perl.")
                 return
             # check if latexmk is installed
@@ -54,7 +59,7 @@ class LatexPlusThread(threading.Thread):
         caller.clearoutput()
         caller.output_log(proc.returncode)
         elapsed = (time.time() - t)
-        caller.output("\n[Done in %ss!]\n"% round(elapsed,2) )
+        caller.output("\n[Done in %ss!]\n" % round(elapsed, 2))
 
 
 class LatexPlusBuildCommand(sublime_plugin.WindowCommand):
@@ -97,7 +102,8 @@ class LatexPlusBuildCommand(sublime_plugin.WindowCommand):
         status = status % 14
         before = min(status, 14-status)
         after = 7 - before
-        self.window.active_view().set_status("Latex-Plus", "Compiling [%s=%s]" % (" " * before, " " * after))
+        self.window.active_view().set_status("Latex-Plus",
+            "Compiling [%s=%s]" % (" " * before, " " * after))
         if self.thread and self.thread.isAlive():
             sublime.set_timeout(lambda: self.status_updater(status+1), 100)
         else:
@@ -110,7 +116,6 @@ class LatexPlusBuildCommand(sublime_plugin.WindowCommand):
         self.output_view = self.window.get_output_panel("exec")
 
     def output_log(self, returncode):
-        view = self.window.active_view()
         tex_dir = os.path.dirname(self.file_name)
         logfile = os.path.splitext(self.file_name)[0] + ".log"
         if not os.path.isfile(logfile):
@@ -119,7 +124,7 @@ class LatexPlusBuildCommand(sublime_plugin.WindowCommand):
 
         check = parser.LogCheck()
         check.read(logfile)
-        D  = check.parse()
+        D = check.parse()
         errors = []
         badboxes = []
         warnings = []
@@ -128,43 +133,47 @@ class LatexPlusBuildCommand(sublime_plugin.WindowCommand):
         # changing workdir for getting relative path
         old_cwd = os.getcwd()
         os.chdir(tex_dir)
-        cleanfile = lambda f: os.path.relpath(re.sub("^\"", "", f.replace("/","\\")) \
-                                    if sublime.platform()=="windows" else f, tex_dir)
+        cleanfile = lambda f: os.path.relpath(re.sub("^\"", "", f.replace("/", "\\"))
+                                    if sublime.platform() == "windows" else f, tex_dir)
         for d in D:
-            out = (cleanfile(d['file']), int(d['line']) if 'line' in d and d['line'] else 0, d['text'])
+            out = (cleanfile(d['file']), int(d['line'])
+                   if 'line' in d and d['line'] else 0, d['text'])
             if 'kind' in d:
                 if d['kind'] == "error":
-                    errors.append("E: %s:%-4d  %s"% out)
-                elif d['kind'] == "warning" and ('Underfull' in d['text'] or 'Overfull' in d['text']):
-                    badboxes.append("B: %s:%-4d  %s"% out)
+                    errors.append("E: %s:%-4d  %s" % out)
+                elif d['kind'] == "warning" and \
+                                  ('Underfull' in d['text'] or 'Overfull' in d['text']):
+                    badboxes.append("B: %s:%-4d  %s" % out)
                 elif d['kind'] == "warning" and 'float specifier changed' in d['text']:
-                    fspecifiers.append("F: %s:%-4d  %s"% out)
+                    fspecifiers.append("F: %s:%-4d  %s" % out)
                 elif d['kind'] == "warning":
-                    warnings.append("W: %s:%-4d  %s"% out)
+                    warnings.append("W: %s:%-4d  %s" % out)
         os.chdir(old_cwd)
 
-        if returncode!=0 or errors:
+        if returncode != 0 or errors:
             self.output("Compilation failed with return code [%d]!\n" % returncode)
         else:
             self.output("Compilation succeeded!\n")
 
-        self.output("\n"+ str(len(errors)) + " Error(s), " + str(len(warnings)) +
-                     " Warning(s), " + str(len(fspecifiers)) + " FSC, and " +
-                         str(len(badboxes)) + " BadBox(es)" + ".\n")
+        self.output("\n" + str(len(errors)) + " Error(s), " + str(len(warnings)) +
+                    " Warning(s), " + str(len(fspecifiers)) + " FSC, and " +
+                    str(len(badboxes)) + " BadBox(es)" + ".\n")
 
         if errors:
             self.output("\n[Error(s)]\n" + "\n".join(errors) + "\n")
         if warnings:
-            self.output("\n[Warning(s)]\n" + "\n".join(warnings)+ "\n")
+            self.output("\n[Warning(s)]\n" + "\n".join(warnings) + "\n")
         if fspecifiers:
-            self.output("\n[FSC]\n" + "\n".join(fspecifiers)+ "\n")
+            self.output("\n[FSC]\n" + "\n".join(fspecifiers) + "\n")
         if badboxes:
-            self.output("\n[BadBox(es)]\n" + "\n".join(badboxes)+ "\n")
+            self.output("\n[BadBox(es)]\n" + "\n".join(badboxes) + "\n")
 
-        if returncode==0 and not errors and self.settings.get("view_on_success", True):
+        if returncode == 0 and not errors and self.settings.get("view_on_success", True):
             forward_sync = self.settings.get("forward_sync_on_success", True)
             bring_forward = self.settings.get("bring_forward_on_success", False)
-            self.window.active_view().run_command("latex_plus_jump_to_pdf", {"bring_forward": bring_forward, "forward_sync": forward_sync})
+            self.window.active_view().run_command("latex_plus_jump_to_pdf",
+                {"bring_forward": bring_forward, "forward_sync": forward_sync})
+
 
 class LatexPlusOutputCommand(sublime_plugin.TextCommand):
     def run(self, edit, characters):

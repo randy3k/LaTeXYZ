@@ -1,8 +1,10 @@
-import sublime, sublime_plugin
+import sublime
+import sublime_plugin
 import os
 import re
 import sys
 import subprocess
+
 
 def check_program(args, env):
     try:
@@ -28,9 +30,9 @@ def get_tex_root(view):
     file_dir = os.path.dirname(file_name)
     last_row = view.rowcol(view.size())[0]
     # check frist 5 rows only
-    for i in range(0,min(5,last_row)):
-        line = view.substr(view.line(view.text_point(i,0)))
-        if re.match(r"\s*\\documentclass",line):
+    for i in range(0, min(5, last_row)):
+        line = view.substr(view.line(view.text_point(i, 0)))
+        if re.match(r"\s*\\documentclass", line):
             print("!TEX root = ", file_name)
             return file_name
         mroot = re.match(r"%\s*!tex\s*root *= *(.*tex)\s*$", line, re.IGNORECASE)
@@ -55,23 +57,23 @@ def get_tex_root(view):
             pass
         os.chdir(old_dir)
 
-    sync = [f for f in  os.listdir(file_dir) if f.endswith(".synctex.gz")]
-    if len(sync)==1:
+    sync = [f for f in os.listdir(file_dir) if f.endswith(".synctex.gz")]
+    if len(sync) == 1:
         tex_root = os.path.join(file_dir, sync[0].replace(".synctex.gz", ".tex"))
         if os.path.isfile(tex_root):
             print("!TEX root = ", tex_root)
             return tex_root
 
-    pdf = [f for f in  os.listdir(file_dir) if f.endswith(".pdf")]
-    if len(pdf)==1:
+    pdf = [f for f in os.listdir(file_dir) if f.endswith(".pdf")]
+    if len(pdf) == 1:
         tex_root = os.path.join(file_dir, pdf[0].replace(".pdf", ".tex"))
         if os.path.isfile(tex_root):
             print("!TEX root = ", tex_root)
             return tex_root
 
-
     print("!TEX root = ", file_name)
     return file_name
+
 
 # List a directory using quick panel
 def listdir(view, dir, base, ext, on_done):
@@ -86,11 +88,13 @@ def listdir(view, dir, base, ext, on_done):
     if base:
         fnames = [f for f in fnames if base.lower() in f.lower()]
 
-    display = [os.curdir, os.pardir]+ ["> "+f for f in ls if os.path.isdir(os.path.join(dir, f))] + fnames
+    display = [os.curdir, os.pardir] + \
+        ["> "+f for f in ls if os.path.isdir(os.path.join(dir, f))] + fnames
 
     def on_action(i):
-        if i<0: return
-        elif i<2 or display[i][0] == '>':
+        if i < 0:
+            return
+        elif i < 2 or display[i][0] == '>':
             target = display[i][2:] if display[i][0] == '>' else display[i]
             target_dir = os.path.normpath(os.path.join(dir, target))
             sublime.set_timeout(lambda: listdir(view, target_dir, base, ext, on_done), 1)
@@ -100,24 +104,28 @@ def listdir(view, dir, base, ext, on_done):
 
     sublime.set_timeout(lambda: view.window().show_quick_panel(display, on_action), 100)
 
+
 # search for pattern in the tex files
 def search_in_tex(rexp, src, tex_dir=None, recursive=True):
     print("Scanning file: " + repr(src))
     results = []
-    if not tex_dir:  tex_dir = os.path.dirname(src)
+    if not tex_dir:
+        tex_dir = os.path.dirname(src)
     try:
         src_file = open(src, "r", encoding="utf-8")
         src_content = src_file.readlines()
 
         for line, c in enumerate(src_content):
-            this_result = re.findall(rexp, re.sub(r"(?<![\\])(\\\\)*%.*","",c))
-            if not this_result: continue
-            results += [{"file":src, "line":line+1, "result": t} for t in this_result]
+            this_result = re.findall(rexp, re.sub(r"(?<![\\])(\\\\)*%.*", "", c))
+            if not this_result:
+                continue
+            results += [{"file": src, "line": line+1, "result": t} for t in this_result]
 
         # recursive search
         if recursive:
             for f in re.findall(r'\\(?:input|include)\{([^\{\}]+)\}', "\n".join(src_content)):
-                if f[-4:].lower() != ".tex": f = f + ".tex"
+                if f[-4:].lower() != ".tex":
+                    f = f + ".tex"
                 f = os.path.normpath(os.path.join(tex_dir, f))
                 results += search_in_tex(rexp, f, tex_dir)
 
@@ -125,6 +133,7 @@ def search_in_tex(rexp, src, tex_dir=None, recursive=True):
         print("Cannot open file: %s" % src)
 
     return results
+
 
 # find bibtex records
 def find_bib_records(tex_root, by=None):
@@ -142,10 +151,10 @@ def find_bib_records(tex_root, by=None):
         return
 
     bibtextype = ['article', 'book', 'booklet', 'commented', 'conference', 'glossdef',
-                    'inbook', 'incollection', 'inproceedings', 'jurthesis',
-                    'manual', 'mastersthesis', 'misc', 'periodical', 'phdthesis',
-                    'proceedings', 'techreport', 'unpublished', 'url', 'electronic', 'webpage']
-    keywordp = re.compile(r'^@('+ '|'.join(bibtextype) + r')\{(.*?)[\} ,"]*$', re.IGNORECASE)
+                  'inbook', 'incollection', 'inproceedings', 'jurthesis',
+                  'manual', 'mastersthesis', 'misc', 'periodical', 'phdthesis',
+                  'proceedings', 'techreport', 'unpublished', 'url', 'electronic', 'webpage']
+    keywordp = re.compile(r'^@(' + '|'.join(bibtextype) + r')\{(.*?)[\} ,"]*$', re.IGNORECASE)
     titlep = re.compile(r'\btitle\s*=\s*(?:\{+|")\s*(.*?)[\} ,"]*$', re.IGNORECASE)
     authorp = re.compile(r'\bauthor\s*=\s*(?:\{+|")\s*(.*?)[\} ,"]*$', re.IGNORECASE)
 
@@ -160,7 +169,7 @@ def find_bib_records(tex_root, by=None):
             bib = bibf.readlines()
             bibf.close()
 
-        lines = [i+1 for i,item in enumerate(bib) if keywordp.search(item)]
+        lines = [i+1 for i, item in enumerate(bib) if keywordp.search(item)]
         print("Found %d bib records in %s" % (len(lines), bibfname))
 
         nextline = lines[1:]+[len(bib)+1]
@@ -168,17 +177,21 @@ def find_bib_records(tex_root, by=None):
             j = line
             keyword = keywordp.search(bib[j-1]).group(2)
             title = author = ""
-            while j<nextline[i]:
+            while j < nextline[i]:
                 content = bib[j-1]
                 if not title:
                     t = titlep.search(content)
-                    if t: title = t.group(1)
+                    if t:
+                        title = t.group(1)
                 if not author:
                     a = authorp.search(content)
-                    if a: author = a.group(1)
-                if title and author: break
+                    if a:
+                        author = a.group(1)
+                if title and author:
+                    break
                 j += 1
-            results.append({"keyword": keyword, 'title': title, 'author': author, 'file': bibfname, 'line': line})
+            results.append({'keyword': keyword, 'title': title, 'author': author,
+                            'file': bibfname, 'line': line})
 
     if by:
         results = sorted(results, key=lambda x: x[by].lower())

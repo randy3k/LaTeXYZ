@@ -1,4 +1,6 @@
-import sublime, sublime_plugin
+import sublime
+import sublime_plugin
+
 
 class LatexPlusChooseBuildSystemCommand(sublime_plugin.WindowCommand):
     def run(self):
@@ -9,7 +11,8 @@ class LatexPlusChooseBuildSystemCommand(sublime_plugin.WindowCommand):
         sublime.set_timeout(lambda: self.window.show_quick_panel(display, on_action), 100)
 
         def on_action(action):
-            if action < -1: return
+            if action < -1:
+                return
             key = display[action][0]
             value = bsys.get(key)
             settings.set("cmd", value)

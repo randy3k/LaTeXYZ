@@ -1,6 +1,5 @@
 import sublime
 import sublime_plugin
-import os
 import re
 
 
@@ -120,6 +119,7 @@ def is_duplicated(x, r):
             return True
     return False
 
+
 class LatexPlusAutoCompletions(sublime_plugin.EventListener):
 
     def on_query_completions(self, view, prefix, locations):
@@ -130,7 +130,7 @@ class LatexPlusAutoCompletions(sublime_plugin.EventListener):
             r = r + maths
         else:
             r = r + [(item, ) for item in view.extract_completions(prefix)
-                if len(item) > 3 and valid(item)]
+                     if len(item) > 3 and valid(item)]
 
         command_completions = [(item, ) for item in view.extract_completions("\\")
                                if len(item) > 3 and valid(item)]
