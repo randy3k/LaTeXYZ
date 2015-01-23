@@ -116,7 +116,7 @@ general = [
 
 def is_duplicated(x, r):
     for item in r:
-        if item[0].find(x):
+        if x in item[0]:
             return True
     return False
 
