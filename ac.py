@@ -113,17 +113,28 @@ general = [
     ("\\bibliography{}", "bibliography{$1}")
 ]
 
+
+def is_duplicated(x, r):
+    for item in r:
+        if item[0].find(x):
+            return True
+    return False
+
 class LatexPlusAutoCompletions(sublime_plugin.EventListener):
 
     def on_query_completions(self, view, prefix, locations):
         if not view.match_selector(locations[0], "text.tex.latex"):
             return None
-        default_completions = [(item, ) for item in view.extract_completions(prefix)
-                               if len(item) > 3 and valid(item)]
+        r = general
+        if view.match_selector(locations[0], "meta.definition.math.latex"):
+            r = r + maths
+        else:
+            r = r + [(item, ) for item in view.extract_completions(prefix)
+                if len(item) > 3 and valid(item)]
+
         command_completions = [(item, ) for item in view.extract_completions("\\")
                                if len(item) > 3 and valid(item)]
 
-        r = default_completions + command_completions + general
-        if view.match_selector(locations[0], "meta.definition.math.latex"):
-            r = r + maths
-        return r
+        r = r + [c for c in command_completions if not is_duplicated(c[0], r)]
+
+        return list(set(r))

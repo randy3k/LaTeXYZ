@@ -1,12 +1,19 @@
 [
-    //
-    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeX-Plus/macros/Delete And Hide Auto Complete.sublime-macro"}, "context": 
+    // for auto completion trigger
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeX-Plus/macros/Delete And Hide Auto Complete.sublime-macro"}, "context":
         [
             {"key": "preceding_text", "match_all": true, "operand": "(^\\\\(\\\\\\\\)*$)|((?<=[^\\\\])\\\\(\\\\\\\\)*$)", "operator": "regex_contains"},
             {"key": "selection_empty", "match_all": true, "operand": true, "operator": "equal"},
             {"key": "selector", "operand": "text.tex.latex", "operator": "equal"}
         ]
     },
+    { "keys": ["\\", "\\"], "command": "insert", "args": {"characters": "\\\\"}, "context":
+        [
+            {"key": "selection_empty", "match_all": true, "operand": true, "operator": "equal"},
+            {"key": "selector", "operand": "text.tex.latex", "operator": "equal"}
+        ]
+    },
+
     // automatic addition of new \items when hitting Shift+Enter in a list environment
     { "keys": ["shift+enter"], "command": "insert_snippet", "args": {"contents": "\n\\item$0"}, "context":
         [
