@@ -24,33 +24,48 @@ class LatexPlusAcCommand(sublime_plugin.TextCommand):
         content = view.substr(view.line(point))
 
         m = re.match(r".*\\(?:eq|page|c|auto)*ref(\{([a-zA-Z0-9_:-]*))?$", contentb)
-        if m: self.dispatch_ref(m, point); return
+        if m:
+            self.dispatch_ref(m, point)
+            return
 
-        m = re.match(r".*\\cite(?:[a-zA-Z_*]*)(\{(?:[a-zA-Z0-9_:-]*\s*,\s*)*([a-zA-Z0-9_:-]*))?$", contentb)
-        if m: self.dispatch_cite(m, point); return
+        m = re.match(r".*\\cite(?:[a-zA-Z_*]*)(\{(?:[a-zA-Z0-9_:-]*\s*,\s*)*([a-zA-Z0-9_:-]*))?$",
+                     contentb)
+        if m:
+            self.dispatch_cite(m, point)
+            return
 
         m = re.match(r".*\\label(\{([a-zA-Z0-9_:-]*))?$", contentb)
-        if m: self.dispatch_label(m, point); return
+        if m:
+            self.dispatch_label(m, point)
+            return
 
         m = re.match(r".*\\includegraphics((?:\[[\]]*\])?\{([^\}]*))?$", contentb)
         ext = ['.jpg', '.jpeg', '.bmp', '.pdf', '.ps', '.eps']
-        if m: self.dispatch_listdir(m, point, ext); return
+        if m:
+            self.dispatch_listdir(m, point, ext)
+            return
 
         m = re.match(r".*\\(?:input|include)(\{([^\}]*))?$", contentb)
         ext = ['.tex']
-        if m: self.dispatch_listdir(m, point, ext); return
+        if m:
+            self.dispatch_listdir(m, point, ext)
+            return
 
         m = re.match(r".*\\bibliography(\{([^\}]*))?$", contentb)
         ext = ['.bib']
-        if m: self.dispatch_listdir(m, point, ext); return
+        if m:
+            self.dispatch_listdir(m, point, ext)
+            return
 
         if re.match(r"^\s*$", content):
-            self.dispatch_closeenv(point); return
+            self.dispatch_closeenv(point)
+            return
 
         sublime.status_message("Nothing to be auto completed.")
 
     def replace(self, i, completions, braces, a, b):
-        if i<0: return
+        if i < 0:
+            return
         open_brace = "" if braces else "{"
         close_brace = "" if braces else "}"
         rept = open_brace + completions[i] + close_brace
@@ -74,8 +89,10 @@ class LatexPlusAcCommand(sublime_plugin.TextCommand):
             sublime.status_message("No label matches %s!" % (prefix,))
             return
 
-        display = [[r['result'], os.path.relpath(r['file'], tex_dir)+":"+str(r['line'])] for r in results]
-        on_done = lambda i: self.replace(i, [r['result'] for r in results], braces, point - len(prefix), point)
+        display = [[r['result'],
+                    os.path.relpath(r['file'], tex_dir)+":"+str(r['line'])] for r in results]
+        on_done = lambda i: \
+            self.replace(i, [r['result'] for r in results], braces, point - len(prefix), point)
         view.window().show_quick_panel(display, on_done)
 
     def dispatch_cite(self, m, point):
@@ -84,11 +101,11 @@ class LatexPlusAcCommand(sublime_plugin.TextCommand):
         tex_root = get_tex_root(view)
         braces, prefix = m.groups()
 
-        results = find_bib_records(tex_root, by = 'author')
+        results = find_bib_records(tex_root, by='author')
 
         if prefix:
-            results = [r for r in results \
-                            if prefix.lower() in ("%s %s %s" % (r['keyword'],r['title'], r['author'])).lower()]
+            results = [r for r in results
+                if prefix.lower() in ("%s %s %s" % (r['keyword'], r['title'], r['author'])).lower()]
         else:
             prefix = ""
 
@@ -96,17 +113,14 @@ class LatexPlusAcCommand(sublime_plugin.TextCommand):
             sublime.status_message("No bib record matches %s!" % (prefix,))
             return
 
-        display = [[ "[" + r['author'] + "] " + r['title'], " (" + r['keyword'] + ") " + r['title'] ] for r in results]
-        on_done = lambda i: self.replace(i, [r['keyword'] for r in results], braces, point - len(prefix), point)
+        display = [["[" + r['author'] + "] " + r['title'], " (" + r['keyword'] + ") " +
+                    r['title']] for r in results]
+        on_done = lambda i: self.replace(i,
+            [r['keyword'] for r in results], braces, point - len(prefix), point)
         view.window().show_quick_panel(display, on_done)
 
     def dispatch_label(self, m, point):
         print("dispatching label")
-        view = self.view
-        tex_root = get_tex_root(view)
-        tex_dir = os.path.dirname(tex_root)
-        braces, prefix = m.groups()
-        print(prefix)
 
     def dispatch_listdir(self, m, point, ext):
         print("dispatching listdir")
@@ -115,12 +129,15 @@ class LatexPlusAcCommand(sublime_plugin.TextCommand):
         tex_dir = os.path.dirname(tex_root)
         braces, prefix = m.groups()
 
-        if not prefix: prefix = ""
+        if not prefix:
+            prefix = ""
         dir = os.path.join(tex_dir, os.path.dirname(prefix))
         base = os.path.basename(prefix)
+
         def on_done(target):
-            target_dir = (os.path.splitext(os.path.relpath(target, tex_dir))[0]).replace(os.sep, '/')
+            target_dir = os.path.splitext(os.path.relpath(target, tex_dir))[0].replace(os.sep, '/')
             self.replace(0, [target_dir], braces, point - len(prefix), point)
+
         listdir(view, dir, base, ext, on_done)
 
     def dispatch_closeenv(self, point):
@@ -131,9 +148,10 @@ class LatexPlusAcCommand(sublime_plugin.TextCommand):
         while 1:
             r = view.find(r'\\(begin|end)\{[^\}]+\}', pt)
             pt = r.end()
-            if view.scope_name(pt-1).find("comment")>=0:
+            if view.scope_name(pt-1).find("comment") >= 0:
                 continue
-            if pt >= point: break
+            if pt >= point:
+                break
             thisenv = re.match(r'\\(begin|end)\{([^\}]+)\}', view.substr(r)).groups()
             if thisenv[0] == 'begin':
                 env.append(thisenv)
