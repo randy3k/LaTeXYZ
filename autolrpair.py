@@ -3,7 +3,7 @@ import sublime_plugin
 
 
 # for auto pair \left \right pairs
-class LatexPlusAutoLeftRightPairListener(sublime_plugin.EventListener):
+class LatexPlusPairListener(sublime_plugin.EventListener):
     def on_query_context(self, view, key, operator, operand, match_all):
         if view.is_scratch() or view.settings().get('is_widget'):
             return
@@ -25,7 +25,7 @@ class LatexPlusAutoLeftRightPairListener(sublime_plugin.EventListener):
             return (out == operand) if operator == 0 else not (out == operand)
 
 
-class LatexPlusAutoLeftRightPairCommand(sublime_plugin.TextCommand):
+class LatexPlusPairCommand(sublime_plugin.TextCommand):
     def run(self, edit, arg):
         view = self.view
         sel = [(s.begin(), s.end()) for s in view.sel()]

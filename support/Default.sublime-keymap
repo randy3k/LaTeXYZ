@@ -369,21 +369,21 @@
 
     // left-right pairs
 
-    { "keys": ["("], "command": "auto_left_right_pair", "args": {"arg": ["(", ")"]}, "context":
+    { "keys": ["("], "command": "latex_plus_pair", "args": {"arg": ["(", ")"]}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
             { "key": "in_brackets", "operator": "equal", "operand": true}
         ]
     },
-    { "keys": ["["], "command": "auto_left_right_pair", "args": {"arg": ["[", "]"]}, "context":
+    { "keys": ["["], "command": "latex_plus_pair", "args": {"arg": ["[", "]"]}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
             { "key": "in_square_brackets", "operator": "equal", "operand": true}
         ]
     },
-    { "keys": ["{"], "command": "auto_left_right_pair", "args": {"arg": ["\\{", "\\}"]}, "context":
+    { "keys": ["{"], "command": "latex_plus_pair", "args": {"arg": ["\\{", "\\}"]}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
