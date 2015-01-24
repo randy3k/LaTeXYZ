@@ -16,7 +16,7 @@
 	<key>foldingStopMarker</key>
 	<string>^\s*[)}]\s*$</string>
 	<key>name</key>
-	<string>BibTeX Extended</string>
+	<string>BibTeX</string>
 	<key>patterns</key>
 	<array>
 		<dict>
