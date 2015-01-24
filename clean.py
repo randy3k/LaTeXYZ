@@ -31,7 +31,7 @@ class LatexPlusCleanCommand(sublime_plugin.TextCommand):
         tex_dir = os.path.dirname(tex_root)
 
         rexp = r'\\(?:input|include)\{([^\}]*)\}'
-        results = search_in_tex(rexp, tex_root, recursive=True if force == True else False)
+        results = search_in_tex(rexp, tex_root, recursive=True if force is True else False)
         texfiles = [r['result'] for r in results]
         texfiles = [f+".tex" if f[-4:].lower() != ".tex" else f for f in texfiles]
         texfiles = [tex_root] + [os.path.join(tex_dir, f) for f in texfiles]
