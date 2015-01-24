@@ -10,15 +10,15 @@ class LatexPlusPairListener(sublime_plugin.EventListener):
         if not view.score_selector(view.sel()[0].end() if len(view.sel()) > 0 else 0,
                                    "meta.definition.math.latex"):
             return
-        if key == 'in_brackets':
+        if key == 'selection_in_brackets':
             out = all([view.substr(sel.begin()-1) == '(' and
                       view.substr(sel.end()) == ')' for sel in view.sel()])
             return (out == operand) if operator == 0 else not (out == operand)
-        elif key == 'in_square_brackets':
+        elif key == 'selection_in_square_brackets':
             out = all([view.substr(sel.begin()-1) == '[' and
                        view.substr(sel.end()) == ']' for sel in view.sel()])
             return (out == operand) if operator == 0 else not (out == operand)
-        elif key == 'in_curly_brackets':
+        elif key == 'selection_in_curly_brackets':
             out = all([view.substr(sublime.Region(sel.begin()-2, sel.begin())) == '\\{' and
                        view.substr(sublime.Region(sel.begin(), sel.begin()+2)) == '\\}'
                        for sel in view.sel()])
