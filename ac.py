@@ -115,7 +115,8 @@ general = [
 
 def is_duplicated(x, r):
     for item in r:
-        if x in item[0]:
+        m = re.match(r"\\\w+", r"\sum")
+        if m and x == m.group(0):
             return True
     return False
 
