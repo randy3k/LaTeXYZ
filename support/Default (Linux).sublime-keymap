@@ -59,7 +59,7 @@
 			{"key": "selector", "operator": "equal", "operand": "text.tex.latex"}
 		]
 	},
-	{ "keys": ["ctrl+l","e"], "command": "insert_snippet", "args": {"contents": "\\begin{${1:env}}\n$SELECTION$2\n\\end{$1}$0"}, "context":
+	{ "keys": ["ctrl+l","e"], "command": "insert_snippet", "args": {"contents": "\\begin{${1:env}}\n$SELECTION$0\n\\end{$1}"}, "context":
 		[
 			{"key": "selector", "operator": "equal", "operand": "text.tex.latex"}
 		]
