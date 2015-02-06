@@ -4,6 +4,7 @@ import os
 import re
 import sys
 import subprocess
+from .latex_accents import latex_read_arr
 
 
 def check_program(args, env):
@@ -135,6 +136,14 @@ def search_in_tex(rexp, src, tex_dir=None, recursive=True):
     return results
 
 
+def decode_latex(name):
+    for t, u in latex_read_arr:
+        name = name.replace("{" + t + "}", u)
+        name = name.replace(t, u)
+    name = re.sub(r"\{|\}", r"", name)
+    return name
+
+
 # find bibtex records
 def find_bib_records(tex_root, by=None):
     tex_dir = os.path.dirname(tex_root)
@@ -183,11 +192,11 @@ def find_bib_records(tex_root, by=None):
                 if not title:
                     t = titlep.search(content)
                     if t:
-                        title = t.group(1)
+                        title = decode_latex(t.group(1))
                 if not author:
                     a = authorp.search(content)
                     if a:
-                        author = a.group(1)
+                        author = decode_latex(a.group(1))
                 if not year:
                     y = yearp.search(content)
                     if y:
