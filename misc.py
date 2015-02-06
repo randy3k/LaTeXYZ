@@ -4,7 +4,7 @@ import os
 import re
 import sys
 import subprocess
-from .latex_accents import latex_read_arr
+from .latex_unicode_map import latex_unicode_map
 
 
 def check_program(args, env):
@@ -137,10 +137,9 @@ def search_in_tex(rexp, src, tex_dir=None, recursive=True):
 
 
 def decode_latex(name):
-    for t, u in latex_read_arr:
-        name = name.replace("{" + t + "}", u)
-        name = name.replace(t, u)
-    name = re.sub(r"\{|\}", r"", name)
+    for u, latex in latex_unicode_map:
+        name = name.replace(latex, u)
+    name = name.replace("{", "").replace("}", "")
     return name
 
 
