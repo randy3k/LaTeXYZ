@@ -157,6 +157,7 @@ def find_bib_records(tex_root, by=None):
     keywordp = re.compile(r'^@(' + '|'.join(bibtextype) + r')\{(.*?)[\} ,"]*$', re.IGNORECASE)
     titlep = re.compile(r'\btitle\s*=\s*(?:\{+|")\s*(.*?)[\} ,"]*$', re.IGNORECASE)
     authorp = re.compile(r'\bauthor\s*=\s*(?:\{+|")\s*(.*?)[\} ,"]*$', re.IGNORECASE)
+    yearp = re.compile(r'\byear\s*=\s*(?:\{+|")\s*(.*?)[\} ,"]*$', re.IGNORECASE)
 
     results = []
     for bibfname in bib_files:
@@ -176,7 +177,7 @@ def find_bib_records(tex_root, by=None):
         for i, line in enumerate(lines):
             j = line
             keyword = keywordp.search(bib[j-1]).group(2)
-            title = author = ""
+            title = author = year = ""
             while j < nextline[i]:
                 content = bib[j-1]
                 if not title:
@@ -187,11 +188,15 @@ def find_bib_records(tex_root, by=None):
                     a = authorp.search(content)
                     if a:
                         author = a.group(1)
-                if title and author:
+                if not year:
+                    y = yearp.search(content)
+                    if y:
+                        year = y.group(1)
+                if title and author and year:
                     break
                 j += 1
             results.append({'keyword': keyword, 'title': title, 'author': author,
-                            'file': bibfname, 'line': line})
+                            'year': year, 'file': bibfname, 'line': line})
 
     if by:
         results = sorted(results, key=lambda x: x[by].lower())

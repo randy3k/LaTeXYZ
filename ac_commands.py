@@ -105,7 +105,8 @@ class LatexPlusAcCommand(sublime_plugin.TextCommand):
 
         if prefix:
             results = [r for r in results
-                if prefix.lower() in ("%s %s %s" % (r['keyword'], r['title'], r['author'])).lower()]
+                       if prefix.lower() in
+                       ("%s %s %s" % (r['keyword'], r['title'], r['author'])).lower()]
         else:
             prefix = ""
 
@@ -113,10 +114,12 @@ class LatexPlusAcCommand(sublime_plugin.TextCommand):
             sublime.status_message("No bib record matches %s!" % (prefix,))
             return
 
-        display = [["[" + r['author'] + "] " + r['title'], " (" + r['keyword'] + ") " +
-                    r['title']] for r in results]
-        on_done = lambda i: self.replace(i,
-            [r['keyword'] for r in results], braces, point - len(prefix), point)
+        display = [[r['author'] + " (" + r['year'] + "): " + r['title'],
+                    " (" + r['keyword'] + ") " + r['title']] for r in results]
+        on_done = lambda i: self.replace(
+            i,
+            [r['keyword'] for r in results], braces, point - len(prefix), point
+        )
         view.window().show_quick_panel(display, on_done)
 
     def dispatch_label(self, m, point):
@@ -158,8 +161,10 @@ class LatexPlusAcCommand(sublime_plugin.TextCommand):
             elif thisenv[1] == env[-1][1]:
                 env.pop()
             else:
-                sublime.error_message('Line %d: {%s} closed with {%s}.' %
-                    (view.rowcol(pt)[0]+1, env[-1][1], thisenv[1]))
+                sublime.error_message(
+                    'Line %d: {%s} closed with {%s}.' %
+                    (view.rowcol(pt)[0]+1, env[-1][1], thisenv[1])
+                )
 
         view.run_command("insert_snippet", {'contents': "\\\\end{" + env[-1][1] + "}"})
         if view.settings().get('auto_indent'):
