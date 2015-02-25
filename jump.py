@@ -78,7 +78,7 @@ class LatexPlusJumpToPdfCommand(sublime_plugin.TextCommand):
             startupinfo = subprocess.STARTUPINFO()
             startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
             tasks = subprocess.check_output(["tasklist"], startupinfo=startupinfo)
-            sumatra_is_running = "SumatraPDF.exe" in str(tasks, encoding='utf8')
+            sumatra_is_running = "SumatraPDF.exe" in tasks.decode('utf-8', 'ignore')
             try:
                 sumatrapdf = windows_settings["sumatrapdf"] \
                     if "sumatrapdf" in windows_settings else SumatraPDF()
