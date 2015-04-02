@@ -47,7 +47,7 @@
 	},
 
 	// cmd+l,x suggests autocompletion
-	{ "keys": ["super+l","x"],"command": "latex_plus_ac", "context":
+	{ "keys": ["super+l","x"],"command": "latex_plus_completion", "context":
 		[
 			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
 		]

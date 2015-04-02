@@ -14,7 +14,7 @@ class LatexPlusReplaceCommand(sublime_plugin.TextCommand):
         self.view.sel().add(a+len(replacement))
 
 
-class LatexPlusAcCommand(sublime_plugin.TextCommand):
+class LatexPlusCompletionCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         view = self.view
         point = view.sel()[0].end() if view.sel() else 0
@@ -40,7 +40,7 @@ class LatexPlusAcCommand(sublime_plugin.TextCommand):
             return
 
         m = re.match(r".*\\includegraphics((?:\[[\]]*\])?\{([^\}]*))?$", contentb)
-        ext = ['.jpg', '.jpeg', '.bmp', '.pdf', '.ps', '.eps']
+        ext = ['.jpg', '.jpeg', '.bmp', '.pdf', '.ps', '.eps', '.png']
         if m:
             self.dispatch_listdir(m, point, ext)
             return
