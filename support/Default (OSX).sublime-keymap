@@ -6,34 +6,6 @@
 		],
 	},
 
-	// Build
-	{ "keys": ["super+b"], "command": "latex_plus_build", "context":
-		[
-			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
-		]
-	},
-
-	// Build - force
-	{ "keys": ["super+alt+b"], "command": "latex_plus_build", "args": {"force": true},  "context":
-		[
-			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
-		]
-	},
-
-	// Clean Build
-	{ "keys": ["super+shift+b"], "command": "latex_plus_clean", "context":
-		[
-			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
-		]
-	},
-
-	// Clean Build - force
-	{ "keys": ["super+alt+shift+b"], "command": "latex_plus_clean", "args": {"force": true}, "context":
-		[
-			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
-		]
-	},
-
 	// View PDF, jump to point
 	{ "keys": ["super+l","v"], "command": "latex_plus_jump_to_pdf", "args": {"bring_forward": true, "forward_sync": false}, "context":
 		[

@@ -14,11 +14,6 @@
             "$pdflatex='pdflatex -synctex=1 --shell-escape %O %S'"
     ],
 
-    "cmd_force": [
-            "latexmk", "-g", "-quiet", "-pdf", "-e",
-            "$pdflatex='pdflatex -synctex=1 --shell-escape %O %S'"
-    ],
-
     "cmd_variants": {
         "PdfLaTeX (Default)" : [
                 "latexmk", "-quiet", "-pdf", "-e",

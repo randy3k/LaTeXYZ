@@ -63,7 +63,12 @@ class LatexPlusThread(threading.Thread):
 
 
 class LatexPlusBuildCommand(sublime_plugin.WindowCommand):
-    def run(self, force=False):
+    def run(self, **kwargs):
+        if "force" in kwargs:
+            force = kwargs["force"]
+        else:
+            force = False
+
         view = self.window.active_view()
         if view.is_dirty():
             print("saving...")
@@ -74,7 +79,9 @@ class LatexPlusBuildCommand(sublime_plugin.WindowCommand):
         tex_dir = os.path.dirname(self.file_name)
 
         self.settings = sublime.load_settings('LaTeX-Plus.sublime-settings')
-        cmd = self.settings.get("cmd_force") if force else self.settings.get("cmd")
+        cmd = self.settings.get("cmd")
+        if force and cmd[0] == "latexmk":
+            cmd = [cmd[0]] + ["-g"] + cmd[1:]
         self.cmd = cmd + [os.path.relpath(self.file_name, tex_dir)]
         os_settings = self.settings.get(sublime.platform())
         self.path = os.path.expandvars(os_settings['path']) if 'path' in os_settings else None

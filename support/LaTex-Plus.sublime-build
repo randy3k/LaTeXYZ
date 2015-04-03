@@ -1,0 +1,20 @@
+{
+    "target": "latex_plus_build",
+    "selector": "text.tex.latex",
+    "variants":[
+        {
+            "name": "Force",
+            "target": "latex_plus_build",
+            "force": true
+        },
+        {
+            "name": "Clean",
+            "target": "latex_plus_clean",
+        },
+        {
+            "name": "Clean (Force)",
+            "target": "latex_plus_clean",
+            "force": true
+        },
+    ]
+}

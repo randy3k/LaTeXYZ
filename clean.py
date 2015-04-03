@@ -24,9 +24,13 @@ def cleantexdir(texdir):
         os.remove(f)
 
 
-class LatexPlusCleanCommand(sublime_plugin.TextCommand):
-    def run(self, edit, force=False):
-        view = self.view
+class LatexPlusCleanCommand(sublime_plugin.WindowCommand):
+    def run(self, **kwargs):
+        if "force" in kwargs:
+            force = kwargs["force"]
+        else:
+            force = False
+        view = self.window.active_view()
         tex_root = get_tex_root(view)
         tex_dir = os.path.dirname(tex_root)
 
