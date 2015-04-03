@@ -39,7 +39,7 @@ class LatexPlusCompletionCommand(sublime_plugin.TextCommand):
             self.dispatch_label(m, point)
             return
 
-        m = re.match(r".*\\includegraphics((?:\[[\]]*\])?\{([^\}]*))?$", contentb)
+        m = re.match(r".*\\includegraphics((?:\[[^\]]*\])?\{([^\}]*))?$", contentb)
         ext = ['.jpg', '.jpeg', '.bmp', '.pdf', '.ps', '.eps', '.png']
         if m:
             self.dispatch_listdir(m, point, ext)
