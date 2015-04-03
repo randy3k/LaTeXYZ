@@ -133,8 +133,12 @@ class LatexPlusBuildCommand(sublime_plugin.WindowCommand):
         # changing workdir for getting relative path
         old_cwd = os.getcwd()
         os.chdir(tex_dir)
-        cleanfile = lambda f: os.path.relpath(re.sub("^\"", "", f.replace("/", "\\"))
-                                    if sublime.platform() == "windows" else f, tex_dir)
+
+        def cleanfile(f):
+            if sublime.platform() == "windows":
+                f = re.sub("^\"", "", f.replace("/", "\\"))
+            return os.path.normpath(os.path.relpath(f))
+
         for d in D:
             out = (cleanfile(d['file']), int(d['line'])
                    if 'line' in d and d['line'] else 0, d['text'])
