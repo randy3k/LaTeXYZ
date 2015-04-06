@@ -11,7 +11,7 @@ import re
 
 re_rerun = re.compile("LaTeX Warning:.*Rerun")
 # file name regex, it may be buggy
-re_file = re.compile(r"""\((?P<file>("[^"]+(?=")|[^\n\t(){}]*?\.[a-zA-Z]+|[^\n\t(){}]*[^ \n\t(){}]))|\)""")
+re_file = re.compile(r"""\((?P<file>("[^"]+(?=")|[^\n\t(){}]*\.[a-zA-Z]+|[^\n\t(){}]*[^ \n\t(){}]))|\)""")
 re_badbox = re.compile(r"(Ov|Und)erfull \\[hv]box ")
 re_line = re.compile(r"(l\.(?P<line>[0-9]+)( (?P<code>.*))?$|<\*>)")
 re_cseq = re.compile(r".*(?P<seq>(\\|\.\.\.)[^ ]*) ?$")
