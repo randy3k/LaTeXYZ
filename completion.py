@@ -28,7 +28,7 @@ class LatexPlusCompletionCommand(sublime_plugin.TextCommand):
             self.dispatch_ref(m, point)
             return
 
-        m = re.match(r".*\\cite(?:[a-zA-Z_*]*)(?:\[[^\]]*\])?(\{(?:[a-zA-Z0-9_:-]*\s*,\s*)*([a-zA-Z0-9_:-]*))?$",
+        m = re.match(r".*\\cite(?:[a-zA-Z_*]*)(?:\[[^\]]*\])*(\{(?:[a-zA-Z0-9_:-]*\s*,\s*)*([a-zA-Z0-9_:-]*))?$",
                      contentb)
         if m:
             self.dispatch_cite(m, point)
