@@ -23,7 +23,7 @@ class LatexPlusCompletionCommand(sublime_plugin.TextCommand):
         contentb = view.substr(sublime.Region(view.line(point).begin(), point))
         content = view.substr(view.line(point))
 
-        m = re.match(r".*\\(?:eq|page|c|auto)*ref(\{([a-zA-Z0-9_:-]*))?$", contentb)
+        m = re.match(r".*\\(?:eq|page|[cC]|auto)*ref(\{([a-zA-Z0-9_:-]*))?$", contentb)
         if m:
             self.dispatch_ref(m, point)
             return
