@@ -115,7 +115,7 @@ general = [
 
 def is_duplicated(x, r):
     for item in r:
-        m = re.match(r"\\\w+", r"\sum")
+        m = re.match(r"\\\w+", item[0])
         if m and x == m.group(0):
             return True
     return False
@@ -133,7 +133,7 @@ class LatexPlusAutoCompletions(sublime_plugin.EventListener):
             r = r + [(item, ) for item in view.extract_completions(prefix)
                      if len(item) > 3 and valid(item)]
 
-        command_completions = [(item, ) for item in view.extract_completions("\\")
+        command_completions = [(item, ) for item in view.extract_completions("\\"+prefix)
                                if len(item) > 3 and valid(item)]
 
         r = r + [c for c in command_completions if not is_duplicated(c[0], r)]
