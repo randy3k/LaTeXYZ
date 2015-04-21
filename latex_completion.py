@@ -146,12 +146,12 @@ class LatexPlusCompletionCommand(sublime_plugin.TextCommand):
 
         def on_done(target):
             fpath = os.path.relpath(target, tex_dir)
-            dirname = os.path.dirname(fpath).replace(os.sep, '/')
+            dirname = os.path.dirname(fpath)
             fname, ext = os.path.splitext(os.path.basename(fpath))
             if "." in fname:
-                out = dirname + "/{" + fname + "}" + ext
+                out = os.path.join(dirname, "{" + fname + "}" + ext).replace(os.sep, '/')
             else:
-                out = dirname + "/" + fname
+                out = os.path.join(dirname, fname).replace(os.sep, '/')
             self.replace(0, [out], braces, point - len(prefix), point)
 
         listdir(view, dir, base, ext, on_done)
