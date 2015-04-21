@@ -28,8 +28,15 @@ class LatexPlusCompletionCommand(sublime_plugin.TextCommand):
             self.dispatch_ref(m, point)
             return
 
-        m = re.match(r".*\\cite(?:[a-zA-Z_*]*)(?:\[[^\]]*\])*(\{(?:[a-zA-Z0-9_:-]*\s*,\s*)*([a-zA-Z0-9_:-]*))?$",
-                     contentb)
+        m = re.match(
+            r"""
+            .*\\cite(?:[a-zA-Z_*]*)
+            (?:\[[^\]]*\])*
+            (\{(?:[a-zA-Z0-9_:-]*\s*,\s*)*([a-zA-Z0-9_:-]*))?
+            $
+            """,
+            contentb, re.VERBOSE
+        )
         if m:
             self.dispatch_cite(m, point)
             return
@@ -138,8 +145,14 @@ class LatexPlusCompletionCommand(sublime_plugin.TextCommand):
         base = os.path.basename(prefix)
 
         def on_done(target):
-            target_dir = os.path.splitext(os.path.relpath(target, tex_dir))[0].replace(os.sep, '/')
-            self.replace(0, [target_dir], braces, point - len(prefix), point)
+            fpath = os.path.relpath(target, tex_dir)
+            dirname = os.path.dirname(fpath).replace(os.sep, '/')
+            fname, ext = os.path.splitext(os.path.basename(fpath))
+            if "." in fname:
+                out = dirname + "/{" + fname + "}" + ext
+            else:
+                out = dirname + "/" + fname
+            self.replace(0, [out], braces, point - len(prefix), point)
 
         listdir(view, dir, base, ext, on_done)
 
