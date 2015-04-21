@@ -68,12 +68,12 @@
 				<dict>
 					<key>name</key>
 					<string>support.function.latex</string>
-				</dict>			
+				</dict>
 				<key>3</key>
 				<dict>
 					<key>name</key>
 					<string>support.function.latex</string>
-				</dict>	
+				</dict>
 			</dict>
 			<key>end</key>
 			<string>}</string>
@@ -225,7 +225,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(\\begin)\{\s*((?:itemize|enumerate|description)\*?)\s*\}</string>
+			<string>(\\begin)\{\s*((?:itemize|enumerate)\*?)\s*\}</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -256,6 +256,47 @@
 			</dict>
 			<key>name</key>
 			<string>meta.definition.list.latex</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(\\begin)\{\s*((?:description)\*?)\s*\}</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.latex</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter.latex</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(\\end)\{\s*(\2)\s*\}</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.latex</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter.latex</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.definition.description.latex</string>
 			<key>patterns</key>
 			<array>
 				<dict>
