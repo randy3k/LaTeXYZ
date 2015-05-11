@@ -1,4 +1,0 @@
-LaTeXSQ 2.0.0
-
-LaTeXSQ is renamed as LaTeX-Plus
-Make sure to rename your user setting file `LaTeXSQ.sublime-settings` to `LaTeX-Plus.sublime-settings`
