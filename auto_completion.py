@@ -139,6 +139,5 @@ class LatexPlusAutoCompletions(sublime_plugin.EventListener):
             r = r + maths
 
         r = r + [(item, ) for item in view.extract_completions("\\"+prefix)
-                 if len(item) >= 3 and valid(item) and not is_duplicated(item[0], r)]
-
+                 if len(item) >= 3 and valid(item) and not is_duplicated(item, r)]
         return list(set(r))
