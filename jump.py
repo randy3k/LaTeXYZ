@@ -128,7 +128,7 @@ class LatexPlusJumpToPdfCommand(sublime_plugin.TextCommand):
                 subl = linux_settings["sublime"] if "sublime" in linux_settings else "subl"
                 evince_is_running = "evince " + pdffile in str(tasks, encoding='utf8')
                 if bring_forward or not evince_is_running:
-                    args = ["python", "-c", evince_sync, "backward", pdffile, subl + " %f:%l"]
+                    args = ["python", "-c", evince_sync, "backward", pdffile, subl + " '%f:%l'"]
                     LatexPlusEvinceThread(args).start()
                     if not evince_is_running:
                         time.sleep(1)
