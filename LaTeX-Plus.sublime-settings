@@ -46,7 +46,7 @@
     "osx": {
         // envirnoment path
         // it is on by default since paths on mac are set by launchctl
-        "path": "/usr/texbin:/usr/local/bin:$PATH"
+        "path": "/Library/TeX/texbin/:/usr/texbin:/usr/local/bin:$PATH"
     },
 
     "windows": {
