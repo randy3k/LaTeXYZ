@@ -158,10 +158,13 @@ def find_bib_records(tex_root, by=None):
         sublime.status_message("No bib files found!")
         return
 
-    bibtextype = ['article', 'book', 'booklet', 'commented', 'conference', 'glossdef',
-                  'inbook', 'incollection', 'inproceedings', 'jurthesis',
-                  'manual', 'mastersthesis', 'misc', 'periodical', 'phdthesis',
-                  'proceedings', 'techreport', 'unpublished', 'url', 'electronic', 'webpage']
+    bibtextype = ["article", "book", "mvbook", "inbook", "bookinbook", "suppbook",
+                  "booklet", "collection", "mvcollection", "incollection",
+                  "suppcollection", "manual", "misc", "online", "patent",
+                  "periodical", "suppperiodical", "proceedings", "mvproceedings",
+                  "inproceedings", "reference", "mvreference", "inreference",
+                  "report", "set", "thesis", "unpublished", "conference",
+                  "electronic", "mastersthesis", "phdthesis", "techreport", "www"]
     keywordp = re.compile(r'^@(' + '|'.join(bibtextype) + r')\{(.*?)[\} ,"]*$', re.IGNORECASE)
     titlep = re.compile(r'\btitle\s*=\s*(?:\{+|")\s*(.*?)[\} ,"]*$', re.IGNORECASE)
     authorp = re.compile(r'\bauthor\s*=\s*(?:\{+|")\s*(.*?)[\} ,"]*$', re.IGNORECASE)
