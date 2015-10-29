@@ -169,6 +169,7 @@ def find_bib_records(tex_root, by=None):
     titlep = re.compile(r'\btitle\s*=\s*(?:\{+|")\s*(.*?)[\} ,"]*$', re.IGNORECASE)
     authorp = re.compile(r'\bauthor\s*=\s*(?:\{+|")\s*(.*?)[\} ,"]*$', re.IGNORECASE)
     yearp = re.compile(r'\byear\s*=\s*(?:\{+|")\s*(.*?)[\} ,"]*$', re.IGNORECASE)
+    publisherp = re.compile(r'\bpublisher\s*=\s*(?:\{+|")\s*(.*?)[\} ,"]*$', re.IGNORECASE)
 
     results = []
     for bibfname in bib_files:
@@ -188,7 +189,7 @@ def find_bib_records(tex_root, by=None):
         for i, line in enumerate(lines):
             j = line
             keyword = keywordp.search(bib[j-1]).group(2)
-            title = author = year = ""
+            title = author = year = publisher = ""
             while j < nextline[i]:
                 content = bib[j-1]
                 if not title:
@@ -203,9 +204,15 @@ def find_bib_records(tex_root, by=None):
                     y = yearp.search(content)
                     if y:
                         year = y.group(1)
+                if not publisher:
+                    p = publisherp.search(content)
+                    if p:
+                        publisher = p.group(1)
                 if title and author and year:
                     break
                 j += 1
+            if not author:
+                author = publisher
             results.append({'keyword': keyword, 'title': title, 'author': author,
                             'year': year, 'file': bibfname, 'line': line})
 
