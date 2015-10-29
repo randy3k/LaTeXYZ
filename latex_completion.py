@@ -121,8 +121,10 @@ class LatexPlusCompletionCommand(sublime_plugin.TextCommand):
             sublime.status_message("No bib record matches %s!" % (prefix,))
             return
 
-        display = [[r['author'] + " (" + r['year'] + "): " + r['title'],
-                    " (" + r['keyword'] + ") " + r['title']] for r in results]
+        display = [[r['author'] +
+                    (" (" + r['year'] + "): " if r['year'] else ": ") +
+                    r['title'], " (" + r['keyword'] + ") " + r['title']]
+                   for r in results]
         on_done = lambda i: self.replace(
             i,
             [r['keyword'] for r in results], braces, point - len(prefix), point
