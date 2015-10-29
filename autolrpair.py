@@ -20,7 +20,12 @@ class LatexPlusPairListener(sublime_plugin.EventListener):
             return (out == operand) if operator == 0 else not (out == operand)
         elif key == 'selection_in_curly_brackets':
             out = all([view.substr(sublime.Region(sel.begin()-2, sel.begin())) == '\\{' and
-                       view.substr(sublime.Region(sel.begin(), sel.begin()+2)) == '\\}'
+                       view.substr(sublime.Region(sel.end(), sel.end()+2)) == '\\}'
+                       for sel in view.sel()])
+            return (out == operand) if operator == 0 else not (out == operand)
+        elif key == 'selection_in_angles':
+            out = all([view.substr(sublime.Region(sel.begin()-7, sel.begin())) == '\\langle' and
+                       view.substr(sublime.Region(sel.end(), sel.end()+7)) == '\\rangle'
                        for sel in view.sel()])
             return (out == operand) if operator == 0 else not (out == operand)
 
@@ -39,3 +44,11 @@ class LatexPlusPairCommand(sublime_plugin.TextCommand):
         right = "\\right" + arg[1].replace('\\', '\\\\')
 
         view.run_command("insert_snippet", {"contents": left+"${1:$SELECTION}"+right})
+
+
+class LatexPlusRemoveAnglesCommand(sublime_plugin.TextCommand):
+    def run(self, edit):
+        view = self.view
+        sel = [(s.begin(), s.end()) for s in view.sel()]
+        for a, b in reversed(sel):
+            view.replace(edit, sublime.Region(a-7, a+7), "")

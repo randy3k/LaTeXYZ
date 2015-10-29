@@ -217,7 +217,7 @@
      // Auto-pair brackets \|
      { "keys": ["\\","|"], "command": "insert_snippet", "args": {"contents": "\\\\|$1\\\\|"}, "context":
          [
-             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+             { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
              { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
              { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
              { "key": "preceding_text", "operator": "not_regex_contains", "operand": "\\\\\\\\$", "match_all": true },
@@ -226,11 +226,30 @@
      },
      { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeX-Plus/macros/Delete Two Left Right.sublime-macro"}, "context":
          [
-             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+             { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
              { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
              { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
              { "key": "preceding_text", "operator": "regex_contains", "operand": "\\\\\\|$", "match_all": true },
              { "key": "following_text", "operator": "regex_contains", "operand": "^\\\\\\|", "match_all": true }
+         ]
+     },
+     // Auto-pair \langle \right
+     { "keys": ["\\","<"], "command": "insert_snippet", "args": {"contents": "\\langle$1\\rangle"}, "context":
+         [
+             { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+             { "key": "preceding_text", "operator": "not_regex_contains", "operand": "\\\\\\\\$", "match_all": true },
+             { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
+         ]
+     },
+     { "keys": ["backspace"], "command": "latex_plus_remove_angles", "context":
+         [
+             { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+             { "key": "preceding_text", "operator": "regex_contains", "operand": "\\\\langle$", "match_all": true },
+             { "key": "following_text", "operator": "regex_contains", "operand": "^\\\\rangle", "match_all": true }
          ]
      },
     // Auto-pair quotes `'
@@ -398,6 +417,13 @@
             { "key": "selection_in_curly_brackets", "operator": "equal", "operand": true}
         ]
     },
+    { "keys": ["<"], "command": "latex_plus_pair", "args": {"arg": ["\\langle", "\\rangle"]}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_in_angles", "operator": "equal", "operand": true}
+        ]
+    },
 
     // vim-latex like keymaps - general
     { "keys": ["_"], "command": "insert_snippet", "args": {"contents": "{$1}$0"}, "context":
@@ -442,6 +468,20 @@
     { "keys": ["`", "8"], "command": "insert_snippet", "args": {"contents": "\\infty"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
+        ]
+    },
+    { "keys": ["<"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeX-Plus/macros/Insert ll.sublime-macro"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "<$", "match_all": true }
+        ]
+    },
+    { "keys": [">"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeX-Plus/macros/Insert gg.sublime-macro"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": ">$", "match_all": true }
         ]
     },
 
