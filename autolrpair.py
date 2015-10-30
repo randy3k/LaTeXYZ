@@ -23,6 +23,11 @@ class LatexPlusPairListener(sublime_plugin.EventListener):
                        view.substr(sublime.Region(sel.end(), sel.end()+2)) == '\\}'
                        for sel in view.sel()])
             return (out == operand) if operator == 0 else not (out == operand)
+        elif key == 'selection_in_bars':
+            out = all([view.substr(sublime.Region(sel.begin()-2, sel.begin())) == '\\|' and
+                       view.substr(sublime.Region(sel.end(), sel.end()+2)) == '\\|'
+                       for sel in view.sel()])
+            return (out == operand) if operator == 0 else not (out == operand)
         elif key == 'selection_in_angles':
             out = all([view.substr(sublime.Region(sel.begin()-7, sel.begin())) == '\\langle' and
                        view.substr(sublime.Region(sel.end(), sel.end()+7)) == '\\rangle'
@@ -44,6 +49,28 @@ class LatexPlusPairCommand(sublime_plugin.TextCommand):
         right = "\\right" + arg[1].replace('\\', '\\\\')
 
         view.run_command("insert_snippet", {"contents": left+"${1:$SELECTION}"+right})
+
+
+class LatexPlusRemovePairCommand(sublime_plugin.TextCommand):
+    def run(self, edit):
+        view = self.view
+        sel = [(s.begin(), s.end()) for s in view.sel()]
+        for a, b in reversed(sel):
+            if view.substr(sublime.Region(a-6, a)) == '\\left(' and \
+                    view.substr(sublime.Region(a, a+7)) == '\\right)':
+                view.replace(edit, sublime.Region(a-6, a+7), "")
+            elif view.substr(sublime.Region(a-6, a)) == '\\left[' and \
+                    view.substr(sublime.Region(a, a+7)) == '\\right]':
+                view.replace(edit, sublime.Region(a-6, a+7), "")
+            elif view.substr(sublime.Region(a-7, a)) == '\\left\\{' and \
+                    view.substr(sublime.Region(a, a+8)) == '\\right\\}':
+                view.replace(edit, sublime.Region(a-7, a+8), "")
+            elif view.substr(sublime.Region(a-7, a)) == '\\left\\|' and \
+                    view.substr(sublime.Region(a, a+8)) == '\\right\\|':
+                view.replace(edit, sublime.Region(a-7, a+8), "")
+            elif view.substr(sublime.Region(a-12, a)) == '\\left\\langle' and \
+                    view.substr(sublime.Region(a, a+13)) == '\\right\\rangle':
+                view.replace(edit, sublime.Region(a-12, a+13), "")
 
 
 class LatexPlusRemoveAnglesCommand(sublime_plugin.TextCommand):

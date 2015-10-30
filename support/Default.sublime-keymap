@@ -417,12 +417,28 @@
             { "key": "selection_in_curly_brackets", "operator": "equal", "operand": true}
         ]
     },
+    { "keys": ["|"], "command": "latex_plus_pair", "args": {"arg": ["\\|", "\\|"]}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_in_bars", "operator": "equal", "operand": true}
+        ]
+    },
     { "keys": ["<"], "command": "latex_plus_pair", "args": {"arg": ["\\langle", "\\rangle"]}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
             { "key": "selection_in_angles", "operator": "equal", "operand": true}
         ]
+    },
+    { "keys": ["backspace"], "command": "latex_plus_remove_pair", "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "\\\\left(\\(|\\[|\\\\\\{|\\\\\\||\\\\langle)$", "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^\\\\right(\\)|\\]|\\\\\\}|\\\\\\||\\\\rangle)", "match_all": true }
+        ],
     },
 
     // vim-latex like keymaps - general
