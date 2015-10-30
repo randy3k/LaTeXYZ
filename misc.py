@@ -77,33 +77,14 @@ def get_tex_root(view):
 
 
 # List a directory using quick panel
-def listdir(view, dir, base, ext, on_done):
-    if not os.path.isdir(dir):
-        sublime.status_message("Directory %s does not exist." % dir)
-        return
-    ls = os.listdir(dir)
-    if ext:
-        fnames = [f for f in ls if os.path.splitext(f)[1].lower() in ext]
-    else:
-        fnames = [f for f in ls if os.path.isfile(os.path.join(dir, f))]
-    if base:
-        fnames = [f for f in fnames if base.lower() in f.lower()]
-
-    display = [os.curdir, os.pardir] + \
-        ["> "+f for f in ls if os.path.isdir(os.path.join(dir, f))] + fnames
-
-    def on_action(i):
-        if i < 0:
-            return
-        elif i < 2 or display[i][0] == '>':
-            target = display[i][2:] if display[i][0] == '>' else display[i]
-            target_dir = os.path.normpath(os.path.join(dir, target))
-            sublime.set_timeout(lambda: listdir(view, target_dir, base, ext, on_done), 1)
-        else:
-            targer = os.path.normpath(os.path.join(dir, display[i]))
-            on_done(targer)
-
-    sublime.set_timeout(lambda: view.window().show_quick_panel(display, on_action), 100)
+def listdir(dir, base, ext):
+    ret = []
+    for (d, _, files) in os.walk(dir):
+        for f in files:
+            if not ext or os.path.splitext(f)[1].lower() in ext:
+                if not base or base.lower() in f.lower():
+                    ret.append(os.path.normpath(os.path.join(d, f)))
+    return ret
 
 
 # search for pattern in the tex files

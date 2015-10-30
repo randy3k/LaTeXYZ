@@ -70,12 +70,10 @@ class LatexPlusCompletionCommand(sublime_plugin.TextCommand):
 
         sublime.status_message("Nothing to be auto completed.")
 
-    def replace(self, i, completions, braces, a, b):
-        if i < 0:
-            return
+    def replace(self, content, braces, a, b):
         open_brace = "" if braces else "{"
         close_brace = "" if braces else "}"
-        rept = open_brace + completions[i] + close_brace
+        rept = open_brace + content + close_brace
         self.view.run_command("latex_plus_replace", {"a": a, "b": b, "replacement": rept})
 
     def dispatch_ref(self, m, point):
@@ -98,8 +96,12 @@ class LatexPlusCompletionCommand(sublime_plugin.TextCommand):
 
         display = [[r['result'],
                     os.path.relpath(r['file'], tex_dir)+":"+str(r['line'])] for r in results]
-        on_done = lambda i: \
-            self.replace(i, [r['result'] for r in results], braces, point - len(prefix), point)
+
+        def on_done(action):
+            if action < 0:
+                return
+            self.replace(display[action][0], braces, point - len(prefix), point)
+
         view.window().show_quick_panel(display, on_done)
 
     def dispatch_cite(self, m, point):
@@ -125,10 +127,13 @@ class LatexPlusCompletionCommand(sublime_plugin.TextCommand):
                     (" (" + r['year'] + "): " if r['year'] else ": ") +
                     r['title'], " (" + r['keyword'] + ") " + r['title']]
                    for r in results]
-        on_done = lambda i: self.replace(
-            i,
-            [r['keyword'] for r in results], braces, point - len(prefix), point
-        )
+
+        def on_done(action):
+            if action < 0:
+                return
+            self.replace([r['keyword'] for r in results][action],
+                         braces, point - len(prefix), point)
+
         view.window().show_quick_panel(display, on_done)
 
     def dispatch_label(self, m, point):
@@ -145,18 +150,24 @@ class LatexPlusCompletionCommand(sublime_plugin.TextCommand):
             prefix = ""
         dir = os.path.join(tex_dir, os.path.dirname(prefix))
         base = os.path.basename(prefix)
+        results = listdir(dir, base, ext)
 
-        def on_done(target):
-            fpath = os.path.relpath(target, tex_dir)
-            dirname = os.path.dirname(fpath)
-            fname, ext = os.path.splitext(os.path.basename(fpath))
+        def on_done(action):
+            if action < 0:
+                return
+            target = os.path.relpath(results[action], tex_dir)
+            dirname = os.path.dirname(target)
+            fname, ext = os.path.splitext(os.path.basename(target))
             if "." in fname:
                 out = os.path.join(dirname, "{" + fname + "}" + ext).replace(os.sep, '/')
             else:
                 out = os.path.join(dirname, fname).replace(os.sep, '/')
-            self.replace(0, [out], braces, point - len(prefix), point)
+            self.replace(out, braces, point - len(prefix), point)
 
-        listdir(view, dir, base, ext, on_done)
+        if results:
+            view.window().show_quick_panel([os.path.relpath(d, dir) for d in results], on_done)
+        else:
+            sublime.status_message("No matching files found.")
 
     def dispatch_closeenv(self, point):
         print("dispatching close env")
