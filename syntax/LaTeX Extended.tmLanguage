@@ -17,30 +17,25 @@
 	<key>patterns</key>
 	<array>
 		<dict>
+			<key>begin</key>
+			<string>%</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>comment.line.percentage.latex</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>$</string>
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>begin</key>
-					<string>%</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>0</key>
-						<dict>
-							<key>name</key>
-							<string>comment.latex</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>$</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>match</key>
-							<string>[^$]+</string>
-							<key>name</key>
-							<string>comment.latex</string>
-						</dict>
-					</array>
+					<key>match</key>
+					<string>[^$]+</string>
+					<key>name</key>
+					<string>comment.line.latex</string>
 				</dict>
 			</array>
 		</dict>
@@ -53,6 +48,29 @@
 		<dict>
 			<key>include</key>
 			<string>#special</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(\\(?:documentclass|usepackage))\s*(?:\[([^\]]*)\])?\{</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.latex</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.preamble.latex</string>
+			<key>end</key>
+			<string>}</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#option</string>
+				</dict>
+			</array>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -98,7 +116,7 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>variable.parameter.latex</string>
+					<string>variable.parameter.function.latex</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -113,11 +131,11 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>variable.parameter.latex</string>
+					<string>variable.parameter.function.latex</string>
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.definition.math.latex</string>
+			<string>meta.function.math.latex</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -148,13 +166,9 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.definition.math.latex</string>
+			<string>meta.function.math.latex</string>
 			<key>patterns</key>
 			<array>
-				<dict>
-					<key>include</key>
-					<string>#special</string>
-				</dict>
 				<dict>
 					<key>include</key>
 					<string>#math</string>
@@ -183,7 +197,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.definition.math.latex</string>
+			<string>meta.function.math.latex</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -214,7 +228,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.definition.math.latex</string>
+			<string>meta.function.math.latex</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -236,7 +250,7 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>variable.parameter.latex</string>
+					<string>variable.parameter.function.latex</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -251,11 +265,11 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>variable.parameter.latex</string>
+					<string>variable.parameter.function.latex</string>
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.definition.list.latex</string>
+			<string>meta.function.environment.list.latex</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -277,7 +291,7 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>variable.parameter.latex</string>
+					<string>variable.parameter.function.latex</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -292,11 +306,11 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>variable.parameter.latex</string>
+					<string>variable.parameter.function.latex</string>
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.definition.description.latex</string>
+			<string>meta.function.environment.description.latex</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -318,7 +332,7 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>variable.parameter.latex</string>
+					<string>variable.parameter.function.latex</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -333,11 +347,11 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>variable.parameter.latex</string>
+					<string>variable.parameter.function.latex</string>
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.definition.verbatim.latex</string>
+			<string>meta.function.verbatim.latex</string>
 		</dict>
 		<dict>
 			<key>captures</key>
@@ -351,80 +365,54 @@
 			<key>match</key>
 			<string>(\\verb)(\W)(.*?)\2</string>
 			<key>name</key>
-			<string>meta.definition.verbatim.latex</string>
+			<string>meta.function.verbatim.latex</string>
 		</dict>
 		<dict>
+			<key>begin</key>
+			<string>\\((?:sub)*(?:section|chapter))(\*)?\{</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>\}</string>
+			<key>name</key>
+			<string>meta.function.section.latex</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#ref</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#label</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#beginend</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#section</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#command</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#braces</string>
+					<string>$self</string>
 				</dict>
 			</array>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#label</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#reference</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#beginend</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#command</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#braces</string>
 		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
-		<key>beginend</key>
-		<dict>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>captures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>support.function.latex</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>variable.parameter.latex</string>
-						</dict>
-					</dict>
-					<key>match</key>
-					<string>(\\begin)\{\s*(\w*)\*?\s*\}</string>
-				</dict>
-				<dict>
-					<key>captures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>support.function.latex</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>variable.parameter.latex</string>
-						</dict>
-					</dict>
-					<key>match</key>
-					<string>(\\end)\{\s*(\w*)\*?\s*\}</string>
-				</dict>
-			</array>
-		</dict>
 		<key>label</key>
 		<dict>
 			<key>patterns</key>
@@ -443,7 +431,7 @@
 					<key>end</key>
 					<string>}</string>
 					<key>name</key>
-					<string>meta.definition.label.latex</string>
+					<string>meta.function.label.latex</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -453,6 +441,79 @@
 							<string>constant.other.latex</string>
 						</dict>
 					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>reference</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>(\\(?:(?:eq|page)?ref|cite\w*\*?))(\[.*?\]){0,2}{</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.latex</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>}</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>[^\s,}]+</string>
+							<key>name</key>
+							<string>constant.other.latex</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>$self</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>beginend</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.latex</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>variable.parameter.function.latex</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>(\\begin)\{\s*(\w*)\*?\s*\}</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.latex</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>variable.parameter.function.latex</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>(\\end)\{\s*(\w*)\*?\s*\}</string>
 				</dict>
 			</array>
 		</dict>
@@ -493,16 +554,29 @@
 				</dict>
 			</array>
 		</dict>
-		<key>special</key>
+		<key>braces</key>
 		<dict>
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>match</key>
-					<string>\\(%|\$|#|&amp;|\{|\})</string>
-					<key>name</key>
-					<string>variable.other.latex</string>
+					<key>begin</key>
+					<string>\{</string>
+					<key>end</key>
+					<string>\}</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>$self</string>
+						</dict>
+					</array>
 				</dict>
+			</array>
+		</dict>
+		<key>special</key>
+		<dict>
+			<key>patterns</key>
+			<array>
 				<dict>
 					<key>captures</key>
 					<dict>
@@ -525,24 +599,11 @@
 					<key>match</key>
 					<string>(\\\\)(?:\[\s*([0-9]*)\s*(\w*)\s*\])?</string>
 				</dict>
-			</array>
-		</dict>
-		<key>braces</key>
-		<dict>
-			<key>patterns</key>
-			<array>
 				<dict>
-					<key>begin</key>
-					<string>\{</string>
-					<key>end</key>
-					<string>\}</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>$self</string>
-						</dict>
-					</array>
+					<key>match</key>
+					<string>\\(%|\$|#|&amp;|\{|\})</string>
+					<key>name</key>
+					<string>variable.other.latex</string>
 				</dict>
 			</array>
 		</dict>
@@ -606,7 +667,15 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#reference</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#beginend</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#special</string>
 				</dict>
 				<dict>
 					<key>match</key>
@@ -616,15 +685,17 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\+|\-|=|-|\*|/|\^|_|&lt;|&gt;|\\\{|\\\}|\[|\]|\(|\)</string>
-					<key>name</key>
-					<string></string>
+					<string>\+|\-|=|-|\*|/|\^|_|&lt;|&gt;</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\\\{|\\\}|\[|\]|\(|\)</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>[a-zA-Z]+</string>
 					<key>name</key>
-					<string>keyword.other</string>
+					<string>keyword.other.latex</string>
 				</dict>
 				<dict>
 					<key>match</key>
@@ -634,74 +705,12 @@
 				</dict>
 			</array>
 		</dict>
-		<key>ref</key>
-		<dict>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>begin</key>
-					<string>(\\(?:(?:eq|page)?ref|cite\w*\*?))(\[.*?\]){0,2}{</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>support.function.latex</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>}</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>match</key>
-							<string>[^\s,}]+</string>
-							<key>name</key>
-							<string>constant.other.latex</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>$self</string>
-						</dict>
-					</array>
-				</dict>
-			</array>
-		</dict>
-		<key>section</key>
-		<dict>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>begin</key>
-					<string>\\((?:sub)*(?:section|chapter))(\*)?\{</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>entity.name.function</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>\}</string>
-					<key>name</key>
-					<string>meta.definition.section.latex</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>$self</string>
-						</dict>
-					</array>
-				</dict>
-			</array>
-		</dict>
 		<key>command</key>
 		<dict>
 			<key>match</key>
 			<string>\\[a-zA-Z]+(?:\s|\n?)?</string>
 			<key>name</key>
-			<string>support.function.latex</string>
+			<string>support.function.general.latex</string>
 		</dict>
 	</dict>
 	<key>scopeName</key>

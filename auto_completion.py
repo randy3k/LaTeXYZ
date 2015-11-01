@@ -136,7 +136,7 @@ class LatexPlusAutoCompletions(sublime_plugin.EventListener):
             return None
 
         r = general
-        if view.match_selector(locations[0], "meta.definition.math.latex"):
+        if view.match_selector(locations[0], "meta.function.math.latex"):
             r = r + maths
 
         r = r + [(item, ) for item in view.extract_completions("\\"+prefix)

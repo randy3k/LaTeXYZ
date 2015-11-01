@@ -5,7 +5,7 @@
 	<key>name</key>
 	<string>Symbol List</string>
 	<key>scope</key>
-	<string>meta.definition.label.latex</string>
+	<string>meta.function.label.latex</string>
 	<key>settings</key>
 	<dict>
 		<key>showInSymbolList</key>

@@ -8,6 +8,8 @@
         }
     ],
 
+    "spelling_selector": "-(constant, keyword, storage, support, variable, meta.preamble.latex)",
+
     "word_separators": "_./\\()\"'-:,.;<>~!@#$%^&*|+=[]{}`~?",
 
     "extensions": ["tex"]

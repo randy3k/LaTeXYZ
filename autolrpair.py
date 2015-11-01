@@ -8,7 +8,7 @@ class LatexPlusPairListener(sublime_plugin.EventListener):
         if view.is_scratch() or view.settings().get('is_widget'):
             return
         if not view.score_selector(view.sel()[0].end() if len(view.sel()) > 0 else 0,
-                                   "meta.definition.math.latex"):
+                                   "meta.function.math.latex"):
             return
         if key == 'selection_in_brackets':
             out = all([view.substr(sel.begin()-1) == '(' and
@@ -71,11 +71,3 @@ class LatexPlusRemovePairCommand(sublime_plugin.TextCommand):
             elif view.substr(sublime.Region(a-12, a)) == '\\left\\langle' and \
                     view.substr(sublime.Region(a, a+13)) == '\\right\\rangle':
                 view.replace(edit, sublime.Region(a-12, a+13), "")
-
-
-class LatexPlusRemoveAnglesCommand(sublime_plugin.TextCommand):
-    def run(self, edit):
-        view = self.view
-        sel = [(s.begin(), s.end()) for s in view.sel()]
-        for a, b in reversed(sel):
-            view.replace(edit, sublime.Region(a-7, a+7), "")
