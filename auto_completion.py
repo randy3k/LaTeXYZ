@@ -107,7 +107,8 @@ general = [
     ("\\textit{}", "textit{$1}"),
 
     ("\\bibliographystyle{}", "bibliographystyle{$1}"),
-    ("\\bibliography{}", "bibliography{$1}")
+    ("\\bibliography{}", "bibliography{$1}"),
+    ("\\addbibresource", "addbibresource{$1}")
 ]
 
 
