@@ -1,4 +1,0 @@
-[
-	{"command": "left_delete"},
-	{"command": "insert_snippet", "args": {"contents": "\\ll"}}
-]

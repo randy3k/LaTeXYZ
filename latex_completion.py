@@ -5,6 +5,15 @@ import re
 from . misc import *
 
 
+# sublime wrapper for insert
+class LatexPlusInsertCommand(sublime_plugin.TextCommand):
+    def run(self, edit, content, before=0, after=0):
+        sel = [(s.begin(), s.end()) for s in self.view.sel()]
+        for (a, b) in reversed(sel):
+            region = sublime.Region(a-before, b+after)
+            self.view.replace(edit, region, content)
+
+
 # sublime wrapper for replacement
 class LatexPlusReplaceCommand(sublime_plugin.TextCommand):
     def run(self, edit, a, b, replacement):

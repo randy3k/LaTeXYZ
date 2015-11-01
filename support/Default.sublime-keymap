@@ -486,18 +486,102 @@
             { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" }
         ]
     },
-    { "keys": ["<"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeX-Plus/macros/Insert ll.sublime-macro"}, "context":
+    { "keys": ["<"], "command": "latex_plus_insert", "args": {"content": "\\ll", "before": 1, "after": 0}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "preceding_text", "operator": "regex_contains", "operand": "<$", "match_all": true }
         ]
     },
-    { "keys": [">"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeX-Plus/macros/Insert gg.sublime-macro"}, "context":
+    { "keys": [">"], "command": "latex_plus_insert", "args": {"content": "\\gg", "before": 1, "after": 0}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "preceding_text", "operator": "regex_contains", "operand": ">$", "match_all": true }
+        ]
+    },
+    { "keys": [" "], "command": "latex_plus_insert", "args": {"content": "\\leftarrow ", "before": 2, "after": 0}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "<-$", "match_all": true }
+        ]
+    },
+    { "keys": [" "], "command": "latex_plus_insert", "args": {"content": "\\rightarrow ", "before": 2, "after": 0}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "->$", "match_all": true }
+        ]
+    },
+    { "keys": [" "], "command": "latex_plus_insert", "args": {"content": "\\leftrightarrow ", "before": 3, "after": 0}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "<=>$", "match_all": true }
+        ]
+    },
+    { "keys": [" "], "command": "latex_plus_insert", "args": {"content": "\\Leftarrow ", "before": 2, "after": 0}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "<=$", "match_all": true }
+        ]
+    },
+    { "keys": [" "], "command": "latex_plus_insert", "args": {"content": "\\Rightarrow ", "before": 2, "after": 0}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "=>$", "match_all": true }
+        ]
+    },
+    { "keys": [" "], "command": "latex_plus_insert", "args": {"content": "\\Leftrightarrow ", "before": 3, "after": 0}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "<=>$", "match_all": true }
+        ]
+    },
+    { "keys": [" "], "command": "latex_plus_insert", "args": {"content": "\\longleftarrow ", "before": 3, "after": 0}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "<--$", "match_all": true }
+        ]
+    },
+    { "keys": [" "], "command": "latex_plus_insert", "args": {"content": "\\longrightarrow ", "before": 3, "after": 0}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "-->$", "match_all": true }
+        ]
+    },
+    { "keys": [" "], "command": "latex_plus_insert", "args": {"content": "\\longleftrightarrow ", "before": 3, "after": 0}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "<==$", "match_all": true }
+        ]
+    },
+    { "keys": [" "], "command": "latex_plus_insert", "args": {"content": "\\Longleftarrow ", "before": 3, "after": 0}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "<==$", "match_all": true }
+        ]
+    },
+    { "keys": [" "], "command": "latex_plus_insert", "args": {"content": "\\Longrightarrow ", "before": 3, "after": 0}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "==>$", "match_all": true }
+        ]
+    },
+    { "keys": [" "], "command": "latex_plus_insert", "args": {"content": "\\Longleftrightarrow ", "before": 4, "after": 0}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.definition.math.latex" },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "<==>$", "match_all": true }
         ]
     },
 
