@@ -10,9 +10,10 @@ If you like it, you could send me some tips via [paypal](https://www.paypal.com/
 ### Features
 * OSX, Windows and Linux support
 * Automatic process of generating a LaTeX document by using `latexmk`
-* AutoCompletion for \ref, \cite, \include, \input, \includegrpahics etc...
+* AutoCompletion for `\ref`, `\cite`, `\include`, `\input`, `\includegrpahics` etc...
+* Keybinds for mathematics symbols, e.g. `` `a `` types `\alpha`.
 * Backward and forward sync of different PDF viewers
-* Automatch for (), [], {}, &#92;(&#92;), &#92;[&#92;], &#92;{&#92;}, \left\right pairs, $$ and quotation marks.
+* Automatch for `()`, `[]`, `{}`, `\(\)`, `\(\)`, `\{\}`, `\left` - `\right` pairs, `$$` and quotation marks.
 * Multi files project support
 * Comprehensive LaTeX syntax, particularly, correctly handle `\newcommand{\bg}{\begin{align}}`
 * More…
