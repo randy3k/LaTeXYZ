@@ -1,0 +1,1 @@
+The syntax file has been renamed from LaTeX-Extended to LaTeX+.

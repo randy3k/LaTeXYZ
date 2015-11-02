@@ -5,6 +5,8 @@
 	<key>fileTypes</key>
 	<array>
 		<string>tex</string>
+		<string>sty</string>
+		<string>cls</string>
 	</array>
 	<key>foldingStartMarker</key>
 	<string>\\begin\{.*\}|%.*\(fold\)\s*$</string>
@@ -13,7 +15,7 @@
 	<key>keyEquivalent</key>
 	<string>^~L</string>
 	<key>name</key>
-	<string>LaTeX Extended</string>
+	<string>LaTeX+</string>
 	<key>patterns</key>
 	<array>
 		<dict>
