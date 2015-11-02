@@ -236,7 +236,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(\\begin)\{\s*((?:itemize|enumerate)\*?)\s*\}</string>
+			<string>(\\begin)\{\s*((?:itemize|enumerate|list)\*?)\s*\}</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -307,7 +307,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.function.environment.description.latex</string>
+			<string>meta.function.environment.list.latex meta.function.environment.description.latex</string>
 			<key>patterns</key>
 			<array>
 				<dict>

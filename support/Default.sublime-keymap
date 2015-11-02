@@ -14,17 +14,17 @@
         ]
     },
 
-    // automatic addition of new \items[] when hitting Shift+Enter in a description environment
-    { "keys": ["shift+enter"], "command": "insert_snippet", "args": {"contents": "\n\\item[$1] $0"}, "context":
-        [
-            { "key": "selector", "operator": "equal", "operand": "meta.function.environment.description.latex" }
-        ]
-    },
-
     // automatic addition of new \items when hitting Shift+Enter in a list environment
     { "keys": ["shift+enter"], "command": "insert_snippet", "args": {"contents": "\n\\item $0"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "meta.function.environment.list.latex" }
+        ]
+    },
+
+    // automatic addition of new \items[] when hitting Shift+Enter in a description environment
+    { "keys": ["shift+enter"], "command": "insert_snippet", "args": {"contents": "\n\\item[$1] $0"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "meta.function.environment.description.latex" }
         ]
     },
 
