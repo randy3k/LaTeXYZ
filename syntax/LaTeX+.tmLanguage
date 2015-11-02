@@ -134,7 +134,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.function.math.latex</string>
+			<string>meta.function.environment.math.latex</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -165,7 +165,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.function.math.latex</string>
+			<string>meta.function.environment.math.latex</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -196,7 +196,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.function.math.latex</string>
+			<string>meta.function.environment.math.latex</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -227,7 +227,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.function.math.latex</string>
+			<string>meta.function.environment.math.latex</string>
 			<key>patterns</key>
 			<array>
 				<dict>
