@@ -8,7 +8,7 @@ class LatexPlusPairListener(sublime_plugin.EventListener):
         if view.is_scratch() or view.settings().get('is_widget'):
             return
         if not view.score_selector(view.sel()[0].end() if len(view.sel()) > 0 else 0,
-                                   "meta.function.math.latex"):
+                                   "meta.function.environment.math.latex"):
             return
         if key == 'selection_in_brackets':
             out = all([view.substr(sel.begin()-1) == '(' and

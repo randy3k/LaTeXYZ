@@ -12,7 +12,7 @@
     { "keys": ["'"], "command": "insert_snippet", "args": {"contents": "'$0"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
-            { "key": "selector", "operator": "equal", "operand": "meta.function.math.latex" },
+            { "key": "selector", "operator": "equal", "operand": "meta.function.environment.math.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true }
         ]
@@ -30,7 +30,7 @@
     { "keys": ["\""], "command": "insert_snippet", "args": {"contents": "\"$0"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
-            { "key": "selector", "operator": "equal", "operand": "meta.function.math.latex" },
+            { "key": "selector", "operator": "equal", "operand": "meta.function.environment.math.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true }
         ]
