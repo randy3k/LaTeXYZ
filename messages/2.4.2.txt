@@ -1,4 +1,4 @@
+The syntax file has been renamed from LaTeX-Extended to LaTeX+. Make sure the corrected syntax is selected.
+
 Math environments have renamed from 'meta.definition.math.latex' to 'meta.function.environment.math.latex'.
 If you are using [BracketHighlighter](https://github.com/facelessuser/BracketHighlighter), please visit [LaTeX-Plus Documentation](https://github.com/randy3k/Latex-Plus/wiki/BracketHighlighter-settings) to update.
-
-The syntax file has been renamed from LaTeX-Extended to LaTeX+.
