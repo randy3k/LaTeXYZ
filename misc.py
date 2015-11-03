@@ -7,6 +7,24 @@ import subprocess
 from .latex_unicode_map import latex_unicode_map
 
 
+# sublime wrapper for insert
+class LatexPlusInsertCommand(sublime_plugin.TextCommand):
+    def run(self, edit, content, before=0, after=0):
+        sel = [(s.begin(), s.end()) for s in self.view.sel()]
+        for (a, b) in reversed(sel):
+            region = sublime.Region(a-before, b+after)
+            self.view.replace(edit, region, content)
+
+
+# sublime wrapper for replacement
+class LatexPlusReplaceCommand(sublime_plugin.TextCommand):
+    def run(self, edit, a, b, replacement):
+        region = sublime.Region(a, b)
+        self.view.replace(edit, region, replacement)
+        self.view.sel().clear()
+        self.view.sel().add(a+len(replacement))
+
+
 def check_program(args, env):
     try:
         if sys.platform == "win32":

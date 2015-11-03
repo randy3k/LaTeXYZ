@@ -5,24 +5,6 @@ import re
 from . misc import *
 
 
-# sublime wrapper for insert
-class LatexPlusInsertCommand(sublime_plugin.TextCommand):
-    def run(self, edit, content, before=0, after=0):
-        sel = [(s.begin(), s.end()) for s in self.view.sel()]
-        for (a, b) in reversed(sel):
-            region = sublime.Region(a-before, b+after)
-            self.view.replace(edit, region, content)
-
-
-# sublime wrapper for replacement
-class LatexPlusReplaceCommand(sublime_plugin.TextCommand):
-    def run(self, edit, a, b, replacement):
-        region = sublime.Region(a, b)
-        self.view.replace(edit, region, replacement)
-        self.view.sel().clear()
-        self.view.sel().add(a+len(replacement))
-
-
 class LatexPlusCompletionCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         view = self.view
@@ -186,10 +168,10 @@ class LatexPlusCompletionCommand(sublime_plugin.TextCommand):
         while 1:
             r = view.find(r'\\(begin|end)\{[^\}]+\}', pt)
             pt = r.end()
+            if pt == -1 or pt >= point:
+                break
             if view.scope_name(pt-1).find("comment") >= 0:
                 continue
-            if pt >= point:
-                break
             thisenv = re.match(r'\\(begin|end)\{([^\}]+)\}', view.substr(r)).groups()
             if thisenv[0] == 'begin':
                 env.append(thisenv)

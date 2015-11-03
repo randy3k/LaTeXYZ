@@ -16,7 +16,7 @@ def cleantex(texfile):
 
 def cleantexdir(texdir):
     settings = sublime.load_settings('LaTeX-Plus.sublime-settings')
-    ext = settings.get("clean_ext_force")
+    ext = settings.get("clean_ext") + settings.get("clean_ext_force")
     ls = os.listdir(texdir)
     rexp = "(" + '|'.join(['\\'+e for e in ext]) + ")$"
     fnames = [os.path.join(texdir, f) for f in ls if re.search(rexp, f)]

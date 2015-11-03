@@ -39,8 +39,7 @@
     ],
 
     "clean_ext_force" :[
-            ".aux", ".dvi", ".lis", ".log", ".blg", ".bbl", ".toc", ".idx", ".ind",
-            ".ilg", ".thm", ".out", ".fdb_latexmk", ".fls", ".nav", ".snm", ".synctex.gz"
+            ".synctex.gz"
     ],
 
     "osx": {
