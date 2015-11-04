@@ -15,7 +15,7 @@ If you like it, you could send me some tips via [paypal](https://www.paypal.com/
 * Backward and forward sync of different PDF viewers
 * Automatch for `()`, `[]`, `{}`, `\(\)`, `\(\)`, `\{\}`, `\left` - `\right` pairs, `$$` and quotation marks.
 * Multi files project support
-* Comprehensive LaTeX syntax: [LaTeX-Plus-Syntax](https://github.com/randy3k/LaTeX-Plus-Syntax).
+* Comprehensive LaTeX syntax: [LaTeX-Plus Syntax](https://github.com/randy3k/LaTeX-Plus/tree/master/syntax).
 * More…
 
 ###Wiki
