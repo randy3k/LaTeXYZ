@@ -5,7 +5,7 @@
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
-            { "key": "preceding_text", "operator": "regex_contains", "operand": "\\$|\\.$", "match_all": true }
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "(\\$|\\.)$", "match_all": true }
         ]
     },
     // do not auto-complete in math mode
@@ -23,7 +23,7 @@
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
-            { "key": "preceding_text", "operator": "regex_contains", "operand": "\\$|\\.$", "match_all": true }
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "(\\$|\\.)$", "match_all": true }
         ]
     },
     // do not auto-complete in math mode
