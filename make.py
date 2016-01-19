@@ -144,7 +144,10 @@ class LatexPlusBuildCommand(sublime_plugin.WindowCommand):
         def cleanfile(f):
             if sublime.platform() == "windows":
                 f = re.sub("^\"", "", f.replace("/", "\\"))
-            return os.path.normpath(os.path.relpath(f))
+            if not os.path.isabs(f):
+                return os.path.normpath(os.path.relpath(f))
+            else:
+                return f
 
         for d in D:
             out = (cleanfile(d['file']), int(d['line'])
