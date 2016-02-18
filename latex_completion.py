@@ -14,14 +14,14 @@ class LatexPlusCompletionCommand(sublime_plugin.TextCommand):
         contentb = view.substr(sublime.Region(view.line(point).begin(), point))
         content = view.substr(view.line(point))
 
-        m = re.match(r".*\\(?:eq|page|[cC]|auto)*ref(\{([a-zA-Z0-9_:-]*))?$", contentb)
+        m = re.match(r".*\\\w*[Rr]ef\*?(\{([a-zA-Z0-9_:-]*))?$", contentb)
         if m:
             self.dispatch_ref(m, point)
             return
 
         m = re.match(
             r"""
-            .*\\cite(?:[a-zA-Z_*]*)
+            .*\\[Cc]ite\w*\*?
             (?:\[[^\]]*\])*
             (\{(?:[a-zA-Z0-9_:-]*\s*,\s*)*([a-zA-Z0-9_:-]*))?
             $
