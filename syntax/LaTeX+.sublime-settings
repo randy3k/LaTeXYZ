@@ -8,7 +8,7 @@
         }
     ],
 
-    "spelling_selector": "-(comment, constant, keyword, storage, support, variable, meta.preamble.latex, meta.include.latex, meta.citation.latex, meta.reference.label.latex, meta.definition.label.latex)",
+    "spelling_selector": "-(comment, source, constant, keyword, storage, support, variable, markup.underline.link, meta.tag, meta.preamble.latex, meta.include.latex, meta.citation.latex, meta.reference.label.latex, meta.definition.label.latex)",
 
     "word_separators": "_./\\()\"'-:,.;<>~!@#$%^&*|+=[]{}`~?",
 
