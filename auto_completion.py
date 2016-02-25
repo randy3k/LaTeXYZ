@@ -112,10 +112,6 @@ general = [
 ]
 
 
-def valid(str):
-    return re.match('^[\w._\\\\]+$', str) is not None
-
-
 def is_duplicated(x, r):
     for item in r:
         m = re.match(r"\\\w+", item[0])
@@ -139,6 +135,8 @@ class LatexPlusAutoCompletions(sublime_plugin.EventListener):
         if view.match_selector(locations[0], "meta.function.environment.math.latex"):
             r = r + maths
 
-        r = r + [(item, ) for item in view.extract_completions("\\"+prefix)
-                 if len(item) >= 3 and valid(item) and not is_duplicated(item, r)]
+        extract_completions = list(set(
+            [view.substr(s) for s in view.find_all(r"\\%s\w+\*?" % prefix) if s.size() > 3]
+        ))
+        r = r + [(item, ) for item in extract_completions if not is_duplicated(item, r)]
         return list(set(r))
