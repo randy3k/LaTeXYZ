@@ -95,7 +95,7 @@ contexts:
         (?:(\[)(?:[^\]]*)(\]))?
         (\{)
       captures:
-        1: storage.type.function.latex
+        1: support.function.newcommand.latex
         2: punctuation.definition.function.latex
         3: punctuation.definition.arguments.begin.latex
         4: support.function.latex
