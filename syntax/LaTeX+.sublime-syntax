@@ -16,7 +16,7 @@ contexts:
       scope: comment.line.percentage.latex
     - match: '&'
       scope: constant.character.ampersand.latex
-    - match: '((\\)[^a-zA-Z@\s\\])'
+    - match: '((\\)[^a-zA-Z@\s\\\(\)\[\]])'
       scope: constant.character.escape.latex
     - match: '(\\\\)(?:(\[)\s*([0-9]*)\s*(\w*)\s*(\]))?'
       captures:
