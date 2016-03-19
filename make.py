@@ -5,7 +5,7 @@ import threading
 import time
 import subprocess
 import re
-from . misc import *
+from . misc import check_program, get_tex_root
 from . import parser
 
 
@@ -109,7 +109,8 @@ class LatexPlusBuildCommand(sublime_plugin.WindowCommand):
         status = status % 14
         before = min(status, 14-status)
         after = 7 - before
-        self.window.active_view().set_status("Latex-Plus",
+        self.window.active_view().set_status(
+            "Latex-Plus",
             "Compiling [%s=%s]" % (" " * before, " " * after))
         if self.thread and self.thread.isAlive():
             sublime.set_timeout(lambda: self.status_updater(status+1), 100)
@@ -185,7 +186,8 @@ class LatexPlusBuildCommand(sublime_plugin.WindowCommand):
         if returncode == 0 and not errors and self.settings.get("view_on_success", True):
             forward_sync = self.settings.get("forward_sync_on_success", True)
             bring_forward = self.settings.get("bring_forward_on_success", False)
-            self.window.active_view().run_command("latex_plus_jump_to_pdf",
+            self.window.active_view().run_command(
+                "latex_plus_jump_to_pdf",
                 {"bring_forward": bring_forward, "forward_sync": forward_sync})
 
 
