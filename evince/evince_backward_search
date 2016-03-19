@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2010 Jose Aliste
-#               2011 Benjamin Kellermann
-#               2016 Randy Lai
+# Copyright (C) 2010 Jose Aliste <jose.aliste@gmail.com>
+#               2011 Benjamin Kellermann <Benjamin.Kellermann@tu-dresden.de>
+#               2016 Randy Lai <randy.cs.lai@gmail.com>
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public Licence as published by the Free Software
@@ -19,21 +19,20 @@
 # this program; if not, write to the Free Software Foundation, Inc., 51 Franklin
 # Street, Fifth Floor, Boston, MA  02110-1301, USA
 
-import dbus, dbus.mainloop.glib
-import argparse
 import os.path
 import traceback
 import sys
 import subprocess
-import time
 import re
-import gobject
-import threading
 
 if sys.version_info >= (3, 0, 0):
-    from urllib.parse import quote, unquote
+    from urllib.parse import unquote
 else:
-    from urllib import quote, unquote
+    from urllib import unquote
+
+
+EV_BINARY = 'evince'
+
 
 class EvinceWindowProxy:
     """A Dbus proxy for an Evince Window."""
@@ -64,10 +63,12 @@ class EvinceWindowProxy:
                 EvinceWindowProxy.bus = dbus.SessionBus()
 
             if EvinceWindowProxy.daemon is None:
-                EvinceWindowProxy.daemon = EvinceWindowProxy.bus.get_object(self.EV_DAEMON_NAME,
+                EvinceWindowProxy.daemon = EvinceWindowProxy.bus.get_object(
+                    self.EV_DAEMON_NAME,
                     self.EV_DAEMON_PATH,
                     follow_name_owner_changes=True)
-            EvinceWindowProxy.bus.add_signal_receiver(self._on_doc_loaded,
+            EvinceWindowProxy.bus.add_signal_receiver(
+                self._on_doc_loaded,
                 signal_name='DocumentLoaded',
                 dbus_interface=self.EV_WINDOW_IFACE,
                 sender_keyword='sender')
@@ -82,10 +83,11 @@ class EvinceWindowProxy:
             self.handle_find_document_reply(keyargs['sender'])
 
     def _get_dbus_name(self, spawn):
-        EvinceWindowProxy.daemon.FindDocument(self.uri, spawn,
-                     reply_handler=self.handle_find_document_reply,
-                     error_handler=self.handle_find_document_error,
-                     dbus_interface = self.EV_DAEMON_IFACE)
+        EvinceWindowProxy.daemon.FindDocument(
+            self.uri, spawn,
+            reply_handler=self.handle_find_document_reply,
+            error_handler=self.handle_find_document_error,
+            dbus_interface=self.EV_DAEMON_IFACE)
 
     def handle_find_document_error(self, error):
         if self._log:
@@ -100,21 +102,22 @@ class EvinceWindowProxy:
             self.dbus_name = evince_name
             self.status = self.RUNNING
             self.evince = EvinceWindowProxy.bus.get_object(self.dbus_name, self.EVINCE_PATH)
-            self.evince.GetWindowList(dbus_interface = self.EVINCE_IFACE,
-                          reply_handler = handler,
-                          error_handler = self.handle_get_window_list_error)
+            self.evince.GetWindowList(
+                dbus_interface=self.EVINCE_IFACE,
+                reply_handler=handler,
+                error_handler=self.handle_get_window_list_error)
 
-    def handle_get_window_list_error (self, e):
+    def handle_get_window_list_error(self, e):
         if self._log:
             self._log.debug("GetWindowList DBus call has failed")
 
-    def handle_get_window_list_reply (self, window_list):
+    def handle_get_window_list_reply(self, window_list):
         if len(window_list) > 0:
             window_obj = EvinceWindowProxy.bus.get_object(self.dbus_name, window_list[0])
-            self.window = dbus.Interface(window_obj,self.EV_WINDOW_IFACE)
+            self.window = dbus.Interface(window_obj, self.EV_WINDOW_IFACE)
             self.window.connect_to_signal("SyncSource", self.on_sync_source)
         else:
-            #That should never happen.
+            # That should never happen.
             if self._log:
                 self._log.debug("GetWindowList returned empty list")
 
@@ -130,38 +133,47 @@ class EvinceWindowProxy:
         if self.source_handler is not None:
             self.source_handler(input_file, source_link, timestamp)
 
+
+# This file offers backward search in any editor.
+#  evince_dbus  pdf_file  line_source input_file
 if __name__ == '__main__':
-    args = sys.argv
-    if len(args)==5 and args[1] == 'forward':
-        pdf = os.path.abspath(args[2]).replace(" ", "%20")
-        line = int(args[3])
-        tex = os.path.abspath(args[4])
+    import dbus.mainloop.glib
+    import gobject
+    import os
+    import threading
 
-        try:
-            bus = dbus.SessionBus()
-            daemon = bus.get_object('org.gnome.evince.Daemon', '/org/gnome/evince/Daemon')
-            dbus_name = daemon.FindDocument('file://' + quote(pdf, safe="%/:=&?~#+!$,;'@()*[]"), \
-                                True, dbus_interface='org.gnome.evince.Daemon')
-            window = bus.get_object(dbus_name, '/org/gnome/evince/Window/0')
-            time.sleep(0.2)
-            window.SyncView(tex, (line, 1), 0, dbus_interface='org.gnome.evince.Window')
-        except dbus.DBusException:
-            traceback.print_exc()
-
-    elif len(args)==4 and args[1] == 'open':
-        pdf = os.path.abspath(args[2])
-        editor = args[3]
-        dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
-        EvinceWindowProxy('file://' + pdf, editor, True)
-        gobject.threads_init()
-        loop = gobject.MainLoop()
-        def evince():
-            ev = subprocess.Popen(['evince', pdf])
-            ev.wait()
-            loop.quit()
-        threading.Thread(target=evince).start()
-        loop.run()
-
-    else:
-        sys.stderr.write("Unknown evince command: %s.\n" % args[1])
+    def print_usage():
+        print("""Usage:
+  evince_backward_search pdf_file "editorcmd %f %l"'
+    %f ... TeX-file to load
+    %l ... line to jump to
+E.g.:
+  evince_backward_search somepdf.pdf "gvim --servername somepdf --remote-silent '+%l<Enter>' %f"
+  evince_backward_search somepdf.pdf "emacsclient -a emacs --no-wait +%l %f"
+  evince_backward_search somepdf.pdf "scite %f '-goto:%l'"
+  evince_backward_search somepdf.pdf "lyxclient -g %f %l"
+  evince_backward_search somepdf.pdf "kate --use --line %l"
+  evince_backward_search somepdf.pdf "kile --line %l" """)
         sys.exit(1)
+
+    if len(sys.argv) != 3:
+        print_usage()
+
+    pdf_file = os.path.abspath(sys.argv[1])
+
+    if not os.path.isfile(pdf_file):
+        print_usage()
+
+    dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+    EvinceWindowProxy('file://' + pdf_file, sys.argv[2], True)
+
+    gobject.threads_init()
+    loop = gobject.MainLoop()
+
+    def evince():
+        ev = subprocess.Popen([EV_BINARY, pdf_file])
+        ev.wait()
+        loop.quit()
+
+    threading.Thread(target=evince).start()
+    loop.run()

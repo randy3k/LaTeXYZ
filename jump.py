@@ -108,19 +108,22 @@ class LatexPlusJumpToPdfCommand(sublime_plugin.TextCommand):
                 print("about to run zathura with %s" % ' '.join(args))
                 subprocess.Popen(args)
             else:
-                evince_sync = sublime.load_resource("Packages/LaTeX-Plus/evince_sync")
                 tasks = subprocess.check_output(['ps', 'xw'])
-
-                subl = linux_settings["sublime"] if "sublime" in linux_settings else "subl"
                 evince_is_running = "evince " + pdffile in str(tasks, encoding='utf8')
+
                 if bring_forward or not evince_is_running:
-                    subprocess.Popen(["python", "-c", evince_sync, "open", pdffile,
-                                      subl + ' "%f:%l"'])
+                    subl = linux_settings["sublime"] if "sublime" in linux_settings else "subl"
+                    evince_backward_search = sublime.load_resource(
+                        "Packages/LaTeX-Plus/evince/evince_backward_search")
+                    subprocess.Popen(["python", "-c", evince_backward_search,
+                                      pdffile, subl + ' "%f:%l"'])
                     if not evince_is_running:
                         time.sleep(1)
 
                 if forward_sync:
-                    subprocess.Popen(["python", "-c", evince_sync, "forward", pdffile,
+                    evince_forward_search = sublime.load_resource(
+                        "Packages/LaTeX-Plus/evince/evince_forward_search")
+                    subprocess.Popen(["python", "-c", evince_forward_search, pdffile,
                                       str(line), srcfile])
 
     def is_enabled(self):
