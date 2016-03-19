@@ -3,12 +3,11 @@ import sublime_plugin
 import os
 import subprocess
 import time
-import threading
-from . misc import *
+from . misc import get_tex_root
 import sys
 
 if sys.platform == "win32":
-    from winreg import *
+    from winreg import OpenKey, QueryValueEx, HKEY_LOCAL_MACHINE, KEY_READ
 
 
 def SumatraPDF():
@@ -49,11 +48,12 @@ class LatexPlusJumpToPdfCommand(sublime_plugin.TextCommand):
 
             args = ['osascript']
             apple_script = ('tell application "Skim"\n'
-                                'if '+ str(bring_forward)+' then activate\n'
+                                'if ' + str(bring_forward)+' then activate\n'
                                 'open POSIX file "' + pdffile + '"\n'
                                 'revert front document\n'
-                                'if '+ str(forward_sync)+' then\n'
-                                    'tell front document to go to TeX line ' + str(line) + ' from POSIX file "' + srcfile + '"\n'
+                                'if ' + str(forward_sync)+' then\n'
+                                    'tell front document to go to TeX line ' + str(line) +
+                                    ' from POSIX file "' + srcfile + '"\n'
                                 'end if\n'
                             'end tell\n')
             args.extend(['-e', apple_script])
