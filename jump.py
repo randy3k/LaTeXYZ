@@ -23,18 +23,6 @@ def SumatraPDF():
     return path
 
 
-class LatexPlusEvinceThread(threading.Thread):
-    def __init__(self, args):
-        self.args = args
-        threading.Thread.__init__(self)
-
-    def run(self):
-        ev_sync = subprocess.Popen(self.args)
-        ev = subprocess.Popen(['evince', self.args[4]])
-        ev.wait()
-        ev_sync.kill()
-
-
 class LatexPlusJumpToPdfCommand(sublime_plugin.TextCommand):
     def run(self, edit, **args):
         view = self.view
@@ -120,16 +108,14 @@ class LatexPlusJumpToPdfCommand(sublime_plugin.TextCommand):
                 print("about to run zathura with %s" % ' '.join(args))
                 subprocess.Popen(args)
             else:
-                evince_sync = sublime.load_resource(
-                    "Packages/LaTeX-Plus/evince_sync")
-                print("evince_sync loaded")
+                evince_sync = sublime.load_resource("Packages/LaTeX-Plus/evince_sync")
                 tasks = subprocess.check_output(['ps', 'xw'])
 
                 subl = linux_settings["sublime"] if "sublime" in linux_settings else "subl"
                 evince_is_running = "evince " + pdffile in str(tasks, encoding='utf8')
                 if bring_forward or not evince_is_running:
-                    args = ["python", "-c", evince_sync, "backward", pdffile, subl + ' "%f:%l"']
-                    LatexPlusEvinceThread(args).start()
+                    subprocess.Popen(["python", "-c", evince_sync, "open", pdffile,
+                                      subl + ' "%f:%l"'])
                     if not evince_is_running:
                         time.sleep(1)
 

@@ -3,7 +3,7 @@
 
 # Copyright (C) 2010 Jose Aliste
 #               2011 Benjamin Kellermann
-#               2013 Randy Lai
+#               2016 Randy Lai
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public Licence as published by the Free Software
@@ -28,6 +28,7 @@ import subprocess
 import time
 import re
 import gobject
+import threading
 
 if sys.version_info >= (3, 0, 0):
     from urllib.parse import quote, unquote
@@ -147,12 +148,18 @@ if __name__ == '__main__':
         except dbus.DBusException:
             traceback.print_exc()
 
-    elif len(args)==4 and args[1] == 'backward':
+    elif len(args)==4 and args[1] == 'open':
         pdf = os.path.abspath(args[2])
         editor = args[3]
         dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
         EvinceWindowProxy('file://' + pdf, editor, True)
+        gobject.threads_init()
         loop = gobject.MainLoop()
+        def evince():
+            ev = subprocess.Popen(['evince', pdf])
+            ev.wait()
+            loop.quit()
+        threading.Thread(target=evince).start()
         loop.run()
 
     else:
