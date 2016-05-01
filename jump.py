@@ -103,7 +103,7 @@ class LatexPlusJumpToPdfCommand(sublime_plugin.TextCommand):
                     args = ["zathura", "--synctex-forward", dest, pdffile]
                 else:
                     sb_binary = linux_settings.get("sublime", "subl")
-                    args = ["zathura", "-s", "-x",
+                    args = ["zathura", "--synctex-pid=" + str(os.getpid()), "-x",
                             sb_binary + " %{input}:%{line}", pdffile]
                 print("about to run zathura with %s" % ' '.join(args))
                 subprocess.Popen(args)
