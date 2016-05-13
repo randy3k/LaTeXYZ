@@ -168,7 +168,6 @@ E.g.:
 
     try:
         import gobject
-        gobject.threads_init()
         loop = gobject.MainLoop()
     except ImportError:
         from gi.repository import GLib
