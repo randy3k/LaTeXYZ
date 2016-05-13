@@ -58,7 +58,3 @@ try:
     window.SyncView(tex, (line, 1), 0, dbus_interface='org.gnome.evince.Window')
 except dbus.DBusException:
     traceback.print_exc()
-
-# Added int(time.time()) per http://www.benwhale.com/blog/2012/09/06/
-# evince-synctex-support-broke-for-me-today/
-window.SyncView(tex, (line, 1), 0, dbus_interface="org.gnome.evince.Window")
