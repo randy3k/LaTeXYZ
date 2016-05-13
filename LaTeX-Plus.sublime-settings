@@ -63,6 +63,9 @@
         // path to sublime
         // "sublime": "/usr/bin/subl",
 
+        // path to python
+        // "python": "/usr/bin/python",
+
         // which viewer to use: evince, okular or zathura (default is evince)
         // "viewer": "evince"
     }
