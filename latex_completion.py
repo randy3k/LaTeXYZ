@@ -49,7 +49,7 @@ class LatexPlusCompletionCommand(sublime_plugin.TextCommand):
             self.dispatch_listdir(m, point, ext)
             return
 
-        m = re.match(r".*\\bibliography(\{([^\}]*))?$", contentb)
+        m = re.match(r".*\\(?:bibliography|addbibresource)(\{([^\}]*))?$", contentb)
         ext = ['.bib']
         if m:
             self.dispatch_listdir(m, point, ext)
