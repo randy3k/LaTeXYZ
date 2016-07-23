@@ -1,7 +1,7 @@
-# LaTeX-Plus
+# LaTeXPlus
 
-LaTeX-Plus is a multi-platform LaTeX plugin for [Sublime Text 3](https://www.sublimetext.com/3). It works on OSX, Windows and Linux (Ubuntu).
-LaTeX-Plus aims to be lightweight, extensible but self contained. If you are looking for a full feature plugin, see, for example [LaTeXing](http://latexing.com) or [LaTeXTools](https://github.com/SublimeText/LaTeXTools).
+LaTeXPlus is a multi-platform LaTeX plugin for [Sublime Text 3](https://www.sublimetext.com/3). It works on OSX, Windows and Linux (Ubuntu).
+LaTeXPlus aims to be lightweight, extensible but self contained. If you are looking for a full feature plugin, see, for example [LaTeXing](http://latexing.com) or [LaTeXTools](https://github.com/SublimeText/LaTeXTools).
 These two plugins are great. A lot of ideas are actually inspired by these two plugins. Unfortunately, LaTeXing is not open source and the development of LaTeXTools has been slowed down lately.
 
 If you like it, you could send me some tips via [paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=YAPVT8VB6RR9C&lc=US&item_name=tips&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted) or [gratipay](https://gratipay.com/~randy3k/).
@@ -14,16 +14,16 @@ If you like it, you could send me some tips via [paypal](https://www.paypal.com/
 * Backward and forward sync of different PDF viewers
 * Automatch for `()`, `[]`, `{}`, `\(\)`, `\(\)`, `\{\}`, `\left` - `\right` pairs, `$$` and quotation marks.
 * Multi files project support
-* Comprehensive LaTeX syntax: [LaTeX-Plus Syntax](https://github.com/randy3k/LaTeX-Plus/tree/master/syntax).
+* Comprehensive LaTeX syntax: [LaTeXPlus Syntax](https://github.com/randy3k/LaTeXPlus/tree/master/syntax).
 * More…
 
 ### Wiki
 
-- [Installation](https://github.com/randy3k/Latex-Plus/wiki/Installation)
-- [User Manual](https://github.com/randy3k/Latex-Plus/wiki/User Manual)
-- [Project Setup](https://github.com/randy3k/Latex-Plus/wiki/Project-Setup)
-- [Latex-Plus Options](https://github.com/randy3k/Latex-Plus/wiki/Latex-Plus-Options)
-- [BracketHighlighter Settings](https://github.com/randy3k/Latex-Plus/wiki/BracketHighlighter-settings)
+- [Installation](https://github.com/randy3k/LaTeXPlus/wiki/Installation)
+- [User Manual](https://github.com/randy3k/LaTeXPlus/wiki/User Manual)
+- [Project Setup](https://github.com/randy3k/LaTeXPlus/wiki/Project-Setup)
+- [LaTeXPlus Options](https://github.com/randy3k/LaTeXPlus/wiki/LaTeXPlus-Options)
+- [BracketHighlighter Settings](https://github.com/randy3k/LaTeXPlus/wiki/BracketHighlighter-settings)
 
 ### Sublime Text 2 compatibility
 
@@ -32,7 +32,7 @@ While it is possible to backward port to ST2,  I would rather keep it ST3 only f
 ### License
 
 ```text
-    LaTeX-Plus Package for Sublime Text
+    LaTeXPlus Package for Sublime Text
     Copyright (C) 2016 Randy Lai
 
     This program is free software; you can redistribute it and/or modify

@@ -78,7 +78,7 @@ class LatexPlusBuildCommand(sublime_plugin.WindowCommand):
         self.file_name = get_tex_root(view)
         tex_dir = os.path.dirname(self.file_name)
 
-        self.settings = sublime.load_settings('LaTeX-Plus.sublime-settings')
+        self.settings = sublime.load_settings('LaTeXPlus.sublime-settings')
         cmd = self.settings.get("cmd")
         if force and cmd[0] == "latexmk":
             cmd = [cmd[0]] + ["-g"] + cmd[1:]
@@ -110,12 +110,12 @@ class LatexPlusBuildCommand(sublime_plugin.WindowCommand):
         before = min(status, 14-status)
         after = 7 - before
         self.window.active_view().set_status(
-            "Latex-Plus",
+            "LaTeXPlus",
             "Compiling [%s=%s]" % (" " * before, " " * after))
         if self.thread and self.thread.isAlive():
             sublime.set_timeout(lambda: self.status_updater(status+1), 100)
         else:
-            self.window.active_view().erase_status("Latex-Plus")
+            self.window.active_view().erase_status("LaTeXPlus")
 
     def output(self, data):
         self.output_view.run_command("latex_plus_output", {"characters": data})

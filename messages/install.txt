@@ -1,2 +1,2 @@
-Welcome to LaTeX-Plus!
-You may want to go to the wiki page at https://github.com/randy3k/Latex-Plus/wiki
+Welcome to LaTeXPlus!
+You may want to go to the wiki page at https://github.com/randy3k/LaTeXPlus/wiki
