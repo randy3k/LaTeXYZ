@@ -9,7 +9,7 @@ from . misc import check_program, get_tex_root
 from . import parser
 
 
-class LatexPlusThread(threading.Thread):
+class LatexBoxThread(threading.Thread):
 
     # pass caller to make output and killing possible
     def __init__(self, caller):
@@ -62,7 +62,7 @@ class LatexPlusThread(threading.Thread):
         caller.output("\n[Done in %ss!]\n" % round(elapsed, 2))
 
 
-class LatexPlusBuildCommand(sublime_plugin.WindowCommand):
+class LatexBoxBuildCommand(sublime_plugin.WindowCommand):
     def run(self, **kwargs):
         if "force" in kwargs:
             force = kwargs["force"]
@@ -78,7 +78,7 @@ class LatexPlusBuildCommand(sublime_plugin.WindowCommand):
         self.file_name = get_tex_root(view)
         tex_dir = os.path.dirname(self.file_name)
 
-        self.settings = sublime.load_settings('LaTeXPlus.sublime-settings')
+        self.settings = sublime.load_settings('LaTeXBox.sublime-settings')
         cmd = self.settings.get("cmd")
         if force and cmd[0] == "latexmk":
             cmd = [cmd[0]] + ["-g"] + cmd[1:]
@@ -102,23 +102,23 @@ class LatexPlusBuildCommand(sublime_plugin.WindowCommand):
             self.thread.killed = True
             return
 
-        self.thread = LatexPlusThread(self)
+        self.thread = LatexBoxThread(self)
         self.thread.start()
 
     def status_updater(self, status=0):
-        status = status % 14
-        before = min(status, 14-status)
-        after = 7 - before
+        status = status % 20
+        before = min(status, 20-status)
+        after = 10 - before
         self.window.active_view().set_status(
-            "LaTeXPlus",
+            "latex_box_status",
             "Compiling [%s=%s]" % (" " * before, " " * after))
         if self.thread and self.thread.isAlive():
             sublime.set_timeout(lambda: self.status_updater(status+1), 100)
         else:
-            self.window.active_view().erase_status("LaTeXPlus")
+            self.window.active_view().erase_status("latex_box_status")
 
     def output(self, data):
-        self.output_view.run_command("latex_plus_output", {"characters": data})
+        self.output_view.run_command("latex_box_output", {"characters": data})
 
     def clearoutput(self):
         self.output_view = self.window.get_output_panel("exec")
@@ -187,11 +187,11 @@ class LatexPlusBuildCommand(sublime_plugin.WindowCommand):
             forward_sync = self.settings.get("forward_sync_on_success", True)
             bring_forward = self.settings.get("bring_forward_on_success", False)
             self.window.active_view().run_command(
-                "latex_plus_jump_to_pdf",
+                "latex_box_jump_to_pdf",
                 {"bring_forward": bring_forward, "forward_sync": forward_sync})
 
 
-class LatexPlusOutputCommand(sublime_plugin.TextCommand):
+class LatexBoxOutputCommand(sublime_plugin.TextCommand):
     def run(self, edit, characters):
         self.view.set_read_only(False)
         self.view.insert(edit, self.view.size(), characters)

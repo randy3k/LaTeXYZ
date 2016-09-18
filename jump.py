@@ -4,9 +4,8 @@ import os
 import subprocess
 import time
 from . misc import get_tex_root
-import sys
 
-if sys.platform == "win32":
+if sublime.platform() == "windown":
     from winreg import OpenKey, QueryValueEx, HKEY_LOCAL_MACHINE, KEY_READ
 
 
@@ -22,14 +21,14 @@ def SumatraPDF():
     return path
 
 
-class LatexPlusJumpToPdfCommand(sublime_plugin.TextCommand):
+class LatexBoxJumpToPdfCommand(sublime_plugin.TextCommand):
     def run(self, edit, **args):
         view = self.view
         point = view.sel()[0].end() if len(view.sel()) > 0 else 0
         if not view.score_selector(point, "text.tex.latex"):
             return
 
-        self.settings = sublime.load_settings('LaTeXPlus.sublime-settings')
+        self.settings = sublime.load_settings('LaTeXBox.sublime-settings')
 
         bring_forward = args["bring_forward"] if "bring_forward" in args else False
         forward_sync = args["forward_sync"] if "forward_sync" in args else False
@@ -110,22 +109,20 @@ class LatexPlusJumpToPdfCommand(sublime_plugin.TextCommand):
             else:
                 tasks = subprocess.check_output(['ps', 'xw'])
                 evince_is_running = "evince " + pdffile in str(tasks, encoding='utf8')
+                python = linux_settings["python"] if "python" in linux_settings else "python"
 
                 if bring_forward or not evince_is_running:
                     subl = linux_settings["sublime"] if "sublime" in linux_settings else "subl"
-                    python = linux_settings["python"] if "python" in linux_settings else "python"
-                    evince_backward_search = sublime.load_resource(
-                        "Packages/LaTeXPlus/evince/evince_backward_search")
-                    subprocess.Popen([python, "-c", evince_backward_search,
-                                      pdffile, subl + ' "%f:%l"'])
+                    evince_backward_search = os.path.join(
+                        os.path.dirname(__file__), "evince", "evince_backward_search")
+                    subprocess.Popen([python, evince_backward_search, pdffile, subl + ' "%f:%l"'])
                     if not evince_is_running:
                         time.sleep(1)
 
                 if forward_sync:
-                    evince_forward_search = sublime.load_resource(
-                        "Packages/LaTeXPlus/evince/evince_forward_search")
-                    subprocess.Popen(["python", "-c", evince_forward_search, pdffile,
-                                      str(line), srcfile])
+                    evince_forward_search = os.path.join(
+                        os.path.dirname(__file__), "evince", "evince_forward_search")
+                    subprocess.Popen([python, evince_forward_search, pdffile, str(line), srcfile])
 
     def is_enabled(self):
         view = self.view

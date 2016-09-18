@@ -5,7 +5,7 @@ import re
 from . misc import get_tex_root, search_in_tex, find_bib_records, listdir
 
 
-class LatexPlusCompletionCommand(sublime_plugin.TextCommand):
+class LatexBoxCompletionCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         view = self.view
         point = view.sel()[0].end() if view.sel() else 0
@@ -65,7 +65,7 @@ class LatexPlusCompletionCommand(sublime_plugin.TextCommand):
         open_brace = "" if braces else "{"
         close_brace = "" if braces else "}"
         rept = open_brace + content + close_brace
-        self.view.run_command("latex_plus_replace", {"a": a, "b": b, "replacement": rept})
+        self.view.run_command("latex_box_replace", {"a": a, "b": b, "replacement": rept})
 
     def dispatch_ref(self, m, point):
         print("dispatching ref")

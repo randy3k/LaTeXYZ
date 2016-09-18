@@ -1,13 +1,13 @@
 [
-    { "caption": "LaTeXPlus: Choose Build System", "command": "latex_plus_choose_build_system"},
+    { "caption": "LaTeXBox: Choose Build System", "command": "latex_box_choose_build_system"},
 
-    { "caption": "LaTeXPlus: Build", "command": "latex_plus_build"},
+    { "caption": "LaTeXBox: Build", "command": "latex_box_build"},
 
-    { "caption": "LaTeXPlus: Build (force)", "command": "latex_plus_build", "args" : {"force" : true}},
+    { "caption": "LaTeXBox: Build (force)", "command": "latex_box_build", "args" : {"force" : true}},
 
-    { "caption": "LaTeXPlus: Clean auxiliary files", "command": "latex_plus_clean"},
+    { "caption": "LaTeXBox: Clean auxiliary files", "command": "latex_box_clean"},
 
-    { "caption": "LaTeXPlus: Clean auxiliary files (force)", "command": "latex_plus_clean", "args" : {"force" : true}},
+    { "caption": "LaTeXBox: Clean auxiliary files (force)", "command": "latex_box_clean", "args" : {"force" : true}},
 
-    { "caption": "LaTeXPlus: View PDF", "command": "latex_plus_jump_to_pdf", "args": {"bring_forward": true, "forward_sync": false}}
+    { "caption": "LaTeXBox: View PDF", "command": "latex_box_jump_to_pdf", "args": {"bring_forward": true, "forward_sync": false}}
 ]

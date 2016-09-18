@@ -8,7 +8,7 @@ from .latex_unicode_map import latex_unicode_map
 
 
 # sublime wrapper for insert
-class LatexPlusInsertCommand(sublime_plugin.TextCommand):
+class LatexBoxInsertCommand(sublime_plugin.TextCommand):
     def run(self, edit, content, before=0, after=0):
         sel = [(s.begin(), s.end()) for s in self.view.sel()]
         for (a, b) in reversed(sel):
@@ -17,7 +17,7 @@ class LatexPlusInsertCommand(sublime_plugin.TextCommand):
 
 
 # sublime wrapper for replacement
-class LatexPlusReplaceCommand(sublime_plugin.TextCommand):
+class LatexBoxReplaceCommand(sublime_plugin.TextCommand):
     def run(self, edit, a, b, replacement):
         region = sublime.Region(a, b)
         self.view.replace(edit, region, replacement)

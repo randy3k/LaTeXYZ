@@ -120,7 +120,7 @@ def is_duplicated(x, r):
     return False
 
 
-class LatexPlusAutoCompletions(sublime_plugin.EventListener):
+class LatexBoxAutoCompletions(sublime_plugin.EventListener):
 
     def on_query_completions(self, view, prefix, locations):
         if not view.match_selector(locations[0], "text.tex.latex"):
@@ -132,7 +132,7 @@ class LatexPlusAutoCompletions(sublime_plugin.EventListener):
             return None
 
         r = general
-        if view.match_selector(locations[0], "meta.function.environment.math.latex"):
+        if view.match_selector(locations[0], "meta.environment.math"):
             r = r + maths
 
         extract_completions = list(set(

@@ -2,9 +2,9 @@ import sublime
 import sublime_plugin
 
 
-class LatexPlusChooseBuildSystemCommand(sublime_plugin.WindowCommand):
+class LatexBoxChooseBuildSystemCommand(sublime_plugin.WindowCommand):
     def run(self):
-        settings = sublime.load_settings('LaTeXPlus.sublime-settings')
+        settings = sublime.load_settings('LaTeXBox.sublime-settings')
         bsys = settings.get("cmd_variants")
         display = [[key, " ".join(value)] for key, value in bsys.items()]
 
@@ -17,4 +17,4 @@ class LatexPlusChooseBuildSystemCommand(sublime_plugin.WindowCommand):
             value = bsys.get(key)
             settings.set("cmd", value)
             settings.set("cmd_force", [value[0]]+["-g"]+value[1:])
-            sublime.save_settings('LaTeXPlus.sublime-settings')
+            sublime.save_settings('LaTeXBox.sublime-settings')

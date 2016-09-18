@@ -1,36 +1,39 @@
 [
 	// Reassign expand_selection to ctrl+l, ctrl+l
-	{ "keys": ["ctrl+l","ctrl+l"], "command": "expand_selection", "args": {"to": "line"}, "context":
+	{ "keys": ["ctrl+l", "ctrl+l"], "command": "expand_selection", "args": {"to": "line"}, "context":
 		[
 			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
 		],
 	},
 
 	// View PDF, jump to point
-	{ "keys": ["ctrl+l","v"], "command": "latex_plus_jump_to_pdf", "args": {"bring_forward": true, "forward_sync": false}, "context":
+	{ "keys": ["ctrl+l", "v"], "command": "latex_box_jump_to_pdf", "args": {"bring_forward": true, "forward_sync": false}, "context":
 		[
 			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
 		]
 	},
-	{ "keys": ["ctrl+l","j"], "command": "latex_plus_jump_to_pdf", "args": {"bring_forward": true, "forward_sync": true}, "context":
+	{ "keys": ["ctrl+l", "j"], "command": "latex_box_jump_to_pdf", "args": {"bring_forward": true, "forward_sync": true}, "context":
+	 	[
+			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+		]
+	},
+
+	// Clean auxiliary files
+
+	{ "keys": ["ctrl+l", "backspace"], "command": "latex_box_clean", "context":
 	 	[
 			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
 		]
 	},
 
 	// cmd+l,x suggests autocompletion
-	{ "keys": ["ctrl+l","x"],"command": "latex_plus_completion", "context":
+	{ "keys": ["ctrl+l", "x"],"command": "latex_box_completion", "context":
 		[
 			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
 		]
 	},
 
 	// Wrap selected text in command or environment
-	{ "keys": ["ctrl+l","c"], "command": "insert_snippet", "args": {"contents": "\\\\${1:$SELECTION}$0"}, "context":
-		[
-			{"key": "selector", "operator": "equal", "operand": "text.tex.latex"}
-		]
-	},
 	{ "keys": ["ctrl+l","e"], "command": "insert_snippet", "args": {"contents": "\\begin{${1:env}}\n$SELECTION$0\n\\end{$1}"}, "context":
 		[
 			{"key": "selector", "operator": "equal", "operand": "text.tex.latex"}

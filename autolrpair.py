@@ -3,12 +3,12 @@ import sublime_plugin
 
 
 # for auto pair \left \right pairs
-class LatexPlusPairListener(sublime_plugin.EventListener):
+class LatexBoxPairListener(sublime_plugin.EventListener):
     def on_query_context(self, view, key, operator, operand, match_all):
         if view.is_scratch() or view.settings().get('is_widget'):
             return
         if not view.score_selector(view.sel()[0].end() if len(view.sel()) > 0 else 0,
-                                   "meta.function.environment.math.latex"):
+                                   "text.tex.latex meta.environment.math"):
             return
         if key == 'selection_in_brackets':
             out = all([view.substr(sel.begin()-1) == '(' and
@@ -35,7 +35,7 @@ class LatexPlusPairListener(sublime_plugin.EventListener):
             return (out == operand) if operator == 0 else not (out == operand)
 
 
-class LatexPlusPairCommand(sublime_plugin.TextCommand):
+class LatexBoxPairCommand(sublime_plugin.TextCommand):
     def run(self, edit, arg):
         view = self.view
         sel = [(s.begin(), s.end()) for s in view.sel()]
@@ -51,7 +51,7 @@ class LatexPlusPairCommand(sublime_plugin.TextCommand):
         view.run_command("insert_snippet", {"contents": left+"${1:$SELECTION}"+right})
 
 
-class LatexPlusRemovePairCommand(sublime_plugin.TextCommand):
+class LatexBoxRemovePairCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         view = self.view
         sel = [(s.begin(), s.end()) for s in view.sel()]

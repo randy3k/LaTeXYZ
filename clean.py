@@ -6,7 +6,7 @@ from . misc import get_tex_root, search_in_tex
 
 
 def cleantex(texfile):
-    settings = sublime.load_settings('LaTeXPlus.sublime-settings')
+    settings = sublime.load_settings('LaTeXBox.sublime-settings')
     ext = settings.get("clean_ext")
     prefix = os.path.splitext(texfile)[0]
     for e in ext:
@@ -15,7 +15,7 @@ def cleantex(texfile):
 
 
 def cleantexdir(texdir):
-    settings = sublime.load_settings('LaTeXPlus.sublime-settings')
+    settings = sublime.load_settings('LaTeXBox.sublime-settings')
     ext = settings.get("clean_ext") + settings.get("clean_ext_force")
     ls = os.listdir(texdir)
     rexp = "(" + '|'.join(['\\'+e for e in ext]) + ")$"
@@ -24,7 +24,7 @@ def cleantexdir(texdir):
         os.remove(f)
 
 
-class LatexPlusCleanCommand(sublime_plugin.WindowCommand):
+class LatexBoxCleanCommand(sublime_plugin.WindowCommand):
     def run(self, **kwargs):
         if "force" in kwargs:
             force = kwargs["force"]

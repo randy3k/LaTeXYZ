@@ -1,10 +1,10 @@
 {
-    "target": "latex_plus_build",
+    "target": "latex_box_build",
     "selector": "text.tex.latex",
     "variants":[
         {
             "name": "Force",
-            "target": "latex_plus_build",
+            "target": "latex_box_build",
             "force": true
         }
     ]
