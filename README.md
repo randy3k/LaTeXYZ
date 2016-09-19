@@ -7,17 +7,16 @@ LaTeXBox
 ---
 **Important**
 
-The LaTeX syntax has been improved and
-[merged](https://github.com/sublimehq/Packages/pull/370) into the default
-Sublime Text [Pacakges](https://github.com/sublimehq/Packages/) repo to
-replace the original LaTeX syntax and the updated syntax is avaible for
-Sublime Text >= 3119. Therefore, LaTeXPlus is now packaged as LaTeXBox and
-does not ship with any LaTeX syntax. For pre-3119 users, you might need to download
-the new [LaTeX](https://github.com/sublimehq/Packages/tree/master/LaTeX) related files or
-use LaTeXBox v2.5.0 (which is LaTeXPlus v2.5.0).
+LaTeX+ syntax has [merged](https://github.com/sublimehq/Packages/pull/370)
+into the default Sublime Text
+[Pacakges](https://github.com/sublimehq/Packages/) repo and the updated syntax
+is available for Sublime Text >= 3119. Therefore, LaTeXPlus is now packaged as
+LaTeXBox and does not ship with any LaTeX syntax. For pre-3119 users, you
+might need to download the new
+[LaTeX](https://github.com/sublimehq/Packages/tree/master/LaTeX) related files
+or stay at LaTeXBox v2.5.0 (which is LaTeXPlus v2.5.0).
 
 ---
-
 
 
 LaTeXBox is a multi-platform LaTeX package for [Sublime Text 3](https://www.sublimetext.com/3). 
