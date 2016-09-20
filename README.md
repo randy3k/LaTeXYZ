@@ -14,7 +14,7 @@ is available for Sublime Text >= 3119. Therefore, LaTeXPlus is now packaged as
 LaTeXBox and does not ship with any LaTeX syntax. For pre-3119 users, you
 might need to download the new
 [LaTeX](https://github.com/sublimehq/Packages/tree/master/LaTeX) related files
-or stay at LaTeXBox v2.5.0 (which is LaTeXPlus v2.5.0).
+or stay at LaTeXBox v2.5.1 (which is LaTeXPlus v2.5.0).
 
 ---
 
