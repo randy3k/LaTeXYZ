@@ -7,6 +7,9 @@ from . misc import get_tex_root, search_in_tex, find_bib_records, listdir
 
 class LatexBoxCompletionCommand(sublime_plugin.TextCommand):
     def run(self, edit):
+        sublime.set_timeout_async(self.run_async)
+
+    def run_async(self):
         view = self.view
         point = view.sel()[0].end() if view.sel() else 0
         if not view.score_selector(point, "text.tex.latex"):
