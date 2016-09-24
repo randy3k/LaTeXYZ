@@ -116,8 +116,7 @@ general = [
 
 def is_duplicated(x, r):
     for item in r:
-        m = re.match(r"\\[a-zA-Z@]", item[0])
-        if m and x == m.group(0):
+        if item[0].startswith(x):
             return True
     return False
 
