@@ -21,7 +21,8 @@ class LatexBoxCompletionCommand(sublime_plugin.TextCommand):
 
         m = re.match(
             r"""
-            .*\\[Cc]ite\w*\*?
+            .*\\(?:(?:[pP]aren|foot|[tT]ext|[sS]mart|super|[aA]|no|full|footfull)cite
+            |[Cc]ite\w*|footcitetext)\*?
             (?:\[[^\]]*\])*
             (\{(?:[a-zA-Z0-9_:-]*\s*,\s*)*([a-zA-Z0-9_:-]*))?
             $
