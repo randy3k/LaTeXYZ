@@ -84,7 +84,9 @@ maths = [
     ("\\int_{}^{}", "int_{$1}^{$2}$0"),
     ("\\frac{}{}", "frac{$1}{$2}$0"),
     ("\\overset{}{}", "overset{$1}{$2}$0"),
+    ("\\overbrace{}{}", "overbrace{$1}{$2}$0"),
     ("\\underset{}{}", "underset{$1}{$2}$0"),
+    ("\\underbrace{}{}", "underbrace{$1}{$2}$0"),
 
     ("\\binom{}{}", "binom{$1}{$2}$0"),
     ("\\text{}", "text{$1}$0")
