@@ -9,7 +9,7 @@ if sublime.platform() == "windown":
     from winreg import OpenKey, QueryValueEx, HKEY_LOCAL_MACHINE, KEY_READ
 
 
-def SumatraPDF():
+def find_sumatrapdf():
     try:
         akey = OpenKey(HKEY_LOCAL_MACHINE,
                        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\SumatraPDF.exe",
@@ -68,7 +68,7 @@ class LatexBoxJumpToPdfCommand(sublime_plugin.TextCommand):
             sumatra_is_running = "SumatraPDF.exe" in tasks.decode('utf-8', 'ignore')
             try:
                 sumatrapdf = windows_settings["sumatrapdf"] \
-                    if "sumatrapdf" in windows_settings else SumatraPDF()
+                    if "sumatrapdf" in windows_settings else find_sumatrapdf()
                 if not sumatra_is_running:
                     print("SumatraPDF not running, launch it")
                     subprocess.Popen([sumatrapdf, pdffile])
