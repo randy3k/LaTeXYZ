@@ -110,7 +110,7 @@ general = [
 
     ("\\bibliographystyle{}", "bibliographystyle{$1}"),
     ("\\bibliography{}", "bibliography{$1}"),
-    ("\\addbibresource", "addbibresource{$1}")
+    ("\\addbibresource{}", "addbibresource{$1}")
 ]
 
 
