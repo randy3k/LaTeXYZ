@@ -4,7 +4,7 @@ import os
 import re
 import sys
 import subprocess
-from .latex_unicode_map import latex_unicode_map
+from .constants import latex_unicode_map
 
 
 # sublime wrapper for insert
@@ -23,6 +23,13 @@ class LatexBoxReplaceCommand(sublime_plugin.TextCommand):
         self.view.replace(edit, region, replacement)
         self.view.sel().clear()
         self.view.sel().add(a+len(replacement))
+
+
+class LatexBoxOutputCommand(sublime_plugin.TextCommand):
+    def run(self, edit, characters):
+        self.view.set_read_only(False)
+        self.view.insert(edit, self.view.size(), characters)
+        self.view.set_read_only(True)
 
 
 def check_program(args, env):

@@ -5,7 +5,7 @@ import threading
 import time
 import subprocess
 import re
-from . misc import check_program, get_tex_root
+from .utils import check_program, get_tex_root
 from . import parser
 
 
@@ -189,10 +189,3 @@ class LatexBoxBuildCommand(sublime_plugin.WindowCommand):
             self.window.active_view().run_command(
                 "latex_box_jump_to_pdf",
                 {"bring_forward": bring_forward, "forward_sync": forward_sync})
-
-
-class LatexBoxOutputCommand(sublime_plugin.TextCommand):
-    def run(self, edit, characters):
-        self.view.set_read_only(False)
-        self.view.insert(edit, self.view.size(), characters)
-        self.view.set_read_only(True)

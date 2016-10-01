@@ -2,7 +2,7 @@ import sublime
 import sublime_plugin
 import os
 import re
-from . misc import get_tex_root, search_in_tex
+from . utils import get_tex_root, search_in_tex
 
 
 def cleantex(texfile):

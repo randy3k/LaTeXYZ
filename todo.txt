@@ -1,3 +1,0 @@
-auto re-numbering of ref
-better way to bring evince to the front
-a full table of content

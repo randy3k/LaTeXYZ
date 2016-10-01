@@ -3,7 +3,7 @@ import sublime_plugin
 import os
 import subprocess
 import time
-from . misc import get_tex_root
+from .utils import get_tex_root
 
 if sublime.platform() == "windown":
     from winreg import OpenKey, QueryValueEx, HKEY_LOCAL_MACHINE, KEY_READ
