@@ -5,7 +5,7 @@ import subprocess
 import time
 from .utils import get_tex_root
 
-if sublime.platform() == "windown":
+if sublime.platform() == "windows":
     from winreg import OpenKey, QueryValueEx, HKEY_LOCAL_MACHINE, KEY_READ
 
 
