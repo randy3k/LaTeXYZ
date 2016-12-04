@@ -4,20 +4,6 @@ LaTeXBox
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=Randy%2ecs%2elai%40gmail%2ecom&amp;lc=US&amp;item_name=Package&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3apaypal%2ddonate%2dyellow%2esvg%3aNonHosted" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-blue.svg" /></a>
 <a href="https://gratipay.com/~randy3k/" title="Donate to this project using Gratipay"><img src="https://img.shields.io/badge/gratipay-donate-yellow.svg" /></a>
 
----
-**Important**
-
-LaTeX+ syntax has [merged](https://github.com/sublimehq/Packages/pull/370)
-into the default Sublime Text
-[Pacakges](https://github.com/sublimehq/Packages/) repo and the updated syntax
-is available for Sublime Text >= 3119. Therefore, LaTeXPlus is now packaged as
-LaTeXBox and does not ship with any LaTeX syntax. For pre-3119 users, you
-might need to download the new
-[LaTeX](https://github.com/sublimehq/Packages/tree/master/LaTeX) related files
-or stay at LaTeXBox v2.5.1 (which is LaTeXPlus v2.5.0).
-
----
-
 
 LaTeXBox is a multi-platform LaTeX package for [Sublime Text 3](https://www.sublimetext.com/3). 
 It works on OSX, Windows and Linux. LaTeXBox aims to be lightweight, extensible but self contained. If
