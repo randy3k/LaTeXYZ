@@ -255,7 +255,8 @@ math_commands = [
 ]
 
 general_commands = [
-    ("\\includegraphics{}", "includegraphics{$1}"),
+    ("\\usagepacage", ),
+    ("\\includegraphics", ),
     ("\\part{}", "part{$1}"),
     ("\\part*{}", "part*{$1}"),
     ("\\chapter{}", "chapter{$1}"),
@@ -274,3 +275,19 @@ general_commands = [
     ("\\bibliography{}", "bibliography{$1}"),
     ("\\addbibresource{}", "addbibresource{$1}")
 ]
+
+
+arrow_map = {
+    "<-": "\\leftarrow",
+    "<--": "\\longleftarrow",
+    "->": "\\rightarrow",
+    "-->": "\\longrightarrow",
+    "<->": "\\leftrightarrow",
+    "<-->": "\\longleftrightarrow",
+    "<=": "\\Leftarrow",
+    "<==": "\\Longleftarrow",
+    "=>": "\\Rightarrow",
+    "==>": "\\Longrightarrow",
+    "<=>": "\\Leftrightarrow",
+    "<==>": "\\Longleftrightarrow"
+}

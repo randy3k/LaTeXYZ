@@ -1,6 +1,7 @@
 import sublime
 import sublime_plugin
-from .constants import math_commands, general_commands
+import re
+from .constants import math_commands, general_commands, arrow_map
 
 
 def is_duplicated(x, r):
@@ -10,11 +11,24 @@ def is_duplicated(x, r):
     return False
 
 
+ARROW = re.compile(r"(<?)([-=]{1,2})(>?)$")
+
+
 class LatexZetaAutoCompletions(sublime_plugin.EventListener):
 
     def on_query_completions(self, view, prefix, locations):
         if not view.match_selector(locations[0], "text.tex.latex"):
             return None
+
+        if not prefix:
+            # arrow completion
+            pt = locations[0]
+            arrow = view.substr(sublime.Region(pt - 4, pt))
+            m = ARROW.search(arrow)
+            if m and (m.group(1) or m.group(3)) and m.group(0) in arrow_map:
+                print([arrow_map[m.group(0)]])
+                arr = arrow_map[m.group(0)]
+                return [(m.group(0), arr)]
 
         # use default completion for non latex command
         ploc = locations[0]-len(prefix)
