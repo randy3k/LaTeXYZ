@@ -1,5 +1,2 @@
 [
-    { "caption" : "-"},
-    { "caption": "Jump to PDF",  "command": "latex_box_jump_to_pdf", "args": {"bring_forward": true, "forward_sync": true} },
-    { "caption": "View PDF", "command": "latex_box_jump_to_pdf", "args": {"bring_forward": true, "forward_sync": false} }
 ]

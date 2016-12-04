@@ -1,13 +1,2 @@
 [
-    { "caption": "LaTeXBox: Choose Build System", "command": "latex_box_choose_build_system"},
-
-    { "caption": "LaTeXBox: Build", "command": "latex_box_build"},
-
-    { "caption": "LaTeXBox: Build (force)", "command": "latex_box_build", "args" : {"force" : true}},
-
-    { "caption": "LaTeXBox: Clean auxiliary files", "command": "latex_box_clean"},
-
-    { "caption": "LaTeXBox: Clean auxiliary files (force)", "command": "latex_box_clean", "args" : {"force" : true}},
-
-    { "caption": "LaTeXBox: View PDF", "command": "latex_box_jump_to_pdf", "args": {"bring_forward": true, "forward_sync": false}}
 ]
