@@ -10,7 +10,7 @@ def is_duplicated(x, r):
     return False
 
 
-class LatexBoxAutoCompletions(sublime_plugin.EventListener):
+class LatexZetaAutoCompletions(sublime_plugin.EventListener):
 
     def on_query_completions(self, view, prefix, locations):
         if not view.match_selector(locations[0], "text.tex.latex"):

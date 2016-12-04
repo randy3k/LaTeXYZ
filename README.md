@@ -1,2 +1,2 @@
-LaTeXLittleBox
+LaTeXZeta
 =====

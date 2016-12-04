@@ -1,8 +1,8 @@
 [
 	{
 		"button": "button1", "modifiers": ["shift","ctrl"],
-		"press_command": "latex_box_jump_to_pdf",
-		"press_args": {"bring_forward": true, "forward_sync": true}, "context":
+		"press_command": "jump_to_pdf",
+		"press_args": {"from_keybinding": true}, "context":
 	 	[
 			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
 		]
