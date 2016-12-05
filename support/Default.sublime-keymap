@@ -1,6 +1,6 @@
 [
     // for auto completion trigger
-    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXBox/macros/Delete And Hide Auto Complete.sublime-macro"}, "context":
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXZeta/macros/Delete And Hide Auto Complete.sublime-macro"}, "context":
         [
             {"key": "preceding_text", "match_all": true, "operand": "(^\\\\(\\\\\\\\)*$)|((?<=[^\\\\])\\\\(\\\\\\\\)*$)", "operator": "regex_contains"},
             {"key": "selection_empty", "match_all": true, "operand": true, "operator": "equal"},
@@ -72,7 +72,7 @@
             { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
         ]
     },
-    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXBox/macros/Delete Two Left Right.sublime-macro"}, "context":
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXZeta/macros/Delete Two Left Right.sublime-macro"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -91,7 +91,7 @@
             { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
         ]
     },
-    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXBox/macros/Delete Two Left Right.sublime-macro"}, "context":
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXZeta/macros/Delete Two Left Right.sublime-macro"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -128,7 +128,7 @@
             { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
         ]
     },
-    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXBox/macros/Delete Two Left Right.sublime-macro"}, "context":
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXZeta/macros/Delete Two Left Right.sublime-macro"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -147,7 +147,7 @@
              { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
          ]
      },
-     { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXBox/macros/Delete Two Left Right.sublime-macro"}, "context":
+     { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXZeta/macros/Delete Two Left Right.sublime-macro"}, "context":
          [
              { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
              { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -274,7 +274,7 @@
         ]
     },
     {
-        "keys": ["\""], "command": "run_macro_file", "args": { "file": "res://Packages/LaTeXBox/macros/Move Two Characters.sublime-macro" },
+        "keys": ["\""], "command": "run_macro_file", "args": { "file": "res://Packages/LaTeXZeta/macros/Move Two Characters.sublime-macro" },
         "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
@@ -284,7 +284,7 @@
     },
     {
         "keys": ["backspace"],
-        "command": "run_macro_file", "args": { "file": "res://Packages/LaTeXBox/macros/Delete Two Left Right.sublime-macro" },
+        "command": "run_macro_file", "args": { "file": "res://Packages/LaTeXZeta/macros/Delete Two Left Right.sublime-macro" },
         "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
