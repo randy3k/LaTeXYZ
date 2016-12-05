@@ -81,6 +81,7 @@ Keys                       | Mappings
 <kbd>\`</kbd>,<kbd>G</kbd> | `\Gamma`
 <kbd>\`</kbd>,<kbd>D</kbd> | `\Delta`
 <kbd>\`</kbd>,<kbd>Q</kbd> | `\Theta`
+<kbd>\`</kbd>,<kbd>X</kbd> | `\Iota`
 <kbd>\`</kbd>,<kbd>L</kbd> | `\Lambda`
 <kbd>\`</kbd>,<kbd>X</kbd> | `\Xi`
 <kbd>\`</kbd>,<kbd>P</kbd> | `\Pi`
