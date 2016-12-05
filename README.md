@@ -5,16 +5,13 @@ LaTeXZeta
 
 Package Control.
 
-## Use mouse click to jump to pdf
-
-<kbd>C</kbd>+<kbd>Shift</kbd>+<kbd>Click</kbd>  - jump to and forward sync with the pdf file (if [LaTeXTools](https://github.com/SublimeText/LaTeXTools) is installed)
-
 ## AutoMatch Pairs
 The following is activated when `auto_match_enabled` is `true`.
 
-* The following pairs are auto matched: `()`, `\(\)`, `\[\]` and `\{\}`.
-* Single and double quotation marks are replaced by the LaTeX quotation pairs, e.g., `'foo'` becomes <code>&#96;foo'</code> and `"foo"` becomes <code>&#96;&#96;foo''</code>.
-* In Math mode,
+* Auto pairing `\(\)`, `\[\]` and `\{\}`.
+* Single and double quotation marks are replaced by the LaTeX quotation pairs, e.g., `'foo'` becomes <code>&#96;foo'</code> and `"foo"` becomes <code>&#96;&#96;foo''</code>. The <code>&#96;</code> to <code>&#96;'</code> auto completion in LaTeXTools is disabled.
+
+* In math environment,
 
 Keys                                                 | Mappings
 --------                                             | -----------------
@@ -29,15 +26,15 @@ Keys                                                 | Mappings
 
 _Note: Some pairs will create fields. The cursor will move to the end of the pair when pressing `tab`._
 
-## AutoComplete Math Commands
+## AutoComplete math commands
 
-Math Commands are only valid in math environment, eg, $$, &#92;[ &#92;] or \begin{equation},
+Math commands are only valid in math environment, eg, $$, &#92;[ &#92;] or \begin{equation},
 \end{equation}.
 These Math Commands are similar to those of vim-latex plugin (if you know what I am talking about).
 
 _Note: Math Commands will create fields. The cursor will move to next field when pressing `tab`._
 
-###Math Symbols
+### Math symbols
 
 Keys                                   | Mappings
 --------                               | -----------------
@@ -65,7 +62,7 @@ Keys                                                                            
 <kbd>&lt;</kbd>,<kbd>=</kbd>,<kbd>&gt;</kbd>,<kbd>&lt;tab&gt;</kbd>              | `\Leftrightarrow`
 <kbd>&lt;</kbd>,<kbd>=</kbd>,<kbd>=</kbd>,<kbd>&gt;</kbd>,<kbd>&lt;tab&gt;</kbd> | `\Longleftrightarrow`
 
-###Greek letters
+### Greek letters
 
 Keys                       | Mappings          | Keys                       | Mappings          | Keys                       | Mappings          |
 --------                   | ----------------- | --------                   | ----------------- | --------                   | ----------------- |
@@ -94,3 +91,10 @@ Keys                       | Mappings
 <kbd>\`</kbd>,<kbd>W</kbd> | `\Omega`
 
 More symbols will be defined in further versions
+
+
+## Others
+
+- <kbd>C</kbd>+<kbd>Shift</kbd>+<kbd>Click</kbd>  - jump to and forward sync with the pdf file (If [LaTeXTools](https://github.com/SublimeText/LaTeXTools) is installed)
+- <kbd>C</kbd>+<kbd>l</kbd>, <kbd>c</kbd>  - wrap the selection into by a command
+- <kbd>C</kbd>+<kbd>l</kbd>, <kbd>e</kbd>  - wrap the selection into by a environment
