@@ -2,13 +2,14 @@ import sublime
 import sublime_plugin
 
 
-# sublime wrapper for insert
-class LatexZetaInsertCommand(sublime_plugin.TextCommand):
-    def run(self, edit, content, before=0, after=0):
+# sublime wrapper for insert_snippet
+class LatexZetaInsertSnippetCommand(sublime_plugin.TextCommand):
+    def run(self, edit, contents, before=0, after=0):
         sel = [(s.begin(), s.end()) for s in self.view.sel()]
         for (a, b) in reversed(sel):
-            region = sublime.Region(a-before, b+after)
-            self.view.replace(edit, region, content)
+            self.view.replace(edit, sublime.Region(b, b+after), "")
+            self.view.replace(edit, sublime.Region(a-before, a), "")
+        self.view.run_command("insert_snippet", {"contents": contents})
 
 
 class LatexZetaJumpToPdfCommand(sublime_plugin.TextCommand):
