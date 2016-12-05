@@ -1,6 +1,10 @@
 LaTeXZeta
 =====
 
+## Installation
+
+Package Control.
+
 ## Use mouse click to jump to pdf
 
 <kbd>C</kbd>+<kbd>Shift</kbd>+<kbd>Click</kbd>  - jump to and forward sync with the pdf file (if [LaTeXTools](https://github.com/SublimeText/LaTeXTools) is installed)
