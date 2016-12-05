@@ -1,10 +1,6 @@
 [
-	{
-		"button": "button1", "modifiers": ["shift","ctrl"],
-		"press_command": "jump_to_pdf",
-		"press_args": {"from_keybinding": true}, "context":
-	 	[
-			{ "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
-		]
-	}
+    {
+        "button": "button1", "modifiers": ["shift","ctrl"],
+        "press_command": "latex_zeta_jump_to_pdf"
+    }
 ]

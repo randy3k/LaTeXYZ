@@ -1,10 +1,6 @@
 [
 	{
 		"button": "button1", "modifiers": ["shift","super"],
-        "press_command": "latex_zeta_jump_to_pdf",
-        "context":
-        [
-            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
-        ]
+        "press_command": "latex_zeta_jump_to_pdf"
 	}
 ]
