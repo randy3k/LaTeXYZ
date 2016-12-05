@@ -28,11 +28,10 @@ _Note: Some pairs will create fields. The cursor will move to the end of the pai
 
 ## AutoComplete math commands
 
-Math commands are only valid in math environment, eg, $$, &#92;[ &#92;] or \begin{equation},
-\end{equation}.
+Math commands are only valid in math environment, eg, `$$`, <code>&#92;[&#92;]</code> or `\begin{equation}`, `\end{equation}`.
 These Math Commands are similar to those of vim-latex plugin (if you know what I am talking about).
 
-_Note: Math Commands will create fields. The cursor will move to next field when pressing `tab`._
+_Note: Math commands will create fields. The cursor will move to next field when pressing `tab`._
 
 ### Math symbols
 
