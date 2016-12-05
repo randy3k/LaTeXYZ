@@ -1,4 +1,7 @@
 [
+    // disable autocompletion of `'
+    { "keys": ["`"], "command": "insert_snippet", "args": {"contents": "`"} },
+
     // for auto completion trigger
     { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXZeta/macros/Delete And Hide Auto Complete.sublime-macro"}, "context":
         [
@@ -360,9 +363,6 @@
             { "key": "following_text", "operator": "regex_contains", "operand": "^\\\\right(\\)|\\]|\\\\\\}|\\\\\\||\\\\rangle)", "match_all": true }
         ],
     },
-
-    // disable autocompletion of `' in math mode
-    { "keys": ["`"], "command": "insert_snippet", "args": {"contents": "`"} },
 
     // vim-latex like keymaps - general
     { "keys": ["_"], "command": "insert_snippet", "args": {"contents": "{$1}$0"}, "context":
