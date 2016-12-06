@@ -5,7 +5,7 @@ LaTeXZeta
 
 Package Control.
 
-## AutoMatch Pairs
+## Auto match Pairs
 The following is activated when `auto_match_enabled` is `true`.
 
 * Auto pairing `\(\)`, `\[\]` and `\{\}`.
@@ -26,7 +26,7 @@ Keys                                                 | Mappings
 
 _Note: Some pairs will create fields. The cursor will move to the end of the pair when pressing `tab`._
 
-## AutoComplete math commands
+## Auto complete math commands
 
 Math commands are only valid in math environment, eg, `$$`, <code>&#92;[&#92;]</code> or `\begin{equation}`, `\end{equation}`.
 These Math Commands are similar to those of vim-latex plugin (if you know what I am talking about).
