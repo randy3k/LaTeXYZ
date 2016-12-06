@@ -1,19 +1,29 @@
 [
+    // completions for arrows
+    { "keys": ["tab"], "command": "r_box_auto_complete", "context":
+        [
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "(<[-=]{1,2})|([-=]{1,2}>)|(<[-=]{1,2}>)$", "match_all": true },
+            { "key": "setting.tab_completion", "operator": "equal", "operand": true },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
+            { "key": "auto_complete_visible", "operator": "equal", "operand": false }
+        ]
+    },
     // disable autocompletion of `'
     { "keys": ["`"], "command": "insert_snippet", "args": {"contents": "`"} },
 
     // for auto completion trigger
     { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXZeta/macros/Delete And Hide Auto Complete.sublime-macro"}, "context":
         [
-            {"key": "preceding_text", "match_all": true, "operand": "(^\\\\(\\\\\\\\)*$)|((?<=[^\\\\])\\\\(\\\\\\\\)*$)", "operator": "regex_contains"},
-            {"key": "selection_empty", "match_all": true, "operand": true, "operator": "equal"},
-            {"key": "selector", "operand": "text.tex.latex", "operator": "equal"}
+            { "key": "selection_empty", "match_all": true, "operand": true, "operator": "equal"},
+            { "key": "selector", "operand": "text.tex.latex", "operator": "equal"},
+            { "key": "auto_complete_visible", "operator": "equal", "operand": true }
         ]
     },
     { "keys": ["\\", "\\"], "command": "insert", "args": {"characters": "\\\\"}, "context":
         [
-            {"key": "selection_empty", "match_all": true, "operand": true, "operator": "equal"},
-            {"key": "selector", "operand": "text.tex.latex", "operator": "equal"}
+            { "key": "selection_empty", "match_all": true, "operand": true, "operator": "equal"},
+            { "key": "selector", "operand": "text.tex.latex", "operator": "equal"}
         ]
     },
 

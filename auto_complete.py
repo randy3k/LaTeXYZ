@@ -27,6 +27,7 @@ class LatexZetaAutoCompletions(sublime_plugin.EventListener):
             m = ARROW.search(arrow)
             if m and (m.group(1) or m.group(3)) and m.group(0) in arrow_map:
                 arr = arrow_map[m.group(0)]
+                print(arr)
                 return [(m.group(0), arr)]
 
         # use default completion for non latex command
