@@ -5,8 +5,20 @@ LaTeXZeta
 
 Package Control.
 
-## Auto match Pairs
-The following is activated when `auto_match_enabled` is `true`.
+## Backslash triggered completions
+
+It provides a list of commands to auto complete when <kbd>&#92;</kbd> is triggered.
+
+<img width="412" src="https://cloud.githubusercontent.com/assets/1690993/20915374/743dfcd2-bb53-11e6-9e29-a1af80356405.png">
+
+
+## Auto match pairs
+
+<img width="412" src="https://cloud.githubusercontent.com/assets/1690993/20916070/b8e1509c-bb57-11e6-8e0a-84bf02a0de63.gif">
+
+
+
+The following auto paring is activated when `auto_match_enabled` is `true`.
 
 * Auto pairing `\(\)`, `\[\]` and `\{\}`.
 * Single and double quotation marks are replaced by the LaTeX quotation pairs, e.g., `'foo'` becomes <code>&#96;foo'</code> and `"foo"` becomes <code>&#96;&#96;foo''</code>. The <code>&#96;</code> to <code>&#96;'</code> auto completion in LaTeXTools is disabled.
@@ -24,12 +36,13 @@ Keys                                                 | Mappings
 <kbd>&#92;</kbd>,<kbd>&lt;</kbd>,<kbd>&lt;</kbd>     | `\left\langle\right\rangle`
 
 
-_Note: Some pairs will create fields. The cursor will move to the end of the pair when pressing `tab`._
+- If any text is highlighted, auto matching pair wraps the selection.
+- Some pairs will create fields. The cursor will move to the end of the pair when pressing `tab`.
 
 ## Auto complete math commands
 
 Math commands are only valid in math environment, eg, `$$`, <code>&#92;[&#92;]</code> or `\begin{equation}`, `\end{equation}`.
-These Math Commands are similar to those of vim-latex plugin (if you know what I am talking about).
+These Math keybinds are similar (not exactly the same) to [vim-latex](http://vim-latex.sourceforge.net/documentation/latex-suite.html#auc-tex-mappings) plugin.
 
 _Note: Math commands will create fields. The cursor will move to next field when pressing `tab`._
 
@@ -39,7 +52,10 @@ Keys                                   | Mappings
 --------                               | -----------------
 <kbd>_ </kbd>,<kbd>_</kbd>             | `_{}`
 <kbd>^</kbd>,<kbd>^</kbd>              | `^{}`
+<kbd>\` </kbd>,<kbd>_</kbd>             | `\bar{}`
+<kbd>\`</kbd>,<kbd>^</kbd>              | `hat{}`
 <kbd>.</kbd>,<kbd>.</kbd>,<kbd>.</kbd> | `\ldots`
+<kbd>\`</kbd>,<kbd>,</kbd>             | `\nonumber`
 <kbd>\`</kbd>,<kbd>/</kbd>             | `\frac{}{}`
 <kbd>\`</kbd>,<kbd>0</kbd>             | `\varnothing`
 <kbd>\`</kbd>,<kbd>2</kbd>             | `\sqrt{}`
