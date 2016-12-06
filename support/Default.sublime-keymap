@@ -625,11 +625,6 @@
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
         ]
     },
-    { "keys": ["`", "I"], "command": "insert_snippet", "args": {"contents": "\\Iota"}, "context":
-        [
-            { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
-        ]
-    },
     { "keys": ["`", "L"], "command": "insert_snippet", "args": {"contents": "\\Lambda"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
