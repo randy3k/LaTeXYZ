@@ -1,6 +1,6 @@
 [
     // completions for arrows
-    { "keys": ["tab"], "command": "r_box_auto_complete", "context":
+    { "keys": ["tab"], "command": "auto_complete", "context":
         [
             { "key": "preceding_text", "operator": "regex_contains", "operand": "(<[-=]{1,2})|([-=]{1,2}>)|(<[-=]{1,2}>)$", "match_all": true },
             { "key": "setting.tab_completion", "operator": "equal", "operand": true },
