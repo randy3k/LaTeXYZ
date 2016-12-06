@@ -26,9 +26,8 @@ class LatexZetaSurroundListener(sublime_plugin.EventListener):
 
 class LatexZetaInsertPairCommand(sublime_plugin.TextCommand):
     def run(self, edit, arg):
-        left = "\\left" + arg[0].replace('\\', '\\\\')
-        right = "\\right" + arg[1].replace('\\', '\\\\')
-
+        left = "\\\\left" + arg[0].replace('\\', '\\\\')
+        right = "\\\\right" + arg[1].replace('\\', '\\\\')
         self.view.run_command("latex_zeta_insert_snippet", {
             "contents": left+"${1:$SELECTION}"+right,
             "before": len(arg[0]),
