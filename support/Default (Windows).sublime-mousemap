@@ -1,6 +1,0 @@
-[
-    {
-        "button": "button1", "modifiers": ["shift","ctrl"],
-        "press_command": "latex_zeta_jump_to_pdf"
-    }
-]
