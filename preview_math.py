@@ -20,7 +20,8 @@ class LatexZetaPreviewMath(sublime_plugin.EventListener):
         lz_settings = sublime.load_settings(lz_settings_file)
         if not lz_settings.get("auto_set_preview_math_template_preamble"):
             return
-        newcommand_regions = view.find_by_selector("meta.function.newcommand.latex")
+        newcommand_regions = view.find_by_selector(
+            "meta.function.newcommand.latex, meta.function.declare-math-operator.latex")
         newcommands = []
         for s in newcommand_regions:
             newcommands.append(view.substr(s))
