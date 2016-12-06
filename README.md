@@ -16,7 +16,7 @@ It provides a list of commands to auto complete when <kbd>&#92;</kbd> is trigger
 
 ## Auto match pairs
 
-<img width="412" src="https://cloud.githubusercontent.com/assets/1690993/20916296/050fad46-bb59-11e6-920e-f46c18b26a33.gif">
+<img width="412" src="https://cloud.githubusercontent.com/assets/1690993/20943620/4af2f0dc-bbce-11e6-88df-759df58e33da.gif">
 
 
 
