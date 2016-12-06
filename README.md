@@ -1,6 +1,8 @@
 LaTeXZeta
 =====
 
+This package is NOT a replacement of any LaTeX package. It is meant to be used together with [LaTeXTools](https://github.com/SublimeText/LaTeXTools) (or similar package) and to improve the typing experience with Sublime Text by providing a bunch of keybinds and helper functions.
+
 ## Installation
 
 Package Control.
