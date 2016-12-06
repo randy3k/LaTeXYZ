@@ -34,8 +34,8 @@ Keys                                                 | Mappings
 <kbd>&#92;</kbd>,<kbd>{</kbd>,<kbd>{</kbd>           | `\left\{\right\}`
 <kbd>&#92;</kbd>,<kbd>&#124;</kbd>                   | `\|\|`
 <kbd>&#92;</kbd>,<kbd>&#124;</kbd>,<kbd>&#124;</kbd> | `\left\|\right\|`
-<kbd>&#92;</kbd>,<kbd>&lt;</kbd>                     | `\langle\rangle`
-<kbd>&#92;</kbd>,<kbd>&lt;</kbd>,<kbd>&lt;</kbd>     | `\left\langle\right\rangle`
+<kbd>&#92;</kbd>,<kbd>&lt;</kbd>                     | `\langle \rangle`
+<kbd>&#92;</kbd>,<kbd>&lt;</kbd>,<kbd>&lt;</kbd>     | `\left\langle \right\rangle`
 
 
 - If any text is highlighted, auto matching pair wraps the selection.

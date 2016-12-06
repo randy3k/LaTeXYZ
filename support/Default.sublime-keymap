@@ -258,7 +258,7 @@
          ]
      },
      // Auto-pair \langle \rangle
-     { "keys": ["\\", "<"], "command": "insert_snippet", "args": {"contents": "\\langle$1\\rangle"}, "context":
+     { "keys": ["`", "<"], "command": "insert_snippet", "args": {"contents": "\\langle $1\\rangle"}, "context":
          [
              { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
              { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -267,8 +267,7 @@
              { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
          ]
      },
-     // Auto-pair \langle \rangle
-     { "keys": ["`", "<"], "command": "insert_snippet", "args": {"contents": "\\langle$1\\rangle"}, "context":
+     { "keys": ["\\", "<"], "command": "insert_snippet", "args": {"contents": "\\langle $1\\rangle"}, "context":
          [
              { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
              { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -277,6 +276,14 @@
              { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
          ]
      },
+     { "keys": ["<"], "command": "insert_snippet", "args": {"contents": "\\langle ${1:$SELECTION}\\rangle"}, "context":
+         [
+             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
+             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+             { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true }
+         ]
+     },
+
      { "keys": ["backspace"], "command": "latex_zeta_insert_snippet", "args": {"contents": "", "before": 7, "after": 7}, "context":
          [
              { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
@@ -445,11 +452,11 @@
             { "key": "latex_zeta_surround", "operator": "equal", "operand": ["\\|", "\\|"]}
         ]
     },
-    { "keys": ["<"], "command": "latex_zeta_insert_pair", "args": {"arg": ["\\langle", "\\rangle"]}, "context":
+    { "keys": ["<"], "command": "latex_zeta_insert_pair", "args": {"arg": ["\\langle ", "\\rangle"]}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
-            { "key": "latex_zeta_surround", "operator": "equal", "operand": ["\\langle", "\\rangle"]}
+            { "key": "latex_zeta_surround", "operator": "equal", "operand": ["\\langle ", "\\rangle"]}
         ]
     },
     { "keys": ["backspace"], "command": "latex_zeta_remove_pair", "context":
