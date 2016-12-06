@@ -50,34 +50,39 @@ _Note: Some math commands will create fields. The cursor will move to next field
 
 ### Math symbols
 
-Keys                                   | Mappings
---------                               | -----------------
-<kbd>_ </kbd>,<kbd>_</kbd>             | `_{}`
-<kbd>^</kbd>,<kbd>^</kbd>              | `^{}`
-<kbd>\` </kbd>,<kbd>_</kbd>             | `\bar{}`
-<kbd>\`</kbd>,<kbd>^</kbd>              | `hat{}`
-<kbd>.</kbd>,<kbd>.</kbd>,<kbd>.</kbd> | `\ldots`
-<kbd>\`</kbd>,<kbd>,</kbd>             | `\nonumber`
-<kbd>\`</kbd>,<kbd>/</kbd>             | `\frac{}{}`
-<kbd>\`</kbd>,<kbd>0</kbd>             | `\varnothing`
-<kbd>\`</kbd>,<kbd>2</kbd>             | `\sqrt{}`
-<kbd>\`</kbd>,<kbd>6</kbd>             | `\partial`
-<kbd>\`</kbd>,<kbd>8</kbd>             | `\infity`
+Keys                                                                     | Mappings
+--------                                                                 | -----------------
+<kbd>_ </kbd>,<kbd>_ </kbd>                                                | `_{}`
+<kbd>^</kbd>,<kbd>^</kbd>                                                | `^{}`
+<kbd>\`</kbd>,<kbd>_</kbd>                                               | `\bar{}`
+<kbd>_ </kbd> (with text highlighted)                                     | `\bar{SELECTION}`
+<kbd>_ </kbd>,<kbd>_ </kbd> (with text highlighted)                        | `\overline{SELECTION}`
+<kbd>\`</kbd>,<kbd>_ </kbd>                                               | `\hat{}`
+<kbd>^</kbd> (with text highlighted)                                     | `\hat{SELECTION}`
+<kbd>^</kbd>, <kbd>^</kbd> (with text highlighted)                       | `\widehat{SELECTION}`
+<kbd>.</kbd>,<kbd>.</kbd>,<kbd>.</kbd>                                   | `\ldots`
+<kbd>\`</kbd>,<kbd>,</kbd>                                               | `\nonumber`
+<kbd>\`</kbd>,<kbd>/</kbd>                                               | `\frac{}{}`
+<kbd>/</kbd> (with text highlighted)                                     | `\frac{SELECTION}{}`
+<kbd>\`</kbd>,<kbd>0</kbd>                                               | `\varnothing`
+<kbd>\`</kbd>,<kbd>2</kbd>                                               | `\sqrt{}`
+<kbd>\`</kbd>,<kbd>6</kbd>                                               | `\partial`
+<kbd>\`</kbd>,<kbd>8</kbd>                                               | `\infity`
 
-Keys                                                                             | Mappings
---------                                                                         | -----------------
-<kbd>&lt;</kbd>,<kbd>-</kbd>,<kbd>&lt;tab&gt;</kbd>                              | `\leftarrow`
-<kbd>&lt;</kbd>,<kbd>-</kbd>,<kbd>-</kbd>,<kbd>&lt;tab&gt;</kbd>                 | `\longleftarrow`
-<kbd>&lt;</kbd>,<kbd>=</kbd>,<kbd>&lt;tab&gt;</kbd>                              | `\Leftarrow`
-<kbd>&lt;</kbd>,<kbd>=</kbd>,<kbd>=</kbd>,<kbd>&lt;tab&gt;</kbd>                 | `\Longleftarrow`
-<kbd>-</kbd>,<kbd>&gt;</kbd>,<kbd>&lt;tab&gt;</kbd>                              | `\rightarrow`
-<kbd>-</kbd>,<kbd>-</kbd>,<kbd>&gt;</kbd>,<kbd>&lt;tab&gt;</kbd>                 | `\longrightarrow`
-<kbd>=</kbd>,<kbd>&gt;</kbd>,<kbd>&lt;tab&gt;</kbd>                              | `\Rightarrow`
-<kbd>=</kbd>,<kbd>=</kbd>,<kbd>&gt;</kbd>,<kbd>&lt;tab&gt;</kbd>                 | `\Longrightarrow`
-<kbd>&lt;</kbd>,<kbd>-</kbd>,<kbd>&gt;</kbd>,<kbd>&lt;tab&gt;</kbd>              | `\leftrightarrow`
-<kbd>&lt;</kbd>,<kbd>-</kbd>,<kbd>-</kbd>,<kbd>&gt;</kbd>,<kbd>&lt;tab&gt;</kbd> | `\longleftrightarrow`
-<kbd>&lt;</kbd>,<kbd>=</kbd>,<kbd>&gt;</kbd>,<kbd>&lt;tab&gt;</kbd>              | `\Leftrightarrow`
-<kbd>&lt;</kbd>,<kbd>=</kbd>,<kbd>=</kbd>,<kbd>&gt;</kbd>,<kbd>&lt;tab&gt;</kbd> | `\Longleftrightarrow`
+Keys                                                                     | Mappings
+--------                                                                 | -----------------
+<kbd>&lt;</kbd>,<kbd>-</kbd>,<kbd>tab</kbd>                              | `\leftarrow`
+<kbd>&lt;</kbd>,<kbd>-</kbd>,<kbd>-</kbd>,<kbd>tab</kbd>                 | `\longleftarrow`
+<kbd>&lt;</kbd>,<kbd>=</kbd>,<kbd>tab</kbd>                              | `\Leftarrow`
+<kbd>&lt;</kbd>,<kbd>=</kbd>,<kbd>=</kbd>,<kbd>tab</kbd>                 | `\Longleftarrow`
+<kbd>-</kbd>,<kbd>&gt;</kbd>,<kbd>tab</kbd>                              | `\rightarrow`
+<kbd>-</kbd>,<kbd>-</kbd>,<kbd>&gt;</kbd>,<kbd>tab</kbd>                 | `\longrightarrow`
+<kbd>=</kbd>,<kbd>&gt;</kbd>,<kbd>tab</kbd>                              | `\Rightarrow`
+<kbd>=</kbd>,<kbd>=</kbd>,<kbd>&gt;</kbd>,<kbd>tab</kbd>                 | `\Longrightarrow`
+<kbd>&lt;</kbd>,<kbd>-</kbd>,<kbd>&gt;</kbd>,<kbd>tab</kbd>              | `\leftrightarrow`
+<kbd>&lt;</kbd>,<kbd>-</kbd>,<kbd>-</kbd>,<kbd>&gt;</kbd>,<kbd>tab</kbd> | `\longleftrightarrow`
+<kbd>&lt;</kbd>,<kbd>=</kbd>,<kbd>&gt;</kbd>,<kbd>tab</kbd>              | `\Leftrightarrow`
+<kbd>&lt;</kbd>,<kbd>=</kbd>,<kbd>=</kbd>,<kbd>&gt;</kbd>,<kbd>tab</kbd> | `\Longleftrightarrow`
 
 ### Greek letters
 

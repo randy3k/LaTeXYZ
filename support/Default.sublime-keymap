@@ -487,14 +487,46 @@
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
         ]
     },
+    { "keys": ["^"], "command": "insert_snippet", "args": {"contents": "\\hat{${1:$SELECTION}}$0"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
+            { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true }
+        ]
+    },
+    { "keys": ["^"], "command": "latex_zeta_insert_snippet", "args": {"contents": "\\widehat{${1:$SELECTION}}$0", "before": 5, "after": 1}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
+            { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true },
+            { "key": "latex_zeta_surround", "operator": "equal", "operand": ["\\hat{", "}"]}
+        ]
+    },
     { "keys": ["`", "_"], "command": "insert_snippet", "args": {"contents": "\\bar{$1}$0"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
         ]
     },
+    { "keys": ["_"], "command": "insert_snippet", "args": {"contents": "\\bar{${1:$SELECTION}}$0"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
+            { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true }
+        ]
+    },
+    { "keys": ["_"], "command": "latex_zeta_insert_snippet", "args": {"contents": "\\overline{${1:$SELECTION}}$0", "before": 5, "after": 1}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
+            { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true },
+            { "key": "latex_zeta_surround", "operator": "equal", "operand": ["\\bar{", "}"]}
+        ]
+    },
     { "keys": ["`", "/"], "command": "insert_snippet", "args": {"contents": "\\frac{$1}{$2}$0"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
+        ]
+    },
+    { "keys": ["/"], "command": "insert_snippet", "args": {"contents": "\\frac{${1:$SELECTION}}{$2}$0"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
+            { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true },
         ]
     },
     { "keys": ["`", "0"], "command": "insert_snippet", "args": {"contents": "\\varnothing"}, "context":
