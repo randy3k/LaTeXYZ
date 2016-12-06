@@ -94,6 +94,14 @@ More symbols will be defined in further versions
 
 ## Others
 
-- <kbd>C</kbd>+<kbd>Shift</kbd>+<kbd>Click</kbd>  - jump to and forward sync with the pdf file (If [LaTeXTools](https://github.com/SublimeText/LaTeXTools) is installed)
 - <kbd>C</kbd>+<kbd>l</kbd>, <kbd>c</kbd>  - wrap the selection into by a command
 - <kbd>C</kbd>+<kbd>l</kbd>, <kbd>e</kbd>  - wrap the selection into by a environment
+
+- `LaTeXZeta: Install Jump to Pdf Mousebinding` ([LaTeXTools](https://github.com/SublimeText/LaTeXTools))
+    - <kbd>C</kbd>+<kbd>Shift</kbd>+<kbd>Click</kbd>  - jump to and forward sync with the pdf file
+
+- `LaTeXZeta: Toggle Auto Set Preview Math Template Preamble` ([LaTeXTools](https://github.com/SublimeText/LaTeXTools))
+    - When set `True`, `\newcommand` commands  in the current file are included when previewing math.
+
+- `LaTeXZeta: Install BracketHighlighter Settings` ([BracketHighlighter](https://github.com/facelessuser/BracketHighlighter))
+    - ![](https://cloud.githubusercontent.com/assets/1690993/20913762/73e6a24e-bb48-11e6-8bdd-b3cd6c6f652a.png)
