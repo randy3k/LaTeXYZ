@@ -44,7 +44,7 @@ Keys                                                 | Mappings
 Math commands are only valid in math environment, eg, `$$`, <code>&#92;[&#92;]</code> or `\begin{equation}`, `\end{equation}`.
 These Math keybinds are similar (not exactly the same) to [vim-latex](http://vim-latex.sourceforge.net/documentation/latex-suite.html#auc-tex-mappings) plugin.
 
-_Note: Math commands will create fields. The cursor will move to next field when pressing `tab`._
+_Note: Some math commands will create fields. The cursor will move to next field when pressing `tab`._
 
 ### Math symbols
 

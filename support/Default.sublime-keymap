@@ -404,6 +404,16 @@
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
         ]
     },
+    { "keys": ["`", "^"], "command": "insert_snippet", "args": {"contents": "\\hat{$1}$0"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
+        ]
+    },
+    { "keys": ["`", "_"], "command": "insert_snippet", "args": {"contents": "\\bar{$1}$0"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
+        ]
+    },
     { "keys": ["`", "/"], "command": "insert_snippet", "args": {"contents": "\\frac{$1}{$2}$0"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
@@ -425,6 +435,11 @@
         ]
     },
     { "keys": ["`", "8"], "command": "insert_snippet", "args": {"contents": "\\infty"}, "context":
+        [
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
+        ]
+    },
+    { "keys": ["`", ","], "command": "insert_snippet", "args": {"contents": "\\nonumber"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
         ]
