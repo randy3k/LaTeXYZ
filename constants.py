@@ -197,7 +197,6 @@ math_commands = [
     ("\\Gamma", ),
     ("\\Delta", ),
     ("\\Theta", ),
-    ("\\Iota", ),
     ("\\Lambda", ),
     ("\\Xi", ),
     ("\\Pi", ),
@@ -211,6 +210,7 @@ math_commands = [
 
     ("\\quad", ),
     ("\\qquad", ),
+    ("\\nonumber", ),
 
     ("\\bigcup", ),
     ("\\bigcap", ),
@@ -218,6 +218,7 @@ math_commands = [
     ("\\rangle", ),
     ("\\bigcup", ),
     ("\\bigcap", ),
+    ("\\wedge", ),
 
     ("\\leftarrow", ),
     ("\\longleftarrow", ),
@@ -242,6 +243,12 @@ math_commands = [
     ("\\mathcal", ),
 
     ("\\partial", ),
+
+    ("\\hat{}", "hat{$1}$0"),
+    ("\\bar{}", "bar{$1}$0"),
+    ("\\tilde{}", "tilde{$1}$0"),
+    ("\\widehat{}", "widehat{$1}$0"),
+    ("\\overline{}", "overline{$1}$0"),
 
     ("\\sum_{}^{}", "sum_{$1}^{$2}$0"),
     ("\\prod_{}^{}", "prod_{$1}^{$2}$0"),
