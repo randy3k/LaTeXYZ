@@ -1,7 +1,7 @@
 import sublime
 import sublime_plugin
 import re
-from .constants import math_commands, general_commands, arrow_map
+from .latex_commands import math_commands, general_commands
 
 
 def is_duplicated(x, r):
@@ -12,6 +12,21 @@ def is_duplicated(x, r):
 
 
 ARROW = re.compile(r"(<?)([-=]{1,2})(>?)$")
+
+arrow_map = {
+    "<-": "\\leftarrow",
+    "<--": "\\longleftarrow",
+    "->": "\\rightarrow",
+    "-->": "\\longrightarrow",
+    "<->": "\\leftrightarrow",
+    "<-->": "\\longleftrightarrow",
+    "<=": "\\Leftarrow",
+    "<==": "\\Longleftarrow",
+    "=>": "\\Rightarrow",
+    "==>": "\\Longrightarrow",
+    "<=>": "\\Leftrightarrow",
+    "<==>": "\\Longleftrightarrow"
+}
 
 
 class LatexZetaAutoCompletions(sublime_plugin.EventListener):
