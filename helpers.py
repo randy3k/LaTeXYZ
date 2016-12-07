@@ -20,11 +20,9 @@ class LatexZetaJumpToPdfCommand(sublime_plugin.TextCommand):
         if not self.view.score_selector(pt, "text.tex.latex"):
             print("LaTeXZeta: current file is not a latex file.")
             return
-        self.view.window().run_command("view_pdf")
-        # add a bit delay so that "view_pdf" is executed first
-        sublime.set_timeout(
-            lambda: self.view.run_command("jump_to_pdf", {"from_keybinding": True}), 100)
-
+        self.view.run_command("jump_to_pdf", {
+            "from_keybinding": True,
+            "keep_focus": False})
 
 mousebind = [
     {
