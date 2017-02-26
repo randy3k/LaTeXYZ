@@ -100,6 +100,12 @@ if __name__ == "__main__":
         ("\\underbrace{}{}", "underbrace{$1}{$2}"),
         ("\\overrightarrow{}", "overrightarrow{$1}"),
         ("\\overleftarrow{}", "overleftarrow{$1}"),
+        ("\\longleftarrow",),
+        ("\\Longleftarrow",),
+        ("\\longrightarrow",),
+        ("\\Longrightarrow",),
+        ("\\longleftrightarrow",),
+        ("\\Longleftrightarrow",),
 
         ("\\sum_{}^{}", "sum_{$1}^{$2}"),
         ("\\prod_{}^{}", "prod_{$1}^{$2}"),
