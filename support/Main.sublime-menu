@@ -22,112 +22,25 @@
                             },
                             { "caption": "-" },
                             {
-                                "command": "open_file",
-                                "args": {"file": "${packages}/LaTeXZeta/LaTeXZeta.sublime-settings"},
-                                "caption": "Settings – Default"
+                              "caption": "Settings",
+                              "command": "edit_settings",
+                              "args": {
+                                "base_file": "${packages}/LaTeXZeta/LaTeXZeta.sublime-settings"
+                              }
                             },
                             {
-                                "command": "open_file",
-                                "args": {"file": "${packages}/User/LaTeXZeta.sublime-settings"},
-                                "caption": "Settings – User"
-                            },
-                            { "caption": "-" },
-                            {
-                                "command": "open_file",
+                                "command": "edit_settings",
                                 "args": {
-                                    "file": "${packages}/LaTeXZeta/support/Default (OSX).sublime-keymap",
-                                    "platform": "OSX"
+                                    "base_file": "${packages}/LaTeXZeta/support/Default ($platform).sublime-keymap"
                                 },
-                                "caption": "Key Bindings – Default"
+                                "caption": "Key Bindings"
                             },
                             {
-                                "command": "open_file",
+                                "command": "edit_settings",
                                 "args": {
-                                    "file": "${packages}/LaTeXZeta/support/Default (Linux).sublime-keymap",
-                                    "platform": "Linux"
+                                    "base_file": "${packages}/User/LaTeXZeta/Default ($platform).sublime-mousemap",
                                 },
-                                "caption": "Key Bindings – Default"
-                            },
-                            {
-                                "command": "open_file",
-                                "args": {
-                                    "file": "${packages}/LaTeXZeta/support/Default (Windows).sublime-keymap",
-                                    "platform": "Windows"
-                                },
-                                "caption": "Key Bindings – Default"
-                            },
-                            {
-                                "command": "open_file",
-                                "args": {
-                                    "file": "${packages}/User/Default (OSX).sublime-keymap",
-                                    "platform": "OSX"
-                                },
-                                "caption": "Key Bindings – User"
-                            },
-                            {
-                                "command": "open_file",
-                                "args": {
-                                    "file": "${packages}/User/Default (Linux).sublime-keymap",
-                                    "platform": "Linux"
-                                },
-                                "caption": "Key Bindings – User"
-                            },
-                            {
-                                "command": "open_file",
-                                "args": {
-                                    "file": "${packages}/User/Default (Windows).sublime-keymap",
-                                    "platform": "Windows"
-                                },
-                                "caption": "Key Bindings – User"
-                            },
-                            { "caption": "-" },
-                            {
-                                "command": "open_file",
-                                "args": {
-                                    "file": "${packages}/LaTeXZeta/support/Default (OSX).sublime-mousemap",
-                                    "platform": "OSX"
-                                },
-                                "caption": "Mouse Bindings – Default"
-                            },
-                            {
-                                "command": "open_file",
-                                "args": {
-                                    "file": "${packages}/LaTeXZeta/support/Default (Linux).sublime-mousemap",
-                                    "platform": "Linux"
-                                },
-                                "caption": "Mouse Bindings – Default"
-                            },
-                            {
-                                "command": "open_file",
-                                "args": {
-                                    "file": "${packages}/LaTeXZeta/support/Default (Windows).sublime-mousemap",
-                                    "platform": "Windows"
-                                },
-                                "caption": "Mouse Bindings – Default"
-                            },
-                            {
-                                "command": "open_file",
-                                "args": {
-                                    "file": "${packages}/User/Default (OSX).sublime-mousemap",
-                                    "platform": "OSX"
-                                },
-                                "caption": "Mouse Bindings – User"
-                            },
-                            {
-                                "command": "open_file",
-                                "args": {
-                                    "file": "${packages}/User/Default (Linux).sublime-mousemap",
-                                    "platform": "Linux"
-                                },
-                                "caption": "Mouse Bindings – User"
-                            },
-                            {
-                                "command": "open_file",
-                                "args": {
-                                    "file": "${packages}/User/Default (Windows).sublime-mousemap",
-                                    "platform": "Windows"
-                                },
-                                "caption": "Mouse Bindings – User"
+                                "caption": "Mouse Bindings"
                             }
                         ]
                     }
