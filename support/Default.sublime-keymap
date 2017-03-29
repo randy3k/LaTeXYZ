@@ -83,6 +83,7 @@
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t|\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true },
+            { "key": "lt_fill_all_cite.open_square", "operator": "not_equal", "match_all": true, "operand": true }
         ]
     },
     { "keys": ["["], "command": "insert_snippet", "args": {"contents": "[${0:$SELECTION}]"}, "context":
@@ -116,7 +117,9 @@
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
-            { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t|\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
+            { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t|\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true },
+            { "key": "lt_fill_all_ref.open_curly", "operator": "not_equal", "match_all": true, "operand": true },
+            { "key": "lt_fill_all_cite.open_curly", "operator": "not_equal", "match_all": true, "operand": true }
         ]
     },
     { "keys": ["{"], "command": "wrap_block", "args": {"begin": "{", "end": "}"}, "context":
