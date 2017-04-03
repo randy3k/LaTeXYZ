@@ -4,13 +4,23 @@ import os
 import json
 
 
+lz_settings_file = "LaTeXYZ.sublime-settings"
+
+
 # sublime wrapper for insert_snippet
 class LatexyzInsertSnippetCommand(sublime_plugin.TextCommand):
-    def run(self, edit, contents, before=0, after=0):
+    def run(self, edit, contents, before=0, after=0, create_fields=False):
         sel = [(s.begin(), s.end()) for s in self.view.sel()]
         for (a, b) in reversed(sel):
             self.view.replace(edit, sublime.Region(b, b+after), "")
             self.view.replace(edit, sublime.Region(a-before, a), "")
+        lz_settings = sublime.load_settings(lz_settings_file)
+        if create_fields and lz_settings.get("auto_create_fields", False):
+            if "$1" not in contents:
+                contents = contents.replace("$0", "$1")
+            elif "$2" not in contents:
+                contents = contents.replace("$0", "$2")
+
         self.view.run_command("insert_snippet", {"contents": contents})
 
 

@@ -5,8 +5,8 @@ if __name__ == "__main__":
     def tidy(x):
         if "{}" in x:
             y = x.replace("\\", "")
-            y = y.replace("{}{}", "{$1}{$2}")
-            y = y.replace("{}", "{$1}")
+            y = y.replace("{}{}", "{$1}{$0}")
+            y = y.replace("{}", "{$0}")
             return (x, y)
         else:
             return (x, )
@@ -89,17 +89,17 @@ if __name__ == "__main__":
         ("\\mathcal", ),
         ("\\mathbb", ),
         ("\\mathscr", ),
-        ("\\text{}", "text{$1}"),
+        ("\\text{}", "text{$0}"),
 
         ("\\hat", ),
         ("\\bar", ),
         ("\\tilde", ),
-        ("\\widehat{}", "widehat{$1}"),
-        ("\\widetilde{}", "widetilde{$1}"),
-        ("\\overbrace{}{}", "overbrace{$1}{$2}"),
-        ("\\underbrace{}{}", "underbrace{$1}{$2}"),
-        ("\\overrightarrow{}", "overrightarrow{$1}"),
-        ("\\overleftarrow{}", "overleftarrow{$1}"),
+        ("\\widehat{}", "widehat{$0}"),
+        ("\\widetilde{}", "widetilde{$0}"),
+        ("\\overbrace{}{}", "overbrace{$1}{$0}"),
+        ("\\underbrace{}{}", "underbrace{$1}{$0}"),
+        ("\\overrightarrow{}", "overrightarrow{$0}"),
+        ("\\overleftarrow{}", "overleftarrow{$0}"),
         ("\\longleftarrow",),
         ("\\Longleftarrow",),
         ("\\longrightarrow",),
@@ -107,37 +107,37 @@ if __name__ == "__main__":
         ("\\longleftrightarrow",),
         ("\\Longleftrightarrow",),
 
-        ("\\sum_{}^{}", "sum_{$1}^{$2}"),
-        ("\\prod_{}^{}", "prod_{$1}^{$2}"),
-        ("\\int_{}^{}", "int_{$1}^{$2}"),
-        ("\\iint_{}^{}", "iint_{$1}^{$2}"),
-        ("\\iiint_{}^{}", "iiint_{$1}^{$2}"),
-        ("\\iiiint_{}^{}", "iiiint_{$1}^{$2}"),
-        ("\\idotsint{}^{}", "idotsint{$1}^{$2}"),
-        ("\\oint_{}^{}", "oint_{$1}^{$2}"),
+        ("\\sum_{}^{}", "sum_{$1}^{$0}"),
+        ("\\prod_{}^{}", "prod_{$1}^{$0}"),
+        ("\\int_{}^{}", "int_{$1}^{$0}"),
+        ("\\iint_{}^{}", "iint_{$1}^{$0}"),
+        ("\\iiint_{}^{}", "iiint_{$1}^{$0}"),
+        ("\\iiiint_{}^{}", "iiiint_{$1}^{$0}"),
+        ("\\idotsint{}^{}", "idotsint{$1}^{$0}"),
+        ("\\oint_{}^{}", "oint_{$1}^{$0}"),
 
-        ("\\frac{}{}", "frac{$1}{$2}"),
-        ("\\binom{}{}", "binom{$1}{$2}"),
-        ("\\overset{}{}", "overset{$1}{$2}"),
-        ("\\underset{}{}", "underset{$1}{$2}")
+        ("\\frac{}{}", "frac{$1}{$0}"),
+        ("\\binom{}{}", "binom{$1}{$0}"),
+        ("\\overset{}{}", "overset{$1}{$0}"),
+        ("\\underset{}{}", "underset{$1}{$0}")
     ]
 
     _general_commands = [
         ("\\usagepacage", ),
         ("\\includegraphics", ),
-        ("\\part{}", "part{$1}"),
-        ("\\part*{}", "part*{$1}"),
-        ("\\chapter{}", "chapter{$1}"),
-        ("\\chapter*{}", "chapter*{$1}"),
-        ("\\section{}", "section{$1}"),
-        ("\\section*{}", "section*{$1}"),
-        ("\\subsection{}", "subsection{$1}"),
-        ("\\subsection*{}", "subsection*{$1}"),
-        ("\\subsubsection{}", "subsubsection{$1}"),
-        ("\\subsubsection*{}", "subsubsection*{$1}"),
+        ("\\part{}", "part{$0}"),
+        ("\\part*{}", "part*{$0}"),
+        ("\\chapter{}", "chapter{$0}"),
+        ("\\chapter*{}", "chapter*{$0}"),
+        ("\\section{}", "section{$0}"),
+        ("\\section*{}", "section*{$0}"),
+        ("\\subsection{}", "subsection{$0}"),
+        ("\\subsection*{}", "subsection*{$0}"),
+        ("\\subsubsection{}", "subsubsection{$0}"),
+        ("\\subsubsection*{}", "subsubsection*{$0}"),
 
-        ("\\underline{}", "underline{$1}"),
-        ("\\overline{}", "overline{$1}"),
+        ("\\underline{}", "underline{$0}"),
+        ("\\overline{}", "overline{$0}"),
 
         ("\\bibliographystyle", ),
         ("\\bibliography", ),

@@ -42,7 +42,7 @@
     },
 
     // Auto-pair brackets
-    { "keys": ["("], "command": "insert_snippet", "args": {"contents": "($0)"}, "context":
+    { "keys": ["("], "command": "latexyz_insert_snippet", "args": {"contents": "($0)", "create_fields": true}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -77,7 +77,7 @@
 
 
     // Auto-pair square brackets
-    { "keys": ["["], "command": "insert_snippet", "args": {"contents": "[$0]"}, "context":
+    { "keys": ["["], "command": "latexyz_insert_snippet", "args": {"contents": "[$0]", "create_fields": true}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -112,7 +112,7 @@
     },
 
     // Auto-pair curly brackets
-    { "keys": ["{"], "command": "insert_snippet", "args": {"contents": "{$0}"}, "context":
+    { "keys": ["{"], "command": "latexyz_insert_snippet", "args": {"contents": "{$0}", "create_fields": true}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -213,7 +213,7 @@
         ]
     },
     // Auto-pair brackets \{
-    { "keys": ["\\", "{"], "command": "insert_snippet", "args": {"contents": "\\\\{$0\\\\}"}, "context":
+    { "keys": ["\\", "{"], "command": "latexyz_insert_snippet", "args": {"contents": "\\\\{$0\\\\}", "create_fields": true}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -232,7 +232,7 @@
         ]
     },
 
-    // Auto pair \{\} when selection
+    // Auto pair \{\} when selection in math mode
     { "keys": ["{"], "command": "insert_snippet", "args": {"contents": "\\\\{${0:$SELECTION}\\\\}"}, "context":
         [
              { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
@@ -242,7 +242,7 @@
     },
 
      // Auto-pair brackets \|
-     { "keys": ["\\", "|"], "command": "insert_snippet", "args": {"contents": "\\\\|$0\\\\|"}, "context":
+     { "keys": ["\\", "|"], "command": "latexyz_insert_snippet", "args": {"contents": "\\\\|$0\\\\|", "create_fields": true}, "context":
          [
              { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
              { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -261,7 +261,7 @@
          ]
      },
      // Auto-pair \langle \rangle
-     { "keys": ["`", "<"], "command": "insert_snippet", "args": {"contents": "\\langle $0\\rangle"}, "context":
+     { "keys": ["`", "<"], "command": "latexyz_insert_snippet", "args": {"contents": "\\langle $0\\rangle", "create_fields": true}, "context":
          [
              { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
              { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -299,7 +299,7 @@
     // Auto-pair quotes `'
     {
         "keys": ["'"],
-        "command": "insert_snippet", "args": { "contents": "`$0'" },
+        "command": "latexyz_insert_snippet", "args": { "contents": "`$0'", "create_fields": true },
         "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
@@ -364,7 +364,7 @@
     // Auto-pair double quotes ``''
     {
         "keys": ["\""],
-        "command": "insert_snippet", "args": { "contents": "``$0''" },
+        "command": "latexyz_insert_snippet", "args": { "contents": "``$0''", "create_fields":true },
         "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
@@ -497,14 +497,14 @@
     },
 
     // vim-latex like keymaps - general
-    { "keys": ["_"], "command": "insert_snippet", "args": {"contents": "{$1}$0"}, "context":
+    { "keys": ["_"], "command": "latexyz_insert_snippet", "args": {"contents": "{$0}", "create_fields": true}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "preceding_text", "operator": "regex_contains", "operand": "_$", "match_all": true }
         ]
     },
-    { "keys": ["^"], "command": "insert_snippet", "args": {"contents": "{$1}$0"}, "context":
+    { "keys": ["^"], "command": "latexyz_insert_snippet", "args": {"contents": "{$0}", "create_fields": true}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
@@ -516,48 +516,48 @@
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
         ]
     },
-    { "keys": ["`", "^"], "command": "insert_snippet", "args": {"contents": "\\hat{$1}$0"}, "context":
+    { "keys": ["`", "^"], "command": "latexyz_insert_snippet", "args": {"contents": "\\hat{$0}", "create_fields": true}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
         ]
     },
-    { "keys": ["^"], "command": "insert_snippet", "args": {"contents": "\\hat{${1:$SELECTION}}$0"}, "context":
+    { "keys": ["^"], "command": "insert_snippet", "args": {"contents": "\\hat{${0:$SELECTION}}"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true }
         ]
     },
-    { "keys": ["^"], "command": "latexyz_insert_snippet", "args": {"contents": "\\widehat{${1:$SELECTION}}$0", "before": 5, "after": 1}, "context":
+    { "keys": ["^"], "command": "latexyz_insert_snippet", "args": {"contents": "\\widehat{${0:$SELECTION}}", "before": 5, "after": 1}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true },
             { "key": "latexyz_surround", "operator": "equal", "operand": ["\\hat{", "}"]}
         ]
     },
-    { "keys": ["`", "_"], "command": "insert_snippet", "args": {"contents": "\\bar{$1}$0"}, "context":
+    { "keys": ["`", "_"], "command": "latexyz_insert_snippet", "args": {"contents": "\\bar{$0}", "create_fields": true}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
         ]
     },
-    { "keys": ["_"], "command": "insert_snippet", "args": {"contents": "\\bar{${1:$SELECTION}}$0"}, "context":
+    { "keys": ["_"], "command": "insert_snippet", "args": {"contents": "\\bar{${0:$SELECTION}}"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true }
         ]
     },
-    { "keys": ["_"], "command": "latexyz_insert_snippet", "args": {"contents": "\\overline{${1:$SELECTION}}$0", "before": 5, "after": 1}, "context":
+    { "keys": ["_"], "command": "latexyz_insert_snippet", "args": {"contents": "\\overline{${0:$SELECTION}}", "before": 5, "after": 1}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true },
             { "key": "latexyz_surround", "operator": "equal", "operand": ["\\bar{", "}"]}
         ]
     },
-    { "keys": ["`", "/"], "command": "insert_snippet", "args": {"contents": "\\frac{$1}{$2}$0"}, "context":
+    { "keys": ["`", "/"], "command": "latexyz_insert_snippet", "args": {"contents": "\\frac{$1}{$0}", "create_fields": true}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
         ]
     },
-    { "keys": ["/"], "command": "insert_snippet", "args": {"contents": "\\frac{${1:$SELECTION}}{$2}$0"}, "context":
+    { "keys": ["/"], "command": "insert_snippet", "args": {"contents": "\\frac{${1:$SELECTION}}{$0}"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true },
@@ -568,7 +568,7 @@
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
         ]
     },
-    { "keys": ["`", "2"], "command": "insert_snippet", "args": {"contents": "\\sqrt{$1}$0"}, "context":
+    { "keys": ["`", "2"], "command": "latexyz_insert_snippet", "args": {"contents": "\\sqrt{$0}", "create_fields": true}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
         ]

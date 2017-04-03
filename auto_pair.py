@@ -24,12 +24,18 @@ class LatexyzSurroundListener(sublime_plugin.EventListener):
             return out if operator == 0 else not out
 
 
+lz_settings_file = "LaTeXYZ.sublime-settings"
+
+
 class LatexyzInsertPairCommand(sublime_plugin.TextCommand):
     def run(self, edit, arg):
         left = "\\\\left" + arg[0].replace('\\', '\\\\')
         right = "\\\\right" + arg[1].replace('\\', '\\\\')
+
+        lz_settings = sublime.load_settings(lz_settings_file)
+        d = 1 if lz_settings.get("auto_create_fields", False) else 0
         self.view.run_command("latexyz_insert_snippet", {
-            "contents": left+"${1:$SELECTION}"+right,
+            "contents": left + "${%d:$SELECTION}" % d + right,
             "before": len(arg[0]),
             "after": len(arg[1])})
 
