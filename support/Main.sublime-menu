@@ -12,12 +12,12 @@
                 "children":
                 [
                     {
-                        "caption": "LaTeXZeta",
+                        "caption": "LaTeXYZ",
                         "children":
                         [
                             {
                                 "command": "open_file",
-                                "args": {"file": "${packages}/LaTeXZeta/README.md"},
+                                "args": {"file": "${packages}/LaTeXYZ/README.md"},
                                 "caption": "README"
                             },
                             { "caption": "-" },
@@ -25,20 +25,20 @@
                               "caption": "Settings",
                               "command": "edit_settings",
                               "args": {
-                                "base_file": "${packages}/LaTeXZeta/LaTeXZeta.sublime-settings"
+                                "base_file": "${packages}/LaTeXYZ/LaTeXYZ.sublime-settings"
                               }
                             },
                             {
                                 "command": "edit_settings",
                                 "args": {
-                                    "base_file": "${packages}/LaTeXZeta/support/Default ($platform).sublime-keymap"
+                                    "base_file": "${packages}/LaTeXYZ/support/Default ($platform).sublime-keymap"
                                 },
                                 "caption": "Key Bindings"
                             },
                             {
                                 "command": "edit_settings",
                                 "args": {
-                                    "base_file": "${packages}/User/LaTeXZeta/Default ($platform).sublime-mousemap",
+                                    "base_file": "${packages}/User/LaTeXYZ/Default ($platform).sublime-mousemap",
                                 },
                                 "caption": "Mouse Bindings"
                             }

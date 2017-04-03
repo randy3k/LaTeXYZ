@@ -76,7 +76,7 @@ bh_core_latex_settings = {
 bh_core_settings_file = "bh_core.sublime-settings"
 
 
-class LatexZetaInstallBhSettings(sublime_plugin.TextCommand):
+class LatexyzInstallBhSettings(sublime_plugin.TextCommand):
 
     def run(self, edit, remove=False):
         bh_core_settings = sublime.load_settings(bh_core_settings_file)

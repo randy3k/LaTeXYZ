@@ -3,14 +3,14 @@ import sublime_plugin
 
 
 # for auto pairing \left \right pairs
-class LatexZetaSurroundListener(sublime_plugin.EventListener):
+class LatexyzSurroundListener(sublime_plugin.EventListener):
     def on_query_context(self, view, key, operator, operand, match_all):
         if view.settings().get('is_widget'):
             return
         if not view.score_selector(view.sel()[0].end() if len(view.sel()) > 0 else 0,
                                    "text.tex.latex meta.environment.math"):
             return
-        if key == 'latex_zeta_surround':
+        if key == 'latexyz_surround':
             left = operand[0]
             right = operand[1]
             out = True
@@ -24,17 +24,17 @@ class LatexZetaSurroundListener(sublime_plugin.EventListener):
             return out if operator == 0 else not out
 
 
-class LatexZetaInsertPairCommand(sublime_plugin.TextCommand):
+class LatexyzInsertPairCommand(sublime_plugin.TextCommand):
     def run(self, edit, arg):
         left = "\\\\left" + arg[0].replace('\\', '\\\\')
         right = "\\\\right" + arg[1].replace('\\', '\\\\')
-        self.view.run_command("latex_zeta_insert_snippet", {
+        self.view.run_command("latexyz_insert_snippet", {
             "contents": left+"${1:$SELECTION}"+right,
             "before": len(arg[0]),
             "after": len(arg[1])})
 
 
-class LatexZetaRemovePairCommand(sublime_plugin.TextCommand):
+class LatexyzRemovePairCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         view = self.view
         sel = [(s.begin(), s.end()) for s in view.sel()]

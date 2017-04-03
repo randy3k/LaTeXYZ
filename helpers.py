@@ -5,7 +5,7 @@ import json
 
 
 # sublime wrapper for insert_snippet
-class LatexZetaInsertSnippetCommand(sublime_plugin.TextCommand):
+class LatexyzInsertSnippetCommand(sublime_plugin.TextCommand):
     def run(self, edit, contents, before=0, after=0):
         sel = [(s.begin(), s.end()) for s in self.view.sel()]
         for (a, b) in reversed(sel):
@@ -14,11 +14,11 @@ class LatexZetaInsertSnippetCommand(sublime_plugin.TextCommand):
         self.view.run_command("insert_snippet", {"contents": contents})
 
 
-class LatexZetaJumpToPdfCommand(sublime_plugin.TextCommand):
+class LatexyzJumpToPdfCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         pt = self.view.sel()[0].end() if len(self.view.sel()) > 0 else 0
         if not self.view.score_selector(pt, "text.tex.latex"):
-            print("LaTeXZeta: current file is not a latex file.")
+            print("LaTeXYZ: current file is not a latex file.")
             return
         self.view.run_command("jump_to_pdf", {
             "from_keybinding": True,
@@ -27,12 +27,12 @@ class LatexZetaJumpToPdfCommand(sublime_plugin.TextCommand):
 mousebind = [
     {
         "button": "button1", "modifiers": ["shift", "ctrl"],
-        "press_command": "latex_zeta_jump_to_pdf"
+        "press_command": "latexyz_jump_to_pdf"
     }
 ]
 
 
-class LatexZetaInstallPdfMousebindingCommand(sublime_plugin.TextCommand):
+class LatexyzInstallPdfMousebindingCommand(sublime_plugin.TextCommand):
     def run(self, edit, remove=False):
         if sublime.platform() == "windows":
             plat = "Windows"
@@ -45,11 +45,15 @@ class LatexZetaInstallPdfMousebindingCommand(sublime_plugin.TextCommand):
         mousebind_file = os.path.join(
             sublime.packages_path(),
             "User",
-            "LaTeXZeta",
+            "LaTeXYZ",
             "Default ({}).sublime-mousemap".format(plat))
 
         if remove:
-            os.unlink(mousebind_file)
+            try:
+                os.unlink(mousebind_file)
+                os.unlink(mousebind_file.replace("LaTeXYZ", "LaTeXZeta"))
+            except:
+                pass
         else:
             os.makedirs(os.path.dirname(mousebind_file), exist_ok=True)
 

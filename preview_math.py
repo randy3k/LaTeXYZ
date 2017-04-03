@@ -2,10 +2,10 @@ import sublime
 import sublime_plugin
 
 
-lz_settings_file = "LaTeXZeta.sublime-settings"
+lz_settings_file = "LaTeXYZ.sublime-settings"
 
 
-class LatexZetaPreviewMath(sublime_plugin.EventListener):
+class LatexyzPreviewMath(sublime_plugin.EventListener):
 
     def on_activated_async(self, view):
         self.set_template_preamble(view)
@@ -28,7 +28,7 @@ class LatexZetaPreviewMath(sublime_plugin.EventListener):
         view.settings().set("preview_math_template_preamble", "\n".join(newcommands))
 
 
-class LatexZetaTooglePreviewMath(sublime_plugin.TextCommand):
+class LatexyzTooglePreviewMath(sublime_plugin.TextCommand):
     def run(self, view):
         lz_settings = sublime.load_settings(lz_settings_file)
         flag = not lz_settings.get("auto_set_preview_math_template_preamble")

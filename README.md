@@ -1,4 +1,4 @@
-LaTeXZeta
+LaTeXYZ
 =====
 
 This package is NOT a replacement of any LaTeX package. It is meant to be used together with [LaTeXTools](https://github.com/SublimeText/LaTeXTools) (or similar package) and to improve the typing experience with Sublime Text by providing a bunch of keybinds and helper functions.
@@ -120,11 +120,11 @@ More symbols will be defined in further versions
 - <kbd>C</kbd>+<kbd>l</kbd>, <kbd>c</kbd>  - wrap the selection into by a command
 - <kbd>C</kbd>+<kbd>l</kbd>, <kbd>e</kbd>  - wrap the selection into by a environment
 
-- `LaTeXZeta: Install Jump to Pdf Mousebinding` ([LaTeXTools](https://github.com/SublimeText/LaTeXTools))
+- `LaTeXYZ: Install Jump to Pdf Mousebinding` ([LaTeXTools](https://github.com/SublimeText/LaTeXTools))
     - <kbd>C</kbd>+<kbd>Shift</kbd>+<kbd>Click</kbd>  - jump to and forward sync with the pdf file
 
-- `LaTeXZeta: Toggle Auto Set Preview Math Template Preamble` ([LaTeXTools](https://github.com/SublimeText/LaTeXTools))
+- `LaTeXYZ: Toggle Auto Set Preview Math Template Preamble` ([LaTeXTools](https://github.com/SublimeText/LaTeXTools))
     - When set `True`, `\newcommand` commands  in the current file are included when previewing math.
 
-- `LaTeXZeta: Install BracketHighlighter Settings` ([BracketHighlighter](https://github.com/facelessuser/BracketHighlighter))
+- `LaTeXYZ: Install BracketHighlighter Settings` ([BracketHighlighter](https://github.com/facelessuser/BracketHighlighter))
     - ![](https://cloud.githubusercontent.com/assets/1690993/20913762/73e6a24e-bb48-11e6-8bdd-b3cd6c6f652a.png)

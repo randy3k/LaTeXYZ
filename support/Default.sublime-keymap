@@ -13,7 +13,7 @@
     { "keys": ["`"], "command": "insert_snippet", "args": {"contents": "`"} },
 
     // for auto completion trigger
-    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXZeta/macros/Delete And Hide Auto Complete.sublime-macro"}, "context":
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXYZ/macros/Delete And Hide Auto Complete.sublime-macro"}, "context":
         [
             { "key": "selection_empty", "match_all": true, "operand": true, "operator": "equal"},
             { "key": "selector", "operand": "text.tex.latex", "operator": "equal"},
@@ -166,7 +166,7 @@
             { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
         ]
     },
-    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXZeta/macros/Delete Two Left Right.sublime-macro"}, "context":
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXYZ/macros/Delete Two Left Right.sublime-macro"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -185,7 +185,7 @@
             { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
         ]
     },
-    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXZeta/macros/Delete Two Left Right.sublime-macro"}, "context":
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXYZ/macros/Delete Two Left Right.sublime-macro"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -222,7 +222,7 @@
             { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
         ]
     },
-    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXZeta/macros/Delete Two Left Right.sublime-macro"}, "context":
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXYZ/macros/Delete Two Left Right.sublime-macro"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -251,7 +251,7 @@
              { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
          ]
      },
-     { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXZeta/macros/Delete Two Left Right.sublime-macro"}, "context":
+     { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXYZ/macros/Delete Two Left Right.sublime-macro"}, "context":
          [
              { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
              { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -287,7 +287,7 @@
          ]
      },
 
-     { "keys": ["backspace"], "command": "latex_zeta_insert_snippet", "args": {"contents": "", "before": 7, "after": 7}, "context":
+     { "keys": ["backspace"], "command": "latexyz_insert_snippet", "args": {"contents": "", "before": 7, "after": 7}, "context":
          [
              { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
              { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -385,7 +385,7 @@
         ]
     },
     {
-        "keys": ["\""], "command": "run_macro_file", "args": { "file": "res://Packages/LaTeXZeta/macros/Move Two Characters.sublime-macro" },
+        "keys": ["\""], "command": "run_macro_file", "args": { "file": "res://Packages/LaTeXYZ/macros/Move Two Characters.sublime-macro" },
         "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
@@ -395,7 +395,7 @@
     },
     {
         "keys": ["backspace"],
-        "command": "run_macro_file", "args": { "file": "res://Packages/LaTeXZeta/macros/Delete Two Left Right.sublime-macro" },
+        "command": "run_macro_file", "args": { "file": "res://Packages/LaTeXYZ/macros/Delete Two Left Right.sublime-macro" },
         "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
@@ -451,42 +451,42 @@
 
     // left-right pairs
 
-    { "keys": ["("], "command": "latex_zeta_insert_pair", "args": {"arg": ["(", ")"]}, "context":
+    { "keys": ["("], "command": "latexyz_insert_pair", "args": {"arg": ["(", ")"]}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
-            { "key": "latex_zeta_surround", "operator": "equal", "operand": ["(", ")"]}
+            { "key": "latexyz_surround", "operator": "equal", "operand": ["(", ")"]}
         ]
     },
-    { "keys": ["["], "command": "latex_zeta_insert_pair", "args": {"arg": ["[", "]"]}, "context":
+    { "keys": ["["], "command": "latexyz_insert_pair", "args": {"arg": ["[", "]"]}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
-            { "key": "latex_zeta_surround", "operator": "equal", "operand": ["[", "]"]}
+            { "key": "latexyz_surround", "operator": "equal", "operand": ["[", "]"]}
         ]
     },
-    { "keys": ["{"], "command": "latex_zeta_insert_pair", "args": {"arg": ["\\{", "\\}"]}, "context":
+    { "keys": ["{"], "command": "latexyz_insert_pair", "args": {"arg": ["\\{", "\\}"]}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
-            { "key": "latex_zeta_surround", "operator": "equal", "operand": ["\\{", "\\}"]}
+            { "key": "latexyz_surround", "operator": "equal", "operand": ["\\{", "\\}"]}
         ]
     },
-    { "keys": ["|"], "command": "latex_zeta_insert_pair", "args": {"arg": ["\\|", "\\|"]}, "context":
+    { "keys": ["|"], "command": "latexyz_insert_pair", "args": {"arg": ["\\|", "\\|"]}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
-            { "key": "latex_zeta_surround", "operator": "equal", "operand": ["\\|", "\\|"]}
+            { "key": "latexyz_surround", "operator": "equal", "operand": ["\\|", "\\|"]}
         ]
     },
-    { "keys": ["<"], "command": "latex_zeta_insert_pair", "args": {"arg": ["\\langle ", "\\rangle"]}, "context":
+    { "keys": ["<"], "command": "latexyz_insert_pair", "args": {"arg": ["\\langle ", "\\rangle"]}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
-            { "key": "latex_zeta_surround", "operator": "equal", "operand": ["\\langle ", "\\rangle"]}
+            { "key": "latexyz_surround", "operator": "equal", "operand": ["\\langle ", "\\rangle"]}
         ]
     },
-    { "keys": ["backspace"], "command": "latex_zeta_remove_pair", "context":
+    { "keys": ["backspace"], "command": "latexyz_remove_pair", "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -527,11 +527,11 @@
             { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true }
         ]
     },
-    { "keys": ["^"], "command": "latex_zeta_insert_snippet", "args": {"contents": "\\widehat{${1:$SELECTION}}$0", "before": 5, "after": 1}, "context":
+    { "keys": ["^"], "command": "latexyz_insert_snippet", "args": {"contents": "\\widehat{${1:$SELECTION}}$0", "before": 5, "after": 1}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true },
-            { "key": "latex_zeta_surround", "operator": "equal", "operand": ["\\hat{", "}"]}
+            { "key": "latexyz_surround", "operator": "equal", "operand": ["\\hat{", "}"]}
         ]
     },
     { "keys": ["`", "_"], "command": "insert_snippet", "args": {"contents": "\\bar{$1}$0"}, "context":
@@ -545,11 +545,11 @@
             { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true }
         ]
     },
-    { "keys": ["_"], "command": "latex_zeta_insert_snippet", "args": {"contents": "\\overline{${1:$SELECTION}}$0", "before": 5, "after": 1}, "context":
+    { "keys": ["_"], "command": "latexyz_insert_snippet", "args": {"contents": "\\overline{${1:$SELECTION}}$0", "before": 5, "after": 1}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true },
-            { "key": "latex_zeta_surround", "operator": "equal", "operand": ["\\bar{", "}"]}
+            { "key": "latexyz_surround", "operator": "equal", "operand": ["\\bar{", "}"]}
         ]
     },
     { "keys": ["`", "/"], "command": "insert_snippet", "args": {"contents": "\\frac{$1}{$2}$0"}, "context":
@@ -588,84 +588,84 @@
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
         ]
     },
-    { "keys": [" "], "command": "latex_zeta_insert_snippet", "args": {"contents": "\\leftarrow ", "before": 2, "after": 0}, "context":
+    { "keys": [" "], "command": "latexyz_insert_snippet", "args": {"contents": "\\leftarrow ", "before": 2, "after": 0}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "preceding_text", "operator": "regex_contains", "operand": "<-$", "match_all": true }
         ]
     },
-    { "keys": [" "], "command": "latex_zeta_insert_snippet", "args": {"contents": "\\rightarrow ", "before": 2, "after": 0}, "context":
+    { "keys": [" "], "command": "latexyz_insert_snippet", "args": {"contents": "\\rightarrow ", "before": 2, "after": 0}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "preceding_text", "operator": "regex_contains", "operand": "->$", "match_all": true }
         ]
     },
-    { "keys": [" "], "command": "latex_zeta_insert_snippet", "args": {"contents": "\\leftrightarrow ", "before": 3, "after": 0}, "context":
+    { "keys": [" "], "command": "latexyz_insert_snippet", "args": {"contents": "\\leftrightarrow ", "before": 3, "after": 0}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "preceding_text", "operator": "regex_contains", "operand": "<->$", "match_all": true }
         ]
     },
-    { "keys": [" "], "command": "latex_zeta_insert_snippet", "args": {"contents": "\\Leftarrow ", "before": 2, "after": 0}, "context":
+    { "keys": [" "], "command": "latexyz_insert_snippet", "args": {"contents": "\\Leftarrow ", "before": 2, "after": 0}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "preceding_text", "operator": "regex_contains", "operand": "<=$", "match_all": true }
         ]
     },
-    { "keys": [" "], "command": "latex_zeta_insert_snippet", "args": {"contents": "\\Rightarrow ", "before": 2, "after": 0}, "context":
+    { "keys": [" "], "command": "latexyz_insert_snippet", "args": {"contents": "\\Rightarrow ", "before": 2, "after": 0}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "preceding_text", "operator": "regex_contains", "operand": "=>$", "match_all": true }
         ]
     },
-    { "keys": [" "], "command": "latex_zeta_insert_snippet", "args": {"contents": "\\Leftrightarrow ", "before": 3, "after": 0}, "context":
+    { "keys": [" "], "command": "latexyz_insert_snippet", "args": {"contents": "\\Leftrightarrow ", "before": 3, "after": 0}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "preceding_text", "operator": "regex_contains", "operand": "<=>$", "match_all": true }
         ]
     },
-    { "keys": [" "], "command": "latex_zeta_insert_snippet", "args": {"contents": "\\longleftarrow ", "before": 3, "after": 0}, "context":
+    { "keys": [" "], "command": "latexyz_insert_snippet", "args": {"contents": "\\longleftarrow ", "before": 3, "after": 0}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "preceding_text", "operator": "regex_contains", "operand": "<--$", "match_all": true }
         ]
     },
-    { "keys": [" "], "command": "latex_zeta_insert_snippet", "args": {"contents": "\\longrightarrow ", "before": 3, "after": 0}, "context":
+    { "keys": [" "], "command": "latexyz_insert_snippet", "args": {"contents": "\\longrightarrow ", "before": 3, "after": 0}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "preceding_text", "operator": "regex_contains", "operand": "-->$", "match_all": true }
         ]
     },
-    { "keys": [" "], "command": "latex_zeta_insert_snippet", "args": {"contents": "\\longleftrightarrow ", "before": 4, "after": 0}, "context":
+    { "keys": [" "], "command": "latexyz_insert_snippet", "args": {"contents": "\\longleftrightarrow ", "before": 4, "after": 0}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "preceding_text", "operator": "regex_contains", "operand": "<-->$", "match_all": true }
         ]
     },
-    { "keys": [" "], "command": "latex_zeta_insert_snippet", "args": {"contents": "\\Longleftarrow ", "before": 3, "after": 0}, "context":
+    { "keys": [" "], "command": "latexyz_insert_snippet", "args": {"contents": "\\Longleftarrow ", "before": 3, "after": 0}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "preceding_text", "operator": "regex_contains", "operand": "<==$", "match_all": true }
         ]
     },
-    { "keys": [" "], "command": "latex_zeta_insert_snippet", "args": {"contents": "\\Longrightarrow ", "before": 3, "after": 0}, "context":
+    { "keys": [" "], "command": "latexyz_insert_snippet", "args": {"contents": "\\Longrightarrow ", "before": 3, "after": 0}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "preceding_text", "operator": "regex_contains", "operand": "==>$", "match_all": true }
         ]
     },
-    { "keys": [" "], "command": "latex_zeta_insert_snippet", "args": {"contents": "\\Longleftrightarrow ", "before": 4, "after": 0}, "context":
+    { "keys": [" "], "command": "latexyz_insert_snippet", "args": {"contents": "\\Longleftrightarrow ", "before": 4, "after": 0}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },

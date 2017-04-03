@@ -1,24 +1,24 @@
 [
     {
-        "caption": "LaTeXZeta: Install BracketHighlighter Settings",
-        "command": "latex_zeta_install_bh_settings"
+        "caption": "LaTeXYZ: Install BracketHighlighter Settings",
+        "command": "latexyz_install_bh_settings"
     },
     {
-        "caption": "LaTeXZeta: Remove BracketHighlighter Settings",
-        "command": "latex_zeta_install_bh_settings",
+        "caption": "LaTeXYZ: Remove BracketHighlighter Settings",
+        "command": "latexyz_install_bh_settings",
         "args": { "remove": true }
     },
     {
-        "caption": "LaTeXZeta: Install Jump to Pdf Mousebinding",
-        "command": "latex_zeta_install_pdf_mousebinding"
+        "caption": "LaTeXYZ: Install Jump to Pdf Mousebinding",
+        "command": "latexyz_install_pdf_mousebinding"
     },
     {
-        "caption": "LaTeXZeta: Remove Jump to Pdf Mousebinding",
-        "command": "latex_zeta_install_pdf_mousebinding",
+        "caption": "LaTeXYZ: Remove Jump to Pdf Mousebinding",
+        "command": "latexyz_install_pdf_mousebinding",
         "args": { "remove": true }
     },
     {
-        "caption": "LaTeXZeta: Toggle Auto Set Preview Math Template Preamble",
-        "command": "latex_zeta_toogle_preview_math"
+        "caption": "LaTeXYZ: Toggle Auto Set Preview Math Template Preamble",
+        "command": "latexyz_toogle_preview_math"
     }
 ]
