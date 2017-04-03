@@ -2,7 +2,6 @@
     // Wrap selected text in environment
     { "keys": ["ctrl+l","e"], "command": "insert_snippet", "args": {"contents": "\\begin{${1:env}}\n$SELECTION$0\n\\end{$1}"}, "context":
         [
-            {"key": "selection_empty", "match_all": true, "operand": false, "operator": "equal"},
             {"key": "selector", "operator": "equal", "operand": "text.tex.latex"}
         ]
     },
@@ -10,7 +9,6 @@
     // Wrap selected text in command
     { "keys": ["ctrl+l","c"], "command": "insert_snippet", "args": {"contents": "\\\\${0:cmd}{$SELECTION}"}, "context":
         [
-            {"key": "selection_empty", "match_all": true, "operand": false, "operator": "equal"},
             {"key": "selector", "operator": "equal", "operand": "text.tex.latex"}
         ]
     }
