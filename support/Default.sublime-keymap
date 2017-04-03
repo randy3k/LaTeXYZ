@@ -157,7 +157,7 @@
     },
 
     // Auto-pair brackets \(
-    { "keys": ["\\", "("], "command": "insert_snippet", "args": {"contents": "\\($1\\)"}, "context":
+    { "keys": ["\\", "("], "command": "insert_snippet", "args": {"contents": "\\($0\\)"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -176,7 +176,7 @@
         ]
     },
     // Auto-pair brackets \[
-    { "keys": ["\\", "["], "command": "insert_snippet", "args": {"contents": "\\[$1\\]"}, "context":
+    { "keys": ["\\", "["], "command": "insert_snippet", "args": {"contents": "\\[$0\\]"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -213,7 +213,7 @@
         ]
     },
     // Auto-pair brackets \{
-    { "keys": ["\\", "{"], "command": "insert_snippet", "args": {"contents": "\\\\{$1\\\\}"}, "context":
+    { "keys": ["\\", "{"], "command": "insert_snippet", "args": {"contents": "\\\\{$0\\\\}"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -233,7 +233,7 @@
     },
 
     // Auto pair \{\} when selection
-    { "keys": ["{"], "command": "insert_snippet", "args": {"contents": "\\\\{${1:$SELECTION}\\\\}"}, "context":
+    { "keys": ["{"], "command": "insert_snippet", "args": {"contents": "\\\\{${0:$SELECTION}\\\\}"}, "context":
         [
              { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
              { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -242,7 +242,7 @@
     },
 
      // Auto-pair brackets \|
-     { "keys": ["\\", "|"], "command": "insert_snippet", "args": {"contents": "\\\\|$1\\\\|"}, "context":
+     { "keys": ["\\", "|"], "command": "insert_snippet", "args": {"contents": "\\\\|$0\\\\|"}, "context":
          [
              { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
              { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -261,7 +261,7 @@
          ]
      },
      // Auto-pair \langle \rangle
-     { "keys": ["`", "<"], "command": "insert_snippet", "args": {"contents": "\\langle $1\\rangle"}, "context":
+     { "keys": ["`", "<"], "command": "insert_snippet", "args": {"contents": "\\langle $0\\rangle"}, "context":
          [
              { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
              { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -270,7 +270,7 @@
              { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
          ]
      },
-     { "keys": ["\\", "<"], "command": "insert_snippet", "args": {"contents": "\\langle $1\\rangle"}, "context":
+     { "keys": ["\\", "<"], "command": "insert_snippet", "args": {"contents": "\\langle $0\\rangle"}, "context":
          [
              { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
              { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -279,7 +279,7 @@
              { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true }
          ]
      },
-     { "keys": ["<"], "command": "insert_snippet", "args": {"contents": "\\langle ${1:$SELECTION}\\rangle"}, "context":
+     { "keys": ["<"], "command": "insert_snippet", "args": {"contents": "\\langle ${0:$SELECTION}\\rangle"}, "context":
          [
              { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
              { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -299,7 +299,7 @@
     // Auto-pair quotes `'
     {
         "keys": ["'"],
-        "command": "insert_snippet", "args": { "contents": "`$1'" },
+        "command": "insert_snippet", "args": { "contents": "`$0'" },
         "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
@@ -311,7 +311,7 @@
     },
     {
         "keys": ["'"],
-        "command": "insert_snippet", "args": { "contents": "`${1:$SELECTION}'" },
+        "command": "insert_snippet", "args": { "contents": "`${0:$SELECTION}'" },
         "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
@@ -364,7 +364,7 @@
     // Auto-pair double quotes ``''
     {
         "keys": ["\""],
-        "command": "insert_snippet", "args": { "contents": "``$1''" },
+        "command": "insert_snippet", "args": { "contents": "``$0''" },
         "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
@@ -376,7 +376,7 @@
     },
     {
         "keys": ["\""],
-        "command": "insert_snippet", "args": { "contents": "``${1:$SELECTION}''" },
+        "command": "insert_snippet", "args": { "contents": "``${0:$SELECTION}''" },
         "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
