@@ -119,7 +119,8 @@
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t|\\)|\\]|;|\\}|\\$|\\\\|$)", "match_all": true },
             { "key": "lt_fill_all_ref.open_curly", "operator": "not_equal", "match_all": true, "operand": true },
-            { "key": "lt_fill_all_cite.open_curly", "operator": "not_equal", "match_all": true, "operand": true }
+            { "key": "lt_fill_all_cite.open_curly", "operator": "not_equal", "match_all": true, "operand": true },
+            { "key": "lt_fill_all_input.open_curly", "operator": "not_equal", "match_all": true, "operand": true }
         ]
     },
     { "keys": ["{"], "command": "wrap_block", "args": {"begin": "{", "end": "}"}, "context":
