@@ -44,7 +44,7 @@ Keys                                                 | Mappings
 ## Auto complete math commands
 
 Math commands are only valid in math environment, eg, `$$`, <code>&#92;[&#92;]</code> or `\begin{equation}`, `\end{equation}`.
-These Math keybinds are similar (not exactly the same) to [vim-latex](http://vim-latex.sourceforge.net/documentation/latex-suite.html#auc-tex-mappings) plugin.
+These Math keybinds are similar to Emacs's Auc-Tex and Vim's [vim-latex-suite](https://github.com/vim-scripts/LaTeX-Suite-aka-Vim-LaTeX/blob/d1e3755fbe06d2f8dc79303126fd7796115496bf/ftplugin/latex-suite/wizardfuncs.vim#L343) (not exactly the same).
 
 _Note: Some math commands will create fields. The cursor will move to next field when pressing `tab`._
 
