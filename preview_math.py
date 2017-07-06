@@ -14,8 +14,12 @@ class LatexyzPreviewMath(sublime_plugin.EventListener):
         self.set_template_preamble(view)
 
     def set_template_preamble(self, view):
-        if not view.match_selector(view.sel()[0].end() if len(view.sel()) > 0 else 0,
-                                   "text.tex.latex"):
+        if len(view.sel()) > 0:
+            pt = view.sel()[0].end()
+        else:
+            pt = 0
+
+        if not view.match_selector(pt, "text.tex.latex"):
             return
         lz_settings = sublime.load_settings(lz_settings_file)
         if not lz_settings.get("auto_set_preview_math_template_preamble"):
