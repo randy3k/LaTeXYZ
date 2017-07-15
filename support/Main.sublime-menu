@@ -36,9 +36,9 @@
                                 "caption": "Key Bindings"
                             },
                             {
-                                "command": "edit_settings",
+                                "command": "open_file",
                                 "args": {
-                                    "base_file": "${packages}/User/LaTeXYZ/Default ($platform).sublime-mousemap",
+                                    "file": "${packages}/User/LaTeXYZ/Default ($platform).sublime-mousemap"
                                 },
                                 "caption": "Mouse Bindings"
                             }
