@@ -10,7 +10,7 @@
         ]
     },
     // disable autocompletion of `'
-    { "keys": ["`"], "command": "insert_snippet", "args": {"contents": "`"}, "context": [{ "key": "latexyz_quotes" }] },
+    { "keys": ["`"], "command": "insert_snippet", "args": {"contents": "`"} },
 
     // for auto completion trigger
     { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXYZ/macros/Delete And Hide Auto Complete.sublime-macro"}, "context":

@@ -19,7 +19,7 @@ When `auto_create_fields` is set `true`, these commands will create fields. The 
 If there is any selected text, auto matching pair wraps the selection.
 
 * Auto pairing `\(\)`, `\[\]` and `\{\}`.
-* Single and double quotation marks are replaced by the LaTeX quotation pairs, e.g., `'foo'` becomes <code>&#96;foo'</code> and `"foo"` becomes <code>&#96;&#96;foo''</code>. The <code>&#96;</code> to <code>&#96;'</code> auto completion in LaTeXTools is disabled. (Disabled by setting `use_latex_quotes` to `false`)
+* Single and double quotation marks are replaced by the LaTeX quotation pairs, e.g., `'foo'` becomes <code>&#96;foo'</code> and `"foo"` becomes <code>&#96;&#96;foo''</code>. (Disabled by setting `use_latex_quotes` to `false`)
 
 * In math environment,
 
@@ -33,6 +33,9 @@ Keys                                                 | Mappings
 <kbd>&#92;</kbd>,<kbd>&lt;</kbd>                     | `\langle \rangle`
 <kbd>&#92;</kbd>,<kbd>&lt;</kbd>,<kbd>&lt;</kbd>     | `\left\langle \right\rangle`
 
+Since LaTeXYZ uses the blacktick <code>&#96;</code> in various keybindings
+
+* The <code>&#96;</code> to <code>&#96;'</code> auto completion in LaTeXTools is disabled by default.
 
 
 ## Auto complete math commands
