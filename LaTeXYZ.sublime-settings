@@ -1,4 +1,8 @@
 {
     "auto_set_preview_math_template_preamble": false,
-    "auto_create_fields": false
+    "auto_create_fields": false,
+    // enable \\ triggerted auto completions
+    "auto_complete": true,
+    // enable latex quotataions
+    "use_latex_quotes": true
 }

@@ -53,6 +53,10 @@ class LatexyzAutoCompletions(sublime_plugin.EventListener):
             return None
 
         lz_settings = sublime.load_settings(lz_settings_file)
+
+        if not lz_settings.get("auto_complete"):
+            return
+
         if not self.general_commands:
             if lz_settings.get("auto_create_fields", False):
                 self.general_commands = [tidy(x) for x in general_commands]
