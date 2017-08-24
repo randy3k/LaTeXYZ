@@ -4,7 +4,7 @@
     // create fields in commands, i.e., <tab> to the next field
     "auto_create_fields": false,
     // enable \\ triggered auto completions
-    "auto_complete": true,
+    "backslash_complete": true,
     // enable latex quotations
     "use_latex_quotes": true
 }

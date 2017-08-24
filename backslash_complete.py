@@ -54,7 +54,7 @@ class LatexyzAutoCompletions(sublime_plugin.EventListener):
 
         lz_settings = sublime.load_settings(lz_settings_file)
 
-        if not lz_settings.get("auto_complete"):
+        if not lz_settings.get("backslash_complete"):
             return
 
         if not self.general_commands:
