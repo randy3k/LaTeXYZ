@@ -15,8 +15,11 @@ Package Control.
 
 The following auto paring is activated when `auto_match_enabled` is `true`.
 
+When `auto_create_fields` is set `true`, these commands will create fields. The cursor will move to next field when pressing `tab`.
+If there is any selected text, auto matching pair wraps the selection.
+
 * Auto pairing `\(\)`, `\[\]` and `\{\}`.
-* Single and double quotation marks are replaced by the LaTeX quotation pairs, e.g., `'foo'` becomes <code>&#96;foo'</code> and `"foo"` becomes <code>&#96;&#96;foo''</code>. The <code>&#96;</code> to <code>&#96;'</code> auto completion in LaTeXTools is disabled.
+* Single and double quotation marks are replaced by the LaTeX quotation pairs, e.g., `'foo'` becomes <code>&#96;foo'</code> and `"foo"` becomes <code>&#96;&#96;foo''</code>. The <code>&#96;</code> to <code>&#96;'</code> auto completion in LaTeXTools is disabled. (Disabled by setting `use_latex_quotes` to `false`)
 
 * In math environment,
 
@@ -31,15 +34,13 @@ Keys                                                 | Mappings
 <kbd>&#92;</kbd>,<kbd>&lt;</kbd>,<kbd>&lt;</kbd>     | `\left\langle \right\rangle`
 
 
-- If any text is highlighted, auto matching pair wraps the selection.
-- Some pairs will create fields. The cursor will move to the end of the pair when pressing `tab`.
 
 ## Auto complete math commands
 
 Math commands are only valid in math environment, eg, `$$`, <code>&#92;[&#92;]</code> or `\begin{equation}`, `\end{equation}`.
 These Math keybinds are similar to Emacs's Auc-Tex and Vim's [vim-latex-suite](https://github.com/vim-scripts/LaTeX-Suite-aka-Vim-LaTeX/blob/d1e3755fbe06d2f8dc79303126fd7796115496bf/ftplugin/latex-suite/wizardfuncs.vim#L343) (not exactly the same).
 
-_Note: Some math commands will create fields. The cursor will move to next field when pressing `tab`._
+When `auto_create_fields` is set `true`, these commands will create fields. The cursor will move to next field when pressing `tab`.
 
 ### Math symbols
 
