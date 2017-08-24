@@ -7,13 +7,6 @@ This package is NOT a replacement of any LaTeX package. It is meant to be used t
 
 Package Control.
 
-## Backslash triggered completions
-
-It provides a list of commands to auto complete when <kbd>&#92;</kbd> is triggered.
-
-<img width="412" src="https://cloud.githubusercontent.com/assets/1690993/20915374/743dfcd2-bb53-11e6-9e29-a1af80356405.png">
-
-
 ## Auto match pairs
 
 <img width="412" src="https://cloud.githubusercontent.com/assets/1690993/20943620/4af2f0dc-bbce-11e6-88df-759df58e33da.gif">
@@ -114,6 +107,14 @@ Keys                       | Mappings
 
 More symbols will be defined in further versions
 
+
+## Backslash triggered completions
+
+It provides a list of commands to auto complete when <kbd>&#92;</kbd> is triggered.
+
+<img width="412" src="https://cloud.githubusercontent.com/assets/1690993/20915374/743dfcd2-bb53-11e6-9e29-a1af80356405.png">
+
+However, it is now recommended to turn this off and use [LaTeX-cwl](https://latextools.readthedocs.io/en/latest/completions/#latex-cwl-support) support of LaTeXTools.
 
 ## Others
 
