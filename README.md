@@ -126,3 +126,23 @@ However, it is now recommended to turn this off and use [LaTeX-cwl](https://late
 
 - `LaTeXYZ: Install BracketHighlighter Settings` ([BracketHighlighter](https://github.com/facelessuser/BracketHighlighter))
     - ![](https://cloud.githubusercontent.com/assets/1690993/20913762/73e6a24e-bb48-11e6-8bdd-b3cd6c6f652a.png)
+
+## Deprecations
+
+The wraping commands <kbd>C+l</kbd> and <kbd>C+e</kbd> are deprecated. Users can add the following to their user settings.
+
+```json
+// Wrap selected text in environment
+{ "keys": ["ctrl+l","e"], "command": "insert_snippet", "args": {"contents": "\\begin{${1:env}}\n$SELECTION$0\n\\end{$1}"}, "context":
+    [
+        {"key": "selector", "operator": "equal", "operand": "text.tex.latex"}
+    ]
+},
+
+// Wrap selected text in command
+{ "keys": ["ctrl+l","c"], "command": "insert_snippet", "args": {"contents": "\\\\${0:cmd}{$SELECTION}"}, "context":
+    [
+        {"key": "selector", "operator": "equal", "operand": "text.tex.latex"}
+    ]
+}
+```
