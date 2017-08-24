@@ -118,9 +118,6 @@ However, it is now recommended to turn this off and use [LaTeX-cwl](https://late
 
 ## Others
 
-- <kbd>C</kbd>+<kbd>l</kbd>, <kbd>c</kbd>  - wrap the selection into by a command
-- <kbd>C</kbd>+<kbd>l</kbd>, <kbd>e</kbd>  - wrap the selection into by a environment
-
 - `LaTeXYZ: Install Jump to Pdf Mousebinding` ([LaTeXTools](https://github.com/SublimeText/LaTeXTools))
     - <kbd>C</kbd>+<kbd>Shift</kbd>+<kbd>Click</kbd>  - jump to and forward sync with the pdf file
 
