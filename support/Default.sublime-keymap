@@ -308,7 +308,7 @@
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|]|\\}|>|$)", "match_all": true },
             { "key": "preceding_text", "operator": "not_regex_contains", "operand": "['a-zA-Z0-9_]$", "match_all": true },
-            { "key": "latexyz_quotes" }
+            { "key": "latexyz.use_latex_quotes" }
         ]
     },
     {
@@ -351,7 +351,7 @@
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "preceding_text", "operator": "regex_contains", "operand": "(\\$|\\.)$", "match_all": true },
-            { "key": "latexyz_quotes" }
+            { "key": "latexyz.use_latex_quotes" }
         ]
     },
     // do not auto-complete in math mode
@@ -361,7 +361,7 @@
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
-            { "key": "latexyz_quotes" }
+            { "key": "latexyz.use_latex_quotes" }
         ]
     },
 
@@ -376,7 +376,7 @@
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|]|\\}|>|$)", "match_all": true },
             { "key": "preceding_text", "operator": "not_regex_contains", "operand": "[\"a-zA-Z0-9_]$", "match_all": true },
-            { "key": "latexyz_quotes" }
+            { "key": "latexyz.use_latex_quotes" }
         ]
     },
     {
@@ -417,7 +417,7 @@
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "preceding_text", "operator": "regex_contains", "operand": "(\\$|\\.|\\\\)$", "match_all": true },
-            { "key": "latexyz_quotes" }
+            { "key": "latexyz.use_latex_quotes" }
         ]
     },
 
@@ -428,7 +428,7 @@
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
-            { "key": "latexyz_quotes" }
+            { "key": "latexyz.use_latex_quotes" }
         ]
     },
 
@@ -464,35 +464,35 @@
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
-            { "key": "latexyz_surround", "operator": "equal", "operand": ["(", ")"]}
+            { "key": "latexyz.surrounded_by", "operator": "equal", "operand": ["(", ")"]}
         ]
     },
     { "keys": ["["], "command": "latexyz_insert_pair", "args": {"arg": ["[", "]"]}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
-            { "key": "latexyz_surround", "operator": "equal", "operand": ["[", "]"]}
+            { "key": "latexyz.surrounded_by", "operator": "equal", "operand": ["[", "]"]}
         ]
     },
     { "keys": ["{"], "command": "latexyz_insert_pair", "args": {"arg": ["\\{", "\\}"]}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
-            { "key": "latexyz_surround", "operator": "equal", "operand": ["\\{", "\\}"]}
+            { "key": "latexyz.surrounded_by", "operator": "equal", "operand": ["\\{", "\\}"]}
         ]
     },
     { "keys": ["|"], "command": "latexyz_insert_pair", "args": {"arg": ["\\|", "\\|"]}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
-            { "key": "latexyz_surround", "operator": "equal", "operand": ["\\|", "\\|"]}
+            { "key": "latexyz.surrounded_by", "operator": "equal", "operand": ["\\|", "\\|"]}
         ]
     },
     { "keys": ["<"], "command": "latexyz_insert_pair", "args": {"arg": ["\\langle ", "\\rangle"]}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
-            { "key": "latexyz_surround", "operator": "equal", "operand": ["\\langle ", "\\rangle"]}
+            { "key": "latexyz.surrounded_by", "operator": "equal", "operand": ["\\langle ", "\\rangle"]}
         ]
     },
     { "keys": ["backspace"], "command": "latexyz_remove_pair", "context":
@@ -540,7 +540,7 @@
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true },
-            { "key": "latexyz_surround", "operator": "equal", "operand": ["\\hat{", "}"]}
+            { "key": "latexyz.surrounded_by", "operator": "equal", "operand": ["\\hat{", "}"]}
         ]
     },
     { "keys": ["`", "_"], "command": "latexyz_insert_snippet", "args": {"contents": "\\bar{$0}", "create_fields": true}, "context":
@@ -558,7 +558,7 @@
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" },
             { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true },
-            { "key": "latexyz_surround", "operator": "equal", "operand": ["\\bar{", "}"]}
+            { "key": "latexyz.surrounded_by", "operator": "equal", "operand": ["\\bar{", "}"]}
         ]
     },
     { "keys": ["`", "/"], "command": "latexyz_insert_snippet", "args": {"contents": "\\frac{$1}{$0}", "create_fields": true}, "context":

@@ -5,16 +5,35 @@ import sublime_plugin
 lz_settings_file = "LaTeXYZ.sublime-settings"
 
 
-class LatexyzQuotes(sublime_plugin.EventListener):
+class LatexyzQueryContext(sublime_plugin.EventListener):
 
     def on_query_context(self, view, key, operator, operand, match_all):
         if view.settings().get('is_widget'):
             return
-        if not view.match_selector(view.sel()[0].end() if len(view.sel()) > 0 else 0,
-                                   "text.tex.latex"):
+
+        try:
+            pt = view.sel()[0].end()
+        except:
+            pt = 0
+
+        if not view.match_selector(pt, "text.tex.latex"):
             return
 
         lz_settings = sublime.load_settings(lz_settings_file)
 
-        if key == 'latexyz_quotes':
-            return lz_settings.get("use_latex_quotes", True)
+        if key == 'latexyz.use_latex_quotes':
+            out = lz_settings.get("use_latex_quotes", True)
+            return out if operator == 0 else not out
+
+        elif key == 'latexyz.surrounded_by':
+            left = operand[0]
+            right = operand[1]
+            out = True
+            for sel in view.sel():
+                if view.substr(sublime.Region(sel.begin()-len(left), sel.begin())) != left:
+                    out = False
+                    break
+                if view.substr(sublime.Region(sel.end(), sel.end()+len(right))) != right:
+                    out = False
+                    break
+            return out if operator == 0 else not out

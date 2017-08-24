@@ -1,29 +1,6 @@
 import sublime
 import sublime_plugin
 
-
-# for auto pairing \left \right pairs
-class LatexyzSurroundListener(sublime_plugin.EventListener):
-    def on_query_context(self, view, key, operator, operand, match_all):
-        if view.settings().get('is_widget'):
-            return
-        if not view.score_selector(view.sel()[0].end() if len(view.sel()) > 0 else 0,
-                                   "text.tex.latex meta.environment.math"):
-            return
-        if key == 'latexyz_surround':
-            left = operand[0]
-            right = operand[1]
-            out = True
-            for sel in view.sel():
-                if view.substr(sublime.Region(sel.begin()-len(left), sel.begin())) != left:
-                    out = False
-                    break
-                if view.substr(sublime.Region(sel.end(), sel.end()+len(right))) != right:
-                    out = False
-                    break
-            return out if operator == 0 else not out
-
-
 lz_settings_file = "LaTeXYZ.sublime-settings"
 
 

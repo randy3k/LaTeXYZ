@@ -49,6 +49,9 @@ class LatexyzAutoCompletions(sublime_plugin.EventListener):
     math_commands = None
 
     def on_query_completions(self, view, prefix, locations):
+        if view.settings().get('is_widget'):
+            return
+
         if not view.match_selector(locations[0], "text.tex.latex"):
             return None
 
