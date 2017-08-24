@@ -130,7 +130,7 @@ However, it is now recommended to turn this off and use [LaTeX-cwl](https://late
 
 ## Deprecations
 
-The wraping commands <kbd>C+l</kbd> and <kbd>C+e</kbd> are deprecated. Users can add the following to their user settings.
+The wraping commands <kbd>C+l, e</kbd> and <kbd>C+l, c</kbd> are deprecated. Users can add the following to their user settings.
 
 ```json
 // Wrap selected text in environment
