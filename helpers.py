@@ -26,11 +26,16 @@ class LatexyzInsertSnippetCommand(sublime_plugin.TextCommand):
 
 class LatexyzJumpToPdfCommand(sublime_plugin.TextCommand):
     def run(self, edit):
-        pt = self.view.sel()[0].end() if len(self.view.sel()) > 0 else 0
-        if not self.view.score_selector(pt, "text.tex.latex"):
+        view = self.view
+        try:
+            pt = view.sel()[0].end()
+        except:
+            pt = 0
+
+        if not view.match_selector(pt, "text.tex.latex"):
             print("LaTeXYZ: current file is not a latex file.")
             return
-        self.view.run_command("jump_to_pdf", {
+        view.run_command("jump_to_pdf", {
             "from_keybinding": True,
             "keep_focus": False})
 
