@@ -118,7 +118,7 @@ It provides a list of commands to auto complete when <kbd>&#92;</kbd> is trigger
 
 <img width="412" src="https://cloud.githubusercontent.com/assets/1690993/20915374/743dfcd2-bb53-11e6-9e29-a1af80356405.png">
 
-However, it is now recommended to turn this off and use [LaTeX-cwl](https://latextools.readthedocs.io/en/latest/completions/#latex-cwl-support) support of LaTeXTools.
+However, it is now recommended to turn this off and use [cwl](https://latextools.readthedocs.io/en/latest/completions/#latex-cwl-support) support of LaTeXTools.
 
 ## Others
 
