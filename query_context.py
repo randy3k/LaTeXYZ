@@ -25,6 +25,10 @@ class LatexyzQueryContext(sublime_plugin.EventListener):
             out = lz_settings.get("use_latex_quotes", True)
             return out if operator == 0 else not out
 
+        elif key == 'latexyz.space_arrow_complete':
+            out = lz_settings.get("space_arrow_complete", True)
+            return out if operator == 0 else not out
+
         elif key == 'latexyz.surrounded_by':
             left = operand[0]
             right = operand[1]

@@ -6,5 +6,7 @@
     // enable \\ triggered auto completions
     "backslash_complete": true,
     // enable latex quotations
-    "use_latex_quotes": true
+    "use_latex_quotes": true,
+    // space triggered arrow completions
+    "space_arrow_complete": true
 }
