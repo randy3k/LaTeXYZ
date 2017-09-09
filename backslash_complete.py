@@ -1,7 +1,7 @@
 import sublime
 import sublime_plugin
 import re
-from .latex_commands import math_commands, general_commands
+from .completions.latex_commands import math_commands, general_commands
 
 
 def is_duplicated(x, r):
@@ -10,23 +10,6 @@ def is_duplicated(x, r):
             return True
     return False
 
-
-ARROW = re.compile(r"(<?)([-=]{1,2})(>?)$")
-
-arrow_map = {
-    "<-": "\\leftarrow",
-    "<--": "\\longleftarrow",
-    "->": "\\rightarrow",
-    "-->": "\\longrightarrow",
-    "<->": "\\leftrightarrow",
-    "<-->": "\\longleftrightarrow",
-    "<=": "\\Leftarrow",
-    "<==": "\\Longleftarrow",
-    "=>": "\\Rightarrow",
-    "==>": "\\Longrightarrow",
-    "<=>": "\\Leftrightarrow",
-    "<==>": "\\Longleftrightarrow"
-}
 
 lz_settings_file = "LaTeXYZ.sublime-settings"
 
@@ -43,7 +26,7 @@ def tidy(x):
         return x
 
 
-class LatexyzAutoCompletions(sublime_plugin.EventListener):
+class LatexyzBlackSlashCompletions(sublime_plugin.EventListener):
 
     general_commands = None
     math_commands = None
@@ -71,15 +54,6 @@ class LatexyzAutoCompletions(sublime_plugin.EventListener):
                 self.math_commands = [tidy(x) for x in math_commands]
             else:
                 self.math_commands = math_commands
-
-        if not prefix:
-            # arrow completion
-            pt = locations[0]
-            arrow = view.substr(sublime.Region(pt - 4, pt))
-            m = ARROW.search(arrow)
-            if m and (m.group(1) or m.group(3)) and m.group(0) in arrow_map:
-                arr = arrow_map[m.group(0)]
-                return [(m.group(0), arr)]
 
         # use default completion for non latex command
         ploc = locations[0]-len(prefix)
