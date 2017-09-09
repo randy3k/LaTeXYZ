@@ -150,3 +150,7 @@ The wraping commands <kbd>C+l, e</kbd> and <kbd>C+l, c</kbd> are deprecated. Use
     ]
 }
 ```
+
+## Why LaTeXYZ?
+
+Just to make sure that it is loaded after LaTeXTools.
