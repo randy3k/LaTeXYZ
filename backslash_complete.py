@@ -1,6 +1,5 @@
 import sublime
 import sublime_plugin
-import re
 from .completions.latex_commands import math_commands, general_commands
 
 
@@ -56,8 +55,8 @@ class LatexyzBlackSlashCompletions(sublime_plugin.EventListener):
                 self.math_commands = math_commands
 
         # use default completion for non latex command
-        ploc = locations[0]-len(prefix)
-        if prefix and view.substr(sublime.Region(ploc-1, ploc)) != "\\":
+        ploc = locations[0] - len(prefix)
+        if prefix and view.substr(sublime.Region(ploc - 1, ploc)) != "\\":
             return None
 
         r = self.general_commands

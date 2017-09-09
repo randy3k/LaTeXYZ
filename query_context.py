@@ -13,7 +13,7 @@ class LatexyzQueryContext(sublime_plugin.EventListener):
 
         try:
             pt = view.sel()[0].end()
-        except:
+        except Exception:
             pt = 0
 
         if not view.match_selector(pt, "text.tex.latex"):
@@ -30,10 +30,10 @@ class LatexyzQueryContext(sublime_plugin.EventListener):
             right = operand[1]
             out = True
             for sel in view.sel():
-                if view.substr(sublime.Region(sel.begin()-len(left), sel.begin())) != left:
+                if view.substr(sublime.Region(sel.begin() - len(left), sel.begin())) != left:
                     out = False
                     break
-                if view.substr(sublime.Region(sel.end(), sel.end()+len(right))) != right:
+                if view.substr(sublime.Region(sel.end(), sel.end() + len(right))) != right:
                     out = False
                     break
             return out if operator == 0 else not out

@@ -22,18 +22,18 @@ class LatexyzRemovePairCommand(sublime_plugin.TextCommand):
         view = self.view
         sel = [(s.begin(), s.end()) for s in view.sel()]
         for a, b in reversed(sel):
-            if view.substr(sublime.Region(a-6, a)) == '\\left(' and \
-                    view.substr(sublime.Region(a, a+7)) == '\\right)':
-                view.replace(edit, sublime.Region(a-6, a+7), "")
-            elif view.substr(sublime.Region(a-6, a)) == '\\left[' and \
-                    view.substr(sublime.Region(a, a+7)) == '\\right]':
-                view.replace(edit, sublime.Region(a-6, a+7), "")
-            elif view.substr(sublime.Region(a-7, a)) == '\\left\\{' and \
-                    view.substr(sublime.Region(a, a+8)) == '\\right\\}':
-                view.replace(edit, sublime.Region(a-7, a+8), "")
-            elif view.substr(sublime.Region(a-7, a)) == '\\left\\|' and \
-                    view.substr(sublime.Region(a, a+8)) == '\\right\\|':
-                view.replace(edit, sublime.Region(a-7, a+8), "")
-            elif view.substr(sublime.Region(a-12, a)) == '\\left\\langle' and \
-                    view.substr(sublime.Region(a, a+13)) == '\\right\\rangle':
-                view.replace(edit, sublime.Region(a-12, a+13), "")
+            if view.substr(sublime.Region(a - 6, a)) == '\\left(' and \
+                    view.substr(sublime.Region(a, a + 7)) == '\\right)':
+                view.replace(edit, sublime.Region(a - 6, a + 7), "")
+            elif view.substr(sublime.Region(a - 6, a)) == '\\left[' and \
+                    view.substr(sublime.Region(a, a + 7)) == '\\right]':
+                view.replace(edit, sublime.Region(a - 6, a + 7), "")
+            elif view.substr(sublime.Region(a - 7, a)) == '\\left\\{' and \
+                    view.substr(sublime.Region(a, a + 8)) == '\\right\\}':
+                view.replace(edit, sublime.Region(a - 7, a + 8), "")
+            elif view.substr(sublime.Region(a - 7, a)) == '\\left\\|' and \
+                    view.substr(sublime.Region(a, a + 8)) == '\\right\\|':
+                view.replace(edit, sublime.Region(a - 7, a + 8), "")
+            elif view.substr(sublime.Region(a - 12, a)) == '\\left\\langle' and \
+                    view.substr(sublime.Region(a, a + 13)) == '\\right\\rangle':
+                view.replace(edit, sublime.Region(a - 12, a + 13), "")

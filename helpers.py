@@ -12,8 +12,8 @@ class LatexyzInsertSnippetCommand(sublime_plugin.TextCommand):
     def run(self, edit, contents, before=0, after=0, create_fields=False):
         sel = [(s.begin(), s.end()) for s in self.view.sel()]
         for (a, b) in reversed(sel):
-            self.view.replace(edit, sublime.Region(b, b+after), "")
-            self.view.replace(edit, sublime.Region(a-before, a), "")
+            self.view.replace(edit, sublime.Region(b, b + after), "")
+            self.view.replace(edit, sublime.Region(a - before, a), "")
         lz_settings = sublime.load_settings(lz_settings_file)
         if create_fields and lz_settings.get("auto_create_fields", False):
             if "$1" not in contents:
@@ -29,7 +29,7 @@ class LatexyzJumpToPdfCommand(sublime_plugin.TextCommand):
         view = self.view
         try:
             pt = view.sel()[0].end()
-        except:
+        except Exception:
             pt = 0
 
         if not view.match_selector(pt, "text.tex.latex"):
@@ -38,6 +38,7 @@ class LatexyzJumpToPdfCommand(sublime_plugin.TextCommand):
         view.run_command("jump_to_pdf", {
             "from_keybinding": True,
             "keep_focus": False})
+
 
 mousebind = [
     {
@@ -67,7 +68,7 @@ class LatexyzInstallPdfMousebindingCommand(sublime_plugin.TextCommand):
             try:
                 os.unlink(mousebind_file)
                 os.unlink(mousebind_file.replace("LaTeXYZ", "LaTeXZeta"))
-            except:
+            except Exception:
                 pass
         else:
             os.makedirs(os.path.dirname(mousebind_file), exist_ok=True)
