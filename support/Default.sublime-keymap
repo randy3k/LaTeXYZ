@@ -77,7 +77,7 @@
             { "key": "following_text", "operator": "regex_contains", "operand": "^\\)", "match_all": true }
         ]
     },
-    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete Left Right.sublime-macro"}, "context":
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXYZ/macros/Delete Left Right.sublime-macro"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -113,7 +113,7 @@
             { "key": "following_text", "operator": "regex_contains", "operand": "^\\]", "match_all": true }
         ]
     },
-    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete Left Right.sublime-macro"}, "context":
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXYZ/macros/Delete Left Right.sublime-macro"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -159,7 +159,7 @@
             { "key": "following_text", "operator": "regex_contains", "operand": "^\\}", "match_all": true }
         ]
     },
-    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete Left Right.sublime-macro"}, "context":
+    { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXYZ/macros/Delete Left Right.sublime-macro"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -346,7 +346,7 @@
     },
     {
         "keys": ["backspace"],
-        "command": "run_macro_file", "args": { "file": "res://Packages/Default/Delete Left Right.sublime-macro" },
+        "command": "run_macro_file", "args": { "file": "res://Packages/LaTeXYZ/macros/Delete Left Right.sublime-macro" },
         "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
