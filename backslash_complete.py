@@ -1,5 +1,8 @@
 import sublime
 import sublime_plugin
+
+import os
+
 from .completions.latex_commands import math_commands, general_commands
 
 
@@ -29,6 +32,7 @@ class LatexyzBlackSlashCompletions(sublime_plugin.EventListener):
 
     general_commands = None
     math_commands = None
+    latex_cwl_installed = None
 
     def on_query_completions(self, view, prefix, locations):
         if view.settings().get('is_widget'):
@@ -38,9 +42,15 @@ class LatexyzBlackSlashCompletions(sublime_plugin.EventListener):
             return None
 
         lz_settings = sublime.load_settings(lz_settings_file)
-
-        if not lz_settings.get("backslash_complete"):
+        backslash_complete = lz_settings.get("backslash_complete", "auto")
+        if backslash_complete is False:
             return
+
+        if backslash_complete == "auto":
+            if self.latex_cwl_installed is None:
+                self.latex_cwl_installed = "LaTeX-cwl.sublime-package" in os.listdir(sublime.installed_packages_path())
+            if self.latex_cwl_installed is True:
+                return
 
         if not self.general_commands:
             if lz_settings.get("auto_create_fields", False):
