@@ -8,5 +8,5 @@
     // enable latex quotations
     "use_latex_quotes": true,
     // space triggered arrow completions
-    "space_arrow_complete": true
+    "space_arrow_complete": false
 }
