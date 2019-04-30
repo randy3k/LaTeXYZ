@@ -227,7 +227,7 @@ math_commands = [
 ]
 
 general_commands = [
-    ("\\usagepacage",),
+    ("\\usepackage",),
     ("\\includegraphics",),
     ("\\part{}", "part{$0}"),
     ("\\part*{}", "part*{$0}"),
