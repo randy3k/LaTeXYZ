@@ -123,7 +123,7 @@ if __name__ == "__main__":
     ]
 
     _general_commands = [
-        ("\\usagepacage", ),
+        ("\\usepackage", ),
         ("\\includegraphics", ),
         ("\\part{}", "part{$0}"),
         ("\\part*{}", "part*{$0}"),
