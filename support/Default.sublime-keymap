@@ -21,7 +21,12 @@
     },
 
     // disable autocompletion of `'
-    { "keys": ["`"], "command": "insert_snippet", "args": {"contents": "`"} },
+    { "keys": ["`"], "command": "insert_snippet", "args": {"contents": "`"}, "context":
+        [
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "selector", "operator": "equal", "operand": "text.tex.latex" }
+        ]
+    },
 
     // for auto completion trigger
     { "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXYZ/macros/Delete And Hide Auto Complete.sublime-macro"}, "context":
