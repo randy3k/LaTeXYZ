@@ -4,7 +4,7 @@ if __name__ == "__main__":
 
     def tidy(x):
         if "{}" in x:
-            y = x.replace("\\", "")
+            y = x.replace("\\", "\\\\")
             y = y.replace("{}{}", "{$1}{$0}")
             y = y.replace("{}", "{$0}")
             return (x, y)
@@ -94,12 +94,12 @@ if __name__ == "__main__":
         ("\\hat", ),
         ("\\bar", ),
         ("\\tilde", ),
-        ("\\widehat{}", "widehat{$0}"),
-        ("\\widetilde{}", "widetilde{$0}"),
-        ("\\overbrace{}{}", "overbrace{$1}{$0}"),
-        ("\\underbrace{}{}", "underbrace{$1}{$0}"),
-        ("\\overrightarrow{}", "overrightarrow{$0}"),
-        ("\\overleftarrow{}", "overleftarrow{$0}"),
+        ("\\widehat{}", "\\widehat{$0}"),
+        ("\\widetilde{}", "\\widetilde{$0}"),
+        ("\\overbrace{}{}", "\\overbrace{$1}{$0}"),
+        ("\\underbrace{}{}", "\\underbrace{$1}{$0}"),
+        ("\\overrightarrow{}", "\\overrightarrow{$0}"),
+        ("\\overleftarrow{}", "\\overleftarrow{$0}"),
         ("\\longleftarrow",),
         ("\\Longleftarrow",),
         ("\\longrightarrow",),
@@ -107,37 +107,37 @@ if __name__ == "__main__":
         ("\\longleftrightarrow",),
         ("\\Longleftrightarrow",),
 
-        ("\\sum_{}^{}", "sum_{$1}^{$0}"),
-        ("\\prod_{}^{}", "prod_{$1}^{$0}"),
-        ("\\int_{}^{}", "int_{$1}^{$0}"),
-        ("\\iint_{}^{}", "iint_{$1}^{$0}"),
-        ("\\iiint_{}^{}", "iiint_{$1}^{$0}"),
-        ("\\iiiint_{}^{}", "iiiint_{$1}^{$0}"),
-        ("\\idotsint{}^{}", "idotsint{$1}^{$0}"),
-        ("\\oint_{}^{}", "oint_{$1}^{$0}"),
+        ("\\sum_{}^{}", "\\sum_{$1}^{$0}"),
+        ("\\prod_{}^{}", "\\prod_{$1}^{$0}"),
+        ("\\int_{}^{}", "\\int_{$1}^{$0}"),
+        ("\\iint_{}^{}", "\\iint_{$1}^{$0}"),
+        ("\\iiint_{}^{}", "\\iiint_{$1}^{$0}"),
+        ("\\iiiint_{}^{}", "\\iiiint_{$1}^{$0}"),
+        ("\\idotsint{}^{}", "\\idotsint{$1}^{$0}"),
+        ("\\oint_{}^{}", "\\oint_{$1}^{$0}"),
 
-        ("\\frac{}{}", "frac{$1}{$0}"),
-        ("\\binom{}{}", "binom{$1}{$0}"),
-        ("\\overset{}{}", "overset{$1}{$0}"),
-        ("\\underset{}{}", "underset{$1}{$0}")
+        ("\\frac{}{}", "\\frac{$1}{$0}"),
+        ("\\binom{}{}", "\\binom{$1}{$0}"),
+        ("\\overset{}{}", "\\overset{$1}{$0}"),
+        ("\\underset{}{}", "\\underset{$1}{$0}")
     ]
 
     _general_commands = [
         ("\\usepackage", ),
         ("\\includegraphics", ),
-        ("\\part{}", "part{$0}"),
-        ("\\part*{}", "part*{$0}"),
-        ("\\chapter{}", "chapter{$0}"),
-        ("\\chapter*{}", "chapter*{$0}"),
-        ("\\section{}", "section{$0}"),
-        ("\\section*{}", "section*{$0}"),
-        ("\\subsection{}", "subsection{$0}"),
-        ("\\subsection*{}", "subsection*{$0}"),
-        ("\\subsubsection{}", "subsubsection{$0}"),
-        ("\\subsubsection*{}", "subsubsection*{$0}"),
+        ("\\part{}", "\\part{$0}"),
+        ("\\part*{}", "\\part*{$0}"),
+        ("\\chapter{}", "\\chapter{$0}"),
+        ("\\chapter*{}", "\\chapter*{$0}"),
+        ("\\section{}", "\\section{$0}"),
+        ("\\section*{}", "\\section*{$0}"),
+        ("\\subsection{}", "\\subsection{$0}"),
+        ("\\subsection*{}", "\\subsection*{$0}"),
+        ("\\subsubsection{}", "\\subsubsection{$0}"),
+        ("\\subsubsection*{}", "\\subsubsection*{$0}"),
 
-        ("\\underline{}", "underline{$0}"),
-        ("\\overline{}", "overline{$0}"),
+        ("\\underline{}", "\\underline{$0}"),
+        ("\\overline{}", "\\overline{$0}"),
 
         ("\\bibliographystyle", ),
         ("\\bibliography", ),
@@ -162,7 +162,8 @@ if __name__ == "__main__":
             if len(c) == 1:
                 f.write("    (\"{}\",)".format(c[0].replace("\\", "\\\\")))
             elif len(c) == 2:
-                f.write("    (\"{}\", \"{}\")".format(c[0].replace("\\", "\\\\"), c[1]))
+                f.write("    (\"{}\", \"{}\")".format(
+                    c[0].replace("\\", "\\\\"), c[1].replace("\\", "\\\\")))
             if i < len(math_commands) - 1:
                 f.write(",\n")
             else:
@@ -174,7 +175,8 @@ if __name__ == "__main__":
             if len(c) == 1:
                 f.write("    (\"{}\",)".format(c[0].replace("\\", "\\\\")))
             elif len(c) == 2:
-                f.write("    (\"{}\", \"{}\")".format(c[0].replace("\\", "\\\\"), c[1]))
+                f.write("    (\"{}\", \"{}\")".format(
+                    c[0].replace("\\", "\\\\"), c[1].replace("\\", "\\\\")))
             if i < len(general_commands) - 1:
                 f.write(",\n")
             else:

@@ -28,6 +28,13 @@ def tidy(x):
         return x
 
 
+def maybe_remove_backslash(x):
+    if sublime.version() < '4000' and len(x) == 2 and x[1].startswith("\\"):
+        return (x[0], x[1][1:])
+    else:
+        return x
+
+
 class LatexyzBlackSlashCompletions(sublime_plugin.EventListener):
 
     general_commands = None
@@ -41,6 +48,11 @@ class LatexyzBlackSlashCompletions(sublime_plugin.EventListener):
         if not view.match_selector(locations[0], "text.tex.latex"):
             return None
 
+        # use default completion for non latex command
+        ploc = locations[0] - len(prefix)
+        if prefix and view.substr(sublime.Region(ploc - 1, ploc)) != "\\":
+            return None
+
         lz_settings = sublime.load_settings(lz_settings_file)
         backslash_complete = lz_settings.get("backslash_complete", "auto")
         if backslash_complete is False:
@@ -48,26 +60,24 @@ class LatexyzBlackSlashCompletions(sublime_plugin.EventListener):
 
         if backslash_complete == "auto":
             if self.latex_cwl_installed is None:
-                self.latex_cwl_installed = "LaTeX-cwl.sublime-package" in os.listdir(sublime.installed_packages_path())
+                self.latex_cwl_installed = \
+                    "LaTeX-cwl.sublime-package" in os.listdir(sublime.installed_packages_path()) \
+                    and "LaTeX-cwl" not in view.settings().get("ignored_packages", []) \
+                    and "LaTeXTools" not in view.settings().get("ignored_packages", [])
             if self.latex_cwl_installed is True:
                 return
 
         if not self.general_commands:
             if lz_settings.get("auto_create_fields", False):
-                self.general_commands = [tidy(x) for x in general_commands]
+                self.general_commands = [maybe_remove_backslash(tidy(x)) for x in general_commands]
             else:
-                self.general_commands = general_commands
+                self.general_commands = [maybe_remove_backslash(x) for x in general_commands]
 
         if not self.math_commands:
             if lz_settings.get("auto_create_fields", False):
-                self.math_commands = [tidy(x) for x in math_commands]
+                self.math_commands = [maybe_remove_backslash(tidy(x)) for x in math_commands]
             else:
-                self.math_commands = math_commands
-
-        # use default completion for non latex command
-        ploc = locations[0] - len(prefix)
-        if prefix and view.substr(sublime.Region(ploc - 1, ploc)) != "\\":
-            return None
+                self.math_commands = [maybe_remove_backslash(x) for x in math_commands]
 
         r = self.general_commands
         if view.match_selector(locations[0], "meta.environment.math"):
