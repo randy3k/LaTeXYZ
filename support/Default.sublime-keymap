@@ -409,6 +409,7 @@
         "keys": ["\""], "command": "run_macro_file", "args": { "file": "res://Packages/LaTeXYZ/macros/Move Two Characters.sublime-macro" },
         "context":
         [
+            { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
             { "key": "selector", "operator": "not_equal", "operand": "text.tex.latex source" },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
