@@ -775,7 +775,7 @@
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
         ]
     },
-    { "keys": ["`", "Y"], "command": "insert_snippet", "args": {"contents": "\\Upsilon"}, "context":
+    { "keys": ["`", "U"], "command": "insert_snippet", "args": {"contents": "\\Upsilon"}, "context":
         [
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex meta.environment.math" }
         ]
