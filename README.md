@@ -104,7 +104,7 @@ Keys                       | Mappings
 <kbd>\`</kbd>,<kbd>X</kbd> | `\Xi`
 <kbd>\`</kbd>,<kbd>P</kbd> | `\Pi`
 <kbd>\`</kbd>,<kbd>S</kbd> | `\Sigma`
-<kbd>\`</kbd>,<kbd>Y</kbd> | `\Upsilon`
+<kbd>\`</kbd>,<kbd>U</kbd> | `\Upsilon`
 <kbd>\`</kbd>,<kbd>F</kbd> | `\Phi`
 <kbd>\`</kbd>,<kbd>Y</kbd> | `\Psi`
 <kbd>\`</kbd>,<kbd>W</kbd> | `\Omega`
