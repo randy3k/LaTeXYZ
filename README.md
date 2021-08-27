@@ -49,12 +49,12 @@ When `auto_create_fields` is set `true`, these commands will create fields. The 
 
 Keys                                                                     | Mappings
 --------                                                                 | -----------------
-<kbd>_ </kbd>,<kbd>_ </kbd>                                                | `_{}`
+<kbd>_</kbd>,<kbd>_</kbd>                                                | `_{}`
 <kbd>^</kbd>,<kbd>^</kbd>                                                | `^{}`
 <kbd>\`</kbd>,<kbd>_</kbd>                                               | `\bar{}`
-<kbd>_ </kbd> (with text highlighted)                                     | `\bar{SELECTION}`
-<kbd>_ </kbd>,<kbd>_ </kbd> (with text highlighted)                        | `\overline{SELECTION}`
-<kbd>\`</kbd>,<kbd>_ </kbd>                                               | `\hat{}`
+<kbd>_</kbd> (with text highlighted)                                     | `\bar{SELECTION}`
+<kbd>_</kbd>,<kbd>_</kbd> (with text highlighted)                        | `\overline{SELECTION}`
+<kbd>\`</kbd>,<kbd>^</kbd>                                               | `\hat{}`
 <kbd>^</kbd> (with text highlighted)                                     | `\hat{SELECTION}`
 <kbd>^</kbd>, <kbd>^</kbd> (with text highlighted)                       | `\widehat{SELECTION}`
 <kbd>.</kbd>,<kbd>.</kbd>,<kbd>.</kbd>                                   | `\ldots`
