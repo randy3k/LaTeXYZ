@@ -1,6 +1,6 @@
 [
     // completions for arrows
-    { "keys": ["tab"], "command": "auto_complete", "context":
+    { "keys": ["tab"], "command": "latexyz_arrow_complete", "context":
         [
             { "key": "preceding_text", "operator": "regex_contains", "operand": "(<[-=]{1,2})|([-=]{1,2}>)|(<[-=]{1,2}>)$", "match_all": true },
             { "key": "setting.tab_completion", "operator": "equal", "operand": true },
@@ -9,10 +9,9 @@
             { "key": "auto_complete_visible", "operator": "equal", "operand": false }
         ]
     },
-    { "keys": [" "], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXYZ/macros/Tab Completion And Insert Space.sublime-macro"}, "context":
+    { "keys": [" "], "command": "run_macro_file", "args": {"file": "res://Packages/LaTeXYZ/macros/Arrow Completion And Insert Space.sublime-macro"}, "context":
         [
             { "key": "preceding_text", "operator": "regex_contains", "operand": "(<[-=]{1,2})|([-=]{1,2}>)|(<[-=]{1,2}>)$", "match_all": true },
-            { "key": "setting.tab_completion", "operator": "equal", "operand": true },
             { "key": "latexyz.space_arrow_complete" },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
             { "key": "selector", "operator": "equal", "operand": "text.tex.latex" },
